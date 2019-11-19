@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>html练习1118</title>
+  <title>html-basic</title>
 </head>
 
 <body>
@@ -89,7 +89,7 @@
     <dl>
       <dt>性别</dt>
       <dd>
-        <label><input type="radio"> 男</label> <label><input type="radio"> 女</label>
+        <label><input type="radio" name="gender"> 男</label> <label><input type="radio" name="gender"> 女</label>
       </dd>
     </dl>
     <dl>
@@ -146,9 +146,58 @@
     <input type="reset"></input>
     <hr>
   </form>
-  怎样&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在这两个字之间空这么大呢?<br>
-  怎样在页面中显示下面的内容呢?<br>
-  &lt;span>&lt;/span>
+  <table border="1">
+    <caption>货品列表</caption>
+    <col>
+    <col bgcolor="red">
+    <tr>
+      <th>编号</th>
+      <th>品名</th>
+      <th>进价</th>
+      <th>出价</th>
+    </tr>
+    <tr>
+      <th>001</th>
+      <td>苹果</td>
+      <td rowspan="2">5</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>001</th>
+      <td>桔子</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>001</th>
+      <td>香蕉</td>
+      <td>5</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>001</th>
+      <td>香蕉</td>
+      <td>5</td>
+      <td>8</td>
+    </tr>
+  </table>
+  <hr>
+
+  <img title="officeplus" src="http://www.officeplus.cn/Images/logo-new.png" width=470 usemap="#imgmap" alt="">
+  <map name="imgmap">
+    <area shape="rect" coords="0,0,300,50" href="https://www.mi.com/" alt="123" target="_blank" title="office">
+    <area shape="circle" coords="330,20,30" href="" alt="">
+  </map>
+  <hr>
+
+  <a href="https://www.mi.com/" target="frame1">点击我会在下面的frame中打开小米商城,但是为什么打不开呢?</a><br>
+  <iframe src="https://nodejs.org" frameborder="1" name="frame1"></iframe>
+
+  <div>
+    怎样&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在这两个字之间空这么大呢?<br>
+    怎样在页面中显示下面的内容呢?<br>
+    &lt;span>&lt;/span>
+  </div>
+
 </body>
 
 </html>
