@@ -11,7 +11,7 @@
       color: red;
     }
 
-    p span:first-child {
+    p>span:first-child {
       color: red;
     }
 
@@ -23,41 +23,48 @@
       color: blue;
     }
 
-    :link {
+    a:link {
       color: pink;
     }
 
-    :visited {
+    a:visited {
       color: orange;
     }
 
-    :focus {
+    [tabindex="-1"]:focus {
       color: blue;
     }
 
-    :hover {
+    [tabindex="-1"]:hover {
       color: red;
     }
 
-    :active {
+    [tabindex="-1"]:active {
       color: green;
     }
 
-    [href^="mailto"i] {
+    a[href^="mailto:"i] {
       color: blue;
     }
 
-    [href^="tel"] {
+    a[href^="tel:"i] {
       color: yellow;
     }
 
-    [href$="pdf"i] {
+    a[href$=".pdf"i] {
       font-size: 30px;
     }
 
     .a li:nth-child(n+4):nth-child(-n+7) {
       color: red;
     }
+
+    /* .a>ul>li:nth-child(4),
+    .a>ul>li:nth-child(5),
+    .a>ul>li:nth-child(6),
+    .a>ul>li:nth-child(7){
+      color: red;
+    } */
 
     .b li:nth-child(-n+25) {
       color: red;
@@ -71,11 +78,20 @@
       color: blue;
     }
 
+    /* .prime li{
+      color:red;
+    } */
+
+    .prime li:first-child,
     .prime li:nth-child(2n+4),
-    .prime li:nth-child(3n+6),
-    .prime li:nth-child(5n+10),
-    .prime li:nth-child(7n+14) {
-      color: blueviolet;
+    .prime li:nth-child(3n+9),
+    .prime li:nth-child(5n+25),
+    .prime li:nth-child(7n+49) {
+      color: green;
+    }
+
+    .prime ul>li:not(:first-child):not(:nth-child(2n+4)):not(:nth-child(3n+9)):not(:nth-child(5n+25)):not(:nth-child(7n+49)) {
+      color: black;
     }
   </style>
 </head>
