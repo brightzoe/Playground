@@ -6,43 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>css-sprite</title>
-  <style>
-    div {
-      background-image: url(https://www.google.com/images/nav_logo242_hr.webp);
-      background-repeat: no-repeat;
-    }
-
-    .logo {
-      width: 250px;
-      height: 73px;
-      background-position: -47px 0;
-    }
-
-    .i {
-      width: 32px;
-      height: 36px;
-      background-position: 0px -654px;
-    }
-
-    .i:hover {
-      width: 32px;
-      height: 36px;
-      background-position: -28.2px -654px;
-    }
-
-    .here {
-      width: 33px;
-      height: 46px;
-      background-position: -305px -419px;
-    }
-  </style>
+  <link rel="stylesheet" href="css-sprite.css">
+  <!-- 复用性:用link;用行内元素:span; -->
 
 </head>
 
 <body>
-  <div class="logo"></div>
-  <div class="i"></div>
-  <div class="here"></div>
+  <span class="icon icon-logo"></span>
+  <span class="icon icon-i"></span>
+  <span class="icon icon-here"></span>
 </body>
 
 </html>
