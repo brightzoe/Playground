@@ -184,6 +184,7 @@
       padding: 0;
       margin: 0;
       /* 三侧阴影,去掉上边与cart的边,白色和一 */
+      /* 购物车做一个过渡,从上到下 */
       text-align: center;
       color: #000;
       line-height: 100px !important;
@@ -366,16 +367,18 @@
       width: 100%;
       height: 100px;
       padding: 0;
+      position: relative;
     }
 
     .Bar2>ul {
       width: 1250px;
       height: 100px;
-      line-height: 100px;
       margin: 0 auto 0 auto;
       padding: 0;
       font-size: 0;
       position: relative;
+      white-space: nowrap;
+      list-style: none;
 
     }
 
@@ -383,37 +386,131 @@
       display: inline-block;
       width: 55px;
       height: 55px;
-      margin: 26px 0 27px 0;
-    }
-
-
-    .header {
-      display: block;
-      height: 100px;
-      width: 600px;
-      box-sizing: border-box;
-      position: absolute;
-      left: 240px;
-      top: 0;
       margin: 0;
-      padding: 0;
-      list-style: none;
+      vertical-align: middle;
     }
 
-    .header li {
+
+    .Bar2>ul span:nth-child(3) {
       display: inline-block;
+      height: 50px;
+      width: 185px;
+
     }
 
-    .header li a {
+
+    .Bar2>ul>li {
+      display: inline-block;
+      height: 100px;
+      vertical-align: 0px;
+      margin: 0;
+    }
+
+    .Bar2>ul>li>a {
       font-size: 16px;
       color: rgb(51, 51, 51);
       padding: 30px 15px 10px 15px;
       /* 把hover的地方变大,不只是文字 */
     }
 
-    .header li:hover a {
+    .Bar2 li:hover a {
       color: rgb(255, 103, 0);
     }
+
+    .xiaomi {
+      position: absolute;
+      top: 100px;
+      height: 230px;
+      width: 100%;
+      box-shadow: 0 -1px 0px rgba(0, 0, 0, 0.15);
+    }
+
+    .Bar2 li:nth-child(4):hover+.xiaomi ul {
+      visibility: visible;
+
+      width: 1250px;
+      height: 230px;
+      margin: 0 auto 0 auto;
+      display: block;
+      list-style: none;
+      padding: 0;
+      white-space: nowrap;
+      font-size: 0;
+    }
+
+    /* 高度卷动特效没做 */
+
+
+    .xiaomi ul {
+      width: 1250px;
+      height: 230px;
+      margin: 0 auto 0 auto;
+      display: block;
+      list-style: none;
+      padding: 0;
+      white-space: nowrap;
+      font-size: 0;
+      visibility: hidden;
+      transition: 0.5s;
+    }
+
+    .xiaomi ul li {
+      display: inline-block;
+      width: 204px;
+      margin: 0;
+      position: relative;
+
+    }
+
+    .xiaomi img {
+      display: block;
+      padding: 0 20px;
+      width: 160px;
+      height: 110px;
+      margin-top: 32px;
+      margin-bottom: 20px;
+
+    }
+
+    .xiaomi ul li span.title {
+      display: block;
+      text-align: center;
+      font-size: 12px;
+      color: #333333 !important;
+    }
+
+    .xiaomi ul li span:last-child {
+      display: block;
+      color: #ff6700;
+      text-align: center;
+      font-size: 12px;
+      height: 20px;
+      margin: 2px;
+    }
+
+    .xiaomi ul li+span {
+      display: inline-block;
+      width: 1px;
+      height: 100px;
+      padding: 0;
+      margin: 0;
+      background-color: rgba(0, 0, 0, 0.15);
+      vertical-align: 60px;
+    }
+
+    /* header里面的竖线,伪元素没有画出来 */
+    /* .xiaomi ul li::before {
+      position: absolute;
+      display: block;
+      width: 1px;
+      height: 100px;
+      padding: 0;
+      margin: 0;
+      z-index: 10;
+      right: 0;
+      top: 0;
+      background-color: rgba(0, 0, 0, 0.15);
+    } */
   </style>
 
 
@@ -474,24 +571,70 @@
   </div>
   <div class="Bar2">
     <ul>
-      <img class="mi-ico" src="https://s01.mifile.cn/i/logo-footer.png?v2" alt="">
+      <img class="mi-ico" src="https://www.logolynx.com/images/logolynx/s_d6/d635b1d83e3f857f666fc259bd460710.png"
+        alt="">
       <!-- 上面图不对.分辨率不够,很模糊 -->
       <!-- 后面放一张hover的图片,找不到地址 -->
       <img src="" alt="">
-      <ul class="header">
-        <li><a href="">小米手机<div></div></a></li>
-        <li><a href="">Redmi&nbsp;红米<div></div></a></li>
-        <li><a href="">电视<div></div></a></li>
-        <li><a href="">笔记本<div></div></a></li>
-        <li><a href="">家电<div></div></a></li>
-        <li><a href="">路由器<div></div></a></li>
-        <li><a href="">智能硬件<div></div></a></li>
-        <li><a href="">服务<div></div></a></li>
-        <li><a href="">社区<div></div></a></li>
-      </ul>
+      <span></span>
+      <li><a href="">小米手机</a></li>
+      <div class="xiaomi">
+        <ul>
+          <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png"
+                alt="">
+            </a>
+            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+            <span>2799元起</span>
+          </li>
+          <span></span>
+          <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png"
+                alt="">
+            </a>
+            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+            <span>2799元起</span>
+          </li>
+          <span></span>
+          <li><a href=""><img
+                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png" alt="">
+            </a>
+            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+            <span>2799元起</span>
+          </li>
+          <span></span>
+          <li><a href=""><img
+                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png" alt="">
+            </a>
+            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+            <span>2799元起</span>
+          </li>
+          <span></span>
+          <li><a href=""><img
+                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png" alt="">
+            </a>
+            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+            <span>2799元起</span>
+          </li>
+          <span></span>
+          <li><a href=""><img
+                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png" alt="">
+            </a>
+            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+            <span>2799元起</span></li>
+        </ul>
+      </div>
+      <li><a href="">Redmi&nbsp;红米</a></li>
+      <li><a href="">电视</a></li>
+      <li><a href="">笔记本</a></li>
+      <li><a href="">家电</a></li>
+      <li><a href="">路由器</a></li>
+      <li><a href="">智能硬件</a></li>
+      <li><a href="">服务</a></li>
+      <li><a href="">社区</a></li>
+    </ul>
     </ul>
   </div>
-  <div class="xiaomi"></div>
+
+
 </body>
 
 </html>
