@@ -176,7 +176,7 @@
 
     .blank2 {
       width: 315px;
-      height: 100px;
+      height: 0px;
       background-color: #fff;
       position: absolute;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
@@ -191,156 +191,12 @@
       font-size: 12px;
       right: -8px;
       top: 40px;
-      visibility: hidden;
+      overflow: hidden;
+      transition: height 0.4s;
     }
 
-    .cart:hover .blank2 {
-      visibility: visible;
-    }
-
-    .Navigation-Bar ul {
-      display: block;
-      width: 1250px;
-      list-style: none;
-      padding: 0;
-      white-space: nowrap;
-      position: relative;
-      margin: 0 auto 0 auto;
-    }
-
-    .blank {
-      display: inline-block;
-      width: 250px;
-      margin: 0;
-
-    }
-
-    .blank1 {
-      display: inline-block;
-      width: 20px;
-      margin: 0;
-    }
-
-
-
-    .Navigation-Bar ul span {
-      display: inline-block;
-      padding: 0 6px 0 6px;
-      font-size: 12px;
-      line-height: 40px;
-      color: #424242;
-    }
-
-    .Navigation-Bar ul li {
-      display: inline-block;
-      font-size: 12px;
-      line-height: 40px;
-      color: #B0B0B0;
-    }
-
-    li a:link {
-      color: #B0B0B0;
-      text-decoration: none;
-    }
-
-    li a:visited {
-      color: #B0B0B0;
-      text-decoration: none;
-    }
-
-    li a:hover {
-      color: white;
-    }
-
-    .download1 {
-      position: relative;
-    }
-
-    .download span:first-child {
-      display: block;
-      box-sizing: content-box;
-      width: 120px;
-      height: 150px;
-      margin: 0;
-      padding: 0;
-      position: absolute;
-      top: 40px;
-      left: -28px;
-      box-shadow: 0 1px 5px #B0B0B0;
-      text-align: center;
-      font-size: 14px;
-    }
-
-    .download span:last-child {
-      position: absolute;
-      display: block;
-      width: 0;
-      height: 0;
-      padding: 0;
-      border: 8px solid;
-      border-color: transparent transparent white transparent;
-      top: 25px;
-      left: 18px;
-
-    }
-
-    .download span img {
-      display: block;
-      box-sizing: content-box;
-      padding: 20px 20px 0 20px;
-      width: 80px;
-      height: 80px;
-    }
-
-    .download span {
-      visibility: hidden;
-    }
-
-    .download:hover span {
-      visibility: visible;
-    }
-
-    ul li+span+span.cart {
-      display: inline-block;
-      width: 120px;
-      height: 40px;
-      position: absolute;
-      background-color: rgb(66, 66, 66);
-      padding: 0;
-      right: 0;
-    }
-
-    .cart img+span {
-      font-size: 12px;
-      color: #B0B0B0;
-    }
-
-    .cart img {
-      display: inline-block;
-      width: 18px;
-      height: 18px;
-      padding: 0;
-      margin: 0 2px 0 0;
-      color: #B0B0B0;
-      vertical-align: middle;
-    }
-
-    /* 把两个ico图叠在一起,显示灰色,hover显示橘色图,这个图大小,位置需要调整 */
-
-    .cart>span {
-      display: block;
-      margin: 0 8px 0 5px;
-    }
-
-    .cart:hover {
-      background-color: #fff;
-    }
-
-    .cart:hover img+span {
-      color: rgb(255, 103, 0);
-    }
-
-    .blank2 {
+    .cart:hover .blank2,
+    .blank2:hover {
       width: 315px;
       height: 100px;
       background-color: #fff;
@@ -349,18 +205,14 @@
       border: 0;
       padding: 0;
       margin: 0;
-      /* 三侧阴影,去掉上边与cart的边,白色和一 */
       text-align: center;
       color: #000;
       line-height: 100px !important;
       font-size: 12px;
-      right: -8px;
+      right: -1px;
       top: 40px;
-      visibility: hidden;
-    }
-
-    .cart:hover .blank2 {
-      visibility: visible;
+      transition: height 0.4s;
+      z-index: 2;
     }
 
     .Bar2 {
@@ -404,6 +256,7 @@
       height: 100px;
       vertical-align: 0px;
       margin: 0;
+      z-index: 1;
     }
 
     .Bar2>ul>li>a {
@@ -417,17 +270,24 @@
       color: rgb(255, 103, 0);
     }
 
-    .xiaomi {
+    .xiaomi,
+    .redmi {
       position: absolute;
       top: 100px;
       height: 230px;
       width: 100%;
+
+    }
+
+    .Bar2 li:hover+.xiaomi {
       box-shadow: 0 -1px 0px rgba(0, 0, 0, 0.15);
+      border-top: salmon 5px solid;
     }
 
-    .Bar2 li:nth-child(4):hover+.xiaomi ul {
-      visibility: visible;
-
+    .Bar2 li:nth-child(4):hover+.xiaomi ul,
+    .Bar2 li:nth-child(6):hover+.redmi ul,
+    .xiaomi:hover ul,
+    .redmi:hover {
       width: 1250px;
       height: 230px;
       margin: 0 auto 0 auto;
@@ -436,25 +296,28 @@
       padding: 0;
       white-space: nowrap;
       font-size: 0;
+      transition: height 0.6s;
     }
 
-    /* 高度卷动特效没做 */
+    /* 正常情况,高度0,里面东西hidden,hover高度增加,里面的显示 */
 
 
-    .xiaomi ul {
+    .xiaomi ul,
+    .redmi ul {
       width: 1250px;
-      height: 230px;
+      height: 0px;
       margin: 0 auto 0 auto;
       display: block;
       list-style: none;
       padding: 0;
       white-space: nowrap;
       font-size: 0;
-      visibility: hidden;
-      transition: 0.5s;
+      overflow: hidden;
+      transition: 0.6s;
     }
 
-    .xiaomi ul li {
+    .xiaomi ul li,
+    .redmi ul li {
       display: inline-block;
       width: 204px;
       margin: 0;
@@ -462,9 +325,10 @@
 
     }
 
-    .xiaomi img {
+    .xiaomi img,
+    .redmi img {
       display: block;
-      padding: 0 20px;
+      padding: 0 15px;
       width: 160px;
       height: 110px;
       margin-top: 32px;
@@ -472,14 +336,16 @@
 
     }
 
-    .xiaomi ul li span.title {
+    .xiaomi ul li span.title,
+    .redmi ul li span {
       display: block;
       text-align: center;
       font-size: 12px;
       color: #333333 !important;
     }
 
-    .xiaomi ul li span:last-child {
+    .xiaomi ul li span:last-child,
+    .redmi ul li span:last-child {
       display: block;
       color: #ff6700;
       text-align: center;
@@ -488,7 +354,8 @@
       margin: 2px;
     }
 
-    .xiaomi ul li+span {
+    .xiaomi ul li+span,
+    .redmi ul li+span {
       display: inline-block;
       width: 1px;
       height: 100px;
@@ -512,7 +379,6 @@
       background-color: rgba(0, 0, 0, 0.15);
     } */
   </style>
-
 
 
 </head>
@@ -573,7 +439,6 @@
     <ul>
       <img class="mi-ico" src="https://www.logolynx.com/images/logolynx/s_d6/d635b1d83e3f857f666fc259bd460710.png"
         alt="">
-      <!-- 上面图不对.分辨率不够,很模糊 -->
       <!-- 后面放一张hover的图片,找不到地址 -->
       <img src="" alt="">
       <span></span>
@@ -623,6 +488,50 @@
         </ul>
       </div>
       <li><a href="">Redmi&nbsp;红米</a></li>
+      <div class="redmi">
+        <ul>
+          <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png"
+                alt="">
+            </a>
+            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+            <span>2799元起</span>
+          </li>
+          <span></span>
+          <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png"
+                alt="">
+            </a>
+            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+            <span>2799元起</span>
+          </li>
+          <span></span>
+          <li><a href=""><img
+                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png" alt="">
+            </a>
+            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+            <span>2799元起</span>
+          </li>
+          <span></span>
+          <li><a href=""><img
+                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png" alt="">
+            </a>
+            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+            <span>2799元起</span>
+          </li>
+          <span></span>
+          <li><a href=""><img
+                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png" alt="">
+            </a>
+            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+            <span>2799元起</span>
+          </li>
+          <span></span>
+          <li><a href=""><img
+                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png" alt="">
+            </a>
+            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+            <span>2799元起</span></li>
+        </ul>
+      </div>
       <li><a href="">电视</a></li>
       <li><a href="">笔记本</a></li>
       <li><a href="">家电</a></li>
