@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
     body {
       margin: 0;
       padding: 0;
+      min-width: 500px;
     }
 
     body {
@@ -20,8 +22,9 @@
     .Navigation-Bar {
       box-sizing: border-box;
       margin: 0;
-      padding: 0 0 0 250px;
+      padding: 0 0 0 0px;
       width: 100%;
+      border: 0;
       background-color: rgb(51, 51, 51);
       height: 40px;
       font-size: 0;
@@ -29,13 +32,31 @@
       position: relative;
     }
 
+    /* 一个ul-block把标题包起来,宽固定,两个margin auto,缩放时左右等宽. */
     .Navigation-Bar ul {
-      width: 600px;
-      min-width: 500px;
+      display: block;
+      width: 1250px;
       list-style: none;
       padding: 0;
       white-space: nowrap;
+      position: relative;
+      margin: 0 auto 0 auto;
     }
+
+    .blank {
+      display: inline-block;
+      width: 250px;
+      margin: 0;
+
+    }
+
+    .blank1 {
+      display: inline-block;
+      width: 20px;
+      margin: 0;
+    }
+
+
 
     .Navigation-Bar ul span {
       display: inline-block;
@@ -70,21 +91,333 @@
       position: relative;
     }
 
-    .download+span {
+    .download span:first-child {
       display: block;
-      box-sizing: border-box;
-      width: 105px;
-      height: 105px;
-      padding: 20px;
+      box-sizing: content-box;
+      width: 120px;
+      height: 150px;
+      margin: 0;
+      padding: 0;
       position: absolute;
       top: 40px;
       left: -28px;
-      border: #B0B0B0 1px solid;
-      xvisibility: hidden;
+      box-shadow: 0 1px 5px #B0B0B0;
+      text-align: center;
+      font-size: 14px;
     }
 
-    .download:hover {}
+    .download span:last-child {
+      position: absolute;
+      display: block;
+      width: 0;
+      height: 0;
+      padding: 0;
+      border: 8px solid;
+      border-color: transparent transparent white transparent;
+      top: 25px;
+      left: 18px;
+
+    }
+
+    .download span img {
+      display: block;
+      box-sizing: content-box;
+      padding: 20px 20px 0 20px;
+      width: 80px;
+      height: 80px;
+    }
+
+    .download span {
+      visibility: hidden;
+    }
+
+    .download:hover span {
+      visibility: visible;
+    }
+
+    ul li+span+span.cart {
+      display: inline-block;
+      width: 120px;
+      height: 40px;
+      position: relative;
+      background-color: rgb(66, 66, 66);
+      padding: 0;
+    }
+
+    .cart img+span {
+      font-size: 12px;
+      color: #B0B0B0;
+    }
+
+    .cart img {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      padding: 0;
+      margin: 0 2px 0 0;
+      color: #B0B0B0;
+      vertical-align: middle;
+    }
+
+    /* 把两个ico图叠在一起,显示灰色,hover显示橘色图,这个图大小,位置需要调整 */
+
+    .cart>span {
+      display: block;
+      margin: 0 8px 0 5px;
+    }
+
+    .cart:hover {
+      background-color: #fff;
+    }
+
+    .cart:hover img+span {
+      color: rgb(255, 103, 0);
+    }
+
+    .blank2 {
+      width: 315px;
+      height: 100px;
+      background-color: #fff;
+      position: absolute;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+      border: 0;
+      padding: 0;
+      margin: 0;
+      /* 三侧阴影,去掉上边与cart的边,白色和一 */
+      text-align: center;
+      color: #000;
+      line-height: 100px !important;
+      font-size: 12px;
+      right: -8px;
+      top: 40px;
+      visibility: hidden;
+    }
+
+    .cart:hover .blank2 {
+      visibility: visible;
+    }
+
+    .Navigation-Bar ul {
+      display: block;
+      width: 1250px;
+      list-style: none;
+      padding: 0;
+      white-space: nowrap;
+      position: relative;
+      margin: 0 auto 0 auto;
+    }
+
+    .blank {
+      display: inline-block;
+      width: 250px;
+      margin: 0;
+
+    }
+
+    .blank1 {
+      display: inline-block;
+      width: 20px;
+      margin: 0;
+    }
+
+
+
+    .Navigation-Bar ul span {
+      display: inline-block;
+      padding: 0 6px 0 6px;
+      font-size: 12px;
+      line-height: 40px;
+      color: #424242;
+    }
+
+    .Navigation-Bar ul li {
+      display: inline-block;
+      font-size: 12px;
+      line-height: 40px;
+      color: #B0B0B0;
+    }
+
+    li a:link {
+      color: #B0B0B0;
+      text-decoration: none;
+    }
+
+    li a:visited {
+      color: #B0B0B0;
+      text-decoration: none;
+    }
+
+    li a:hover {
+      color: white;
+    }
+
+    .download1 {
+      position: relative;
+    }
+
+    .download span:first-child {
+      display: block;
+      box-sizing: content-box;
+      width: 120px;
+      height: 150px;
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      top: 40px;
+      left: -28px;
+      box-shadow: 0 1px 5px #B0B0B0;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .download span:last-child {
+      position: absolute;
+      display: block;
+      width: 0;
+      height: 0;
+      padding: 0;
+      border: 8px solid;
+      border-color: transparent transparent white transparent;
+      top: 25px;
+      left: 18px;
+
+    }
+
+    .download span img {
+      display: block;
+      box-sizing: content-box;
+      padding: 20px 20px 0 20px;
+      width: 80px;
+      height: 80px;
+    }
+
+    .download span {
+      visibility: hidden;
+    }
+
+    .download:hover span {
+      visibility: visible;
+    }
+
+    ul li+span+span.cart {
+      display: inline-block;
+      width: 120px;
+      height: 40px;
+      position: absolute;
+      background-color: rgb(66, 66, 66);
+      padding: 0;
+      right: 0;
+    }
+
+    .cart img+span {
+      font-size: 12px;
+      color: #B0B0B0;
+    }
+
+    .cart img {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      padding: 0;
+      margin: 0 2px 0 0;
+      color: #B0B0B0;
+      vertical-align: middle;
+    }
+
+    /* 把两个ico图叠在一起,显示灰色,hover显示橘色图,这个图大小,位置需要调整 */
+
+    .cart>span {
+      display: block;
+      margin: 0 8px 0 5px;
+    }
+
+    .cart:hover {
+      background-color: #fff;
+    }
+
+    .cart:hover img+span {
+      color: rgb(255, 103, 0);
+    }
+
+    .blank2 {
+      width: 315px;
+      height: 100px;
+      background-color: #fff;
+      position: absolute;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+      border: 0;
+      padding: 0;
+      margin: 0;
+      /* 三侧阴影,去掉上边与cart的边,白色和一 */
+      text-align: center;
+      color: #000;
+      line-height: 100px !important;
+      font-size: 12px;
+      right: -8px;
+      top: 40px;
+      visibility: hidden;
+    }
+
+    .cart:hover .blank2 {
+      visibility: visible;
+    }
+
+    .Bar2 {
+      width: 100%;
+      height: 100px;
+      padding: 0;
+    }
+
+    .Bar2>ul {
+      width: 1250px;
+      height: 100px;
+      line-height: 100px;
+      margin: 0 auto 0 auto;
+      padding: 0;
+      font-size: 0;
+      position: relative;
+
+    }
+
+    .mi-ico {
+      display: inline-block;
+      width: 55px;
+      height: 55px;
+      margin: 26px 0 27px 0;
+    }
+
+
+    .header {
+      display: block;
+      height: 100px;
+      width: 600px;
+      box-sizing: border-box;
+      position: absolute;
+      left: 240px;
+      top: 0;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .header li {
+      display: inline-block;
+    }
+
+    .header li a {
+      font-size: 16px;
+      color: rgb(51, 51, 51);
+      padding: 30px 15px 10px 15px;
+      /* 把hover的地方变大,不只是文字 */
+    }
+
+    .header li:hover a {
+      color: rgb(255, 103, 0);
+    }
   </style>
+
+
+
 </head>
 
 <body>
@@ -114,20 +447,51 @@
       <li><a href="https://i.mi.com/">协议规则</a></li>
       <span>|</span>
       <li class="download1">
-        <a class="download" href="https://i.mi.com/">下载app</a><span><img
-            src="https://i1.mifile.cn/f/i/17/appdownload/download.png?1">
-          </img>
-          小米商城APP</span>
+        <a class="download" href="https://www.mi.com/appdownload/">下载app
+          <span>
+            <img src="https://i1.mifile.cn/f/i/17/appdownload/download.png?1">
+            </img>
+            小米商城APP</span>
+          <span></span></a>
       </li>
+      <span>|</span>
+      <li><a href="https://i.mi.com/">Select Location</a></li>
+      <span class="blank"></span>
+      <li><a href="https://i.mi.com/">登录</a></li>
+      <span>|</span>
+      <li><a href="https://i.mi.com/">注册</a></li>
+      <span>|</span>
+      <li><a href="https://i.mi.com/">消息通知</a></li>
+      <span class="blank1"></span>
+      <span class="cart" href="https://static.mi.com/cart/">
+        <span>
+          <img src="https://i8.mifile.cn/b2c-mimall-media/d7db56d1d850113f016c95e289e36efa.png" alt="">
+          <span>购物车&nbsp;&nbsp;(0)</span>
+        </span>
+        <span class="blank2">购物车中还没有商品，赶紧选购吧！</span>
+      </span>
     </ul>
-
-    <ul>
-      <li>登录</li>
-      <li>注册</li>
-      <li>消息通知</li>
-    </ul>
-    <i class="cart"></i>
   </div>
+  <div class="Bar2">
+    <ul>
+      <img class="mi-ico" src="https://s01.mifile.cn/i/logo-footer.png?v2" alt="">
+      <!-- 上面图不对.分辨率不够,很模糊 -->
+      <!-- 后面放一张hover的图片,找不到地址 -->
+      <img src="" alt="">
+      <ul class="header">
+        <li><a href="">小米手机<div></div></a></li>
+        <li><a href="">Redmi&nbsp;红米<div></div></a></li>
+        <li><a href="">电视<div></div></a></li>
+        <li><a href="">笔记本<div></div></a></li>
+        <li><a href="">家电<div></div></a></li>
+        <li><a href="">路由器<div></div></a></li>
+        <li><a href="">智能硬件<div></div></a></li>
+        <li><a href="">服务<div></div></a></li>
+        <li><a href="">社区<div></div></a></li>
+      </ul>
+    </ul>
+  </div>
+  <div class="xiaomi"></div>
 </body>
 
 </html>
