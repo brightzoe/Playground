@@ -7,7 +7,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>mi homepage</title>
+  <style type="css" media="screen, print">
+    @font-face {
+      font-family: 'iconfont';
+      src: url('iconfont.eot');
+      src: url('iconfont.eot?#iefix') format('embedded-opentype'),
+      url('iconfont.woff') format('woff'),
+      url('iconfont.ttf') format('truetype'),
+      url('iconfont.svg#iconfont') format('svg');
+        }
+  </style>
   <style>
+    .iconfont {
+      font-family: "iconfont" !important;
+      font-size: 16px;
+      font-style: normal;
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-stroke-width: 0.2px;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
     html,
     body {
       margin: 0;
@@ -45,7 +64,7 @@
 
     .blank {
       display: inline-block;
-      width: 250px;
+      width: 120px;
       margin: 0;
 
     }
@@ -139,9 +158,10 @@
       display: inline-block;
       width: 120px;
       height: 40px;
-      position: relative;
+      position: absolute;
       background-color: rgb(66, 66, 66);
       padding: 0;
+      right: 0;
     }
 
     .cart img+span {
@@ -228,7 +248,6 @@
       margin: 0 auto 0 auto;
       padding: 0;
       font-size: 0;
-      position: relative;
       white-space: nowrap;
       list-style: none;
 
@@ -262,7 +281,7 @@
     .Bar2>ul>li>a {
       font-size: 16px;
       color: rgb(51, 51, 51);
-      padding: 30px 15px 10px 15px;
+      padding: 30px 10px 10px 10px;
       /* 把hover的地方变大,不只是文字 */
     }
 
@@ -271,23 +290,35 @@
     }
 
     .xiaomi,
-    .redmi {
+    .redmi,
+    .tv {
       position: absolute;
+      display: inline-block;
+      margin: 0;
+      border: 0;
+      box-sizing: border-box;
       top: 100px;
+      left: 0;
       height: 230px;
       width: 100%;
-
     }
 
-    .Bar2 li:hover+.xiaomi {
+
+    .Bar2 li:hover+.xiaomi,
+    .xiaomi:hover,
+    .redmi:hover,
+    .tv:hover,
+    .Bar2 li:hover+.redmi,
+    .Bar2 li:hover+.tv {
       box-shadow: 0 -1px 0px rgba(0, 0, 0, 0.15);
-      border-top: salmon 5px solid;
     }
 
     .Bar2 li:nth-child(4):hover+.xiaomi ul,
     .Bar2 li:nth-child(6):hover+.redmi ul,
+    .Bar2 LI:nth-child(8):hover+.tv ul,
     .xiaomi:hover ul,
-    .redmi:hover {
+    .redmi:hover ul,
+    .tv:hover ul {
       width: 1250px;
       height: 230px;
       margin: 0 auto 0 auto;
@@ -300,10 +331,9 @@
     }
 
     /* 正常情况,高度0,里面东西hidden,hover高度增加,里面的显示 */
-
-
     .xiaomi ul,
-    .redmi ul {
+    .redmi ul,
+    .tv ul {
       width: 1250px;
       height: 0px;
       margin: 0 auto 0 auto;
@@ -317,7 +347,8 @@
     }
 
     .xiaomi ul li,
-    .redmi ul li {
+    .redmi ul li,
+    .tv ul li {
       display: inline-block;
       width: 204px;
       margin: 0;
@@ -326,7 +357,8 @@
     }
 
     .xiaomi img,
-    .redmi img {
+    .redmi img,
+    .tv img {
       display: block;
       padding: 0 15px;
       width: 160px;
@@ -337,7 +369,8 @@
     }
 
     .xiaomi ul li span.title,
-    .redmi ul li span {
+    .redmi ul li span.title,
+    .tv ul li span.title {
       display: block;
       text-align: center;
       font-size: 12px;
@@ -345,7 +378,8 @@
     }
 
     .xiaomi ul li span:last-child,
-    .redmi ul li span:last-child {
+    .redmi ul li span:last-child,
+    .tv ul li span:last-child {
       display: block;
       color: #ff6700;
       text-align: center;
@@ -355,7 +389,8 @@
     }
 
     .xiaomi ul li+span,
-    .redmi ul li+span {
+    .redmi ul li+span,
+    .tv ul li+span {
       display: inline-block;
       width: 1px;
       height: 100px;
@@ -378,6 +413,210 @@
       top: 0;
       background-color: rgba(0, 0, 0, 0.15);
     } */
+    .mi-search {
+      display: inline-block;
+      padding: 0;
+      margin-left: 96px;
+      position: relative;
+      box-sizing: border-box;
+      width: 300px;
+      height: 50px;
+      border: 1px #B0B0B0 solid;
+      vertical-align: middle;
+    }
+
+    .mi-search input:first-child {
+      border: 0;
+      position: absolute;
+      box-sizing: content-box;
+      width: 250px;
+      height: 48px;
+      padding: 0;
+      left: 0;
+      top: 0;
+
+    }
+
+    .mi-search label {
+      display: block;
+      box-sizing: border-box;
+      width: 50px;
+      height: 50px;
+      border-left: 1px #B0B0B0 solid;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    x.iconfont {
+      width: 50px;
+      height: 48px;
+    }
+
+    /* 阿里巴巴矢量库,icon加不上 */
+    .Billboard {
+      width: 100%;
+      height: 460px;
+    }
+
+    /* 轮播图 */
+    .radio-slider {
+      width: 1250px;
+      height: 460px;
+      margin: 0 auto 0 auto;
+      position: relative;
+
+    }
+
+    .radio-slider img {
+      position: absolute;
+      width: 100%;
+      height: 460px;
+      top: 0;
+      left: 0;
+    }
+
+
+
+    .radio-slider label {
+      position: absolute;
+      border: 2px solid #747272;
+      width: 6px;
+      height: 6px;
+      border-radius: 200px;
+      background-color: rgba(119, 117, 117, 0.4);
+      z-index: 5;
+      bottom: 30px;
+      cursor: pointer;
+    }
+
+    input:checked+*+label,
+    .radio-slider label:hover {
+      background-color: rgb(233, 230, 230);
+
+    }
+
+
+    #a1 {
+      right: 112px;
+    }
+
+    #b1 {
+      right: 94px;
+    }
+
+    #c1 {
+      right: 76px;
+    }
+
+    #d1 {
+      right: 58px;
+    }
+
+    #e1 {
+      right: 40px;
+    }
+
+    input[name="slider"] {
+      display: none;
+    }
+
+    input+img {
+      opacity: 0;
+    }
+
+    input:checked+img {
+      opacity: 1;
+      transition: 0.6s;
+    }
+
+    .next label {
+      position: absolute;
+      top: 200px;
+      right: 0;
+      background: url(https://i1.mifile.cn/f/i/2014/cn/icon/icon-slides.png);
+      background-repeat: no-repeat;
+      padding: 0;
+      width: 41px;
+      height: 69px;
+      border: 0;
+      border-radius: 0;
+      background-position: -122px 0;
+      visibility: hidden;
+    }
+
+    /* 右边label:hover有条白线,未解决 */
+    .next label:hover,
+    #a:checked~.next #b3,
+    #b:checked~.next #c3,
+    #c:checked~.next #d3,
+    #d:checked~.next #e3,
+    #e:checked~.next #a3 {
+      visibility: visible;
+      /* 最后一条不好用,未找到原因 */
+      /* 轮播图还要放一个loop,自动轮播 */
+    }
+
+    .next label:hover,
+    .next label:active {
+      background-position: -40px 0;
+      background-color: transparent;
+    }
+
+    .previous label {
+      position: absolute;
+      top: 200px;
+      left: 235px;
+      visibility: hidden;
+      background: url(https://i1.mifile.cn/f/i/2014/cn/icon/icon-slides.png);
+      background-repeat: no-repeat;
+      padding: 0;
+      width: 41px;
+      height: 69px;
+      border: 0;
+      border-radius: 0;
+      background-position: -83px 0;
+    }
+
+    #a:checked~.previous #e2,
+    #b:checked~.previous #a2,
+    #c:checked~.previous #b2,
+    #d:checked~.previous #c2,
+    #e:checked~.previous #d2 {
+      visibility: visible;
+    }
+
+    .previous label:hover,
+    .previous label:active {
+      background-position: 0 0;
+      background-color: transparent;
+    }
+
+    ul.list {
+      box-sizing: border-box;
+      width: 230px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 10;
+      list-style: none;
+      background: rgba(105, 101, 101, .6);
+      padding: 20px 0 0 0;
+      margin: 0;
+      height: 460px;
+    }
+
+    ul.list>li {
+      display: block;
+      width: 230px;
+      height: 45px;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    ul.list>li:hover {
+      background-color: rgb(255, 103, 0);
+    }
   </style>
 
 
@@ -533,16 +772,114 @@
         </ul>
       </div>
       <li><a href="">电视</a></li>
+      <div class="tv">
+        <ul>
+          <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png"
+                alt="">
+            </a>
+            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+            <span>2799元起</span>
+          </li>
+          <span></span>
+          <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png"
+                alt="">
+            </a>
+            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+            <span>2799元起</span>
+          </li>
+          <span></span>
+          <li><a href=""><img
+                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png" alt="">
+            </a>
+            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+            <span>2799元起</span>
+          </li>
+          <span></span>
+          <li><a href=""><img
+                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png" alt="">
+            </a>
+            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+            <span>2799元起</span>
+          </li>
+          <span></span>
+          <li><a href=""><img
+                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png" alt="">
+            </a>
+            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+            <span>2799元起</span>
+          </li>
+          <span></span>
+          <li><a href=""><img
+                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png" alt="">
+            </a>
+            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+            <span>2799元起</span></li>
+        </ul>
+      </div>
       <li><a href="">笔记本</a></li>
+      <!-- 后面加div,笔记本,家电等还没做 -->
       <li><a href="">家电</a></li>
       <li><a href="">路由器</a></li>
       <li><a href="">智能硬件</a></li>
       <li><a href="">服务</a></li>
       <li><a href="">社区</a></li>
-    </ul>
+      <form class="mi-search" action="https://search.mi.com/search">
+        <input type="text" name="name" value="">
+        <input type="submit" name="search" value="" id="search" hidden>
+        <label for="search"><i class="iconfont">&#xe7de;</i></label>
+      </form>
     </ul>
   </div>
+  <section class="Billboard">
+    <div class="radio-slider">
+      <input type="radio" name="slider" id="a" checked>
+      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ad84d80e7fc5990162a387a6b103af01.jpeg?thumb=1&w=1226&h=460"
+        alt="">
+      <label for="a" id="a1"></label>
+      <input type="radio" name="slider" id="b">
+      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/17728eaeb111572cf03e4962205f2ba6.jpg?thumb=1&w=1226&h=460"
+        alt="">
+      <label for="b" id="b1"></label>
+      <input type="radio" name="slider" id="c">
+      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e52c3e98602b90f198ec316dce253cba.jpg?thumb=1&w=1226&h=460"
+        alt="">
+      <label for="c" id="c1"></label>
+      <input type="radio" name="slider" id="d">
+      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/05bc8af40fc9f9941808d253034c279d.jpg?thumb=1&w=1226&h=460"
+        alt="">
+      <label for="d" id="d1"></label>
+      <input type="radio" name="slider" id="e">
+      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/5cac96e3dd740cfd6384986cebdbface.jpg?w=2452&h=920" alt="">
+      <label for="e" id="e1"></label>
+      <div class="previous">
+        <label for="a" id="a2"></label>
+        <label for="b" id="b2"></label>
+        <label for="c" id="c2"></label>
+        <label for="d" id="d2"></label>
+        <label for="e" id="e2"></label>
+      </div>
+      <div class="next">
+        <label for="a" id="a3"></label>
+        <label for="b" id="b3"></label>
+        <label for="c" id="c3"></label>
+        <label for="d" id="d3"></label>
+        <label for="e" id="e3"></label>
+      </div>
+      <ul class="list">
+        <li>手机&nbsp;电话卡</li>
+        <li>电视&nbsp;盒子</li>
+        <li>笔记本&nbsp;显示器&nbsp;平板</li>
+        <li>家电&nbsp;插线板</li>
+        <li>出行&nbsp;穿戴</li>
+        <li>智能&nbsp;路由器</li>
+        <li>电源&nbsp;配件</li>
+        <li>健康&nbsp;儿童</li>
+        <li>耳机&nbsp;音响</li>
+        <li>生活&nbsp;箱包</li>
+      </ul>
+    </div>
 
+  </section>
 
 </body>
 
