@@ -8,6 +8,10 @@
   <title>mi homepage</title>
   <script src="https://at.alicdn.com/t/font_1551713_9zuyd1uro7w.js"></script>
   <style>
+    x* {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
     .icon {
       width: 1em;
       height: 1em;
@@ -112,6 +116,8 @@
       box-shadow: 0 1px 5px #B0B0B0;
       text-align: center;
       font-size: 14px;
+      background-color: #fff;
+      z-index: 10;
     }
 
     .download span:last-child {
@@ -237,6 +243,7 @@
       margin: 0 auto 0 auto;
       padding: 0;
       font-size: 0;
+      line-height: 100px;
       white-space: nowrap;
       list-style: none;
 
@@ -246,17 +253,11 @@
       display: inline-block;
       width: 55px;
       height: 55px;
-      margin: 0;
+      margin: 0 185px 0 0;
       vertical-align: middle;
     }
 
 
-    .Bar2>ul span:nth-child(3) {
-      display: inline-block;
-      height: 50px;
-      width: 185px;
-
-    }
 
 
     .Bar2>ul>li {
@@ -274,74 +275,52 @@
       /* 把hover的地方变大,不只是文字 */
     }
 
-    .Bar2 li:hover a {
+    .Bar2>ul>li:hover>a {
       color: rgb(255, 103, 0);
+    }
+
+    /* 正常情况,高度0,里面东西hidden,hover高度增加,里面的显示 */
+    .Bar2>ul>li>div {
+      width: 100%;
+      xdisplay: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin: 0;
+      list-style: none;
+      white-space: nowrap;
+      font-size: 0;
+      transition: 0.6s;
+      background: #fff;
+      z-index: 100;
     }
 
     .xiaomi,
     .redmi,
-    .tv {
-      position: absolute;
-      display: inline-block;
-      margin: 0;
-      border: 0;
+    .tv,
+    .computer,
+    .house,
+    .mao,
+    .smart {
       box-sizing: border-box;
-      top: 100px;
-      left: 0;
-      height: 230px;
-      width: 100%;
-    }
-
-
-    .Bar2 li:hover+.xiaomi,
-    .xiaomi:hover,
-    .redmi:hover,
-    .tv:hover,
-    .Bar2 li:hover+.redmi,
-    .Bar2 li:hover+.tv {
-      box-shadow: 0 -1px 0px rgba(0, 0, 0, 0.15);
-    }
-
-    .Bar2 li:nth-child(4):hover+.xiaomi ul,
-    .Bar2 li:nth-child(6):hover+.redmi ul,
-    .Bar2 li:nth-child(8):hover+.tv ul,
-    .xiaomi:hover ul,
-    .redmi:hover ul,
-    .tv:hover ul {
+      margin: 0 auto 0 auto;
       width: 1230px;
       height: 230px;
-      margin: 0 auto 0 auto;
+    }
+
+
+    .Bar2>ul>li:nth-child(3):hover>div {
       display: block;
       list-style: none;
       padding: 0;
       white-space: nowrap;
       font-size: 0;
       transition: height 0.6s;
-
     }
 
-
-
-    /* 正常情况,高度0,里面东西hidden,hover高度增加,里面的显示 */
-    .xiaomi ul,
-    .redmi ul,
-    .tv ul {
-      width: 1230px;
-      height: 0px;
-      margin: 0 auto 0 auto;
-      display: block;
-      list-style: none;
-      padding: 0;
-      white-space: nowrap;
-      font-size: 0;
-      overflow: hidden;
-      transition: 0.6s;
-
-    }
-
-    .xiaomi ul li,
-    .redmi ul li,
-    .tv ul li {
+    .xiaomi li,
+    .redmi li,
+    .tv li {
       display: inline-block;
       width: 204px;
       margin: 0;
@@ -361,18 +340,18 @@
 
     }
 
-    .xiaomi ul li span.title,
-    .redmi ul li span.title,
-    .tv ul li span.title {
+    .xiaomi li span.title,
+    .redmi li span.title,
+    .tv li span.title {
       display: block;
       text-align: center;
       font-size: 12px;
       color: #333333 !important;
     }
 
-    .xiaomi ul li span:last-child,
-    .redmi ul li span:last-child,
-    .tv ul li span:last-child {
+    .xiaomi li span:last-child,
+    .redmi li span:last-child,
+    .tv li span:last-child {
       display: block;
       color: #ff6700;
       text-align: center;
@@ -381,9 +360,9 @@
       margin: 2px;
     }
 
-    .xiaomi ul li+span,
-    .redmi ul li+span,
-    .tv ul li+span {
+    .xiaomi li+span,
+    .redmi li+span,
+    .tv li+span {
       display: inline-block;
       width: 1px;
       height: 100px;
@@ -450,7 +429,7 @@
     .Billboard {
       width: 100%;
       height: 460px;
-
+      z-index: 50;
     }
 
     /* 轮播图 */
@@ -459,7 +438,6 @@
       height: 460px;
       margin: 0 auto 0 auto;
       position: relative;
-
     }
 
     .radio-slider img {
@@ -468,10 +446,7 @@
       height: 460px;
       top: 0;
       left: 0;
-
     }
-
-
 
     .radio-slider label {
       position: absolute;
@@ -488,9 +463,7 @@
     input:checked+*+label,
     .radio-slider label:hover {
       background-color: rgb(233, 230, 230);
-
     }
-
 
     #a1 {
       right: 112px;
@@ -599,6 +572,7 @@
       padding: 20px 0 0 0;
       margin: 0;
       height: 460px;
+      z-index: 80;
     }
 
     ul.list>a {
@@ -614,6 +588,7 @@
       text-align: left;
       line-height: 42px;
       text-decoration: none;
+
     }
 
     ul.list>a>svg {
@@ -751,6 +726,7 @@
     .list>a:nth-child(10):hover~.life-list {
       visibility: visible;
       box-shadow: 0 8px 16px rgba(0, 0, 0, .18);
+
     }
 
     .mobile-list:hover,
@@ -828,149 +804,362 @@
         alt="">
       <!-- 后面放一张hover的图片,找不到地址 -->
       <img src="" alt="">
-      <span></span>
-      <li><a href="">小米手机</a></li>
-      <div class="xiaomi">
-        <ul>
-          <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png"
-                alt="">
-            </a>
-            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-            <span>2799元起</span>
-          </li>
-          <span></span>
-          <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png"
-                alt="">
-            </a>
-            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-            <span>2799元起</span>
-          </li>
-          <span></span>
-          <li><a href=""><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png" alt="">
-            </a>
-            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-            <span>2799元起</span>
-          </li>
-          <span></span>
-          <li><a href=""><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png" alt="">
-            </a>
-            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-            <span>2799元起</span>
-          </li>
-          <span></span>
-          <li><a href=""><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png" alt="">
-            </a>
-            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-            <span>2799元起</span>
-          </li>
-          <span></span>
-          <li><a href=""><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png" alt="">
-            </a>
-            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-            <span>2799元起</span></li>
-        </ul>
-      </div>
-      <li><a href="">Redmi&nbsp;红米</a></li>
-      <div class="redmi">
-        <ul>
-          <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png"
-                alt="">
-            </a>
-            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-            <span>2799元起</span>
-          </li>
-          <span></span>
-          <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png"
-                alt="">
-            </a>
-            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-            <span>2799元起</span>
-          </li>
-          <span></span>
-          <li><a href=""><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png" alt="">
-            </a>
-            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-            <span>2799元起</span>
-          </li>
-          <span></span>
-          <li><a href=""><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png" alt="">
-            </a>
-            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-            <span>2799元起</span>
-          </li>
-          <span></span>
-          <li><a href=""><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png" alt="">
-            </a>
-            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-            <span>2799元起</span>
-          </li>
-          <span></span>
-          <li><a href=""><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png" alt="">
-            </a>
-            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-            <span>2799元起</span></li>
-        </ul>
-      </div>
-      <li><a href="">电视</a></li>
-      <div class="tv">
-        <ul>
-          <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png"
-                alt="">
-            </a>
-            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-            <span>2799元起</span>
-          </li>
-          <span></span>
-          <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png"
-                alt="">
-            </a>
-            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-            <span>2799元起</span>
-          </li>
-          <span></span>
-          <li><a href=""><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png" alt="">
-            </a>
-            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-            <span>2799元起</span>
-          </li>
-          <span></span>
-          <li><a href=""><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png" alt="">
-            </a>
-            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-            <span>2799元起</span>
-          </li>
-          <span></span>
-          <li><a href=""><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png" alt="">
-            </a>
-            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-            <span>2799元起</span>
-          </li>
-          <span></span>
-          <li><a href=""><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png" alt="">
-            </a>
-            <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-            <span>2799元起</span></li>
-        </ul>
-      </div>
-      <li><a href="">笔记本</a></li>
-      <!-- 后面加div,笔记本,家电等还没做 -->
-      <li><a href="">家电</a></li>
-      <li><a href="">路由器</a></li>
-      <li><a href="">智能硬件</a></li>
+
+      <li><a href="">小米手机</a>
+        <div>
+          <ul class="xiaomi">
+            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span></li>
+          </ul>
+        </div>
+      </li>
+
+      <li><a href="">Redmi&nbsp;红米</a>
+        <div>
+          <ul class="redmi">
+            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span></li>
+          </ul>
+        </div>
+      </li>
+      <li><a href="">电视</a>
+        <div>
+          <ul class="tv">
+            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span></li>
+          </ul>
+        </div>
+      </li>
+
+      <li><a href="">笔记本</a>
+        <div>
+          <ul class="computer">
+            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span></li>
+          </ul>
+        </div>
+      </li>
+      <li><a href="">家电</a>
+        <div>
+          <ul class="house">
+            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span></li>
+          </ul>
+        </div>
+      </li>
+      <li><a href="">路由器</a>
+        <div>
+          <ul class="mao">
+            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span></li>
+          </ul>
+        </div>
+      </li>
+      <li><a href="">智能硬件</a>
+        <div>
+          <ul class="smart">
+            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span>
+            </li>
+            <span></span>
+            <li><a href=""><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png"
+                  alt="">
+              </a>
+              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+              <span>2799元起</span></li>
+          </ul>
+        </div>
+      </li>
       <li><a href="">服务</a></li>
       <li><a href="">社区</a></li>
+
       <form class="mi-search" action="https://search.mi.com/search">
         <input type="text" name="name" value="">
         <input type="submit" name="search" value="" id="search" hidden>
@@ -978,6 +1167,8 @@
       </form>
     </ul>
   </div>
+
+
   <section class="Billboard">
     <div class="radio-slider">
       <input type="radio" name="slider" id="a" checked>
