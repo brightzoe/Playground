@@ -1,1877 +1,1226 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>mi homepage</title>
-  <script src="https://at.alicdn.com/t/font_1551713_9zuyd1uro7w.js"></script>
-  <style>
-    x* {
-      background: rgba(0, 0, 0, 0.1);
-    }
-
-    .icon {
-      width: 1em;
-      height: 1em;
-      vertical-align: -0.15em;
-      fill: currentColor;
-      overflow: hidden;
-    }
-
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      min-width: 500px;
-    }
-
-    body {
-      font: 14px/1.5 "Helvetica Neue", Helvetica, Arial, "MicrosoftYaHei", sans-serif;
-    }
-
-    .Navigation-Bar {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0 0 0 0px;
-      width: 100%;
-      border: 0;
-      background-color: rgb(51, 51, 51);
-      height: 40px;
-      font-size: 0;
-      color: #B0B0B0;
-      position: relative;
-    }
-
-    /* 一个ul-block把标题包起来,宽固定,两个margin auto,缩放时左右等宽. */
-    .Navigation-Bar ul {
-      display: block;
-      width: 1230px;
-      list-style: none;
-      padding: 0;
-      white-space: nowrap;
-      position: relative;
-      margin: 0 auto 0 auto;
-    }
-
-    .blank {
-      display: inline-block;
-      width: 120px;
-      margin: 0;
-
-    }
-
-    .blank1 {
-      display: inline-block;
-      width: 20px;
-      margin: 0;
-    }
-
-
-
-    .Navigation-Bar ul span {
-      display: inline-block;
-      padding: 0 6px 0 6px;
-      font-size: 12px;
-      line-height: 40px;
-      color: #424242;
-    }
-
-    .Navigation-Bar ul li {
-      display: inline-block;
-      font-size: 12px;
-      line-height: 40px;
-      color: #B0B0B0;
-    }
-
-    li a:link {
-      color: #B0B0B0;
-      text-decoration: none;
-    }
-
-    li a:visited {
-      color: #B0B0B0;
-      text-decoration: none;
-    }
-
-    li a:hover {
-      color: white;
-    }
-
-    .download1 {
-      position: relative;
-    }
-
-    .download span:first-child {
-      display: block;
-      box-sizing: content-box;
-      width: 120px;
-      height: 150px;
-      margin: 0;
-      padding: 0;
-      position: absolute;
-      top: 40px;
-      left: -28px;
-      box-shadow: 0 1px 5px #B0B0B0;
-      text-align: center;
-      font-size: 14px;
-      background-color: #fff;
-      z-index: 10;
-    }
-
-    .download span:last-child {
-      position: absolute;
-      display: block;
-      width: 0;
-      height: 0;
-      padding: 0;
-      border: 8px solid;
-      border-color: transparent transparent white transparent;
-      top: 25px;
-      left: 18px;
-
-    }
-
-    .download span img {
-      display: block;
-      box-sizing: content-box;
-      padding: 20px 20px 0 20px;
-      width: 80px;
-      height: 80px;
-    }
-
-    .download span {
-      visibility: hidden;
-    }
-
-    .download:hover span {
-      visibility: visible;
-    }
-
-    ul li+span+span.cart {
-      display: inline-block;
-      width: 120px;
-      height: 40px;
-      position: absolute;
-      background-color: rgb(66, 66, 66);
-      padding: 0;
-      right: 0;
-    }
-
-    .cart img+span {
-      font-size: 12px;
-      color: #B0B0B0;
-    }
-
-    .cart img {
-      display: inline-block;
-      width: 18px;
-      height: 18px;
-      padding: 0;
-      margin: 0 2px 0 0;
-      color: #B0B0B0;
-      vertical-align: middle;
-    }
-
-    /* 把两个ico图叠在一起,显示灰色,hover显示橘色图,这个图大小,位置需要调整 */
-
-    .cart>span {
-      display: block;
-      margin: 0 8px 0 5px;
-    }
-
-    .cart:hover {
-      background-color: #fff;
-    }
-
-    .cart:hover img+span {
-      color: rgb(255, 103, 0);
-    }
-
-    .blank2 {
-      width: 315px;
-      height: 0px;
-      background-color: #fff;
-      position: absolute;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-      border: 0;
-      padding: 0;
-      margin: 0;
-      /* 三侧阴影,去掉上边与cart的边,白色和一 */
-      /* 购物车做一个过渡,从上到下 */
-      text-align: center;
-      color: #000;
-      line-height: 100px !important;
-      font-size: 12px;
-      right: -8px;
-      top: 40px;
-      overflow: hidden;
-      transition: height 0.4s;
-    }
-
-    .cart:hover .blank2,
-    .blank2:hover {
-      width: 315px;
-      height: 100px;
-      background-color: #fff;
-      position: absolute;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-      border: 0;
-      padding: 0;
-      margin: 0;
-      text-align: center;
-      color: #000;
-      line-height: 100px !important;
-      font-size: 12px;
-      right: -1px;
-      top: 40px;
-      transition: height 0.4s;
-      z-index: 2;
-    }
-
-    .Bar2 {
-      width: 100%;
-      height: 100px;
-      padding: 0;
-      position: relative;
-    }
-
-    .Bar2>ul {
-      width: 1230px;
-      height: 100px;
-      margin: 0 auto 0 auto;
-      padding: 0;
-      font-size: 0;
-      line-height: 100px;
-      white-space: nowrap;
-      list-style: none;
-
-    }
-
-    .mi-ico {
-      display: inline-block;
-      width: 55px;
-      height: 55px;
-      margin: 0 185px 0 0;
-      vertical-align: middle;
-    }
-
-
-
-
-    .Bar2>ul>li {
-      display: inline-block;
-      height: 100px;
-      vertical-align: 0px;
-      margin: 0;
-      z-index: 1;
-    }
-
-    .Bar2>ul>li>a {
-      font-size: 16px;
-      color: rgb(51, 51, 51);
-      padding: 30px 10px 10px 10px;
-      /* 把hover的地方变大,不只是文字 */
-    }
-
-    .Bar2>ul>li:hover>a {
-      color: rgb(255, 103, 0);
-    }
-
-    /* 正常情况,高度0,里面东西hidden,hover高度增加,里面的显示 */
-    .Bar2>ul>li>div {
-      width: 100%;
-      xdisplay: none;
-      position: absolute;
-      top: 0;
-      left: 0;
-      margin: 0;
-      list-style: none;
-      white-space: nowrap;
-      font-size: 0;
-      transition: 0.6s;
-      background: #fff;
-      z-index: 100;
-    }
-
-    .xiaomi,
-    .redmi,
-    .tv,
-    .computer,
-    .house,
-    .mao,
-    .smart {
-      box-sizing: border-box;
-      margin: 0 auto 0 auto;
-      width: 1230px;
-      height: 230px;
-    }
-
-
-    .Bar2>ul>li:nth-child(3):hover>div {
-      display: block;
-      list-style: none;
-      padding: 0;
-      white-space: nowrap;
-      font-size: 0;
-      transition: height 0.6s;
-    }
-
-    .xiaomi li,
-    .redmi li,
-    .tv li {
-      display: inline-block;
-      width: 204px;
-      margin: 0;
-      position: relative;
-
-    }
-
-    .xiaomi img,
-    .redmi img,
-    .tv img {
-      display: block;
-      padding: 0 15px;
-      width: 160px;
-      height: 110px;
-      margin-top: 32px;
-      margin-bottom: 20px;
-
-    }
-
-    .xiaomi li span.title,
-    .redmi li span.title,
-    .tv li span.title {
-      display: block;
-      text-align: center;
-      font-size: 12px;
-      color: #333333 !important;
-    }
-
-    .xiaomi li span:last-child,
-    .redmi li span:last-child,
-    .tv li span:last-child {
-      display: block;
-      color: #ff6700;
-      text-align: center;
-      font-size: 12px;
-      height: 20px;
-      margin: 2px;
-    }
-
-    .xiaomi li+span,
-    .redmi li+span,
-    .tv li+span {
-      display: inline-block;
-      width: 1px;
-      height: 100px;
-      padding: 0;
-      margin: 0;
-      background-color: rgba(0, 0, 0, 0.15);
-      vertical-align: 60px;
-    }
-
-    /* header里面的竖线,伪元素没有画出来 */
-    /* .xiaomi ul li::before {
-  position: absolute;
-  display: block;
-  width: 1px;
-  height: 100px;
-  padding: 0;
-  margin: 0;
-  z-index: 10;
-  right: 0;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.15);
-  } */
-    .mi-search {
-      display: inline-block;
-      padding: 0;
-      margin-left: 76px;
-      position: relative;
-      box-sizing: border-box;
-      width: 300px;
-      height: 50px;
-      border: 1px #B0B0B0 solid;
-      vertical-align: middle;
-    }
-
-    .mi-search input:first-child {
-      border: 0;
-      position: absolute;
-      box-sizing: content-box;
-      width: 250px;
-      height: 48px;
-      padding: 0;
-      left: 0;
-      top: 0;
-
-    }
-
-    .mi-search label {
-      display: block;
-      box-sizing: border-box;
-      width: 50px;
-      height: 50px;
-      border-left: 1px #B0B0B0 solid;
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-
-    x.iconfont {
-      width: 50px;
-      height: 48px;
-    }
-
-    /* 阿里巴巴矢量库,icon加不上 */
-    .Billboard {
-      width: 100%;
-      height: 460px;
-      z-index: 50;
-    }
-
-    /* 轮播图 */
-    .radio-slider {
-      width: 1230px;
-      height: 460px;
-      margin: 0 auto 0 auto;
-      position: relative;
-    }
-
-    .radio-slider img {
-      position: absolute;
-      width: 100%;
-      height: 460px;
-      top: 0;
-      left: 0;
-    }
-
-    .radio-slider label {
-      position: absolute;
-      border: 2px solid #747272;
-      width: 6px;
-      height: 6px;
-      border-radius: 200px;
-      background-color: rgba(119, 117, 117, 0.4);
-      z-index: 5;
-      bottom: 30px;
-      cursor: pointer;
-    }
-
-    input:checked+*+label,
-    .radio-slider label:hover {
-      background-color: rgb(233, 230, 230);
-    }
-
-    #a1 {
-      right: 112px;
-    }
-
-    #b1 {
-      right: 94px;
-    }
-
-    #c1 {
-      right: 76px;
-    }
-
-    #d1 {
-      right: 58px;
-    }
-
-    #e1 {
-      right: 40px;
-    }
-
-    input[name="slider"] {
-      display: none;
-    }
-
-    input+img {
-      opacity: 0;
-    }
-
-    input:checked+img {
-      opacity: 1;
-      transition: 0.6s;
-    }
-
-    .next label {
-      position: absolute;
-      top: 200px;
-      right: 0;
-      background: url(https://i1.mifile.cn/f/i/2014/cn/icon/icon-slides.png);
-      background-repeat: no-repeat;
-      padding: 0;
-      width: 41px;
-      height: 69px;
-      border: 0;
-      border-radius: 0;
-      background-position: -122px 0;
-      visibility: hidden;
-    }
-
-    /* 右边label:hover有条白线,未解决 */
-    .next label:hover,
-    #a:checked~.next #b3,
-    #b:checked~.next #c3,
-    #c:checked~.next #d3,
-    #d:checked~.next #e3,
-    #e:checked~.next #a3 {
-      visibility: visible;
-      /* 最后一条不好用,未找到原因 */
-      /* 轮播图还要放一个loop,自动轮播 */
-    }
-
-    .next label:hover,
-    .next label:active {
-      background-position: -40px 0;
-      background-color: transparent;
-    }
-
-    .previous label {
-      position: absolute;
-      top: 200px;
-      left: 230px;
-      visibility: hidden;
-      background: url(https://i1.mifile.cn/f/i/2014/cn/icon/icon-slides.png);
-      background-repeat: no-repeat;
-      padding: 0;
-      width: 41px;
-      height: 69px;
-      border: 0;
-      border-radius: 0;
-      background-position: -83px 0;
-    }
-
-    #a:checked~.previous #e2,
-    #b:checked~.previous #a2,
-    #c:checked~.previous #b2,
-    #d:checked~.previous #c2,
-    #e:checked~.previous #d2 {
-      visibility: visible;
-    }
-
-    .previous label:hover,
-    .previous label:active {
-      background-position: 0 0;
-      background-color: transparent;
-    }
-
-    ul.list {
-      box-sizing: border-box;
-      width: 230px;
-      position: absolute;
-      left: 0;
-      top: 0;
-      z-index: 10;
-      list-style: none;
-      background: rgba(15, 15, 15, 0.6);
-      padding: 20px 0 0 0;
-      margin: 0;
-      height: 460px;
-      z-index: 80;
-    }
-
-    ul.list>a {
-      display: block;
-      box-sizing: border-box;
-      position: relative;
-      width: 230px;
-      height: 42px;
-      font-size: 14px;
-      margin: 0;
-      color: #fff;
-      padding-left: 28px;
-      text-align: left;
-      line-height: 42px;
-      text-decoration: none;
-
-    }
-
-    ul.list>a>svg {
-      position: absolute;
-      top: 14px;
-      right: 15px;
-      width: 16px;
-      height: 16px;
-      opacity: 0.6;
-    }
-
-
-
-    ul.list>a:hover {
-      background-color: rgb(255, 103, 0);
-      cursor: pointer;
-
-    }
-
-    .list>div {
-      position: absolute;
-      top: 0px;
-      left: 230px;
-      box-sizing: content-box;
-      width: 1000px;
-      height: 460px;
-      background-color: #fff;
-      font-size: 0;
-      visibility: hidden;
-    }
-
-    .list1 {
-      position: absolute;
-      top: 0;
-      left: 0;
-      box-sizing: border-box;
-      display: inline-block;
-      width: 250px;
-      height: 460px;
-      margin: 0;
-      color: #000;
-      z-index: 10;
-    }
-
-    .list2 {
-      position: absolute;
-      top: 0;
-      left: 250px;
-      box-sizing: border-box;
-      display: inline-block;
-      width: 250px;
-      height: 460px;
-      margin: 0;
-      color: #000;
-      z-index: 10;
-    }
-
-
-    .list3 {
-      position: absolute;
-      top: 0;
-      left: 500px;
-      box-sizing: border-box;
-      display: inline-block;
-      width: 250px;
-      height: 460px;
-      margin: 0;
-      color: #000;
-      z-index: 10;
-    }
-
-
-    .list4 {
-      position: absolute;
-      top: 0;
-      left: 750px;
-      box-sizing: border-box;
-      display: inline-block;
-      width: 250px;
-      height: 460px;
-      margin: 0;
-      color: #000;
-      z-index: 10;
-    }
-
-    .product {
-      display: block;
-      position: relative;
-      width: 250px;
-      height: 76.66px;
-      padding: 0 0 0 72px;
-      line-height: 76.66px;
-      box-sizing: border-box;
-      margin: 0;
-      font-size: 14px;
-      color: #000;
-      text-decoration: none;
-    }
-
-    .product:hover {
-      color: rgb(239, 102, 0);
-    }
-
-    .product img {
-      display: block;
-      position: absolute;
-      top: 18.3px;
-      left: 20px;
-      box-sizing: border-box;
-      width: 40px;
-      height: 40px;
-      z-index: 12;
-    }
-
-    .list .out-list,
-    .list .smart-list,
-    .list .ear-list,
-    .list .life-list {
-      width: 750px;
-    }
-
-    .list .fitting-list {
-      width: 500px;
-    }
-
-    .list>a:first-child:hover~.mobile-list,
-    .list>a:nth-child(2):hover~.tv-list,
-    .list>a:nth-child(3):hover~.computer-list,
-    .list>a:nth-child(4):hover~.house-list,
-    .list>a:nth-child(5):hover~.out-list,
-    .list>a:nth-child(6):hover~.smart-list,
-    .list>a:nth-child(7):hover~.fitting-list,
-    .list>a:nth-child(8):hover~.health-list,
-    .list>a:nth-child(9):hover~.ear-list,
-    .list>a:nth-child(10):hover~.life-list {
-      visibility: visible;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, .18);
-
-    }
-
-    .mobile-list:hover,
-    .tv-list:hover,
-    .computer-list:hover,
-    .house-list:hover,
-    .out-list:hover,
-    .smart-list:hover,
-    .fitting-list:hover,
-    .health-list:hover,
-    .ear-list:hover,
-    .life-list:hover {
-      visibility: visible;
-    }
-  </style>
-
-
-</head>
-
-<body>
-
-  <div class="Navigation-Bar">
-    <!-- 导航栏中间是"|"不是border -->
-    <ul>
-      <li><a href="https://www.mi.com/index.html">小米商城</a></li>
-      <span>|</span>
-      <li><a href="https://www.miui.com/">MIUI</li>
-      </li>
-      <span>|</span>
-      <li><a href="https://iot.mi.com/index.html">loT</a></li>
-      <span>|</span>
-      <li><a href="https://i.mi.com/">云服务</a></li>
-      <span>|</span>
-      <li><a href="https://i.mi.com/">金融</a></li>
-      <span>|</span>
-      <li><a href="https://i.mi.com/">有品</a></li>
-      <span>|</span>
-      <li><a href="https://i.mi.com/">小爱开放平台</a></li>
-      <span>|</span>
-      <li><a href="https://i.mi.com/">企业团购</a></li>
-      <span>|</span>
-      <li><a href="https://i.mi.com/">资质证照</a></li>
-      <span>|</span>
-      <li><a href="https://i.mi.com/">协议规则</a></li>
-      <span>|</span>
-      <li class="download1">
-        <a class="download" href="https://www.mi.com/appdownload/">下载app
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>mi homepage</title>
+    <script src="https://at.alicdn.com/t/font_1551713_9zuyd1uro7w.js"></script>
+    <link rel="stylesheet" href="mi.css">
+
+  </head>
+
+  <body>
+
+    <div class="Navigation-Bar">
+      <!-- 导航栏中间是"|"不是border -->
+      <ul>
+        <li><a href="https://www.mi.com/index.html">小米商城</a></li>
+        <span>|</span>
+        <li><a href="https://www.miui.com/">MIUI</li>
+        </li>
+        <span>|</span>
+        <li><a href="https://iot.mi.com/index.html">loT</a></li>
+        <span>|</span>
+        <li><a href="https://i.mi.com/">云服务</a></li>
+        <span>|</span>
+        <li><a href="https://i.mi.com/">金融</a></li>
+        <span>|</span>
+        <li><a href="https://i.mi.com/">有品</a></li>
+        <span>|</span>
+        <li><a href="https://i.mi.com/">小爱开放平台</a></li>
+        <span>|</span>
+        <li><a href="https://i.mi.com/">企业团购</a></li>
+        <span>|</span>
+        <li><a href="https://i.mi.com/">资质证照</a></li>
+        <span>|</span>
+        <li><a href="https://i.mi.com/">协议规则</a></li>
+        <span>|</span>
+        <li class="download1">
+          <a class="download" href="https://www.mi.com/appdownload/">下载app
+            <span>
+              <img src="https://i1.mifile.cn/f/i/17/appdownload/download.png?1">
+              </img>
+              小米商城APP</span>
+            <span></span></a>
+        </li>
+        <span>|</span>
+        <li><a href="https://i.mi.com/">Select Location</a></li>
+        <span class="blank"></span>
+        <li><a href="https://i.mi.com/">登录</a></li>
+        <span>|</span>
+        <li><a href="https://i.mi.com/">注册</a></li>
+        <span>|</span>
+        <li><a href="https://i.mi.com/">消息通知</a></li>
+        <span class="blank1"></span>
+        <span class="cart" href="https://static.mi.com/cart/">
           <span>
-            <img src="https://i1.mifile.cn/f/i/17/appdownload/download.png?1">
-            </img>
-            小米商城APP</span>
-          <span></span></a>
-      </li>
-      <span>|</span>
-      <li><a href="https://i.mi.com/">Select Location</a></li>
-      <span class="blank"></span>
-      <li><a href="https://i.mi.com/">登录</a></li>
-      <span>|</span>
-      <li><a href="https://i.mi.com/">注册</a></li>
-      <span>|</span>
-      <li><a href="https://i.mi.com/">消息通知</a></li>
-      <span class="blank1"></span>
-      <span class="cart" href="https://static.mi.com/cart/">
-        <span>
-          <img src="https://i8.mifile.cn/b2c-mimall-media/d7db56d1d850113f016c95e289e36efa.png" alt="">
-          <span>购物车&nbsp;&nbsp;(0)</span>
+            <img src="https://i8.mifile.cn/b2c-mimall-media/d7db56d1d850113f016c95e289e36efa.png" alt="">
+            <span>购物车&nbsp;&nbsp;(0)</span>
+          </span>
+          <span class="blank2">购物车中还没有商品，赶紧选购吧！</span>
         </span>
-        <span class="blank2">购物车中还没有商品，赶紧选购吧！</span>
-      </span>
-    </ul>
-  </div>
-  <div class="Bar2">
-    <ul>
-      <img class="mi-ico" src="https://www.logolynx.com/images/logolynx/s_d6/d635b1d83e3f857f666fc259bd460710.png"
-        alt="">
-      <!-- 后面放一张hover的图片,找不到地址 -->
-      <img src="" alt="">
-
-      <li><a href="">小米手机</a>
-        <div>
-          <ul class="xiaomi">
-            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span></li>
-          </ul>
-        </div>
-      </li>
-
-      <li><a href="">Redmi&nbsp;红米</a>
-        <div>
-          <ul class="redmi">
-            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span></li>
-          </ul>
-        </div>
-      </li>
-      <li><a href="">电视</a>
-        <div>
-          <ul class="tv">
-            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span></li>
-          </ul>
-        </div>
-      </li>
-
-      <li><a href="">笔记本</a>
-        <div>
-          <ul class="computer">
-            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span></li>
-          </ul>
-        </div>
-      </li>
-      <li><a href="">家电</a>
-        <div>
-          <ul class="house">
-            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span></li>
-          </ul>
-        </div>
-      </li>
-      <li><a href="">路由器</a>
-        <div>
-          <ul class="mao">
-            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span></li>
-          </ul>
-        </div>
-      </li>
-      <li><a href="">智能硬件</a>
-        <div>
-          <ul class="smart">
-            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span>
-            </li>
-            <span></span>
-            <li><a href=""><img
-                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png"
-                  alt="">
-              </a>
-              <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
-              <span>2799元起</span></li>
-          </ul>
-        </div>
-      </li>
-      <li><a href="">服务</a></li>
-      <li><a href="">社区</a></li>
-
-      <form class="mi-search" action="https://search.mi.com/search">
-        <input type="text" name="name" value="">
-        <input type="submit" name="search" value="" id="search" hidden>
-        <label for="search"><i class="iconfont">&#xe7de;</i></label>
-      </form>
-    </ul>
-  </div>
-
-
-  <section class="Billboard">
-    <div class="radio-slider">
-      <input type="radio" name="slider" id="a" checked>
-      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ad84d80e7fc5990162a387a6b103af01.jpeg?thumb=1&w=1226&h=460"
-        alt="">
-      <label for="a" id="a1"></label>
-      <input type="radio" name="slider" id="b">
-      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/17728eaeb111572cf03e4962205f2ba6.jpg?thumb=1&w=1226&h=460"
-        alt="">
-      <label for="b" id="b1"></label>
-      <input type="radio" name="slider" id="c">
-      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e52c3e98602b90f198ec316dce253cba.jpg?thumb=1&w=1226&h=460"
-        alt="">
-      <label for="c" id="c1"></label>
-      <input type="radio" name="slider" id="d">
-      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/05bc8af40fc9f9941808d253034c279d.jpg?thumb=1&w=1226&h=460"
-        alt="">
-      <label for="d" id="d1"></label>
-      <input type="radio" name="slider" id="e">
-      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/5cac96e3dd740cfd6384986cebdbface.jpg?w=2452&h=920" alt="">
-      <label for="e" id="e1"></label>
-      <div class="previous">
-        <label for="a" id="a2"></label>
-        <label for="b" id="b2"></label>
-        <label for="c" id="c2"></label>
-        <label for="d" id="d2"></label>
-        <label for="e" id="e2"></label>
-      </div>
-      <div class="next">
-        <label for="a" id="a3"></label>
-        <label for="b" id="b3"></label>
-        <label for="c" id="c3"></label>
-        <label for="d" id="d3"></label>
-        <label for="e" id="e3"></label>
-      </div>
-      <ul class="list">
-        <a href="www.xiaomi.com">手机&nbsp;电话卡
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-icon_next_arrow"></use>
-          </svg>
-
-        </a>
-        <a href="www.xiaomi.com">电视&nbsp;盒子
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-icon_next_arrow"></use>
-          </svg>
-
-        </a>
-        <a href="www.xiaomi.com">笔记本&nbsp;显示器&nbsp;平板
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-icon_next_arrow"></use>
-          </svg>
-        </a>
-        <a href="www.xiaomi.com">家电&nbsp;插线板
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-icon_next_arrow"></use>
-          </svg>
-
-        </a>
-        <a>出行&nbsp;穿戴
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-icon_next_arrow"></use>
-          </svg>
-
-        </a>
-        <a href="www.xiaomi.com">智能&nbsp;路由器
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-icon_next_arrow"></use>
-          </svg>
-
-        </a>
-        <a href="www.xiaomi.com">电源&nbsp;配件
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-icon_next_arrow"></use>
-          </svg>
-
-        </a>
-        <a href="www.xiaomi.com">健康&nbsp;儿童
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-icon_next_arrow"></use>
-          </svg>
-
-        </a>
-        <a href="www.xiaomi.com">耳机&nbsp;音响
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-icon_next_arrow"></use>
-          </svg>
-
-        </a>
-        <a href="www.xiaomi.com">生活&nbsp;箱包
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-icon_next_arrow"></use>
-          </svg>
-        </a>
-        <div class="mobile-list">
-          <div class="list1">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-          </div>
-          <div class="list2">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-          </div>
-          <div class="list3">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-          </div>
-          <div class="list4">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/8ade0163e9fdbd92a4b7d7ee3aeab905.jpg?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/1a2ed8c7ac2ab7ebfd1554a7a1ac25a6.jpg?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-          </div>
-        </div>
-        <div class="tv-list">
-          <div class="list1">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-          </div>
-          <div class="list2">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-          </div>
-          <div class="list3">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-          </div>
-          <div class="list4">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-          </div>
-        </div>
-        <div class="computer-list">
-          <div class="list1">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-          </div>
-          <div class="list2">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-          </div>
-          <div class="list3">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-          </div>
-          <div class="list4">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/8ade0163e9fdbd92a4b7d7ee3aeab905.jpg?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/1a2ed8c7ac2ab7ebfd1554a7a1ac25a6.jpg?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-          </div>
-        </div>
-        <div class="house-list">
-          <div class="list1">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-          </div>
-          <div class="list2">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-          </div>
-          <div class="list3">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-          </div>
-          <div class="list4">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/8ade0163e9fdbd92a4b7d7ee3aeab905.jpg?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/1a2ed8c7ac2ab7ebfd1554a7a1ac25a6.jpg?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-          </div>
-        </div>
-        <div class="out-list">
-          <div class="list1">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-          </div>
-          <div class="list2">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-          </div>
-          <div class="list3">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-          </div>
-        </div>
-        <div class="smart-list">
-          <div class="list1">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-          </div>
-          <div class="list2">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-          </div>
-          <div class="list3">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-          </div>
-        </div>
-        <div class="fitting-list">
-          <div class="list1">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-          </div>
-          <div class="list2">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
-                alt="">小米CC9&nbsp;Pro</a>
-          </div>
-        </div>
-        <div class="health-list">
-          <div class="list1">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-          </div>
-          <div class="list2">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-          </div>
-          <div class="list3">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-          </div>
-          <div class="list4">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
-                alt="">小米电视5&nbsp;55寸</a>
-          </div>
-        </div>
-        <div class="ear-list">
-          <div class="list1">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-          </div>
-          <div class="list2">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-          </div>
-          <div class="list3">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-          </div>
-        </div>
-        <div class="life-list">
-          <div class="list1">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-          </div>
-          <div class="list2">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-          </div>
-          <div class="list3">
-            <a class="product" href="https://item.mi.com/10000198.html"><img
-                src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
-                alt="">车载逆变器</a>
-          </div>
-        </div>
       </ul>
     </div>
+    <div class="Bar2">
+      <ul>
+        <img class="mi-ico" src="https://www.logolynx.com/images/logolynx/s_d6/d635b1d83e3f857f666fc259bd460710.png"
+          alt="">
+        <!-- 后面放一张hover的图片,找不到地址 -->
+        <img src="" alt="">
 
-  </section>
+        <li><a href="">小米手机</a>
+          <div>
+            <ul class="xiaomi">
+              <li><a href=""><img
+                    src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png" alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span><span>2799元起</span></a>
 
-</body>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png" alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span><span>2799元起</span></a>
+
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span><span>2799元起</span></a>
+
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span><span>2799元起</span></a>
+
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span><span>2799元起</span></a>
+
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span><span>2799元起</span></a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li><a href="">Redmi&nbsp;红米</a>
+          <div>
+            <ul class="redmi">
+              <li><a href=""><img
+                    src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png" alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png" alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="">电视</a>
+          <div>
+            <ul class="tv">
+              <li><a href=""><img
+                    src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png" alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png" alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span></li>
+            </ul>
+          </div>
+        </li>
+
+        <li><a href="">笔记本</a>
+          <div>
+            <ul class="computer">
+              <li><a href=""><img
+                    src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png" alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png" alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="">家电</a>
+          <div>
+            <ul class="house">
+              <li><a href=""><img
+                    src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png" alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png" alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="">路由器</a>
+          <div>
+            <ul class="mao">
+              <li><a href=""><img
+                    src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png" alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png" alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="">智能硬件</a>
+          <div>
+            <ul class="smart">
+              <li><a href=""><img
+                    src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/be92bc4baa572bf467fc9e881fd4be2a.png" alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/41c566d825a3ae3b5751a78d4c7cffdb.png" alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/f515ab05232ed14ccd78ec67e024495a.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/df9b3e7a562e02a33eb069b3f0119815.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/3b5e5829fdf92d54c167f4681531b535.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span>
+              </li>
+              <span></span>
+              <li><a href=""><img
+                    src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/b02f50c9dd2e01c139a06a12502755ef.png"
+                    alt="">
+                </a>
+                <a href=""><span class="title">小米CC9&nbsp;Pro</span></a>
+                <span>2799元起</span></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="">服务</a></li>
+        <li><a href="">社区</a></li>
+
+        <form class="mi-search" action="https://search.mi.com/search">
+          <input type="text" name="name" value="">
+          <input type="submit" name="search" value="" id="search" hidden>
+          <label for="search"><i class="iconfont">&#xe7de;</i></label>
+        </form>
+      </ul>
+    </div>
+    <section class="Billboard">
+      <div class="radio-slider">
+        <input type="radio" name="slider" id="a" checked>
+        <img
+          src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ad84d80e7fc5990162a387a6b103af01.jpeg?thumb=1&w=1226&h=460"
+          alt="">
+        <label for="a" id="a1"></label>
+        <input type="radio" name="slider" id="b">
+        <img
+          src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/17728eaeb111572cf03e4962205f2ba6.jpg?thumb=1&w=1226&h=460"
+          alt="">
+        <label for="b" id="b1"></label>
+        <input type="radio" name="slider" id="c">
+        <img
+          src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/e52c3e98602b90f198ec316dce253cba.jpg?thumb=1&w=1226&h=460"
+          alt="">
+        <label for="c" id="c1"></label>
+        <input type="radio" name="slider" id="d">
+        <img
+          src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/05bc8af40fc9f9941808d253034c279d.jpg?thumb=1&w=1226&h=460"
+          alt="">
+        <label for="d" id="d1"></label>
+        <input type="radio" name="slider" id="e">
+        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/5cac96e3dd740cfd6384986cebdbface.jpg?w=2452&h=920"
+          alt="">
+        <label for="e" id="e1"></label>
+        <div class="previous">
+          <label for="a" id="a2"></label>
+          <label for="b" id="b2"></label>
+          <label for="c" id="c2"></label>
+          <label for="d" id="d2"></label>
+          <label for="e" id="e2"></label>
+        </div>
+        <div class="next">
+          <label for="a" id="a3"></label>
+          <label for="b" id="b3"></label>
+          <label for="c" id="c3"></label>
+          <label for="d" id="d3"></label>
+          <label for="e" id="e3"></label>
+        </div>
+        <ul class="list">
+          <a href="www.xiaomi.com">手机&nbsp;电话卡
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-icon_next_arrow"></use>
+            </svg>
+
+          </a>
+          <a href="www.xiaomi.com">电视&nbsp;盒子
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-icon_next_arrow"></use>
+            </svg>
+
+          </a>
+          <a href="www.xiaomi.com">笔记本&nbsp;显示器&nbsp;平板
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-icon_next_arrow"></use>
+            </svg>
+          </a>
+          <a href="www.xiaomi.com">家电&nbsp;插线板
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-icon_next_arrow"></use>
+            </svg>
+
+          </a>
+          <a>出行&nbsp;穿戴
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-icon_next_arrow"></use>
+            </svg>
+
+          </a>
+          <a href="www.xiaomi.com">智能&nbsp;路由器
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-icon_next_arrow"></use>
+            </svg>
+
+          </a>
+          <a href="www.xiaomi.com">电源&nbsp;配件
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-icon_next_arrow"></use>
+            </svg>
+
+          </a>
+          <a href="www.xiaomi.com">健康&nbsp;儿童
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-icon_next_arrow"></use>
+            </svg>
+
+          </a>
+          <a href="www.xiaomi.com">耳机&nbsp;音响
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-icon_next_arrow"></use>
+            </svg>
+
+          </a>
+          <a href="www.xiaomi.com">生活&nbsp;箱包
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-icon_next_arrow"></use>
+            </svg>
+          </a>
+          <div class="mobile-list">
+            <div class="list1">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+            </div>
+            <div class="list2">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+            </div>
+            <div class="list3">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+            </div>
+            <div class="list4">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/8ade0163e9fdbd92a4b7d7ee3aeab905.jpg?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/1a2ed8c7ac2ab7ebfd1554a7a1ac25a6.jpg?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+            </div>
+          </div>
+          <div class="tv-list">
+            <div class="list1">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+            </div>
+            <div class="list2">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+            </div>
+            <div class="list3">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+            </div>
+            <div class="list4">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+            </div>
+          </div>
+          <div class="computer-list">
+            <div class="list1">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+            </div>
+            <div class="list2">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+            </div>
+            <div class="list3">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+            </div>
+            <div class="list4">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/8ade0163e9fdbd92a4b7d7ee3aeab905.jpg?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/1a2ed8c7ac2ab7ebfd1554a7a1ac25a6.jpg?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+            </div>
+          </div>
+          <div class="house-list">
+            <div class="list1">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+            </div>
+            <div class="list2">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+            </div>
+            <div class="list3">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+            </div>
+            <div class="list4">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/8ade0163e9fdbd92a4b7d7ee3aeab905.jpg?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/1a2ed8c7ac2ab7ebfd1554a7a1ac25a6.jpg?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+            </div>
+          </div>
+          <div class="out-list">
+            <div class="list1">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+            </div>
+            <div class="list2">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+            </div>
+            <div class="list3">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+            </div>
+          </div>
+          <div class="smart-list">
+            <div class="list1">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+            </div>
+            <div class="list2">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+            </div>
+            <div class="list3">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+            </div>
+          </div>
+          <div class="fitting-list">
+            <div class="list1">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+            </div>
+            <div class="list2">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/74bb2ad7cb8b3707d8fd9d596e1866e2.png?thumb=1&w=40&h=40"
+                  alt="">小米CC9&nbsp;Pro</a>
+            </div>
+          </div>
+          <div class="health-list">
+            <div class="list1">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+            </div>
+            <div class="list2">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+            </div>
+            <div class="list3">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+            </div>
+            <div class="list4">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23316088a9182a08c624958319924d8d.png?thumb=1&w=40&h=40&f=webp&q=90"
+                  alt="">小米电视5&nbsp;55寸</a>
+            </div>
+          </div>
+          <div class="ear-list">
+            <div class="list1">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+            </div>
+            <div class="list2">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+            </div>
+            <div class="list3">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+            </div>
+          </div>
+          <div class="life-list">
+            <div class="list1">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+            </div>
+            <div class="list2">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+            </div>
+            <div class="list3">
+              <a class="product" href="https://item.mi.com/10000198.html"><img
+                  src="https://cdn.cnbj0.fds.api.mi-img.com/b2c-mimall-media/601f0b54e805d769ab6dc1bdea93706d.jpg?thumb=1&w=40&h=40"
+                  alt="">车载逆变器</a>
+            </div>
+          </div>
+        </ul>
+      </div>
+
+    </section>
+    <aside>
+      <a href="">
+        <img src="https://i8.mifile.cn/b2c-mimall-media/98a23aae70f25798192693f21c4d4039.png"></img>
+        <img src="https://i8.mifile.cn/b2c-mimall-media/74c4fcb4475af8308e9a670db9c01fdf.png"></img>
+        手机APP
+        <div class="download2"><img src="https://i8.mifile.cn/b2c-mimall-media/93650133310ec1c385487417a472a26c.pngs"
+            alt="">
+          <div></div>
+          <p>手机扫一扫</p>
+          <p>一分赢好礼</p>
+        </div>
+      </a>
+      <a>
+        <img src="https://i8.mifile.cn/b2c-mimall-media/55cad219421bee03a801775e7309b920.png">
+        <img src="https://i8.mifile.cn/b2c-mimall-media/41f858550f42eb1770b97faf219ae215.png">
+        个人中心
+
+      </a>
+      <a>
+        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/12eb0965ab33dc8e05870911b90f3f13.png">
+        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/95fbf0081a06eec7be4d35e277faeca0.png">
+        售后服务
+      </a>
+      <a>
+        <img src="https://i8.mifile.cn/b2c-mimall-media/4f036ae4d45002b2a6fb6756cedebf02.png">
+        <img src="https://i8.mifile.cn/b2c-mimall-media/5e9f2b1b0da09ac3b3961378284ef2d4.png">
+        人工客服
+      </a>
+      <a>
+        <img src="https://i8.mifile.cn/b2c-mimall-media/d7db56d1d850113f016c95e289e36efa.png">
+        <img src="https://i8.mifile.cn/b2c-mimall-media/692a6c3b0a93a24f74a29c0f9d68ec71.png">
+        购物车
+      </a>
+      <a href="#top">
+        <img src="https://i1.mifile.cn/f/i/2018/home/totop.png">
+        <img src="https://i1.mifile.cn/f/i/2018/home/totop_hover.png">
+        回顶部
+        <!-- 第一页面隐藏回顶部的button -->
+      </a>
+    </aside>
+    <div class=Bar3>
+      <div>
+        <a><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/82abdba456e8caaea5848a0cddce03db.png?w=48&h=48"
+            alt="">
+          <p>小米秒杀</p>
+        </a>
+        <a><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/806f2dfb2d27978e33fe3815d3851fa3.png?w=48&h=48"
+            alt="">
+          <p>企业团购</p>
+        </a>
+        <a><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/eded6fa3b897a058163e2485532c4f10.png?w=48&h=48"
+            alt="">
+          <p>F码通道</p>
+        </a>
+        <a><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/43a3195efa6a3cc7662efed8e7abe8bf.png?w=48&h=48"
+            alt="">
+          <p>米粉卡</p>
+        </a>
+        <a><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/f4846bca6010a0deb9f85464409862af.png?w=48&h=48"
+            alt="">
+          <p>以旧换新</p>
+        </a>
+        <a><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9a76d7636b08e0988efb4fc384ae497b.png?w=48&h=48"
+            alt="">
+          <p>话费充值</p>
+        </a>
+
+      </div>
+      <a href=""><img
+          src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/7c5524bbd8d8e2d8b4fec3774915d2fb.jpg?w=632&h=340"
+          alt=""></a>
+      <a href=""><img
+          src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/daae21ecb17e628f5255412f103c626f.jpg?w=632&h=340"
+          alt=""></a>
+      <a href=""><img
+          src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/816a66edef10673b4768128b41804cae.jpg?w=632&h=340"
+          alt=""></a>
+
+    </div>
+    <div class="view1">
+
+    </div>
+  </body>
 
 </html>

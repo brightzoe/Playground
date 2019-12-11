@@ -1,0 +1,932 @@
+
+
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 500px;
+}
+
+body {
+  font: 14px/1.5 "Helvetica Neue", Helvetica, Arial, "MicrosoftYaHei", sans-serif;
+}
+
+.Navigation-Bar {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0 0 0 0px;
+  width: 100%;
+  border: 0;
+  background-color: rgb(51, 51, 51);
+  height: 40px;
+  font-size: 0;
+  color: #B0B0B0;
+  position: relative;
+}
+
+/* 一个ul-block把标题包起来,宽固定,两个margin auto,缩放时左右等宽. */
+.Navigation-Bar ul {
+  display: block;
+  width: 1230px;
+  list-style: none;
+  padding: 0;
+  white-space: nowrap;
+  position: relative;
+  margin: 0 auto 0 auto;
+}
+
+.blank {
+  display: inline-block;
+  width: 260px;
+  margin: 0;
+
+}
+
+.blank1 {
+  display: inline-block;
+  width: 20px;
+  margin: 0;
+}
+
+
+
+.Navigation-Bar ul span {
+  display: inline-block;
+  padding: 0 6px 0 6px;
+  font-size: 12px;
+  line-height: 40px;
+  color: #424242;
+}
+
+.Navigation-Bar ul li {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 40px;
+  color: #B0B0B0;
+}
+
+li a:link {
+  color: #B0B0B0;
+  text-decoration: none;
+}
+
+li a:visited {
+  color: #B0B0B0;
+  text-decoration: none;
+}
+
+li a:hover {
+  color: white;
+}
+
+.download1 {
+  position: relative;
+}
+
+.download span:first-child {
+  display: block;
+  box-sizing: content-box;
+  width: 120px;
+  height: 150px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 40px;
+  left: -28px;
+  box-shadow: 0 1px 5px #B0B0B0;
+  text-align: center;
+  font-size: 14px;
+  background-color: #fff;
+  z-index: 10;
+}
+
+.download span:last-child {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  padding: 0;
+  border: 8px solid;
+  border-color: transparent transparent white transparent;
+  top: 25px;
+  left: 18px;
+
+}
+
+.download span img {
+  display: block;
+  box-sizing: content-box;
+  padding: 20px 20px 0 20px;
+  width: 80px;
+  height: 80px;
+}
+
+.download span {
+  visibility: hidden;
+}
+
+.download:hover span {
+  visibility: visible;
+}
+
+ul li+span+span.cart {
+  display: inline-block;
+  width: 120px;
+  height: 40px;
+  position: absolute;
+  background-color: rgb(66, 66, 66);
+  padding: 0;
+  right: 0;
+}
+
+.cart img+span {
+  font-size: 12px;
+  color: #B0B0B0;
+}
+
+.cart img {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  margin: 0 2px 0 0;
+  color: #B0B0B0;
+  vertical-align: middle;
+}
+
+/* 把两个ico图叠在一起,显示灰色,hover显示橘色图,这个图大小,位置需要调整 */
+
+.cart>span {
+  display: block;
+  margin: 0 8px 0 5px;
+}
+
+.cart:hover {
+  background-color: #fff;
+}
+
+.cart:hover img+span {
+  color: rgb(255, 103, 0);
+}
+
+.blank2 {
+  width: 315px;
+  height: 0px;
+  background-color: #fff;
+  position: absolute;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  border: 0;
+  padding: 0;
+  margin: 0;
+  /* 三侧阴影,去掉上边与cart的边,白色和一 */
+  /* 购物车做一个过渡,从上到下 */
+  text-align: center;
+  color: #000;
+  line-height: 100px !important;
+  font-size: 12px;
+  right: -8px;
+  top: 40px;
+  overflow: hidden;
+  transition: height 0.4s;
+}
+
+.cart:hover .blank2,
+.blank2:hover {
+  width: 315px;
+  height: 100px;
+  background-color: #fff;
+  position: absolute;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  border: 0;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  color: #000;
+  line-height: 100px !important;
+  font-size: 12px;
+  right: -1px;
+  top: 40px;
+  transition: height 0.4s;
+  z-index: 2;
+}
+
+.Bar2 {
+  width: 100%;
+  height: 100px;
+  padding: 0;
+  position: relative;
+}
+
+.Bar2>ul {
+  width: 1230px;
+  height: 100px;
+  margin: 0 auto 0 auto;
+  padding: 0;
+  font-size: 0;
+  line-height: 100px;
+  white-space: nowrap;
+  list-style: none;
+
+}
+
+.mi-ico {
+  display: inline-block;
+  width: 55px;
+  height: 55px;
+  margin: 0 185px 0 0;
+  vertical-align: middle;
+}
+
+
+
+
+.Bar2>ul>li {
+  display: inline-block;
+  height: 100px;
+  vertical-align: 0px;
+  margin: 0;
+  z-index: 1;
+}
+
+.Bar2>ul>li>a {
+  font-size: 16px;
+  color: rgb(51, 51, 51);
+  padding: 30px 10px 10px 10px;
+  /* 把hover的地方变大,不只是文字 */
+}
+
+.Bar2>ul>li:hover>a {
+  color: rgb(255, 103, 0);
+}
+
+/* 正常情况,高度0,里面东西hidden,hover高度增加,里面的显示 */
+.Bar2>ul>li>div {
+  width: 100%;
+  height: 0;
+  position: absolute;
+  overflow: hidden;
+  top: 100px;
+  left: 0;
+  margin: 0;
+  list-style: none;
+  white-space: nowrap;
+  font-size: 0;
+  transition: 0.6s;
+  background: #fff;
+  z-index: 100;
+}
+
+.xiaomi,
+.redmi,
+.tv,
+.computer,
+.house,
+.mao,
+.smart {
+  box-sizing: border-box;
+  margin: 0 auto 0 auto;
+  width: 1230px;
+  height: 230px;
+}
+
+
+.Bar2>ul>li:nth-child(3):hover>div,
+.Bar2>ul>li:nth-child(3)>div:hover,
+.Bar2>ul>li:nth-child(4):hover>div,
+.Bar2>ul>li:nth-child(4)>div:hover,
+.Bar2>ul>li:nth-child(5):hover>div,
+.Bar2>ul>li:nth-child(5)>div:hover,
+.Bar2>ul>li:nth-child(6):hover>div,
+.Bar2>ul>li:nth-child(6)>div:hover,
+.Bar2>ul>li:nth-child(7):hover>div,
+.Bar2>ul>li:nth-child(7)>div:hover,
+.Bar2>ul>li:nth-child(8):hover>div,
+.Bar2>ul>li:nth-child(8)>div:hover,
+.Bar2>ul>li:nth-child(9):hover>div,
+.Bar2>ul>li:nth-child(9)>div:hover {
+  display: block;
+  list-style: none;
+  padding: 0;
+  white-space: nowrap;
+  height: 230px;
+  font-size: 0;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, .18);
+  transition: height 0.6s;
+}
+
+.xiaomi li,
+.redmi li,
+.tv li,
+.computer li,
+.house li,
+.mao li,
+.smart li {
+  display: inline-block;
+  width: 204px;
+  height: 230px;
+  margin: 0;
+  position: relative;
+
+}
+
+.xiaomi img,
+.redmi img,
+.tv img,
+.computer img,
+.house img,
+.mao img,
+.smart img {
+  display: block;
+  padding: 0 15px;
+  width: 160px;
+  height: 110px;
+  margin-top: 32px;
+  margin-bottom: 20px;
+
+}
+
+.xiaomi a:last-child {
+  display: block;
+  height: 40px;
+}
+
+.xiaomi li span.title,
+.redmi li span.title,
+.tv li span.title,
+.computer li span.title,
+.house li span.title,
+.mao li span.title,
+.smart li span.title {
+  display: block;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  font-size: 12px;
+  color: #333333 !important;
+}
+
+.xiaomi li span:last-child,
+.redmi li span:last-child,
+.tv li span:last-child,
+.computer li span:last-child,
+.house li span:last-child,
+.mao li span:last-child,
+.smart li span:last-child {
+  display: block;
+  color: #ff6700;
+  text-align: center;
+  font-size: 12px;
+  height: 20px;
+  margin: 2px;
+  line-height: 20px;
+}
+
+.xiaomi li+span,
+.redmi li+span,
+.tv li+span,
+.computer li+span,
+.house li+span,
+.mao li+span,
+.smart li+span {
+  display: inline-block;
+  width: 1px;
+  height: 100px;
+  padding: 0;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.15);
+  vertical-align: 60px;
+}
+
+/* header里面的竖线,伪元素没有画出来 */
+/* .xiaomi ul li::before {
+position: absolute;
+display: block;
+width: 1px;
+height: 100px;
+padding: 0;
+margin: 0;
+z-index: 10;
+right: 0;
+top: 0;
+background-color: rgba(0, 0, 0, 0.15);
+} */
+.mi-search {
+  display: inline-block;
+  padding: 0;
+  margin-left: 76px;
+  position: relative;
+  box-sizing: border-box;
+  width: 300px;
+  height: 50px;
+  border: 1px #B0B0B0 solid;
+  vertical-align: middle;
+}
+
+.mi-search input:first-child {
+  border: 0;
+  position: absolute;
+  box-sizing: content-box;
+  width: 250px;
+  height: 48px;
+  padding: 0;
+  left: 0;
+  top: 0;
+
+}
+
+.mi-search label {
+  display: block;
+  box-sizing: border-box;
+  width: 50px;
+  height: 50px;
+  border-left: 1px #B0B0B0 solid;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+x.iconfont {
+  width: 50px;
+  height: 48px;
+}
+
+/* 阿里巴巴矢量库,icon加不上 */
+.Billboard {
+  width: 100%;
+  height: 460px;
+  z-index: 50;
+}
+
+/* 轮播图 */
+.radio-slider {
+  width: 1230px;
+  height: 460px;
+  margin: 0 auto 0 auto;
+  position: relative;
+}
+
+.radio-slider img {
+  position: absolute;
+  width: 100%;
+  height: 460px;
+  top: 0;
+  left: 0;
+}
+
+.radio-slider label {
+  position: absolute;
+  border: 2px solid #747272;
+  width: 6px;
+  height: 6px;
+  border-radius: 200px;
+  background-color: rgba(119, 117, 117, 0.4);
+  z-index: 5;
+  bottom: 30px;
+  cursor: pointer;
+}
+
+input:checked+*+label,
+.radio-slider label:hover {
+  background-color: rgb(233, 230, 230);
+}
+
+#a1 {
+  right: 112px;
+}
+
+#b1 {
+  right: 94px;
+}
+
+#c1 {
+  right: 76px;
+}
+
+#d1 {
+  right: 58px;
+}
+
+#e1 {
+  right: 40px;
+}
+
+input[name="slider"] {
+  display: none;
+}
+
+input+img {
+  opacity: 0;
+}
+
+input:checked+img {
+  opacity: 1;
+  transition: 0.6s;
+}
+
+.next label {
+  position: absolute;
+  top: 200px;
+  right: 0;
+  background: url(https://i1.mifile.cn/f/i/2014/cn/icon/icon-slides.png);
+  background-repeat: no-repeat;
+  padding: 0;
+  width: 41px;
+  height: 69px;
+  border: 0;
+  border-radius: 0;
+  background-position: -122px 0;
+  visibility: hidden;
+}
+
+/* 右边label:hover有条白线,未解决 */
+.next label:hover,
+#a:checked~.next #b3,
+#b:checked~.next #c3,
+#c:checked~.next #d3,
+#d:checked~.next #e3,
+#e:checked~.next #a3 {
+  visibility: visible;
+  /* 最后一条不好用,未找到原因 */
+  /* 轮播图还要放一个loop,自动轮播 */
+}
+
+.next label:hover,
+.next label:active {
+  background-position: -40px 0;
+  background-color: transparent;
+}
+
+.previous label {
+  position: absolute;
+  top: 200px;
+  left: 230px;
+  visibility: hidden;
+  background: url(https://i1.mifile.cn/f/i/2014/cn/icon/icon-slides.png);
+  background-repeat: no-repeat;
+  padding: 0;
+  width: 41px;
+  height: 69px;
+  border: 0;
+  border-radius: 0;
+  background-position: -83px 0;
+}
+
+#a:checked~.previous #e2,
+#b:checked~.previous #a2,
+#c:checked~.previous #b2,
+#d:checked~.previous #c2,
+#e:checked~.previous #d2 {
+  visibility: visible;
+}
+
+.previous label:hover,
+.previous label:active {
+  background-position: 0 0;
+  background-color: transparent;
+}
+
+ul.list {
+  box-sizing: border-box;
+  width: 230px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  list-style: none;
+  background: rgba(15, 15, 15, 0.6);
+  padding: 20px 0 0 0;
+  margin: 0;
+  height: 460px;
+  z-index: 80;
+}
+
+ul.list>a {
+  display: block;
+  box-sizing: border-box;
+  position: relative;
+  width: 230px;
+  height: 42px;
+  font-size: 14px;
+  margin: 0;
+  color: #fff;
+  padding-left: 28px;
+  text-align: left;
+  line-height: 42px;
+  text-decoration: none;
+
+}
+
+ul.list>a>svg {
+  position: absolute;
+  top: 14px;
+  right: 15px;
+  width: 16px;
+  height: 16px;
+  opacity: 0.6;
+}
+
+
+
+ul.list>a:hover {
+  background-color: rgb(255, 103, 0);
+  cursor: pointer;
+
+}
+
+.list>div {
+  position: absolute;
+  top: 0px;
+  left: 230px;
+  box-sizing: content-box;
+  width: 1000px;
+  height: 460px;
+  background-color: #fff;
+  font-size: 0;
+  visibility: hidden;
+}
+
+.list1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  display: inline-block;
+  width: 250px;
+  height: 460px;
+  margin: 0;
+  color: #000;
+  z-index: 10;
+}
+
+.list2 {
+  position: absolute;
+  top: 0;
+  left: 250px;
+  box-sizing: border-box;
+  display: inline-block;
+  width: 250px;
+  height: 460px;
+  margin: 0;
+  color: #000;
+  z-index: 10;
+}
+
+
+.list3 {
+  position: absolute;
+  top: 0;
+  left: 500px;
+  box-sizing: border-box;
+  display: inline-block;
+  width: 250px;
+  height: 460px;
+  margin: 0;
+  color: #000;
+  z-index: 10;
+}
+
+
+.list4 {
+  position: absolute;
+  top: 0;
+  left: 750px;
+  box-sizing: border-box;
+  display: inline-block;
+  width: 250px;
+  height: 460px;
+  margin: 0;
+  color: #000;
+  z-index: 10;
+}
+
+.product {
+  display: block;
+  position: relative;
+  width: 250px;
+  height: 76.66px;
+  padding: 0 0 0 72px;
+  line-height: 76.66px;
+  box-sizing: border-box;
+  margin: 0;
+  font-size: 14px;
+  color: #000;
+  text-decoration: none;
+}
+
+.product:hover {
+  color: rgb(239, 102, 0);
+}
+
+.product img {
+  display: block;
+  position: absolute;
+  top: 18.3px;
+  left: 20px;
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
+  z-index: 12;
+}
+
+.list .out-list,
+.list .smart-list,
+.list .ear-list,
+.list .life-list {
+  width: 750px;
+}
+
+.list .fitting-list {
+  width: 500px;
+}
+
+.list>a:first-child:hover~.mobile-list,
+.list>a:nth-child(2):hover~.tv-list,
+.list>a:nth-child(3):hover~.computer-list,
+.list>a:nth-child(4):hover~.house-list,
+.list>a:nth-child(5):hover~.out-list,
+.list>a:nth-child(6):hover~.smart-list,
+.list>a:nth-child(7):hover~.fitting-list,
+.list>a:nth-child(8):hover~.health-list,
+.list>a:nth-child(9):hover~.ear-list,
+.list>a:nth-child(10):hover~.life-list {
+  visibility: visible;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, .18);
+
+}
+
+.mobile-list:hover,
+.tv-list:hover,
+.computer-list:hover,
+.house-list:hover,
+.out-list:hover,
+.smart-list:hover,
+.fitting-list:hover,
+.health-list:hover,
+.ear-list:hover,
+.life-list:hover {
+  visibility: visible;
+}
+body{
+  position: relative;
+  background-color: rgb(255, 255, 255);
+}
+aside {
+  display: block;
+  float: right;
+  width: 80px;
+  height: 560px;
+  position: fixed;
+
+  bottom:70px;
+  right:0;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+aside>a{
+  display: block;
+  position: relative;
+  box-sizing:border-box;
+  width: 80px;
+  height: 90px;
+  border:1px solid #f5f5f5;
+  background-color: white;
+  font-size:14px;
+  text-decoration: none;
+  text-align: center;
+  color:#757373;
+  padding-top:58px;
+}
+
+aside a:nth-child(5){
+  margin-bottom:20px;
+}
+aside>a>img{
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top:18px;
+  left:25px;
+}
+aside a img:nth-child(2){
+  display: none;
+}
+aside a:hover img:nth-child(2){
+display: block;
+}
+aside>a:hover{
+  color:#ff6700;
+  cursor: pointer;
+}
+.download2{
+  width: 130px;
+  height: 190px;
+  border:1px solid #f5f5f5;
+  display: none;
+  position: absolute;
+  left:-145px;
+  top:0;
+  background-color: rgb(255,255,255);
+}
+.download2 img{
+  width: 100px;
+  height: 100px;
+  margin:20px 15px 0px 15px;
+}
+.download2 p{
+  height: 10px;
+  margin-top: 6px;
+  color:#757373;
+}
+.download2 div{
+  position: absolute;
+  top: 40px;
+  left: 130px;
+  width: 0;
+  height: 0;
+  border:15px solid rgb(255,255,255);
+  border-color: transparent transparent transparent rgb(255,255,255);
+}
+aside>a:first-child:hover .download2,.download2:hover{
+  display: block;
+}
+.Bar3{
+  width: 1230px;
+  height: 170px;
+  margin:15px auto;
+
+}
+.Bar3>div{
+  display:inline-block;
+  width: 230px;
+  height: 170px;
+  background-color: rgb(94,87,80);
+}
+.Bar3>a{
+  display: inline-block;
+  width: 316px;
+  height: 170px;
+  margin:0 0 0 13px;
+  background-color: rgb(94,87,80);
+}
+.Bar3>a>img{
+  width: 316px;
+  height: 170px;
+  line-height: 85px;
+}
+.Bar3>div>a{
+  display:inline-block;
+  width: 70px;
+  height: 70px;
+  vertical-align: 21px;
+  text-align: center;
+  margin:0;
+  color:#B0B0B0;
+  position: relative;
+  cursor: pointer;
+}
+.Bar3>div>a>img{
+  position: absolute;
+  top:20px;
+  left:29px;
+  width: 24px;
+  height: 24px;
+}
+.Bar3>div>a>p{
+  margin-top:48px;
+  margin-left:  13px;
+  font-size: 12px;
+}
+.Bar3>div>a::before{
+position:absolute;
+content: "";
+width: 70px;
+height: 1px;
+top:2px;
+left:5px;
+background: #665e57;
+}
+.Bar3>div>a::after{
+position:absolute;
+content: "";
+width: 1px;
+height: 78px;
+top:5px;
+left:2px;
+background: #665e57;
+}
+.view1{
+  position: absolute;
+  top:810px;
+  width: 100%;
+  height: 770px;
+  background-color: rgb(245,245,245);
+  z-index: -99;
+}
