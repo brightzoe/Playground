@@ -6,10 +6,6 @@
   overflow: hidden;
 }
 
-x* {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
 html,
 body {
   margin: 0;
@@ -18,7 +14,9 @@ body {
 }
 
 body {
-  font: 14px/1.5 "Helvetica Neue", Helvetica, Arial, "MicrosoftYaHei", sans-serif;
+  font-size: 14px;
+  line-height:1.5;
+  font-family:Arial;
 }
 
 .Navigation-Bar {
@@ -270,6 +268,7 @@ ul li+span+span.cart {
 }
 
 /* 正常情况,高度0,里面东西hidden,hover高度增加,里面的显示 */
+/* ul被hover,高度一直有,li切换不延迟 */
 .Bar2>ul>li>div {
   width: 100%;
   height: 0;
@@ -891,7 +890,7 @@ aside>a:first-child:hover .download2,
   display: inline-block;
   width: 316px;
   height: 170px;
-  margin: 0 0 0 12px;
+  margin: 0 0 0 16px;
   background-color: rgb(94, 87, 80);
 }
 
@@ -954,6 +953,7 @@ aside>a:first-child:hover .download2,
   height: 7700px;
   background-color: rgb(245, 245, 245);
   z-index: -99;
+  padding: 0;
 }
 
 .seckill {
@@ -1154,7 +1154,9 @@ aside>a:first-child:hover .download2,
 }
 
 .mi9,
-.tv1 {
+.tv1,
+.lock,
+.maoyan {
   display: block;
   width: 1226px;
   height: 120px;
@@ -1270,6 +1272,7 @@ aside>a:first-child:hover .download2,
   margin: auto;
   position: relative;
   font-size: 0;
+  height: 690px;
 }
 
 .video.video {
@@ -1321,7 +1324,8 @@ aside>a:first-child:hover .download2,
 }
 
 .video1,
-.hot1 {
+.hot1,
+.security1 {
   position: absolute;
   top: 60px;
   left: 234px;
@@ -1331,7 +1335,8 @@ aside>a:first-child:hover .download2,
 }
 
 .video1 a,
-.hot1 a {
+.hot1 a,
+.security1 a {
   display: inline-block;
   background-color: #fff;
   margin-left: 15px;
@@ -1343,7 +1348,8 @@ aside>a:first-child:hover .download2,
 }
 
 .video1 img,
-.hot1 img {
+.hot1 img,
+.security1 img {
   width: 160px;
   height: 160px;
   margin: 20px auto 15px auto;
@@ -1352,7 +1358,8 @@ aside>a:first-child:hover .download2,
 }
 
 .video1 p:nth-child(2),
-.hot1 p:nth-child(2) {
+.hot1 p:nth-child(2),
+.security1 p:nth-child(2) {
   color: black;
   font-size: 14px;
   line-height: 20px;
@@ -1361,7 +1368,8 @@ aside>a:first-child:hover .download2,
 }
 
 .video1 p:nth-child(3),
-.hot1 p:nth-child(3) {
+.hot1 p:nth-child(3),
+.security1 p:nth-child(3) {
   color: rgb(149, 147, 147);
   font-size: 12px;
   line-height: 16px;
@@ -1370,7 +1378,8 @@ aside>a:first-child:hover .download2,
 }
 
 .video1 p:nth-child(4),
-.hot1 p:nth-child(4) {
+.hot1 p:nth-child(4),
+.security1 p:nth-child(4) {
   color: #ff6700;
   font-size: 14px;
   line-height: 16px;
@@ -1466,10 +1475,161 @@ aside>a:first-child:hover .download2,
   display: none;
 }
 
-.video:hover~.hot1 {
+.video:hover~.video1,
+.hot:hover~.hot1 {
   display: block;
 }
 
-.hot:hover~.video1 {
+.hot:hover~.video1,
+.hot:hover~.security1 {
   display: none;
+}
+
+.hot:hover~.video {
+  color: black;
+  border: none;
+}
+
+span.security {
+  position: absolute;
+  right: 46px;
+  font-size: 16px;
+  font-weight: normal;
+  height: 44px;
+}
+
+.security:hover {
+  color: #ff6700;
+  border-bottom: 2px solid #ff6700;
+}
+
+.security:hover+.out {
+  color: black;
+  border: none;
+}
+
+.security:hover~.video1,
+.security:hover~.hot1 {
+  display: none;
+}
+
+/* hover之后不要跳回去 */
+span.pro {
+  right: 65px;
+}
+
+span.hot00.hot00 {
+  right: 130px;
+}
+
+ul.video2 {
+  list-style: none;
+  width: 1226px;
+  height: 285px;
+  margin: auto;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.video2 li {
+  display: inline-block;
+  width: 296px;
+  height: 285px;
+  background-color: #fff;
+  position: relative;
+}
+
+.video2>li>a {
+  display: block;
+  width: 296px;
+  height: 285px;
+  box-sizing: border-box;
+  margin: 0;
+  color: black;
+  line-height: 40px;
+  text-align: center;
+}
+
+.video2 li {
+  margin-right: 9px;
+  margin-bottom: 20px;
+
+}
+
+.video2 li:last-child {
+  margin-right: 0;
+}
+
+.video2 svg {
+  position: absolute;
+  top: 130px;
+  left: 15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  color: white;
+}
+
+.video2>li:hover svg {
+  background-color: #ff6700;
+}
+
+.Bar4 {
+  width: 100%;
+  height: 271px;
+  background-color: #fff;
+}
+
+footer {
+  width: 1230px;
+  height: 271px;
+  margin: auto;
+  font-size: 0;
+}
+.Bar4>footer>.footer1>span{
+  display: inline-block;
+  width: 245px;
+  height: 80px;
+  font-size: 16px;
+  text-align: center;
+  color:#55504b;
+  position: relative;
+}
+.Bar4 .footer1 span span{
+  color:#55504b;
+  text-decoration: none;
+  width: 245px;
+  height: 22px;
+  margin-top: 34px;
+  display: inline-block;
+  border-right:1px solid rgb(214, 213, 213);
+}
+
+.Bar4 .last.last.last span{
+  border:none;
+}
+footer svg{
+  font-size: 24px;
+  margin-right:8px;
+}
+.footer1{
+  width: 1226px;
+  height: 82px;
+  margin:auto;
+  border-bottom:1px solid rgb(214, 213, 213);
+}
+.footer1.footer1 a{
+  color:#666564;
+  text-decoration: none;
+}
+
+.footer1 a:hover{
+  color:#ff6700;
+}
+.footer2{
+  width: 1226px;
+  height: 189px;
+  margin:auto;
+  color: #757373;
+  font-size: 14px;
 }
