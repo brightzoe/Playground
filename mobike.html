@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>mobike</title>
+  <script src="https://at.alicdn.com/t/font_1551713_4dox8286swj.js  "></script>
+  <style>
+     .icon {
+       width: 1em; height: 1em;
+       vertical-align: -0.15em;
+       fill: currentColor;
+       overflow: hidden;
+    }
+    
+    *{
+      background-color: rgba(0,0,0,0.1);
+      margin:0;
+      padding:0;
+    }
+    .hero{
+      background-image: url(https://mobike.com/cn/assets/themes/moby/img/landing/hero-bg-3.jpg);
+      background-position: 51% 44%;
+      width: 100%;
+      height: 780px;
+    }
+    .hero-content{
+      width: 1040px;
+      height: 100%;
+      margin:auto;
+      position: relative;
+    }
+    .slider{
+      list-style: none;
+      padding: 0;
+      margin: 0 -5px;
+      overflow: hidden;
+    }
+    .slider li:first-child{
+      background-image: url(https://mobike.com/cn/assets/themes/moby/img/promo-01.jpg);
+    }
+    .slider li:nth-child(2){
+      background-image: url(https://mobike.com/cn/assets/themes/moby/img/promo-02.jpg);
+    }
+    .slider li:nth-child(3){
+      background-image: url(https://mobike.com/cn/assets/themes/moby/img/promo-03.jpg);
+    }
+    .slider li:nth-child(4){
+      background-image: url(https://mobike.com/cn/assets/themes/moby/img/promo-04.jpg);
+    }
+    .slider li{
+      height:260px;
+      width: 25%;
+      float: left;
+      box-sizing: border-box;
+      border:5px solid white;
+    }
+    .banner{
+      position: absolute;
+      
+    }
+    @media (max-width: 1080px) {
+      .hero{
+        height: 625px;
+      }
+      .slider li{
+        width: 50%;
+      }
+    } 
+    @media (max-width: 640px){
+      .slider li{
+        width: 100%;
+      }
+    }
+    header{
+      width: 100%;
+      height: 80px;
+    }
+    header .icon{
+      width: 130px;
+      height: 80px;
+      color: black;
+      font-weight: bold;
+      vertical-align: middle;
+    }
+    .nav{
+      float:right;
+      list-style: none;
+     
+    }
+    .nav li{
+      display: inline-block;
+      height: 80px;
+      line-height: 80px;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+    }
+    .nav li:first-child,.nav li:nth-child(3){
+      width: 75px;
+    }
+    .nav li:nth-child(2n+2){
+      width: 85px;
+    }
+    .nav li a{
+      box-sizing: border-box;
+      height: 40px;
+      line-height: 40px;
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .nav>li:first-child{
+      position: relative;
+    }
+    .products{
+      position: absolute;
+      box-sizing: border-box;
+      border-radius: 5px;
+      width: 240px;
+      height: 201px;
+      top: 80px;
+      left: -15px;
+      list-style: none;
+      padding: 0;
+      background-color: rgb(26,26,26);
+      flex-flow: column;
+      display: none;
+    }
+    .products.products li{
+      display: block;
+      height:67px;
+      width: 240px;
+    }
+    .products.products li a{
+      display: block;
+      box-sizing: border-box;
+      padding:15px;
+      height:67px;
+      width: 240px;
+    }
+    .products span{
+      display: block;
+      color: rgb(190, 186, 186);
+      font-size: 24px;
+      font-weight:lighter;
+      line-height: 28px;
+      text-align: left;
+    }
+    .products span:last-child{
+      font-size: 15px;
+      line-height: 16px;
+    }
+    .products a:hover span:first-child{
+      color: aqua;
+    }
+    .nav>li:first-child:hover .products{
+      display: flex;
+    }
+    .nav>li:first-child::before{
+      position: absolute;
+      content: "";
+      display: none;
+      top: 68px;
+      left: 26px;
+      width: 0px;
+      height: 0px;
+      border: 6px solid black;
+      border-color: transparent transparent black transparent;
+    }
+    .nav li:first-child:hover::before{
+      display: block;
+    }
+   
+    </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="hero-content">
+      <header>
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-service-mobike"></use>
+      </svg>
+      <ul class="nav">
+        <li>产品
+          <ul class="products">
+            <li><a href=""><span>经典版</span><span>轻便，可靠</span></a></li>
+            <li><a href=""><span>轻骑</span><span>城市随处可骑行</span></a></li>
+            <li><a href=""><span>智能锁</span><span>摩拜智造，天生靠得住</span></a></li>
+          </ul>
+        </li>
+        <li><a href="">摩拜科技</a></li>
+        <li><a href="">关于</a></li>
+        <li><a href="">广告合作</a></li>
+      </ul>
+      </header>
+      <p class="banner">让自行车回归城市</p>
+      <a class="b2" href="">立即开始使用Mobike</a>
+    </div>
+  </div>
+  <div style="overflow: hidden" >
+    <ul class="slider">
+      <li>大国品牌</li>
+      <li>摩拜科技</li>
+      <li>摩拜生活</li>
+      <li>摩拜校招</li>
+    </ul>
+</div>
+</body>
+</html>
+
+
+
