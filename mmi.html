@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=500, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://at.alicdn.com/t/font_1551713_1qzdkqu94l3.js"></script>
+  <title>mmi</title>
+  <style>
+     .icon {
+       width: 1em; height: 1em;
+       vertical-align: -0.15em;
+       fill: currentColor;
+       overflow: hidden;
+    }
+    html,body{
+      width: 500px;
+      margin:0;
+      font-family: Helvetica Neue,Tahoma,Arial,PingFangSC-Regular,Hiragino Sans GB,Microsoft Yahei,sans-serif;
+      position: relative;
+    }
+    .notice{
+      width: 500px;
+      height: 70px;
+    }
+    .notice img{
+      width: 500px;
+      height: 70px;
+    }
+    .header{
+      width: 500px;
+      height: 60px;
+      background-color: rgba(0,0,0,0.06);
+      line-height: 60px;
+    }
+    .icon-mi,.icon-me {
+      display: inline-block;
+      width: 35px;
+      height: 35px;
+      margin:12.5px;
+    }
+    .search,.search a{
+      display: inline-block;
+      height: 40px;
+      width: 360px;
+      border:1px solid rgba(0,0,0,0.06);
+      vertical-align: 10px;
+      background-color: #fff;
+      color:rgba(0,0,0,0.2);
+      text-decoration: none;
+      font-size: 24px;
+      line-height: 40px;
+    }
+    .icon-search{
+      color:rgba(0,0,0,0.1);
+      margin-left: 10px;
+      width: 20px;
+      height: 20px;
+      vertical-align: baseline;
+    }
+    .header2{
+      width: 500px;
+      height: 40px;
+      background-color: rgba(0,0,0,0.06);
+      line-height: 40px;
+      margin:0;
+    }
+    .list{
+      display:inline-block;
+      box-sizing: border-box;
+      height: 40px;
+      font-size: 18px;
+      width: 70px;
+      color:rgba(0,0,0,0.5);
+      text-align: center;
+    }
+    .list:active{
+      color:#ff6677;
+      border-bottom:2px solid #ff6677;
+    }
+    .icon-down1{
+      width: 28px;
+      height: 28px;
+      margin:6px 13px;
+      float:right;
+    }
+    .hero{
+      width: 500px;
+      height: 250px;
+    }
+    .catgs{
+      width: 500px;
+      height: 211px;
+      display:flex;
+      flex-flow: wrap;
+    }
+    .catgs a,.catgs img{
+      width: 100px;
+      height: 105.5px;
+      margin:0;
+    }
+    .line{
+      width: 500px;
+      height: 11px;
+      background-color: rgba(0,0,0,0.06);
+    }
+    .hero2{
+      width: 500px;
+      height: 353px;
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: space-between;
+      align-content: space-between;
+    }
+    .hero2 a, .hero2 a img{
+      width: 248.8px;
+      height: 175px;
+    }
+    .hero2 a:first-child, .hero2 a:first-child img{
+      width: 248.8px;
+      height: 353px;
+    }
+    footer{
+      position: fixed;
+      width: 500px;
+      height: 52px;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      background-color: rgb(250, 250, 250);
+      z-index: 10;
+    }
+    footer input{
+      display: none;
+    }
+    .a,.b,.c,.d,.a a,.b a,.c a,.d a{
+      display: block;
+      width: 125px;
+      height: 52px;
+      text-decoration:none;
+    }
+    footer .icon{
+      height: 30px;
+      width: 30px;
+      margin:0 47px;
+      color: rgba(0,0,0,0.5);
+    }
+    footer span{
+      display: block;
+      height: 20px;
+      width: 125px;
+      text-align: center;
+      font-size: 16px;
+      color: rgba(0,0,0,0.5);
+    }
+    footer label:checked{
+      color:#ff6677;
+    }
+  </style>
+</head>
+<body>
+  <div class="notice">
+  <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/6d413c53c65eca6c6b6ba826ea4e3ff6.png" alt="">
+  </div>
+  <div class="header">
+    <svg class="icon icon-mi" aria-hidden="true">
+      <use xlink:href="#icon-mi"></use>
+    </svg>
+    <div class="search">
+      <a href="https://m.mi.com/search">
+        <svg class="icon icon-search" aria-hidden="true">
+        <use xlink:href="#icon-search"></use>  
+        </svg>
+        搜索商品名称
+      </a>
+    </div>
+    <svg class="icon icon-me" aria-hidden="true">
+      <use xlink:href="#icon-me"></use>
+  </svg>
+  </div>
+  <div class="header2">
+    <div class="list">推荐</div>
+    <div class="list">手机</div>
+    <div class="list">智能</div>
+    <div class="list">电视</div>
+    <div class="list">笔记本</div>
+    <div class="list">家电</div>
+    <svg class="icon icon-down1" aria-hidden="true">
+      <use xlink:href="#icon-down1"></use>
+  </svg>
+  </div>
+  <img class="hero" src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/d4f8a729b17c195e04479c669f5cac27.jpg?thumb=1&w=720&h=360" alt="">
+  <div class="catgs">
+    <a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/cb65daec7ef7b52cc785f88f78efba37.png?thumb=1&w=144&h=152" alt=""></a>
+    <a href=""><img src="https://i8.mifile.cn/v1/a1/eb5024fe-dfe3-6e53-3e18-675bef5fa06e.webp" alt=""></a>
+    <a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/780602689f55569ed27edf86cda44d03.jpg?thumb=1&w=144&h=152" alt=""></a>
+    <a href=""><img src="https://i8.mifile.cn/v1/a1/e8bc849a-0a3b-21a0-6810-7da3a3903dee.webp" alt=""></a>
+    <a href=""><img src="https://i8.mifile.cn/v1/a1/7dbcbf87-6a58-adb6-2f3f-bb3dae3e9c80.webp" alt=""></a>
+    <a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/bc1c677a6e10e42d00fb0a063662fbf9.png?thumb=1&w=144&h=152" alt=""></a>
+    <a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9ea68dee2bfa0e55a82236b0d968e975.png?thumb=1&w=144&h=152" alt=""></a>
+    <a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/1b92680601206b48b885d883c23b83e2.png?thumb=1&w=144&h=152" alt=""></a>
+    <a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/9425031cdd7af22d9a23a5ae16d1f57c.jpg?thumb=1&w=144&h=152" alt=""></a>
+    <a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/f11f9df6b0b0b428f8c8fc3267131830.png?thumb=1&w=144&h=152" alt=""></a>
+  </div>
+  <div class="line"></div>
+  <div class="hero2">
+    <a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/32b5d24417b673008f386592c4d17046.jpg?thumb=1&w=358&h=508" alt=""></a>
+    <a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/4aea81c738383c9787b49c3d5e6a7ab0.jpg?thumb=1&w=358&h=252" alt=""></a>
+    <a href=""><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/267e988a99b5cf4e960747e8aa5fa831.jpg?thumb=1&w=358&h=252" alt=""></a>
+  </div>
+  <div class="line"></div>
+  <footer>
+    <input type="radio" name="footer" id="a">
+    <input type="radio" name="footer" id="b">
+    <input type="radio" name="footer" id="c">
+    <input type="radio" name="footer" id="d">
+    <label class="a" for="a" aria-checked="true">  
+      <a href="">
+        <svg class="icon icon-home1" aria-hidden="true">
+        <use xlink:href="#icon-home1"></use>
+        </svg>
+        <span>首页</span>
+      </a>
+    </label>
+    <label class="b" for="b">
+      <a href="">
+        <svg class="icon icon-leimupinleifenleileibie" aria-hidden="true">
+        <use xlink:href="#icon-leimupinleifenleileibie"></use>
+        </svg>
+        <span>分类</span>
+      </a>
+    </label>
+    <label class="c" for="c">
+      <a href="">
+        <svg class="icon icon-cart1" aria-hidden="true">
+        <use xlink:href="#icon-cart1"></use>
+        </svg>
+        <span>购物车</span>
+      </a>
+    </label>
+    <label class="d" for="d">
+      <a href="">
+        <svg class="icon icon-iconme" aria-hidden="true">
+        <use xlink:href="#icon-iconme"></use>
+        </svg>
+        <span>我的</span>
+      </a>
+    </label>
+</footer>
+</body>
+</html>
