@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>mobike</title>
-  <script src="https://at.alicdn.com/t/font_1551713_4dox8286swj.js  "></script>
+  <script src="https://at.alicdn.com/t/font_1551713_rhdh7pvq1kk.js  "></script>
   <style>
      .icon {
        width: 1em; height: 1em;
@@ -14,16 +14,25 @@
        overflow: hidden;
     }
     
-    *{
-      background-color: rgba(0,0,0,0.1);
+    html{
       margin:0;
       padding:0;
+      font-size: 2vw;
+      width: 100%;
+      font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Microsoft Yahei', 'WenQuanYi Micro Hei', Arial, Verdana, sans-serif;
+    }
+    body{
+      margin:0;
+      font-size: 0;
+      width: 100%;
     }
     .hero{
       background-image: url(https://mobike.com/cn/assets/themes/moby/img/landing/hero-bg-3.jpg);
-      background-position: 51% 44%;
+      background-size: cover;
       width: 100%;
-      height: 780px;
+      height: 800px;
+      position: relative;
+      background-position: center center;
     }
     .hero-content{
       width: 1040px;
@@ -34,7 +43,7 @@
     .slider{
       list-style: none;
       padding: 0;
-      margin: 0 -5px;
+      margin: 0 -2px;
       overflow: hidden;
     }
     .slider li:first-child{
@@ -54,39 +63,95 @@
       width: 25%;
       float: left;
       box-sizing: border-box;
-      border:5px solid white;
+      border:1px solid white;
+      background-size:cover;
+      background-position: center center;
+      color:#fff;
+      font-size: 24px;
+      padding-top: 4vw;
+      text-align: center;
     }
     .banner{
       position: absolute;
+      bottom:40%;
+      left: 0;
+      font-size: 66px;
+      font-weight: 600;
+      color: #fff;
+      margin-left: 10px;
+      white-space: nowrap;
+    }
+    .b2{
+      position: absolute;
+      bottom: 36%;
+      left: 0;
+      display: block;
+      width: 368px;
+      height: 70px;
+      box-sizing: border-box;
+      line-height: 70px;
+      border-radius: 10px;
+      background-color: rgba(0,0,0,0.5);
+      color: #fff;
+      text-decoration: none;
+      font-size: 24px;
+      text-align: center;
+      margin-left: 10px;
+      white-space: nowrap;
+      font-weight:bold;
+    }
+    .b2:hover{
+      background-color: rgba(0,0,0,1);
+    }
+    .news{
+      width: 100%;
+      height: 45px;
+      position: absolute;
+      bottom: 0;
+      background-color: rgba(90, 76, 68, 0.3);
+      overflow: hidden;
+    }
+    .news a{
+      display: flex;
+      width: 1040px;
+      margin:auto;
+      color: #fff;
+      text-decoration: none;
+      height: 45px;
+      align-content: center;
+    }
+    .news a span:first-child{
+      background: linear-gradient(to bottom, #ec614f 0%, #ff2e2e 100%);
+      width: 50px;
+      height: 20px;
+      font-size: 12px;
+      line-height: 20px;
+      margin:14px;
+      border-radius: 3px;
+      text-align: center;
       
     }
-    @media (max-width: 1080px) {
-      .hero{
-        height: 625px;
-      }
-      .slider li{
-        width: 50%;
-      }
-    } 
-    @media (max-width: 640px){
-      .slider li{
-        width: 100%;
-      }
-    }
+     .news a span:nth-child(2){
+      font-size: 16px;
+      line-height: 50px;
+     }
+
     header{
       width: 100%;
       height: 80px;
+      background: linear-gradient(to bottom, rgba(87, 81, 81, 0.4) 0%, rgba(255,255,255,0) 100%);
     }
     header .icon{
       width: 130px;
       height: 80px;
-      color: black;
-      font-weight: bold;
+      color: white;
+      font-weight: 900;
       vertical-align: middle;
     }
     .nav{
       float:right;
       list-style: none;
+      margin:0;
      
     }
     .nav li{
@@ -94,8 +159,8 @@
       height: 80px;
       line-height: 80px;
       font-size: 16px;
-      font-weight: bold;
       text-align: center;
+      color: #fff;
     }
     .nav li:first-child,.nav li:nth-child(3){
       width: 75px;
@@ -107,7 +172,7 @@
       box-sizing: border-box;
       height: 40px;
       line-height: 40px;
-      color: #000;
+      color: #fff;
       text-decoration: none;
       cursor: pointer;
     }
@@ -124,7 +189,7 @@
       left: -15px;
       list-style: none;
       padding: 0;
-      background-color: rgb(26,26,26);
+      background-color: #fff;
       flex-flow: column;
       display: none;
     }
@@ -142,18 +207,19 @@
     }
     .products span{
       display: block;
-      color: rgb(190, 186, 186);
-      font-size: 24px;
+      color: rgb(0,0,0);
+      font-size: 20px;
       font-weight:lighter;
       line-height: 28px;
       text-align: left;
     }
     .products span:last-child{
       font-size: 15px;
-      line-height: 16px;
+      line-height: 14px;
+      color: #747070;
     }
     .products a:hover span:first-child{
-      color: aqua;
+      color: #ff6677;
     }
     .nav>li:first-child:hover .products{
       display: flex;
@@ -166,17 +232,113 @@
       left: 26px;
       width: 0px;
       height: 0px;
-      border: 6px solid black;
-      border-color: transparent transparent black transparent;
+      border: 6px solid white;
+      border-color: transparent transparent white transparent;
     }
     .nav li:first-child:hover::before{
       display: block;
     }
-   
+    .three{
+      width: 1040px;
+      margin:auto;
+      display: flex;
+      flex-flow: row wrap;
+      align-content: center;
+      font-size: 16px;
+      color: #747070;
+    }
+    .icon{
+      width: 33.3%;
+      height: 140px;
+      box-sizing: border-box;
+    }
+    .icon div{
+      height: 50px;
+      margin:45px 0;
+      width: 220px;
+    }
+    .icon img{
+      width: 50px;
+      height: 50px;
+      margin:0 10px 0 0;
+      float: left;
+    }
+    .icon p{
+      margin:0;
+    }
+    .icon p:nth-child(2){
+      color: #000;
+    }
+    .icon-rb div{
+      margin:45px auto;
+    }
+    span.hr{
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: rgba(87, 81, 81, 0.1);
+    }
+    .footer{
+      display: flex;
+      flex-flow: row wrap;
+      font-size: 16px;
+      width: 1040px;
+      margin:40px auto;
+      justify-content: space-between;
+      align-content:flex-start;
+    }
+    .intro p{
+      color: #747070;
+      font-size: 14px;
+      margin:15px 0;
+    }
+    .intro p:first-child{
+      color: #000;
+      font-size: 18px;
+      margin:0 0 20px 0;
+      font-weight: bold;
+    }
+    .footer img{
+      width: 200px;
+      margin:20px,0;
+    }
+    @media (max-width: 1080px) {
+      .hero,.hero-content{
+        height: 550px;
+        width: 100%;
+      }
+      .nav{
+        display: none;
+        /* 变小了之后的导航栏未做 */
+      }
+      .banner{
+        font-size: 40px;
+      }
+      .b2{
+        width: 230px;
+        height: 50px;
+        font-size: 22px;
+        line-height: 50px;
+      }
+      .news a{
+        width: 100%;
+      }
+      .slider li{
+        width: 50%;
+      }
+    } 
+    @media (max-width: 640px){
+       .hero,.hero-content{
+        height: 550px;
+      }
+      .slider li{
+        width: 100%;
+      }
+    }
     </style>
 </head>
 <body>
-  <div class="hero">
+  <div class="hero" >
     <div class="hero-content">
       <header>
         <svg class="icon" aria-hidden="true">
@@ -198,6 +360,9 @@
       <p class="banner">让自行车回归城市</p>
       <a class="b2" href="">立即开始使用Mobike</a>
     </div>
+  <div class="news">
+    <a href="https://mobike.com/cn/news/468"><span>NEWS</span><span>"摩拜公交"小程序上线&nbsp;线上购买地铁票省时省力</span></a>
+  </div>
   </div>
   <div style="overflow: hidden" >
     <ul class="slider">
@@ -206,6 +371,44 @@
       <li>摩拜生活</li>
       <li>摩拜校招</li>
     </ul>
+  </div>
+<div class="three">
+  <div class="icon icon-wx"><div><img src="https://mobike.com/cn/assets/themes/moby/img/icon-wechat.png" alt=""><p>微信小程序</p><p>微信扫一扫，直接用车</p></div></div>
+  <div class="icon icon-rb"><div><img src="https://mobike.com/cn/assets/themes/moby/img/icon-rp.png" alt=""><p>红包车</p><p>骑摩拜，能赚钱</p></div></div>
+  <div class="icon icon-mg"><div><img src="https://mobike.com/cn/assets/themes/moby/img/icon-credit.png" alt=""><p>摩范分</p><p>文明骑行，信用生活</p></div></div>
+</div>
+<span class="hr"></span>
+<div class="footer">
+  <div class="massgge">
+   <img src="https://mobike.com/cn/assets/themes/moby/img/logo-text.svg" alt="">
+    <p>Beijing Mobike Technology Co., Ltd</p>
+    <p>客服电话&nbsp;400-618-7799</p>
+    <p>北京摩拜科技有限公司</p>
+</div>
+  <div class="intro">
+    <p>产品</p>
+    <p>经典版</p>
+    <p>轻骑</p>
+    <p>智能锁</p>
+  </div>
+  <div class="intro">
+    <p>生活</p>
+    <p>城市</p>
+  </div>
+  <div class="intro">
+    <p>关于</p>
+    <p>关于Mobike</p>
+    <p>加入我们</p>
+    <p>联系我们</p>
+    <p>服务协议</p>
+  </div>
+  <div class="intro">
+    <p>社交网络</p>
+    <p>微博</p>
+    <p>微信</p>
+    <p>知乎专栏</p>
+    <p>Facebook</p>
+  </div>
 </div>
 </body>
 </html>
