@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "E:\\miao"
+		},
+		{
+			"path": "C:\\Users\\brigh\\Desktop\\notes"
+		}
+	],
+	"settings":{
+		"liveServer.settings.multiRootWorkspaceName": "notes",
+		"previewServer.browsers": [
+			"chrome"
+		],
+		"previewServer.ignoreDefaultBrowser": true,
+		"liveServer.settings.fullReload": true
+	}
+
+}
