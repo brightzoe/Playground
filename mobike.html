@@ -247,6 +247,7 @@
       font-size: 16px;
       color: #747070;
     }
+    /* 换行不对 */
     .icon{
       width: 33.3%;
       height: 140px;
@@ -282,7 +283,7 @@
       display: block;
       width: 100%;
       height: 2px;
-      background-color: rgba(87, 81, 81, 0.1);
+      background-color: rgba(87, 81, 81, 0.05);
     }
     .footer{
       display: flex;
@@ -290,8 +291,15 @@
       font-size: 16px;
       width: 1040px;
       margin:40px auto;
-      justify-content: space-between;
       align-content:flex-start;
+    }
+    div.message{
+      flex-grow: 2;
+      width:200px;
+    }
+    .intro{
+    flex-grow: 0;
+     margin:0 50px;
     }
     .intro p{
       color: #747070;
@@ -304,9 +312,33 @@
       margin:0 0 20px 0;
       font-weight: bold;
     }
+    .intro p:not(:first-child):hover{
+      color: #ff6700;
+      cursor: pointer;
+    }
     .footer img{
-      width: 200px;
-      margin:20px,0;
+      width: 170px;
+      margin:40px,0;
+    }
+    footer{
+      width: 1040px;
+      margin:50px auto;
+      font-size: 12px;
+      color: #a39f9f;
+      height: 45px;
+      position: relative;
+    }
+    .footer1 img{
+      display: inline-block;
+      width: 12px;
+    }
+    footer> img{
+      width: 40px;
+      height: 40px;
+      margin:0 10px;
+      position: absolute;
+      top: 0;
+      right: 0;
     }
     @media (max-width: 1080px) {
       .hero,.hero-content{
@@ -331,6 +363,9 @@
       }
       .slider li{
         width: 50%;
+      }
+      .three,.footer,footer{
+        width: 100%;
       }
     } 
     @media (max-width: 640px){
@@ -385,12 +420,13 @@
 </div>
 <span class="hr"></span>
 <div class="footer">
-  <div class="massgge">
+  <div class="message">
    <img src="https://mobike.com/cn/assets/themes/moby/img/logo-text.svg" alt="">
     <p>Beijing Mobike Technology Co., Ltd</p>
     <p>客服电话&nbsp;400-618-7799</p>
     <p>北京摩拜科技有限公司</p>
 </div>
+<!-- 下面是flex,一起换行 -->
   <div class="intro">
     <p>产品</p>
     <p>经典版</p>
@@ -416,6 +452,12 @@
     <p>Facebook</p>
   </div>
 </div>
+<span class="hr"></span>
+<footer>
+  <p class="footer1">京&nbsp;ICP&nbsp;备15053449&nbsp;号<img src="https://mobike.com/cn/assets/themes/moby/img/beian-icon.png" alt="">京公网安备&nbsp;11010502032956&nbsp;号</p>
+  <p class="footer2">增值电信业务经营许可证编号:京B2-20170053</p>
+  <img src="https://mobike.com/cn/assets/themes/moby/img/footer-chengxin.jpg" alt="">
+</footer>
 </body>
 </html>
 
