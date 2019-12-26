@@ -1,6 +1,5 @@
 e:
-cd miao
 git add .
-git commit -a -m "1"
+git commit -a -m "%date% %time%"
 git push
 Username: brightzoe
