@@ -60,7 +60,7 @@
 <script id="ch0103/08">
   var f = +prompt()
   var C = 5 * (f - 32) / 9
-  
+
   console.log(C.toFixed(5))
 </script>
 
@@ -70,7 +70,7 @@
   var l = ((Math.PI) * d).toFixed(4)
   var s = ((Math.PI) * r * r).toFixed(4)
 
-  console.log(d,l,s);
+  console.log(d, l, s);
 </script>
 
 <script id="ch0103/10">
@@ -89,53 +89,101 @@
 </script>
 
 <script id="ch0103/12">
+  var r = +prompt()
+  var V = 4 / 3 * 3.14 * Math.pow(r, 3)
 
+  console.log(V.toFixed(2));
 </script>
 
 
 
-<script id="ch0103/13">
 
+<script id="ch0103/13">
+  var a = +prompt()
+  var x = Math.trunc(a / 100)
+  var y = Math.trunc((a - 100 * x) / 10)
+  var z = Math.trunc(a - 100 * x - 10 * y)
+
+  console.log(String(z) + String(y) + String(x))
 </script>
 
 
 
 <script id="ch0103/14">
+  var h = +prompt()
+  var r = +prompt()
+  var v = Math.PI * r * r * h / 1000
+  var z = Math.ceil(20 / v)
 
+  console.log(z);
 </script>
 
 
 
 <script id="ch0103/15">
+  var n = +prompt()
+  var x = +prompt()
+  var y = +prompt()
+  var w = Math.ceil(y / x)
+  var z = n - w
 
+  console.log(z);
 </script>
 
 
 
 <script id="ch0103/16">
+  var x1 = +prompt()
+  var y1 = +prompt()
+  var x2 = +prompt()
+  var y2 = +prompt()
+  var a = Math.pow((x1 - x2), 2)
+  var b = Math.pow((y1 - y2), 2)
+  var l = Math.sqrt(a + b)
 
+  console.log(l.toFixed(3));
 </script>
 
 
 
 <script id="ch0103/17">
+  var x1 = +prompt()
+  var y1 = +prompt()
+  var x2 = +prompt()
+  var y2 = +prompt()
+  var x3 = +prompt()
+  var y3 = +prompt()
+  var a = (x1 * y2 + x2 * y3 + x3 * y1 - x1 * y3 - x2 * y1 - x3 * y2) / 2
+
+  console.log(Math.abs(a).toFixed(2));
 
 </script>
 
 
 
 <script id="ch0103/18">
+  var a1 = +prompt()
+  var a2 = +prompt()
+  var n = +prompt()
+  var an = a1 + (n - 1) * (a2 - a1)
 
+  console.log(an);
 </script>
 
 
 
 <script id="ch0103/19">
+  var a = +prompt()
+  var b = +prompt()
 
+  console.log(a * b);
 </script>
 
 
 
 <script id="ch0103/20">
+  var n = +prompt()
+  var s = Math.pow(2, n)
 
+  console.log(s);
 </script>
