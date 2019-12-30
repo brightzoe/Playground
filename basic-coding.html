@@ -85,7 +85,7 @@
   var a = +prompt()
   var b = +prompt()
   var c = a % b
-  console.log(c.toFixed(4));
+  console.log(c.toFixed(10) - 0);//去掉小数后面多余的0
 </script>
 
 <script id="ch0103/12">
@@ -154,7 +154,7 @@
   var x3 = +prompt()
   var y3 = +prompt()
   var a = (x1 * y2 + x2 * y3 + x3 * y1 - x1 * y3 - x2 * y1 - x3 * y2) / 2
-
+  //三坐标求三角形面积，海伦公式or上面这种
   console.log(Math.abs(a).toFixed(2));
 
 </script>
@@ -184,6 +184,317 @@
 <script id="ch0103/20">
   var n = +prompt()
   var s = Math.pow(2, n)
-
+  // var s = 1 << n 
+  // 2的n次方，移位运算
   console.log(s);
+</script>
+
+
+<script id="ch0104/01">
+  var N = +prompt()
+  if (N > 0) {
+    console.log("positive");
+  } else if (N == 0) {
+    console.log("zero");
+  } else {
+    console.log("negative");
+  }
+</script>
+
+
+
+<script id="ch0104/02">
+  var a = +prompt()
+  if (a >= 0) {
+    console.log(a.toFixed(2));
+  }
+  else {
+    console.log(-a.toFixed(2));
+  }
+</script>
+
+
+
+<script id="ch0104/03">
+  var a = +prompt()
+  if (a / 2 != 0) {
+    console.log("odd");
+  }
+  else {
+    console.log("even");
+  }
+</script>
+
+
+
+<script id="ch0104/04">
+  var a = String(prompt())
+  if (a.charCodeAt(0) % 2 != 0) {
+    console.log("YES");
+  }
+  else {
+    console.log("NO");
+  }
+</script>
+
+
+
+<script id="ch0104/05">
+  var a = +prompt()
+  var b = +prompt()
+  if (a > b) {
+    console.log(">");
+  } else if (a == b) {
+    console.log("=");
+  } else {
+    console.log("<");
+  }
+</script>
+
+
+
+<script id="ch0104/06">
+  var a = +prompt()
+  if (a >= 10 && a <= 99) {
+    console.log(1);
+  }
+  else {
+    console.log(0);
+  } 
+</script>
+
+
+
+<script id="ch0104/07">
+  var a = +prompt()
+  var b = +prompt()
+  if (a >= 10 || b >= 20) {
+    console.log(1);
+  }
+  else {
+    console.log(0);
+  }
+</script>
+
+
+
+<script id="ch0104/08">
+  var a = +prompt()
+  if (a % 3 == 0 && a % 5 == 0) {
+    console.log("YES");
+  }
+  else {
+    console.log("NO");
+  }
+</script>
+
+
+
+<script id="ch0104/09">
+  var a = +prompt()
+  if (a % 3 == 0 && a % 5 == 0 && a % 7 == 0) {
+    console.log('3' + ' ' + '5' + ' ' + '7');
+  } else if (a % 3 == 0 && a % 5 == 0 && a % 7 != 0) {
+    console.log('3' + ' ' + '5');
+  } else if (a % 3 == 0 && a % 5 != 0 && a % 7 == 0) {
+    console.log('3' + ' ' + '7');
+  } else if (a % 3 != 0 && a % 5 == 0 && a % 7 == 0) {
+    console.log('5' + ' ' + '7');
+  } else if (a % 3 == 0 && a % 5 != 0 && a % 7 != 0) {
+    console.log('3');
+  } else if (a % 3 != 0 && a % 5 != 0 && a % 7 == 0) {
+    console.log('7');
+  } else if (a % 3 != 0 && a % 5 == 0 && a % 7 != 0) {
+    console.log('5');
+  }
+  else {
+    console.log(n);
+  }
+</script>
+
+
+
+<script id="ch0104/10">
+  var a = +prompt()
+  var b = +prompt()
+  if ((a < 60 && b >= 60) || (a >= 60 && b < 60)) {
+    console.log(1);
+  }
+  else {
+    console.log(0);
+  }
+</script>
+
+
+
+<script id="ch0104/11">
+  var a = +prompt()
+  if (a == 2 || a == 4 || a == 6) {
+    console.log("YES");
+  }
+  else {
+    console.log("NO");
+  }
+</script>
+
+
+
+<script id="ch0104/12">
+  var l = +prompt()
+  if (l > 100) {
+    console.log("Bike");
+  } else if (l == 100) {
+    console.log("All");
+  }
+  else {
+    console.log("Walk");
+  }
+</script>
+
+
+
+<script id="ch0104/13">
+  var a = +prompt()
+  if (0 <= a && a < 5) {
+    y = 2.5 - a
+    console.log(y.toFixed(3));
+  } else if (a >= 10) {
+    y = a / 2 - 1.5
+    console.log(y.toFixed(3));
+  }
+  else {
+    y = 2 - 1.5 * (a - 3) * (a - 3)
+    console.log(y.toFixed(3));
+  }
+</script>
+
+
+
+<script id="ch0104/14">
+  var x = +prompt()
+  var y = +prompt()
+  if (x <= 1000 && y == 'n') {
+    console.log(8);
+  } else if (x <= 1000 && y == 'y') {
+    console.log(13);
+  } else if (y == 'n') {
+    console.log(8 + Math.ceil((x - 1000) / 500) * 4);
+  }
+  else {
+    console.log(13 + Math.ceil((x - 1000) / 500) * 4);
+  }
+</script>
+
+
+
+<script id="ch0104/15">
+  var a = +prompt()
+  var b = +prompt()
+  var c = +prompt()
+  var d = Math.max(a, b, c)
+  console.log(d);
+</script>
+
+
+
+<script id="ch0104/16">
+  var a = +prompt()
+  var b = +prompt()
+  var c = +prompt()
+  var d = Math.max(a, b, c)
+  var s = a + b + c - d
+  if (s > d) {
+    console.log("yes");
+  }
+  else {
+    console.log("no");
+  }
+</script>
+
+
+
+<script id="ch0104/17">
+  var a = +prompt()
+  if (a % 400 == 0 || (a % 4 == 0 && a % 100 != 0)) {
+    console.log("Y");
+  }
+  else {
+    console.log("N");
+  }
+</script>
+
+
+
+<script id="ch0104/18">
+  var x = +prompt()
+  var y = +prompt()
+  if (-1 <= x && x <= 1 && y >= -1 && y <= 1) {
+    console.log("yes");
+  }
+  else {
+    console.log("no");
+  }
+</script>
+
+
+
+<script id="ch0104/19">
+  var a = +prompt()
+  var b = +prompt()
+  var c = prompt()
+  if (c == "+") {
+    console.log(a + b);
+  }else if (c == "-") {
+    console.log(a - b);
+  }else if (c == "/" && b != 0) {
+    console.log(a / b);
+  }else if (c == "*") {
+    console.log(a * b);
+  }else if (b == 0 && c == "/") {
+    console.log("Divided by zero!");
+  }
+  else {
+    console.log("Invalid operator!");
+  }
+
+</script>
+
+
+
+<script id="ch0104/20">
+  var a = +prompt()
+  var b = +prompt()
+  var c = +prompt()
+  var delta = b * b - 4 * a * c
+  if(delta > 0){
+    x1 = (-b + Math.sqrt(delta)) / 2 / a
+    x2 = (-b - Math.sqrt(delta)) / 2 / a
+    y1 = Math.max(x1, x2).toFixed(5)
+    y2 = Math.min(x1, x2).toFixed(5)
+    console.log("x1=" + y1 + ";" + "x2=" + y2);
+  } else if (delta == 0){
+     x1 = ((-b + Math.sqrt(delta)) / 2 / a).toFixed(5)
+     console.log("x1=x2=" + x1);
+  }else{
+    m = (-b / 2 / a).toFixed(5)
+    n1 = Math.sqrt(-delta) / 2 / a
+    n2 = -Math.sqrt(-delta) / 2 / a
+    y1 = Math.max(n1, n2).toFixed(5)
+    x1 = m + '+' + y1 + 'i'
+    x2 = m + '-' + y1 + 'i'
+    console.log("x1=" + x1 + ";" + "x2=" + x2 );
+  }
+</script>
+
+
+<script id="ch0104/21">
+  var n = +prompt()
+  var x = +prompt()
+  var y = +prompt()
+  var z = n - Math.ceil(y / x)
+  if( z > 0){
+    console.log(z);
+  }else{
+    console.log(0);
+  }
 </script>
