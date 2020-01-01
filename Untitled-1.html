@@ -8,7 +8,20 @@
     <title>mi-layout</title>
 
     <script>
-
+      var num = Math.round(Math.random() * 100)
+      var a
+      do{
+        a = +prompt("请输入一个数：")
+      
+        if(a < num){
+          alert("猜小了!")
+        }else if(a > num){
+          alert("猜大了!")
+        }else {
+          alert("猜对了!")
+        }
+      }
+       while( a != num)
     </script>
   </head>
 
