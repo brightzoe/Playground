@@ -285,7 +285,7 @@
     console.log("5");
     tf = true;
   }
-  if ((tf = false)) {
+  if (tf == false) {
     console.log("n");
   }
 </script>
@@ -470,7 +470,7 @@
 <script id="ch0105/03">
   var n = +prompt();
   var sum = 0;
-  for (i = 0; i < n; i++) {
+  for (var i = 0; i < n; i++) {
     var num = +prompt();
     sum += num;
   }
@@ -480,7 +480,7 @@
 <script id="ch0105/04">
   var n = +prompt();
   var sum = 0;
-  for (i = 0; i < n; i++) {
+  for (var i = 0; i < n; i++) {
     var num = +prompt();
     sum += num;
   }
@@ -490,7 +490,7 @@
 <script id="ch0105/05">
   var n = +prompt();
   var MaxGrade = 0;
-  for (i = 0; i < n; i++) {
+  for (var i = 0; i < n; i++) {
     var grade = +prompt();
     if (grade > MaxGrade) {
       MaxGrade = grade;
@@ -503,7 +503,7 @@
   var n = +prompt();
   var MaxNumber = 0;
   var MinNumber = 1000;
-  for (i = 0; i < n; i++) {
+  for (var i = 0; i < n; i++) {
     var number = +prompt();
     if (number > MaxNumber) {
       MaxNumber = number;
@@ -520,7 +520,7 @@
   var SumA = 0;
   var SumB = 0;
   var SumC = 0;
-  for (i = 0; i < n; i++) {
+  for (var i = 0; i < n; i++) {
     var a = +prompt();
     var b = +prompt();
     var c = +prompt();
@@ -535,7 +535,7 @@
   var n = +prompt();
   var sum = (n - 2) * 180;
   var KnownDegree = 0;
-  for (i = 1; i < n; i++) {
+  for (var i = 1; i < n; i++) {
     var degree = +prompt();
     KnownDegree += degree;
   }
@@ -547,14 +547,12 @@
   var n = +prompt();
   var sum = 0;
   if (m % 2 == 0) {
-    for (m; m <= n; m += 2) {
-      sum += m;
-    }
-  } else {
-    for (m; m <= n; m += 2) {
-      sum += m;
-    }
+    m++;
   }
+  for (m; m <= n; m += 2) {
+    sum += m;
+  }
+
   console.log(sum);
 </script>
 
@@ -575,7 +573,7 @@
   var num1 = 0;
   var num5 = 0;
   var num10 = 0;
-  for (i = 0; i < k; i++) {
+  for (var i = 0; i < k; i++) {
     var num = +prompt();
     if (num == 1) {
       num1 += 1;
@@ -592,7 +590,7 @@
   var N = +prompt();
   var m = +prompt();
   var same = 0;
-  for (i = 0; i < N; i++) {
+  for (var i = 0; i < N; i++) {
     var num = +prompt();
     if (num == m) {
       same++;
@@ -605,7 +603,7 @@
   var a = +prompt();
   var n = +prompt();
   var s = 1;
-  for (i = 0; i < n; i++) {
+  for (var i = 0; i < n; i++) {
     s *= a;
   }
   console.log(s);
@@ -614,7 +612,7 @@
 <script id="ch0105/14">
   var x = +prompt();
   var n = +prompt();
-  for (i = 0; i < n; i++) {
+  for (var i = 0; i < n; i++) {
     x *= 1.001;
   }
   console.log(x.toFixed(4));
@@ -624,28 +622,32 @@
   var R = +prompt();
   var M = +prompt();
   var Y = +prompt();
-  for (i = 0; i < Y; i++) {
+  for (var i = 0; i < Y; i++) {
     M *= R / 100 + 1;
   }
   console.log(Math.trunc(M));
 </script>
 
-<!-- <script id="ch0105/16">
+<script id="ch0105/16">
   var N = +prompt();
   var K = +prompt();
-  var M = 0;
-  var increase = 1;
-  for (M = 0; N * M < 200 * increase; M++) debugger;
-  {
-    increase = (1 + K / 100) * increase;
+  var M = N; //攒的钱
+  var price = 200; //房价
+  var r = 1 + K / 100;
+  for (i = 0; i <= 20; i++) {
+    price *= r;
+    M = N * (i + 2);
+    if (M >= price) {
+      console.log(i + 2);
+      break;
+    }
   }
-
-  if (M <= 20) {
-    console.log(M);
-  } else {
+  if (M < price) {
     console.log("Impossible");
   }
-</script> -->
+
+  // 可以算gap = price - M
+</script>
 
 <script id="ch0105/17">
   var k = +prompt();
@@ -654,7 +656,7 @@
   if (k < 3) {
     console.log(1);
   } else {
-    for (i = 2; i < k; i++) {
+    for (var i = 2; i < k; i++) {
       var num3 = num1 + num2;
       num1 = num2;
       num2 = num3;
@@ -669,7 +671,7 @@
   var a = +prompt();
   var b = +prompt();
   var x = b / a;
-  for (i = 0; i < n - 1; i++) {
+  for (var i = 0; i < n - 1; i++) {
     var c = +prompt();
     var d = +prompt();
     var y = d / c;
@@ -779,6 +781,7 @@
 </script>
 
 <script id="ch0105/25">
+  var n;
   for (n = 1 * 9 * 9; n <= 6 * 7 * 7 + 6 * 7 + 6; n++) {
     //最小是9进制100，最大是7进制666
     var a = n % 7;
@@ -861,27 +864,206 @@
 
 <script id="ch0105/31"></script>
 
-<script id="ch0105/32"></script>
+<script id="ch0105/32">
+  var n = +prompt();
+  var p1 = 1;
+  var q1 = 2;
+  var a1 = q1 / p1;
+  var sum = a1;
+  for (i = 1; i < n; i++) {
+    q2 = q1 + p1;
+    p2 = q1;
+    a2 = q2 / p2;
+    sum += a2;
+    q1 = q2;
+    p1 = p2;
+    a1 = a2;
+  }
+  console.log(sum.toFixed(4));
+</script>
 
-<script id="ch0105/33"></script>
+<script id="ch0105/33">
+  var n = +prompt();
+  var a = 1;
+  var sum = 1;
+  for (i = 1; i < n; i++) {
+    a = -a;
+    sum += a / (i + 1);
+  }
+  console.log(sum.toFixed(4));
+</script>
 
-<script id="ch0105/34"></script>
+<script id="ch0105/34">
+  var n = +prompt();
+  var a = 1;
+  var sum = 1;
+  for (i = 1; i < n; i++) {
+    a = a * (i + 1);
+    sum += a;
+  }
+  console.log(sum);
+</script>
 
-<script id="ch0105/35"></script>
+<script id="ch0105/35">
+  var n = +prompt();
+  var a = 1;
+  var e = 2;
+  for (i = 1; i < n; i++) {
+    a = a * (i + 1);
+    e += 1 / a;
+  }
+  console.log(e.toFixed(10));
+</script>
 
-<script id="ch0105/36"></script>
+<script id="ch0105/36">
+  var x = +prompt();
+  var n = +prompt();
+  var a = 1;
+  var sum = 1;
+  for (i = 0; i < n; i++) {
+    a = Math.pow(x, i + 1);
+    sum += a;
+  }
+  console.log(sum.toFixed(2));
+</script>
 
-<script id="ch0105/37"></script>
+<script id="ch0105/37">
+  var m = +prompt();
+  var n = +prompt();
+  var x = +prompt();
+  for (i = 0; ; i++) {
+    n = Math.trunc(m / n) + n;
+    x = x - Math.ceil(m / n);
+    if (x < 0) {
+      break;
+    }
+  }
+  console.log(n);
+</script>
 
-<script id="ch0105/38"></script>
+<script id="ch0105/38">
+  var n = +prompt();
+  var a = n;
+  if (n == 0) {
+    console.log(0);
+  } else {
+    for (i = 0; i <= n; i++) {
+      var c = +prompt();
 
-<script id="ch0105/39"></script>
+      console.log(c * a);
+      a--;
+      if (a == 0) {
+        var c = +prompt();
+        break;
+      }
+    }
+  }
+  //思路不清晰，第一组数字不理解
+</script>
 
-<script id="ch0105/40"></script>
+<script id="ch0105/39">
+  var n = +prompt()
+  var sum = 0
+  for (i = 1; i <= n; i++){
+    if(i % 7 == 0){
+      continue
+    }else if( ){
+      //某一位为7
+      continue
+    }else{
+      sum += i * i
+    }
+  }
+  console.log(sum);
+</script>
 
-<script id="ch0105/41"></script>
+<script id="ch0105/40">
+  var n = +prompt();
+  var sum = 0; //1的总个数
+  var a = 0; //每个数中1的个数
+  var b = 0; //从个位开始，到高位
+  for (i = 1; i <= n; i++) {
+    b = i;
+    a = 0; //每算出一个数中的个数，重置掉
+    for (m = 0; m < n; m++) {
+      if (b % 10 == 1) {
+        a++;
+      }
+      b = (b - (b % 10)) / 10;
+      if (b == 0) {
+        break;
+      }
+    }
+    sum += a;
+  }
+  console.log(sum);
+</script>
 
-<script id="ch0105/42"></script>
+<script id="ch0105/41">
+  //与40题一致
+  var l = +prompt();
+  var r = +prompt();
+  var sum = 0;
+  var a = 0; //每个数中2的个数
+  var b = 0; //从个位开始，遍历数中的每一位
+  for (i = l; i <= r; i++) {
+    //遍历l到r
+    b = i;
+    a = 0;
+    for (;;) {
+      //遍历每一位F
+
+      if (b % 10 == 2) {
+        a++;
+      }
+      b = (b - (b % 10)) / 10;
+      if (b == 0) {
+        break;
+      }
+    }
+    sum += a;
+  }
+  console.log(sum);
+</script>
+
+<script id="ch0105/42">
+  //我可真厉害啊！
+  var h = +prompt();
+  var w = +prompt();
+  var s = String(prompt());
+  var p = +prompt();
+  if (p == 1) {
+    //实心的
+    for (i = 0; i < h; i++) {
+      var sw = s; //每一行的个数
+      for (m = 0; m < w; m++) {
+        //控制每一行个数
+        sw += s;
+      }
+      console.log(sw + "\n");
+    }
+  } else {
+    //空心的
+    var sw = s;
+    for (m = 1; m < w; m++) {
+      sw += s;
+    }
+    console.log(sw + "\n"); //第一行
+    for (i = 2; i < h; i++) {
+      var sw = s;
+      for (m = 2; m < w; m++) {
+        //控制每一行空格个数
+        sw += " ";
+      }
+      console.log(sw + s); //中间的行
+    }
+    sw = s;
+    for (m = 1; m < w; m++) {
+      sw += s;
+    }
+    console.log(sw + "\n"); //最后一行
+  }
+</script>
 
 <script id="ch0105/43"></script>
 
