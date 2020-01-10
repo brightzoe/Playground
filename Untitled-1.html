@@ -1,33 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>mi-layout</title>
 
     <script>
-      var num = Math.round(Math.random() * 100)
-      var a
-      do{
-        a = +prompt("请输入一个数：")
-      
-        if(a < num){
-          alert("猜小了!")
-        }else if(a > num){
-          alert("猜大了!")
-        }else {
-          alert("猜对了!")
+      var num = Math.round(Math.random() * 100);
+      var a;
+      do {
+        a = +prompt("请输入一个数：");
+
+        if (a < num) {
+          alert("猜小了!");
+        } else if (a > num) {
+          alert("猜大了!");
+        } else {
+          alert("猜对了!");
         }
-      }
-       while( a != num)
+      } while (a != num);
     </script>
   </head>
 
-  <body>
+  <body></body>
+  <script>
+    var digitWidth = function(t) {
+      var digitWidth = 0;
+      do {
+        var digit = t % 10;
+        t = (t - digit) / 10;
+        digitWidth++;
+      } while (t > 0);
+      return digitWidth;
+    };
 
+    var power = function(a, n) {
+      var a;
+      var t = 1;
+      for (var i = 0; i < n; i++) {
+        var t = t * a;
+      }
+      return t;
+    };
 
-  </body>
+    var isPrime = function(n) {
+      var sqrt_n = Math.sqrt(n);
+      for (var i = 2; i <= sqrt_n; i++) {
+        if (n % i == 0) {
+          return false;
+        }
+      }
+      return true;
+    };
 
+    //happy-number
+    var isHappy = function(n) {
+      var t = Math.sqrt(n);
+      var sum = 0;
+      if (n == 1) {
+        return true;
+      }
+      if (n < 10) {
+        return false;
+      }
+
+      for (j = 0; j < t; j++) {
+        for (i = 0; i < t; i++) {
+          var num = n % 10;
+          n = (n - num) / 10;
+          sum += num * num;
+          if (n == 0) {
+            break;
+          }
+        }
+        n = sum;
+        sum = 0;
+        if (n < 10) {
+          break;
+        }
+      }
+      if (n == 1) {
+        return true;
+      }
+      return false;
+    };
+
+    //辗转相除法
+    var sameDivide = function(a, b) {
+      while (a && b) {
+        if (b > 0) {
+          var t = b;
+          b = a % b;
+          a = t;
+        }
+      }
+      return a;
+    };
+
+    //weekday
+    //16000101周六
+    debugger;
+    var Sum = function(n) {
+      var day = n % 100;
+      var month = ((n - day) / 100) % 100;
+      var year = (n - (n % 10000)) / 10000 - 1600; //split year & month & day
+
+      //计算给定日期与16000101差几天
+      if (year == 0) {
+        if (month == 1 || month == 4 || month == 7) {
+          var sum = day + 6;
+        } else if (month == 2 || month == 8) {
+          var sum = day + 2;
+        } else if (month == 3 || month == 11) {
+          var sum = day + 3;
+        } else if (month == 9 || month == 12) {
+          var sum = day + 5;
+        } else if (month == 5) {
+          var sum = day + 1;
+        } else if (month == 6) {
+          var sum = day + 4;
+        } else if (month == 10) {
+          var sum = day;
+        }
+
+        var sum = sum % 7;
+      }
+      return sum;
+    };
+    sum = Sum(+prompt());
+    switch (sum) {
+      case "0":
+        console.log(6);
+      case "1":
+        console.log(6);
+      case "2":
+        console.log(6);
+      case "3":
+        console.log(6);
+      case "4":
+        console.log(6);
+      case "5":
+        console.log(6);
+      case "6":
+        console.log(6);
+    }
+
+    var hammingDistance = function(x, y) {
+      if (x == y) {
+        return 0;
+      }
+
+      var sum1 = "";
+      var sum2 = "";
+      for (; x > 0; ) {
+        var digit = x % 2;
+        x = (x - digit) / 2;
+        sum1 = digit + sum1;
+      }
+
+      for (; y > 0; ) {
+        var digit = y % 2;
+        y = (y - digit) / 2;
+        sum2 = digit + sum2;
+      }
+
+      var diff = sum1 ^ sum2;
+
+      var sum = 0;
+
+      for (; diff > 0; ) {
+        var digit = diff % 10;
+        diff = (diff - digit) / 10;
+        sum += digit;
+      }
+      return sum;
+    };
+
+    //在数组中找target,找到返回下标,找不到返回-1
+    function findIndex(ary, target) {
+      for (vari = 0; i < ary.length; i++) {
+        if (ary[i] === target) {
+          return i;
+        }
+      }
+      return -1;
+    }
+  </script>
 </html>
