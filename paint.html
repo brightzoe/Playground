@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>画图</title>
+    <style>
+      canvas {
+        border: 2px solid #f0f;
+        display: block;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas width="400" height="300"></canvas>
+  </body>
+  <script>
+    var canvas = document.querySelector("canvas");
+    canvas.style.imageRendering = "pixelated";
+    var ctx = canvas.getContext("2d");
+
+    function dot(x, y, color = "black") {
+      ctx.fillStyle = color;
+      ctx.fillRect(x, y, 1, 1);
+    }
+    function line(x1, y1, x2, y2) {
+      ctx.strokeStyle = "black";
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+    }
+    /**
+   * YOUR TASK
+画图的题：
+√画一条实线
+√画一条一个实点一个空点的虚线
+√画一条两个实点两个空点的虚线
+√画一条三个实点两个空点的虚线
+√画一条45度的斜线
+√画一条跨越画布左上角和右下角的对角线
+√画一个空心矩形
+√画一个实心矩形
+画一个rgb色彩空间的某一面
+√画一个空心的圆
+√画一个实心的圆
+画一个大小合适的sin(x)的图像
+   */
+  </script>
+  <script>
+    // // YOUR CODE GOES BELOW
+    // // //实线
+    // // ctx.beginPath();
+    // // ctx.moveTo(50, 290); //起点坐标
+    // // ctx.lineTo(330, 290); //终点坐标
+    // // ctx.stroke();
+    for (x = 50; x < 330; x++) {
+      var y = 290;
+      dot(x, y, "black");
+    }
+
+    // // //一个实点一个空点的虚线
+    // // ctx.beginPath();
+    // // for (var x = 50; x < 330; x += 2) {
+    // //   ctx.moveTo(x, 280);
+    // //   ctx.lineTo(x + 1, 280);
+    // // }
+    // // ctx.stroke();
+    for (x = 50; x < 330; x += 2) {
+      var y = 280;
+      dot(x, y, "black");
+    }
+
+    // // //两个实点两个空点的虚线
+    // // ctx.beginPath();
+    // // for (var x = 50; x < 330; x += 4) {
+    // //   ctx.moveTo(x, 270);
+    // //   ctx.lineTo(x + 2, 270);
+    // // }
+    // // ctx.stroke();
+    for (x = 50; x < 330; x += 4) {
+      var y = 270;
+      dot(x, y, "black");
+      dot(x + 1, y, "black");
+    }
+
+    // // //三个实点两个空点的虚线
+    // // //5个距离为一循环
+    // // ctx.beginPath();
+    // // for (var x = 50; x < 330; x += 5) {
+    // //   ctx.moveTo(x, 260);
+    // //   ctx.lineTo(x + 3, 260);
+    // // }
+    // // ctx.stroke();
+    for (x = 50; x < 330; x += 5) {
+      var y = 260;
+      dot(x, y, "black");
+      dot(x + 1, y, "black");
+      dot(x + 2, y, "black");
+    }
+
+    // // //45°斜线
+    // // ctx.beginPath();
+    // // ctx.moveTo(0, 300); //起点坐标
+    // // ctx.lineTo(300, 0); //终点坐标
+    // // ctx.stroke();
+    var y = 300;
+    for (x = 0; x < 330; x += 0.1) {
+      y -= 0.1;
+      dot(x, y, "red");
+    }
+
+    //对角线
+    ctx.beginPath();
+    ctx.moveTo(0, 0); //起点坐标
+    ctx.lineTo(400, 300); //终点坐标
+    ctx.stroke();
+
+    //空心矩形
+    ctx.lineWidth = 5; //边框宽度
+    ctx.strokeStyle = "blue";
+    ctx.strokeRect(10, 10, 80, 60); //左上角坐标,宽，高
+
+    //实心矩形
+    ctx.fillStyle = "aqua";
+    ctx.fillRect(20, 20, 60, 40);
+
+    //rgb色彩空间某一面
+
+    for (var r = 0; r < 256; r++) {
+      for (var g = 0; g < 256; g++) {
+        dot(r / 2 + 100, g / 2 + 100, "rgb(" + r + "," + g + "," + 0 + ")");
+      }
+    }
+
+    //空心圆
+    ctx.beginPath();
+    //center=(150,40) radius=30 angle=0 to 7
+    ctx.arc(150, 40, 30, 0, 7);
+    ctx.stroke();
+
+    //实心圆
+    ctx.beginPath();
+    //center=(150,40) radius=30 angle=0 to 7
+    ctx.arc(250, 40, 32, 0, 7);
+    ctx.fillStyle = "pink";
+    ctx.fill();
+
+    //棒棒糖
+    for (var z = 0; z <= 2 * Math.PI; z += 0.1) {
+      for (z = 0; z <= 50; z += 0.01) {
+        var x = z * Math.cos(z);
+        var y = z * Math.sin(z);
+        dot(x + 300, y + 130, "black");
+      }
+    }
+
+    //sinx;
+    for (var x = 0; x < 400; x++) {
+      var y = 220 + 20 * Math.sin(x / 20);
+      dot(x, y, "black");
+    }
+  </script>
+</html>
