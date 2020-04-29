@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>qq-mail-position</title>
+  <style>
+    * {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      position: relative;
+    }
+
+    header {
+      width: 100%;
+      height: 100px;
+      background-color: red;
+      border-bottom: 2px black solid;
+    }
+
+    aside {
+      width: 100px;
+      height: calc(100% - 100px);
+      background-color: green;
+      border-right: 2px black solid;
+
+    }
+
+    main {
+      width: calc(100% - 100px);
+      height: calc(100% - 100px);
+      background-color: blue;
+      position: absolute;
+      top: 100px;
+      left: 100px;
+    }
+
+    /* 三个fixed 也可*/
+  </style>
+</head>
+
+<body>
+  <header>
+    header
+  </header>
+  <aside>
+    aside
+  </aside>
+  <main>
+    main
+  </main>
+</body>
+
+</html>

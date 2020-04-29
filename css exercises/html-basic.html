@@ -1,0 +1,219 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>html-basic</title>
+</head>
+
+<body>
+  <h1>Lorem.</h1>
+  <h2>Lorem ipsum.</h2>
+  <h3>Lorem ipsum dolor.</h3>
+
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, temporibus nesciunt blanditiis dolorem expedita
+    consequatur eaque pariatur eius, praesentium sed tenetur minus quos assumenda quia sunt? Doloremque tempora
+    perferendis esse.</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quos cupiditate libero. Facere nostrum fugiat
+    reiciendis, explicabo enim nihil quisquam a, consequatur minima officiis, tenetur ut molestias nisi sit libero.
+  </p>
+
+  <a href="http://www.jd.com" target='_blank'>在新窗口打开京东</a>
+  <a href="mailto:2577213154@qq.com">点击给我发邮件</a>
+  <a href="#bottom">跳转到本页的底部</a>
+  <a href="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
+    download="google.png">点我可以下载一个文件</a>
+  <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" width="300" height="200"
+    alt="图片加载失败">
+  <hr>
+  <hr>
+
+  <marquee behavior="" direction="">飘~~~</marquee>
+  <em>这几种强调</em>
+  <b>有什么</b>
+  <strong>区别呢?</strong>
+  <u>这个呢?</u>
+  <i>这个呢?</i>
+  <br>
+  &lt;!--这段注释需要出现在页面里面-->
+  <br>
+  <p>html的注释怎么写?</p>
+
+  <p>下面是一段javascript代码,最适合用何种标签表示呢?</p>
+  <pre>
+    <code class="">
+    function a(){
+      return 8
+    }
+    </code>
+  </pre>
+  <hr>
+
+  <ul>
+    <li>
+      <span>小学</span>
+      <ol>
+        <li><span>一年级</span>
+          <ol>
+            <li>上学期</li>
+            <li>下学期</li>
+          </ol>
+        </li>
+        <li>二年级</li>
+        <li>三年级</li>
+      </ol>
+    </li>
+    <li>中学</li>
+    <li>大学</li>
+  </ul>
+
+  <hr>
+
+  <dl>
+    <dt>班级</dt>
+    <dd>三年二班</dd>
+
+    <dt>老师</dt>
+    <dd>张老师</dd>
+    <dd>李老师</dd>
+    <dd>王老师</dd>
+
+    <dt>学生</dt>
+    <dd>小明</dd>
+    <dd>豆豆</dd>
+  </dl>
+
+  <hr>
+
+  <form action="http://www.google.com/search" method="get" target="_blank">
+    <h2>Google搜索</h2>
+    <input type="text" placeholder="请输入想要搜索的内容" name="q">
+    <input type="submit" value="在新窗口打开搜索结果">
+  </form>
+
+  <hr>
+
+  <form action="">
+    <p>个人信息调查表</p>
+    <dl>
+      <dt>性别</dt>
+      <dd>
+        <label><input type="radio" name="gender" value="man"> 男</label> <label><input type="radio" name="gender"
+            value="famale"> 女</label>
+      </dd>
+
+      <dt>年龄</dt>
+      <dd>
+        <select name="age" id="">
+          <option selected hidden>请选择</option>
+          <optgroup label="少年">
+            <option value='1-6'>1-6岁</option>
+            <option value='6-12'>6-12岁</option>
+          </optgroup>
+          <optgroup label="青年">
+            <option value='13-15'>13-15岁</option>
+            <option value='16-18'>16-18岁</option>
+          </optgroup>
+          <optgroup label="壮年">
+            <option value='18-22'>18-22岁</option>
+            <option value='23-30'>23-30岁</option>
+          </optgroup>
+        </select>
+      </dd>
+
+      <dt>生日</dt>
+      <dd><input type="date" name="birthday"></dd>
+
+      <dt>生辰</dt>
+      <dd><input type="time" name="birthtime"></dd>
+
+      <dt>照片</dt>
+      <dd>
+        <input type="file" id="pic" name="pic" accept="image/*" hidden>
+        <label for="pic">点我上传照片,我比文件上传按钮好看</label>
+      </dd>
+
+      <dt>肤色</dt>
+      <dd><input type="color"></dd>
+
+      <dt>自我介绍</dt>
+      <dd><textarea name="selfintroduction" id="" cols="30" rows="10">&lt;/textarea></textarea></dd>
+    </dl>
+    <fieldset>
+      <legend>这里面的全都禁用了</legend>
+      <input type="text" disabled>
+      <input type="text" disabled>
+      <input type="text" disabled>
+      <input type="text" disabled>
+    </fieldset>
+    <input type="submit"></input>
+    <input type="reset"></input>
+
+    <hr>
+
+  </form>
+  <table border="1">
+    <caption>货品列表</caption>
+    <col>
+    <col bgcolor="red">
+
+    <thead>
+      <tr>
+        <th>编号</th>
+        <th>品名</th>
+        <th>进价</th>
+        <th>出价</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <th>001</th>
+        <td>苹果</td>
+        <td rowspan="2">5</td>
+        <td>8</td>
+      </tr>
+      <tr>
+        <th>001</th>
+        <td>桔子</td>
+        <td>8</td>
+      </tr>
+      <tr>
+        <th>001</th>
+        <td>香蕉</td>
+        <td>5</td>
+        <td>8</td>
+      </tr>
+      <tr>
+        <th>001</th>
+        <td>香蕉</td>
+        <td>5</td>
+        <td>8</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <img title="officeplus" src="http://www.officeplus.cn/Images/logo-new.png" width=470 usemap="imgmap" alt="">
+  <map name="imgmap">
+    <area shape="rect" coords="0,0,300,50" href="https://www.mi.com/" alt="123" target="_blank" title="office">
+    <area shape="circle" coords="330,20,30" href="" alt="">
+  </map>
+
+  <hr>
+
+  <a href="https://www.mi.com/" target="frame1">点击我会在下面的frame中打开小米商城,但是为什么打不开呢?</a><br>
+  <iframe src="https://nodejs.org" frameborder="1" name="frame1"></iframe>
+
+  <div>
+    怎样&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在这两个字之间空这么大呢?<br>
+    怎样在页面中显示下面的内容呢?<br>
+    &lt;span>&lt;/span>
+  </div>
+
+  <div id="bottom"></div>
+
+</body>
+
+</html>

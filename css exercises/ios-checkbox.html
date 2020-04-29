@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ios-checkbox</title>
+  <style>
+    #onoff {
+      display: none;
+    }
+
+    #onoff+label {
+      height: 150px;
+      width: 270px;
+      border-radius: 120px;
+      box-sizing: border-box;
+      display: inline-block;
+      border: 5px grey solid;
+      position: relative;
+      background-color: white;
+      transition: 0.3s;
+    }
+
+    #onoff:checked+label {
+      border: 1px #30F349 solid;
+      background-color: #30F349;
+      border-width: 50px;
+      xbox-shadow: 0 0 0px 150px #30F349 inset;
+    }
+
+    #onoff+label::before {
+      position: absolute;
+      content: "";
+      left: 5px;
+      top: 5px;
+      height: 130px;
+      width: 130px;
+      border-radius: 50%;
+      display: inline-block;
+      background-color: white;
+      box-shadow: 0 0 15px grey;
+      transition: 0.3s;
+    }
+
+    #onoff:checked+label::before {
+      left: 70px;
+      top: -40px;
+    }
+
+    .radio {
+      display: none;
+    }
+
+    .radio+label {
+      height: 36px;
+      width: 36px;
+      box-sizing: border-box;
+      border-radius: 50%;
+      border: 5px black solid;
+      background-color: #fff;
+      position: relative;
+      display: block;
+      margin: 20px;
+      transition: 0.3s;
+    }
+
+    /* .radio+label::before {
+      content: "";
+      width: 0px;
+      height: 0px;
+      border-radius: 9999px;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      position: absolute;
+      background-color: black;
+      transition: 0.2s;
+    }
+
+    .radio:checked+label::before {
+      width: 30px;
+      height: 30px;
+      background-color: rgb(76, 190, 91);
+      border-color: rgb(76, 190, 91);
+    }
+
+    中间的圆从小变大 */
+
+    .radio:checked+label {
+      border-color: rgb(76, 190, 91);
+      padding: 5px;
+      background-color: rgb(76, 190, 91);
+      background-clip: content-box;
+    }
+
+    .radio+label::before {
+      content: "Radio Button";
+      position: absolute;
+      top: 4px;
+      left: 48px;
+      white-space: nowrap;
+      color: black;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <input type="checkbox" id="onoff">
+    <label for="onoff"></label>
+    <br>
+    <br>
+    <input type="radio" class="radio" name="radio" id="radio1">
+    <label for="radio1"></label>
+    <input type="radio" class="radio" name="radio" id="radio2">
+    <label for="radio2"></label>
+    <input type="radio" class="radio" name="radio" id="radio3">
+    <label for="radio3"></label>
+  </div>
+
+</body>
+
+</html>

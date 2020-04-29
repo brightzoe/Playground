@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,12 +21,13 @@
           alert("猜对了!");
         }
       } while (a != num);
+
     </script>
   </head>
 
   <body></body>
   <script>
-    var digitWidth = function(t) {
+    var digitWidth = function (t) {
       var digitWidth = 0;
       do {
         var digit = t % 10;
@@ -35,7 +37,7 @@
       return digitWidth;
     };
 
-    var power = function(a, n) {
+    var power = function (a, n) {
       var a;
       var t = 1;
       for (var i = 0; i < n; i++) {
@@ -44,7 +46,7 @@
       return t;
     };
 
-    var isPrime = function(n) {
+    var isPrime = function (n) {
       var sqrt_n = Math.sqrt(n);
       for (var i = 2; i <= sqrt_n; i++) {
         if (n % i == 0) {
@@ -55,7 +57,7 @@
     };
 
     //happy-number
-    var isHappy = function(n) {
+    var isHappy = function (n) {
       var t = Math.sqrt(n);
       var sum = 0;
       if (n == 1) {
@@ -87,7 +89,7 @@
     };
 
     //辗转相除法
-    var sameDivide = function(a, b) {
+    var sameDivide = function (a, b) {
       while (a && b) {
         if (b > 0) {
           var t = b;
@@ -101,7 +103,7 @@
     //weekday
     //16000101周六
     debugger;
-    var Sum = function(n) {
+    var Sum = function (n) {
       var day = n % 100;
       var month = ((n - day) / 100) % 100;
       var year = (n - (n % 10000)) / 10000 - 1600; //split year & month & day
@@ -146,20 +148,20 @@
         console.log(6);
     }
 
-    var hammingDistance = function(x, y) {
+    var hammingDistance = function (x, y) {
       if (x == y) {
         return 0;
       }
 
       var sum1 = "";
       var sum2 = "";
-      for (; x > 0; ) {
+      for (; x > 0;) {
         var digit = x % 2;
         x = (x - digit) / 2;
         sum1 = digit + sum1;
       }
 
-      for (; y > 0; ) {
+      for (; y > 0;) {
         var digit = y % 2;
         y = (y - digit) / 2;
         sum2 = digit + sum2;
@@ -169,7 +171,7 @@
 
       var sum = 0;
 
-      for (; diff > 0; ) {
+      for (; diff > 0;) {
         var digit = diff % 10;
         diff = (diff - digit) / 10;
         sum += digit;
@@ -177,14 +179,6 @@
       return sum;
     };
 
-    //在数组中找target,找到返回下标,找不到返回-1
-    function findIndex(ary, target) {
-      for (vari = 0; i < ary.length; i++) {
-        if (ary[i] === target) {
-          return i;
-        }
-      }
-      return -1;
-    }
   </script>
+
 </html>

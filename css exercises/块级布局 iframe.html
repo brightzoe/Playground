@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    /* 利用content-box为0,用上border做出倒三角形 */
+    .triangle {
+      width: 0px;
+      height: 0px;
+      border: 30px solid;
+      border-color: red transparent blue transparent;
+      margin: 30px;
+      padding: 0px;
+      border-bottom-width: 0;
+    }
+
+    /* 灵活实现iframe margin-box全宽 */
+    .a {
+      display: block;
+      width: calc(100%-60px);
+      box-sizing: border-box;
+      border: 5px solid;
+      margin: 30px;
+      padding: 30px;
+    }
+
+    /* ②加一个包含块,
+    使iframe成为包含块的content-box  */
+    nav {
+      margin: 30px;
+    }
+
+    .b {
+      box-sizing: border-box;
+      width=100%;
+      border: 5px solid;
+      padding: 30px;
+    }
+
+    .neg {
+      margin-top: -50px;
+      margin-right: 10px;
+      margin-left: 10px;
+      margin-bottom: 0;
+      border: 3px solid gray;
+
+    }
+    li{
+      margin:10px;
+      background-color: red;
+    }
+    ul {
+      margin:0;
+      background-color: tan;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="triangle"></div>
+
+  <iframe class="a" src="https://www.baidu.com" frameborder="0"></iframe>
+  <nav>
+    <iframe class="b" src="https://www.baidu.com" frameborder="0"></iframe>
+  </nav>
+
+  <div style='width:420px;background-color: silver; padding=10px; margin-top:50px; border:1px solid;'>
+    <p class="neg">Lorem ipsum dolor sit amet.</p>A div.
+  </div>
+  <div>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+</body>
+
+</html>
+
