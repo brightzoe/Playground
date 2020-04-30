@@ -183,13 +183,12 @@ var brightzoe = {
 
   },
 
-  /**
+  /**输出数组的第一个元素。
    * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
+   * @return {*}
    */
-  head: function () {
-
+  head: function (array) {
+    return array[0]
   },
 
   /**
@@ -1198,8 +1197,9 @@ var brightzoe = {
    * @return {boolean}
    */
   isNaN: function (val) {
-    if (typeof val == 'object') { //对象转换为原始类型:valueOf和toString
-      if (val.toString === 'NaN') {
+    if (typeof val == 'object') {
+      //对象转换为原始类型:valueOf()和toString()
+      if (val.toString() === 'NaN') {
         return true
       }
       return false
