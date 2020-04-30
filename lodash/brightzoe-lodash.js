@@ -358,7 +358,7 @@ var brightzoe = {
    * @param {} [size]
    * @return {array[][]}
    */
-  sortedLastindexBy: function () {
+  sortedLastIndexBy: function () {
 
   },
 
@@ -1086,7 +1086,7 @@ var brightzoe = {
    * @param {} [size]
    * @return {array[][]}
    */
-  isobjectlike: function () { //isObjectLike
+  isObjectLike: function () {
 
   },
 
@@ -1818,6 +1818,14 @@ var brightzoe = {
    * @param {} 
    * @return {}
    */
+  capitalize: function () {
+
+  },
+  /**
+   * @param {} 
+   * @param {} 
+   * @return {}
+   */
   deburr: function () {
 
   },
@@ -1854,7 +1862,7 @@ var brightzoe = {
    * @param {} 
    * @return {}
    */
-  KebabCase: function () {
+  kebabCase: function () {
 
   },
 
@@ -2124,7 +2132,7 @@ var brightzoe = {
    * @param {} 
    * @return {}
    */
-  uniqeId: function () {
+  uniqueId: function () {
 
   },
 
