@@ -605,13 +605,13 @@ var brightzoe = {
   filter: function () {
 
   },
-  /**
-   * @param {} 
-   * @param {} 
-   * @param {} 
-   * @return {}
+  /**返回符合条件的第一个元素。
+   * @param {Array|Object}collection
+   * @param {function}predicate
+   * @param {number}fromIndex
+   * @return {*}
    */
-  find: function () {
+  find: function (collection, predicate = _.identity, fromIndex = 0) {
 
   },
   /**
@@ -1087,7 +1087,7 @@ var brightzoe = {
    * @param {} [size]
    * @return {array[][]}
    */
-  isObjectlike: function () {
+  isobjectlike: function () { //isObjectLike
 
   },
 
