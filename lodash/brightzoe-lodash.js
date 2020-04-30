@@ -1087,8 +1087,7 @@ var brightzoe = {
    * @param {} [size]
    * @return {array[][]}
    */
-  isObjectLike：
-  function () {
+  isObjectlike: function () {
 
   },
 
