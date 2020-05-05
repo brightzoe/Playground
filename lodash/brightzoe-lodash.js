@@ -264,7 +264,7 @@ var brightzoe = {
    * @param {...array} array
    * @return {array}
    */
-  intersection: function (array) {
+  intersection: function (...array) {
     let res = []
     let flag = 1
     for (let i = 0; i < array[0].length; i++) {
@@ -295,26 +295,33 @@ var brightzoe = {
    * @param {function} comparator
    * @return {array}
    */
-  intersectionWith: function (arrays, comparator) {
+  intersectionWith: function (...arrays, comparator) {
 
   },
 
-  /**
+  /**将 array 中的所有元素转换为由 separator 分隔的字符串。
    * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
+   * @param {string} separator
+   * @return {string}
    */
-  join: function () {
-
+  join: function (array, separator = ',') {
+    let res = ''
+    for (let i = 0; i < array.length - 1; i++) {
+      res = array[i] + separator
+    }
+    res += array[array.length - 1]
+    return res
   },
 
-  /**
+  /**获取array中的最后一个元素。
    * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
+   * @return {*}
    */
-  last: function () {
-
+  last: function (array) {
+    // if (array.length == 0) {
+    //   return undefined
+    // }不需要
+    return array[array.length - 1]
   },
 
   /**
