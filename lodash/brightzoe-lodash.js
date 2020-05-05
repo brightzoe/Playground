@@ -229,21 +229,12 @@ var brightzoe = {
    * @return {number}
    */
   indexOf: function (array, value, fromIndex = 0) {
-    if (fromIndex >= 0) {
-      for (let i = fromIndex; i < array.length; i++) {
-        if (value == array[i]) {
-          return i
-        }
+    for (let i = fromIndex; i < array.length; i++) {
+      if (value == array[i] || (value !== value && array[i] !== array[i])) {
+        return i
       }
-      return -1
-    } else {
-      for (let i = array.length + fromIndex; i >= 0; i--) {
-        if (value == array[i]) {
-          return i
-        }
-      }
-      return -1
     }
+    return -1
 
   },
 
