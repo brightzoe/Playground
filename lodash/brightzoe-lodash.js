@@ -298,7 +298,7 @@ var brightzoe = {
   join: function (array, separator = ',') {
     let res = ''
     for (let i = 0; i < array.length - 1; i++) {
-      res = array[i] + separator
+      res += array[i] + separator
     }
     res += array[array.length - 1]
     return res
@@ -315,13 +315,19 @@ var brightzoe = {
     return array[array.length - 1]
   },
 
-  /**
+  /**这个方法类似 _.indexOf ，区别是它是从右到左遍历array的元素。
    * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
+   * @param {*} value
+   * @param {number} fromIndex
+   * @return {number}
    */
-  lastIndexOf: function () {
-
+  lastIndexOf: function (array, value, fromIndex = array.length - 1) {
+    for (let i = fromIndex; i >= 0; i--) {
+      if (value == array[i] || (value !== value && array[i] !== array[i])) {
+        return i
+      }
+    }
+    return -1
   },
 
   /**
