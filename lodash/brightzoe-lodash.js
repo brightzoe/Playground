@@ -168,7 +168,7 @@ var brightzoe = {
    * @param {array} array
    * @return {array}
    */
-  flattenDeep: function (array) {
+  flattenDeep: function flattenDeep(array) {
     let res = []
     for (let ans of array) {
       res = res.concat(ans)
