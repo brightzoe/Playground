@@ -286,7 +286,7 @@ var brightzoe = {
    * @param {function} comparator
    * @return {array}
    */
-  intersectionWith: function (...arrays, comparator) {
+  intersectionWith: function () {
 
   },
 
@@ -330,13 +330,16 @@ var brightzoe = {
     return -1
   },
 
-  /**
+  /**获取array数组的第n个元素。如果n为负数，则返回从数组结尾开始的第n个元素.
    * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
+   * @param {number} [n]
+   * @return {*}
    */
-  nth: function () {
-
+  nth: function (array, n = 0) {
+    if (n < 0) {
+      return array[array.length + n]
+    }
+    return array[n]
   },
 
   /**
