@@ -87,16 +87,20 @@ var brightzoe = {
     return result
   },
 
-  /**
+  /**创建一个切片数组，去除array尾部的n个元素。（n默认值为1。）
    * @param {array} array
    * @param {number} [n]
    * @return {array}
    */
-  dropRight: function () {
+  dropRight: function (array, n = 1) {
+    if (n == 0) {
+      return array
+    }
+    return array.slice(0, -n) //从右边裁切
 
   },
 
-  /**
+  /**创建一个切片数组，去除array中从 predicate 返回假值开始到尾部的部分。predicate 会传入3个参数： (value, index, array)。
    * @param {array} array
    * @param {function} [predicate=_.identity]
    * @return {array}
@@ -105,7 +109,7 @@ var brightzoe = {
 
   },
 
-  /**
+  /**创建一个切片数组，去除array中从起点开始到 predicate 返回假值结束部分。predicate 会传入3个参数： (value, index, array)。
    * @param {array} array
    * @param {function} [predicate=_.identity]
    * @return {array}
@@ -129,58 +133,85 @@ var brightzoe = {
   },
 
 
-  /**
+  /**该方法返回第一个通过 predicate 判断为真值的元素的索引值（index），而不是元素本身。
    * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
+   * @param { Array | Function | Object | string} [predicate = _.identity]
+   * @return {number}
    */
   findIndex: function () {
 
   },
 
-  /**
+  /**这个方式类似 _.findIndex， 区别是它是从右到左的迭代集合array中的元素。
    * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
+   * @param { Array | Function | Object | string} [predicate = _.identity]
+   * @return {number}
    */
   findLastIndex: function () {
 
   },
 
-  /**
+  /**减少一级array嵌套深度。
+   * 把array[i] 是数组的解放掉，空数组concat(array[i])
    * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
+   * @return {array}
    */
-  flatten: function () {
+  flatten: function (array) {
+    let res = []
+    for (let ans of array) {
+      res = res.concat(ans)
+    }
+    return res
+  },
+
+  /**将array递归为一维数组。
+   * @param {array} array
+   * @return {array}
+   */
+  flattenDeep: function (array) {
+    let res = []
+    for (let ans of array) {
+      res = res.concat(ans)
+    }
+    for (let ans of res) {
+      //递归，如果里面还有数组就继续减少一级深度。
+      if (Array.isArray(ans)) {
+        return flattenDeep(res)
+      }
+    }
+    return res
 
   },
 
-  /**
+  /**根据 depth 递归减少 array 的嵌套层级
    * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
+   * @param {number} [depth=1]
+   * @return {array}
    */
-  flattenDeep: function () {
-
+  flattenDepth: function (array, depth) {
+    for (let i = 0; i < depth; i++) {
+      //深度是几就减少几次
+      let res = []
+      for (let ans of array) {
+        res = res.concat(ans)
+      }
+      array = res
+    }
+    return array
   },
 
   /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
+   * @param {array} pairs
+   * @return {object}
    */
-  flattenDepth: function () {
-
-  },
-
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
-  fromPairs: function () {
-
+  fromPairs: function (pairs) {
+    let res = {}
+    let key = ''
+    for (let i = 0; i < pairs.length; i++) {
+      key = pairs[i][0]
+      res[key] = pairs[i][1]
+    }
+    return res
   },
 
   /**输出数组的第一个元素。
@@ -191,48 +222,80 @@ var brightzoe = {
     return array[0]
   },
 
-  /**
+  /**使用 SameValueZero 等值比较，返回首次 value 在数组array中被找到的 索引值， 如果 fromIndex 为负值，将从数组array尾端索引进行匹配。
    * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
+   * @param {number} value
+   * @param {number} [fromIndex = 0]
+   * @return {number}
    */
-  indexOf: function () {
+  indexOf: function (array, value, fromIndex = 0) {
+    if (fromIndex >= 0) {
+      for (let i = fromIndex; i < array.length; i++) {
+        if (value == array[i]) {
+          return i
+        }
+      }
+      return -1
+    } else {
+      for (let i = array.length + fromIndex; i >= 0; i--) {
+        if (value == array[i]) {
+          return i
+        }
+      }
+      return -1
+    }
 
+  },
+
+
+  /**去除数组array中的最后一个元素
+   * @param {array} array
+   * @return {array}
+   */
+  initial: function (array) {
+    let res = []
+    for (let i = 0; i < array.length - 1; i++) {
+      res.push(array[i])
+    }
+    return res
+  },
+
+  /**创建一个给定数组的交集的数组。
+   * @param {...array} array
+   * @return {array}
+   */
+  intersection: function (array) {
+    let res = []
+    let flag = 1
+    for (let i = 0; i < array[0].length; i++) {
+      for (let j = 1; j < array.length; j++) {
+        if (!array[j].includes(array[0][i])) {
+          flag = 0
+          break;
+        }
+      }
+      if (flag) {
+        res.push(array[0][i])
+      }
+    }
+    return res
   },
 
   /**
    * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
-  initial: function () {
-
-  },
-
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
-  intersection: function () {
-
-  },
-
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
+   * @param {Array|Function|Object|string} [iteratee = _.identity]
+   * @return {array}
    */
   intersectionBy: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
+  /**这个方法类似 _.intersection，区别是它接受一个 comparator 调用比较arrays中的元素。结果值是从第一数组中选择。comparator 会传入两个参数：(arrVal, othVal)。
+   * @param {...array} arrays
+   * @param {function} comparator
+   * @return {array}
    */
-  intersectionWith: function () {
+  intersectionWith: function (arrays, comparator) {
 
   },
 
@@ -1839,13 +1902,17 @@ var brightzoe = {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
+  /**转义string中的 "&", "<", ">", '"', "'", 和 "`" 字符为HTML实体字符。
+   * @param {string} string
+   * @return {string}
    */
-  escape: function () {
-
+  escape: function (string) {
+    string.replace(/&/g, "&amp;")
+    string.replace(/</g, "&lt;")
+    string.replace(/>/g, "&gt;")
+    string.replace(/"/g, "&quot;")
+    string.replace(/'/g, "&apos;")
+    string.replace(/`/g, "&grave;")
   },
 
   /**
@@ -2028,40 +2095,59 @@ var brightzoe = {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
+  /**转换string字符串中的 HTML 实体 &amp;, &lt;, &gt;, &quot;, &#39;, 和 &#96; 为对应的字符。
+   * @param {string} string
+   * @return {string}
    */
-  unescape: function () {
+  unescape: function (string) {
+    string.replace(/&amp;/g, "&")
+    string.replace(/&lt;/g, "<")
+    string.replace(/&gt;/g, ">")
+    string.replace(/&quot;/g, '"')
+    string.replace(/&apos;/g, "'")
+    string.replace(/&grave;/g, "`")
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
+  /**转换字符串string为 空格 分隔的大写单词
+   * @param {string} string
+   * @return {string}
    */
-  upperCase: function () {
-
+  upperCase: function (string) {
+    //先全变成大写，字符都用空格替换，然后减少空格为1个
+    var str = string.toUpperCase()
+    str = str.replace(/[^A-Z]+/g, " ")
+    str = str.trim() //去掉首尾空格
+    for (let i = 0; i < str.length; i++) { //间隔空格全部变为1个
+      if (str[i] == ' ' && str[i + 1] == ' ') {
+        str.substr(i + 1, 1)
+        i--
+      }
+    }
+    return str
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
+  /**转换字符串string的首字母为大写。
+   * @param {string} string
+   * @return {string} 
    */
-  upperFirst: function () {
-
+  upperFirst: function (string) {
+    //只有一个字符串，只需要改变首字符
+    if (string[0].charCodeAt() >= 97 && string[0].charCodeAt() <= 122) {
+      let first = String.fromCharCode(string[0].charCodeAt() - 32)
+      return first + string.slice(1)
+    }
+    return string
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
+  /**拆分字符串string中的词为数组.
+   * @param {string} string
+   * @param {RegExp / string} pattern
+   * @return {array} 
    */
-  words: function () {
-
+  words: function (string, pattern = /\w+/g) {
+    return string.match(pattern)
+    //指定字符串匹配指定文本内容,返回数组
   },
 
   /**
@@ -2082,13 +2168,57 @@ var brightzoe = {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
+  /**创建一个包含从 start 到 end，但不包含 end 本身范围数字的数组。 如果 start 是负数，而 end 或 step 没有指定:那么 step 为 -1 。 如果 end 没有指定，start 设置为 0。 如果 end 小于 start，会创建一个空数组，除非指定了 step。
+   * @param {number} [start = 0]
+   * @param {number} end
+   * @param {number} [step]
+   * @return {array}
    */
-  range: function () {
+  range: function (start, end, step) {
+    //输入一位数想要什么结果，输入两位数要什么结果
+    if (end == undefined && step == undefined) {
+      //只输入一个数，区分正数和负数
+      end = start
+      start = 0
+      if (end > 0) {
+        step = 1
+      } else {
+        step = -1
+      }
+    }
+    if (step == undefined) {
+      //只输入两位数
+      if (start < end) {
+        step = 1
+      } else {
+        step = -1
+      }
+    }
 
+    //已经将上面情况全部处理为正常三个数
+    if (start == end) {
+      return []
+    }
+
+    let result = [start]
+    let i = 0
+    //是增序还是降序
+    if (step > 0) {
+      while (result[i] + step < end) {
+        result.push(result[i] + step)
+        i++
+      }
+    } else if (step < 0) {
+      while (result[i] + step > end) {
+        result.push(result[i] + step)
+        i++
+      }
+    } else {
+      result.length = Math.abs(end - start)
+      result.fill(start)
+    }
+
+    return result
   },
 
   /**
