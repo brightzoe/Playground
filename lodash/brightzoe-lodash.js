@@ -298,7 +298,7 @@ var brightzoe = {
   join: function (array, separator = ',') {
     let res = ''
     for (let i = 0; i < array.length - 1; i++) {
-      res += array[i] + separator
+      res = res + array[i] + separator
     }
     res += array[array.length - 1]
     return res
@@ -342,811 +342,548 @@ var brightzoe = {
     return array[n]
   },
 
-  /**
+  /**移除数组array中所有和给定值相等的元素，使用 SameValueZero 进行全等比较。
    * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
+   * @param {...*} [values]
+   * @return {array}
    */
-  pull: function () {
-
+  pull: function (array, ...values) {
+    for (let i = 0; i < array.length; i++) {
+      for (let j = 0; j < values.length; j++) {
+        if (array[i] == values[j] || (array[i] !== array[i] && values[j] !== values[j])) {
+          array.splice(i, 1)
+          i--
+        }
+      }
+    }
+    return array
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
-  pullAll: function () {
 
+  pullAll: function (array, values) {
+    for (let i = 0; i < array.length; i++) {
+      for (let j = 0; j < values.length; j++) {
+        if (array[i] == values[j] || (array[i] !== array[i] && values[j] !== values[j])) {
+          array.splice(i, 1)
+          i--
+        }
+      }
+    }
+    return array
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   pullAllBy: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   pullAllWith: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
-  reverse: function () {
 
+  reverse: function (array) {
+    //双指针
+    for (let i = 0, j = array.length - 1; i < j; i++, j--) {
+      [array[i], array[j]] = [array[j], array[i]]
+    }
+    return array
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
-  sortedIndex: function () {
 
+  sortedIndex: function (array, value) {
+    for (let i = 0; i < array.length; i++) {
+      if (array[i] >= value) {
+        return i
+      }
+    }
+    return array.length
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   sortedIndexBy: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
-  sortedIndexOf: function () {
 
+  sortedIndexOf: function (array, value) {
+    for (let i = 0; i < array.length; i++) {
+      if (array[i] == value || (array[i] !== array[i] && value !== value)) {
+        return i
+      }
+    }
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
-  sortedLastIndex: function () {
 
+  sortedLastIndex: function (array, value) {
+    for (let i = array.length - 1; i > 0; i--) {
+      if (array[i] <= array) {
+        return i + 1
+      }
+    }
+    return 0
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   sortedLastIndexBy: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
-  sortedLastIndexOf: function () {
+  //从右边开始，返回第一个遇到的索引
+  sortedLastIndexOf: function (array, value) {
+    for (let i = array.length - 1; i > 0; i--) {
+      if (array[i] == value || (array[i] !== array[i] && value !== value)) {
+        return i
+      }
+    }
+    return -1
+  },
+
+  //这个和uniq只是输入的数组的区别吗？？
+  sortedUniq: function (array) {
+    for (let i = 0; i < array.length; i++) {
+      for (let j = i + 1; j < array.length; j++) {
+        if (array[i] === array[j] || (array[i] !== array[i] && array[j] !== array[j])) {
+          array.splice(j, 1)
+        }
+      }
+    }
+    return array
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
-  sortedUniq: function () {
 
-  },
-
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
   sortedUniqBy: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
-  tail: function () {
-
+  tail: function (array) {
+    let res = []
+    for (let i = 1; i < array.length; i++) {
+      res.push(array[i])
+    }
+    return res
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
-  take: function () {
 
+  take: function (array, n = 1) {
+    let res = []
+    let i = 0
+    while (i < n) {
+      res.push(array[i])
+      i++
+    }
+    return res
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
-  takeRight: function () {
 
+  takeRight: function (array, n = 1) {
+    if (n >= array.length) {
+      return array
+    }
+    let res = []
+    let i = array.length - 1
+    let count = 0
+    while (count < n) {
+      res.unshift(array[i])
+      i--
+      count++
+    }
+    return res
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   takeRightWhile: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   takeWhile: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
-  union: function () {
 
+  union: function (...array) {
+    for (let i = 1; i < array.length; i++) {
+      for (let j = 0; j < array[i].length; j++) {
+        if (!array[0].includes(array[i][j])) {
+          array[0].push(array[i][j])
+        }
+      }
+    }
+    return array[0]
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   unionBy: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   unionWith: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
-  uniq: function () {
-
+  //去重
+  uniq: function (array) {
+    for (let i = 0; i < array.length; i++) {
+      for (let j = i + 1; j < array.length; j++) {
+        if (array[i] === array[j] || (array[i] !== array[i] && array[j] !== array[j])) {
+          array.splice(j, 1)
+        }
+      }
+    }
+    return array
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   uniqBy: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   uniqWith: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
-  unzip: function () {
 
+  unzip: function (array) {
+    let res = []
+    for (let i = 0; i < array[0].length; i++) {
+      res[i] = []
+      for (let j = 0; j < array.length; j++) {
+        res[i][j] = array[j][i]
+      }
+    }
+    return res
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   unzipWith: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+  //断点
   without: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   xor: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   xorBy: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   xorWith: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
-  zip: function () {
 
+  zip: function (...arrays) {
+    //二维数组的声明
+    let res = []
+    for (let i = 0; i < arrays[0].length; i++) {
+      res[i] = []
+      for (let j = 0; j < arrays.length; j++) {
+        res[i][j] = arrays[j][i]
+      }
+
+    }
+    return res
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
-  zipObject: function () {
 
+  zipObject: function (props = [], values = []) {
+    var res = {}
+    for (let i = 0; i < props.length; i++) {
+      res[props[i]] = values[i]
+    }
+    return res
   },
-  /**
-   * @param {} 
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   zipObjectDeep: function () {
 
   },
-  /**
-   * @param {} 
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   zipWith: function () {
 
   },
-  /**
-   * @param {} 
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   countBy: function () {
 
   },
-  /**
-   * @param {} 
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   every: function () {
 
   },
-  /**
-   * @param {} 
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   filter: function () {
 
   },
-  /**返回符合条件的第一个元素。
-   * @param {Array|Object}collection
-   * @param {function}predicate
-   * @param {number}fromIndex
-   * @return {*}
-   */
-  find: function (collection, predicate = _.identity, fromIndex = 0) {
+
+  //返回符合条件的第一个元素。
+  find: function () {
 
   },
-  /**
-   * @param {} 
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   findLast: function () {
 
   },
-  /**
-   * @param {} 
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   flatMap: function () {
 
   },
-  /**
-   * @param {array/object} collection
-   * @param {function} [predicate=_.identity]
-   * @param {number} [fromIndex=0]
-   * @return {*}
-   */
+
   flatMapDeep: function () {
 
   },
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   flatMapDepth: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   forEach: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   forEachRight: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   groupBy: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   includes: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   invokeMap: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   keyBy: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   map: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   orderBy: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   partition: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   reduce: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   reduceRight: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   reject: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   sample: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   sampleSize: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   shuffle: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   size: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   some: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   sortBy: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   defer: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   delay: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   castArray: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   conformsTo: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   eq: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   gt: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   gte: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isArguments: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isArray: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isArrayBuffer: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isArrayLike: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isArrayLikeObject: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isBoolean: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isDate: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isElement: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isEmpty: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isEqual: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isEqualWith: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isError: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isFinite: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isFunction: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isInteger: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isLength: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isMap: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isMatch: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isMatchWith: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isNative: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isNil: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isNumber: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isObject: function () {
 
   },
@@ -1160,92 +897,52 @@ var brightzoe = {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isPlainObject: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isRegExp: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isSafeInteger: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isSet: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isString: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isSymbol: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isTypedArray: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isUndefined: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isWeakMap: function () {
 
   },
 
-  /**
-   * @param {array} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isWeakSet: function () {
 
   },
@@ -1281,630 +978,350 @@ var brightzoe = {
     }
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   lt: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   lte: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   toArray: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   toFinite: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   toInteger: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   toLength: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   toNumber: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   assign: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   toSafeInteger: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   add: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   ceil: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   divide: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   floor: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   max: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   maxBy: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   mean: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   meanBy: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   min: function () {
 
   },
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   minBy: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   multiply: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   round: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   subtract: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   sum: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   sumBy: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   clamp: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   inRange: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   random: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   assignIn: function () {
 
   },
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   at: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   defaults: function () {
 
   },
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   defaultsDeep: function () {
 
   },
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   findKey: function () {
 
   },
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   findLastKey: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   forIn: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   forInRight: function () {
 
   },
 
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   forOwn: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   forOwnRight: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   functions: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   functionsIn: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   get: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   has: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   hasIn: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   invert: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   invertBy: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   invoke: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   keys: function () {
 
   },
 
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   keysIn: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   mapKeys: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   mapValues: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   merge: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   mergeWith: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   omit: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   omitBy: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   pick: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   pickBy: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   result: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   set: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   setWith: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   toPairs: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   toPairsIn: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   transform: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   upset: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   update: function () {
 
   },
 
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   updateWith: function () {
 
   },
 
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   values: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   valuesIn: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   camelCase: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   capitalize: function () {
 
   },
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   deburr: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   endsWith: function () {
 
   },
@@ -1922,182 +1339,102 @@ var brightzoe = {
     string.replace(/`/g, "&grave;")
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   escapeRegExp: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   kebabCase: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   lowerCase: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   lowerFirst: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   pad: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   padEnd: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   padStart: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   parseInt: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   repeat: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   replace: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   snakeCase: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   split: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   startCase: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   startsWith: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   toLower: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   toUpper: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   trim: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   trimEnd: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   trimStart: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   truncate: function () {
 
   },
@@ -2157,20 +1494,12 @@ var brightzoe = {
     //指定字符串匹配指定文本内容,返回数组
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   bindAll: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   defaultTo: function () {
 
   },
@@ -2228,254 +1557,142 @@ var brightzoe = {
     return result
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   rangeRight: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   mixin: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   times: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   toPath: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   uniqueId: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   cloneDeep: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   identity: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   concat: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   pullAt: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   matches: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   property: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   ary: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   unary: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   negate: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   once: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   spread: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   curry: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   memoize: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   flip: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   conforms: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   constant: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   flow: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   method: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   methodOf: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   nthArg: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   propertyOf: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   parseJson: function () {
 
   },
 
-  /**
-   * @param {} 
-   * @param {} 
-   * @return {}
-   */
+
   stringifyJson: function () {
 
   }
