@@ -468,6 +468,9 @@ var brightzoe = {
 
 
   take: function (array, n = 1) {
+    if (n >= array.length) {
+      return array
+    }
     let res = []
     let i = 0
     while (i < n) {
@@ -564,14 +567,35 @@ var brightzoe = {
 
   },
 
-  //断点
-  without: function () {
 
+  without: function (array, ...values) {
+    let res = []
+    for (let ans of array) {
+      if (!values.includes(ans)) {
+        res.push(ans)
+      }
+
+    }
+    return res
   },
 
-
-  xor: function () {
-
+  //求并集
+  xor: function (...arrays) {
+    let ary = []
+    for (let ans of arrays) {
+      ary = ary.concat(ans)
+    }
+    for (let i = 0; i < ary.length; i++) {
+      for (let j = i + 1; j < ary.length; j++) {
+        if (ary[i] == ary[j]) {
+          ary.splice(i, 1)
+          ary.splice(j - 1, 1)
+          i--
+          j--
+        }
+      }
+    }
+    return ary
   },
 
 
@@ -664,8 +688,18 @@ var brightzoe = {
   },
 
 
-  includes: function () {
-
+  includes: function (collection, value, fromIndex = 0) {
+    fromIndex = fromIndex >= 0 ? fromIndex : collection.length + fromIndex
+    if (typeof (collection) == 'object') {
+      //变成只有属性值的数组
+      collection = Object.values(collection)
+    }
+    for (let i = fromIndex; i < collection.length; i++) {
+      if ((value == collection[i]) || (value == collection.slice(i, i + value.length))) {
+        return true
+      }
+    }
+    return false
   },
 
 
@@ -710,7 +744,7 @@ var brightzoe = {
 
 
   sample: function () {
-
+    //random
   },
 
 
@@ -724,8 +758,12 @@ var brightzoe = {
   },
 
 
-  size: function () {
-
+  size: function (collection) {
+    if (typeof (collection) == "object") {
+      return Object.keys(collection).length
+    } else {
+      return collection.length
+    }
   },
 
 
@@ -749,8 +787,17 @@ var brightzoe = {
   },
 
 
-  castArray: function () {
+  castArray: function (value) {
+    //如何判断没有输入参数还是参数是undefined
+    //用aruments.length
+    if (!arguments.length) {
+      return []
+    }
+    if (typeof value == "array") {
+      return value
+    }
 
+    return [value]
   },
 
 
@@ -759,18 +806,21 @@ var brightzoe = {
   },
 
 
-  eq: function () {
-
+  eq: function (value, other) {
+    if (value !== value && other !== other) {
+      return true
+    }
+    return value === other
   },
 
 
-  gt: function () {
-
+  gt: function (value, other) {
+    return value > other
   },
 
 
-  gte: function () {
-
+  gte: function (value, other) {
+    return value >= other
   },
 
 
@@ -820,7 +870,7 @@ var brightzoe = {
 
 
   isEqual: function () {
-
+    //深对比
   },
 
 
@@ -874,8 +924,11 @@ var brightzoe = {
   },
 
 
-  isNil: function () {
-
+  isNil: function (value) {
+    if (value === null || value === undefined) {
+      return true
+    }
+    return false
   },
 
 
@@ -888,11 +941,7 @@ var brightzoe = {
 
   },
 
-  /**
-   * @param {object} array
-   * @param {} [size]
-   * @return {array[][]}
-   */
+
   isObjectLike: function () {
 
   },
@@ -933,8 +982,8 @@ var brightzoe = {
   },
 
 
-  isUndefined: function () {
-
+  isUndefined: function (value) {
+    return value === undefined
   },
 
 
@@ -979,18 +1028,33 @@ var brightzoe = {
   },
 
 
-  lt: function () {
-
+  lt: function (value, other) {
+    return value < other
   },
 
 
-  lte: function () {
-
+  lte: function (value, other) {
+    return value <= other
   },
 
 
-  toArray: function () {
-
+  toArray: function (value) {
+    if (value == undefined) { //null&&undefined
+      return []
+    }
+    if (typeof (value) == "object") {
+      return Object.values(value)
+    } else if (typeof (value) == "array") {
+      return value
+    } else if (typeof (value) == "string") {
+      let res = []
+      for (let str of value) {
+        res.push(str)
+      }
+      return res
+    } else {
+      return []
+    }
   },
 
 
@@ -1024,28 +1088,37 @@ var brightzoe = {
   },
 
 
-  add: function () {
-
+  add: function (augend, addend) {
+    return augend + addend
   },
 
 
-  ceil: function () {
-
+  ceil: function (number, precision = 0) {
+    // p = -1 number = number - number % 10 + 10
+    // p = 0 number = number - number % 1 + 1
+    // p = 1 number = number - number % 0.1 + 0.1
+    let exp = 10 ** (-precision)
+    return number - number % exp + exp
   },
 
 
-  divide: function () {
-
+  divide: function (dividend, divisor) {
+    return dividend / divisor
   },
 
 
-  floor: function () {
-
+  floor: function (number, precision = 0) {
+    let exp = 10 ** (-precision)
+    return number - number % exp
   },
 
 
-  max: function () {
-
+  max: function (array) {
+    let max = array[0]
+    for (let i = 0; i < array.length; i++) {
+      max = max > array[i] ? max : array[i]
+    }
+    return max
   },
 
 
@@ -1054,8 +1127,12 @@ var brightzoe = {
   },
 
 
-  mean: function () {
-
+  mean: function (array) {
+    let sum = 0
+    for (let i = 0; i < array.length; i++) {
+      sum += array[i]
+    }
+    return sum / array.length
   },
 
 
@@ -1064,8 +1141,11 @@ var brightzoe = {
   },
 
 
-  min: function () {
-
+  min: function (array) {
+    let min = array[0]
+    for (let i = 0; i < array.length; i++) {
+      mean = mean < array[i] ? mean : array[i]
+    }
   },
 
   minBy: function () {
@@ -1073,23 +1153,32 @@ var brightzoe = {
   },
 
 
-  multiply: function () {
-
+  multiply: function (multiplier, multiplicand) {
+    return multiplicand * multiplier
   },
 
 
-  round: function () {
+  round: function (number, precision = 0) {
+    let exp = 10 ** (-precision)
+    if (number - this.floor(number, precision) < 0.5 * exp) {
 
+      return this.floor(number, precision)
+    }
+    return this.ceil(number, precision)
   },
 
 
-  subtract: function () {
-
+  subtract: function (minuend, subtrahend) {
+    return minuend - subtrahend
   },
 
 
-  sum: function () {
-
+  sum: function (array) {
+    let sum = 0
+    for (let ary of array) {
+      sum += ary
+    }
+    return sum
   },
 
 
@@ -1103,8 +1192,17 @@ var brightzoe = {
   },
 
 
-  inRange: function () {
-
+  inRange: function (number, start = 0, end) {
+    if (end == undefined) {
+      end = start
+      start = 0
+    }
+    if (start > end) {
+      let temp = start
+      start = end
+      end = temp
+    }
+    return number >= start && number < end
   },
 
 
@@ -1117,13 +1215,28 @@ var brightzoe = {
 
   },
 
-  at: function () {
-
+  at: function (object, paths) {
+    let res = []
+    for (let i = 0; i < paths.length; i++) {
+      // res.push(object[path[i]])
+    }
+    return res
   },
 
 
-  defaults: function () {
-
+  defaults: function (object, ...sources) {
+    let source = {}
+    for (let i in sources) {
+      //对象合并
+      Object.assign(source, sources[i])
+    }
+    let array = Object.keys(source)
+    for (let ary of array) {
+      if (ary in object == false) {
+        object[ary] = source[ary]
+      }
+    }
+    return object
   },
 
   defaultsDeep: function () {
@@ -1185,8 +1298,14 @@ var brightzoe = {
   },
 
 
-  invert: function () {
-
+  invert: function (object) {
+    let res = {}
+    let array = Object.values(object)
+    let array2 = Object.keys(object)
+    for (let i = 0; i < array.length; i++) {
+      res[array[i]] = array2[i]
+    }
+    return res
   },
 
 
@@ -1241,8 +1360,12 @@ var brightzoe = {
   },
 
 
-  pick: function () {
-
+  pick: function (object, props) {
+    let res = {}
+    for (let prop of props) {
+      res[prop] = object[prop]
+    }
+    return res
   },
 
 
@@ -1298,13 +1421,24 @@ var brightzoe = {
 
 
 
-  values: function () {
-
+  values: function (object) {
+    //要去掉不可枚举的
+    let obj = Object(object)
+    let ary = []
+    for (let keys in obj) {
+      ary.push(obj[keys])
+    }
+    return ary
   },
 
 
-  valuesIn: function () {
-
+  valuesIn: function (object) {
+    let obj = Object(object);
+    let ary = []
+    for (let keys in obj) {
+      ary.push(obj[keys])
+    }
+    return ary
   },
 
 
