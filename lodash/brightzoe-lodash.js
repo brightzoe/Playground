@@ -1146,6 +1146,7 @@ var brightzoe = {
     for (let i = 0; i < array.length; i++) {
       mean = mean < array[i] ? mean : array[i]
     }
+    return min
   },
 
   minBy: function () {
@@ -1404,7 +1405,7 @@ var brightzoe = {
   },
 
 
-  upset: function () {
+  unset: function () {
 
   },
 
@@ -1426,8 +1427,11 @@ var brightzoe = {
     let obj = Object(object)
     let ary = []
     for (let keys in obj) {
-      ary.push(obj[keys])
+      if (obj.hasOwnProperty(keys)) {
+        ary.push(obj[keys])
+      }
     }
+
     return ary
   },
 
@@ -1442,13 +1446,24 @@ var brightzoe = {
   },
 
 
-  camelCase: function () {
-
+  camelCase: function (string = '') {
+    string = string.replace(/[^a-zA-Z]/g, ' ') //非字母变成空格
+    let str = string.trim() //前后空格去掉
+    str = str.toLowerCase()
+    for (let i = 0; i < str.length; i++) {
+      if (str[i] == ' ' && str[i + 1].charCodeAt(0) >= 97) {
+        str = str.slice(0, i) + str[i + 1].toUpperCase() + str.slice(i + 2, str.length)
+      }
+    }
+    str.replace('/ /g', '')
+    return str
   },
 
 
-  capitalize: function () {
-
+  capitalize: function (string = '') {
+    string = string.toUpperCase()
+    string = string.slice(0, 1) + string.slice(1, string.length).toLowerCase()
+    return string
   },
 
   deburr: function () {
@@ -1456,8 +1471,11 @@ var brightzoe = {
   },
 
 
-  endsWith: function () {
-
+  endsWith: function (string = '', target, position = string.length) {
+    if (string[position - 1] == target) {
+      return true
+    }
+    return false
   },
 
   /**转义string中的 "&", "<", ">", '"', "'", 和 "`" 字符为HTML实体字符。
@@ -1479,47 +1497,89 @@ var brightzoe = {
   },
 
 
-  kebabCase: function () {
-
+  kebabCase: function (string = '') {
+    string = string.replace(/[^a-zA-Z]/g, ' ')
+    string = string.trim().toLowerCase()
+    string = string.replace(/ +/g, '-')
+    return string
   },
 
 
-  lowerCase: function () {
+  lowerCase: function (string = '') {
+    if (/[^a-zA-Z]/.exec(string) == null) {
+      for (var i = 1; i < string.length; i++) {
+        if (string[i].charCodeAt(0) <= 90 && string[i].charCodeAt(0) >= 65) {
+          var string = string.slice(0, i) + ' ' + string.slice(i, i + 1).toLowerCase() + string.slice(i + 1, string.length)
+        }
 
+      }
+    }
+
+    string = string.replace(/[^a-zA-Z]+/g, ' ')
+    string = string.trim().toLowerCase()
+    return string
   },
 
 
-  lowerFirst: function () {
-
+  lowerFirst: function (string = '') {
+    var str = string[0].toLowerCase() + string.slice(1, string.length)
+    return str
   },
 
 
-  pad: function () {
-
+  pad: function (string = '', length = 0, chars = ' ') {
+    while (true) {
+      if (string.length < length) {
+        string += chars
+      } else {
+        break;
+      }
+      if (string.length < length) {
+        string = chars + string
+      } else {
+        break;
+      }
+    }
+    return string.slice(0, length)
   },
 
 
-  padEnd: function () {
-
+  padEnd: function (string = '', length = 0, chars = ' ') {
+    while (string.length < length) {
+      string += chars
+    }
+    return string.slice(0, length)
   },
 
 
-  padStart: function () {
-
+  padStart: function (string = '', length = 0, chars = ' ') {
+    var char = ''
+    for (var i = chars.length - 1; i >= 0; i--) {
+      char += chars[i]
+    }
+    while (string.length < length) {
+      string = char + string
+    }
+    return string.slice(string.length - length, string.length)
   },
 
 
-  parseInt: function () {
-
+  parseInt: function (string, radix = 10) {
+    var num = +string
+    return num.toString(radix)
   },
 
 
-  repeat: function () {
-
+  repeat: function (string = '', n) {
+    var res = ''
+    for (var i = 0; i < n; i++) {
+      res += str
+    }
+    return res
   },
 
 
-  replace: function () {
+  replace: function (string = '', pattern, replacement) {
 
   },
 
