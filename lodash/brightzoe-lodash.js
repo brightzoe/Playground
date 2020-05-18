@@ -6,11 +6,11 @@ var brightzoe = {
    * @return {array[][]}
    */
   chunk: function (array, size = 1) {
-    let result = []
+    let result = [];
     for (let i = 0, j = 0; i < array.length; i += size, j++) {
-      result[j] = array.slice(i, i + size)
+      result[j] = array.slice(i, i + size);
     }
-    return result
+    return result;
   },
 
   /**将数组中的假值去除，生成一个新数组。假值包括false，null，0，''，undefined和NaN。
@@ -18,40 +18,41 @@ var brightzoe = {
    * @return {array}
    */
   compact: function (array) {
-    let result = []
+    let result = [];
     for (let i = 0; i < array.length; i++) {
       if (array[i] != false && array[i] != null && array[i] === array[i]) {
-        result.push(array[i])
+        result.push(array[i]);
       }
     }
-    return result
+    return result;
   },
 
   /**创建一个新数组，其中的值为array里面，但在values里面没有出现的值，值的顺序与array一致。
    * @param {array} array
-   * @param {...array} [values]//支持多个数组
+   * @param {...array} [value]//支持多个数组
    * @return {array}
    */
-  difference: function (array, values) {
-    let value = []
-    let result = []
-    for (let i = 1; i < arguments.length; i++) { //小池子拼成大池子
-      value = value.concat(arguments[i])
+  difference: function (array, ...value) {
+    let value = [];
+    let result = [];
+    for (let i = 1; i < arguments.length; i++) {
+      //小池子拼成大池子
+      value = value.concat(arguments[i]);
     }
 
     for (ans of array) {
-      let flag = 1
+      let flag = 1;
       for (let i = 0; i < value.length; i++) {
         if (ans == value[i]) {
-          flag = 0
+          flag = 0;
           continue;
         }
       }
       if (flag) {
-        result.push(ans)
+        result.push(ans);
       }
     }
-    return result
+    return result;
   },
 
   /**
@@ -60,9 +61,7 @@ var brightzoe = {
    * @param {function} [iteratee]
    * @return {array}
    */
-  differenceBy: function (array, values, iteratee) {
-
-  },
+  differenceBy: function (array, values, iteratee) {},
 
   /**
    * @param {array} array
@@ -70,9 +69,7 @@ var brightzoe = {
    * @param {function} [comparator]
    * @return {array}
    */
-  differenceWith: function (array, [values], [comparator]) {
-
-  },
+  differenceWith: function (array, [values], [comparator]) {},
 
   /**把array的前size个元素删去，创建一个数组片段。
    * @param {array} array
@@ -80,11 +77,11 @@ var brightzoe = {
    * @return {array}
    */
   drop: function (array, n = 1) {
-    let result = []
+    let result = [];
     for (let i = n; i < array.length; i++) {
-      result.push(array[i])
+      result.push(array[i]);
     }
-    return result
+    return result;
   },
 
   /**创建一个切片数组，去除array尾部的n个元素。（n默认值为1。）
@@ -94,10 +91,9 @@ var brightzoe = {
    */
   dropRight: function (array, n = 1) {
     if (n == 0) {
-      return array
+      return array;
     }
-    return array.slice(0, -n) //从右边裁切
-
+    return array.slice(0, -n); //从右边裁切
   },
 
   /**创建一个切片数组，去除array中从 predicate 返回假值开始到尾部的部分。predicate 会传入3个参数： (value, index, array)。
@@ -105,18 +101,14 @@ var brightzoe = {
    * @param {function} [predicate=_.identity]
    * @return {array}
    */
-  dropRightWhile: function () {
-
-  },
+  dropRightWhile: function () {},
 
   /**创建一个切片数组，去除array中从起点开始到 predicate 返回假值结束部分。predicate 会传入3个参数： (value, index, array)。
    * @param {array} array
    * @param {function} [predicate=_.identity]
    * @return {array}
    */
-  dropWhile: function () {
-
-  },
+  dropWhile: function () {},
 
   /**将数组index为start到end的元素全部替换为value。包含start，不包含end。
    * @param {array} array
@@ -127,29 +119,24 @@ var brightzoe = {
    */
   fill: function (array, value, start = 0, end = array.length) {
     for (let i = start; i < end; i++) {
-      array[i] = value
+      array[i] = value;
     }
-    return array
+    return array;
   },
-
 
   /**该方法返回第一个通过 predicate 判断为真值的元素的索引值（index），而不是元素本身。
    * @param {array} array
    * @param { Array | Function | Object | string} [predicate = _.identity]
    * @return {number}
    */
-  findIndex: function () {
-
-  },
+  findIndex: function () {},
 
   /**这个方式类似 _.findIndex， 区别是它是从右到左的迭代集合array中的元素。
    * @param {array} array
    * @param { Array | Function | Object | string} [predicate = _.identity]
    * @return {number}
    */
-  findLastIndex: function () {
-
-  },
+  findLastIndex: function () {},
 
   /**减少一级array嵌套深度。
    * 把array[i] 是数组的解放掉，空数组concat(array[i])
@@ -157,11 +144,11 @@ var brightzoe = {
    * @return {array}
    */
   flatten: function (array) {
-    let res = []
+    let res = [];
     for (let ans of array) {
-      res = res.concat(ans)
+      res = res.concat(ans);
     }
-    return res
+    return res;
   },
 
   /**将array递归为一维数组。
@@ -169,18 +156,17 @@ var brightzoe = {
    * @return {array}
    */
   flattenDeep: function flattenDeep(array) {
-    let res = []
+    let res = [];
     for (let ans of array) {
-      res = res.concat(ans)
+      res = res.concat(ans);
     }
     for (let ans of res) {
       //递归，如果里面还有数组就继续减少一级深度。
       if (Array.isArray(ans)) {
-        return flattenDeep(res)
+        return flattenDeep(res);
       }
     }
-    return res
-
+    return res;
   },
 
   /**根据 depth 递归减少 array 的嵌套层级
@@ -191,13 +177,13 @@ var brightzoe = {
   flattenDepth: function (array, depth) {
     for (let i = 0; i < depth; i++) {
       //深度是几就减少几次
-      let res = []
+      let res = [];
       for (let ans of array) {
-        res = res.concat(ans)
+        res = res.concat(ans);
       }
-      array = res
+      array = res;
     }
-    return array
+    return array;
   },
 
   /**
@@ -205,13 +191,13 @@ var brightzoe = {
    * @return {object}
    */
   fromPairs: function (pairs) {
-    let res = {}
-    let key = ''
+    let res = {};
+    let key = "";
     for (let i = 0; i < pairs.length; i++) {
-      key = pairs[i][0]
-      res[key] = pairs[i][1]
+      key = pairs[i][0];
+      res[key] = pairs[i][1];
     }
-    return res
+    return res;
   },
 
   /**输出数组的第一个元素。
@@ -219,7 +205,7 @@ var brightzoe = {
    * @return {*}
    */
   head: function (array) {
-    return array[0]
+    return array[0];
   },
 
   /**使用 SameValueZero 等值比较，返回首次 value 在数组array中被找到的 索引值， 如果 fromIndex 为负值，将从数组array尾端索引进行匹配。
@@ -231,24 +217,22 @@ var brightzoe = {
   indexOf: function (array, value, fromIndex = 0) {
     for (let i = fromIndex; i < array.length; i++) {
       if (value == array[i] || (value !== value && array[i] !== array[i])) {
-        return i
+        return i;
       }
     }
-    return -1
-
+    return -1;
   },
-
 
   /**去除数组array中的最后一个元素
    * @param {array} array
    * @return {array}
    */
   initial: function (array) {
-    let res = []
+    let res = [];
     for (let i = 0; i < array.length - 1; i++) {
-      res.push(array[i])
+      res.push(array[i]);
     }
-    return res
+    return res;
   },
 
   /**创建一个给定数组的交集的数组。
@@ -256,20 +240,20 @@ var brightzoe = {
    * @return {array}
    */
   intersection: function (...array) {
-    let res = []
-    let flag = 1
+    let res = [];
+    let flag = 1;
     for (let i = 0; i < array[0].length; i++) {
       for (let j = 1; j < array.length; j++) {
         if (!array[j].includes(array[0][i])) {
-          flag = 0
+          flag = 0;
           break;
         }
       }
       if (flag) {
-        res.push(array[0][i])
+        res.push(array[0][i]);
       }
     }
-    return res
+    return res;
   },
 
   /**
@@ -277,31 +261,27 @@ var brightzoe = {
    * @param {Array|Function|Object|string} [iteratee = _.identity]
    * @return {array}
    */
-  intersectionBy: function () {
-
-  },
+  intersectionBy: function () {},
 
   /**这个方法类似 _.intersection，区别是它接受一个 comparator 调用比较arrays中的元素。结果值是从第一数组中选择。comparator 会传入两个参数：(arrVal, othVal)。
    * @param {...array} arrays
    * @param {function} comparator
    * @return {array}
    */
-  intersectionWith: function () {
-
-  },
+  intersectionWith: function () {},
 
   /**将 array 中的所有元素转换为由 separator 分隔的字符串。
    * @param {array} array
    * @param {string} separator
    * @return {string}
    */
-  join: function (array, separator = ',') {
-    let res = ''
+  join: function (array, separator = ",") {
+    let res = "";
     for (let i = 0; i < array.length - 1; i++) {
-      res = res + array[i] + separator
+      res = res + array[i] + separator;
     }
-    res += array[array.length - 1]
-    return res
+    res += array[array.length - 1];
+    return res;
   },
 
   /**获取array中的最后一个元素。
@@ -312,7 +292,7 @@ var brightzoe = {
     // if (array.length == 0) {
     //   return undefined
     // }不需要
-    return array[array.length - 1]
+    return array[array.length - 1];
   },
 
   /**这个方法类似 _.indexOf ，区别是它是从右到左遍历array的元素。
@@ -324,10 +304,10 @@ var brightzoe = {
   lastIndexOf: function (array, value, fromIndex = array.length - 1) {
     for (let i = fromIndex; i >= 0; i--) {
       if (value == array[i] || (value !== value && array[i] !== array[i])) {
-        return i
+        return i;
       }
     }
-    return -1
+    return -1;
   },
 
   /**获取array数组的第n个元素。如果n为负数，则返回从数组结尾开始的第n个元素.
@@ -337,9 +317,9 @@ var brightzoe = {
    */
   nth: function (array, n = 0) {
     if (n < 0) {
-      return array[array.length + n]
+      return array[array.length + n];
     }
-    return array[n]
+    return array[n];
   },
 
   /**移除数组array中所有和给定值相等的元素，使用 SameValueZero 进行全等比较。
@@ -350,651 +330,432 @@ var brightzoe = {
   pull: function (array, ...values) {
     for (let i = 0; i < array.length; i++) {
       for (let j = 0; j < values.length; j++) {
-        if (array[i] == values[j] || (array[i] !== array[i] && values[j] !== values[j])) {
-          array.splice(i, 1)
-          i--
+        if (
+          array[i] == values[j] ||
+          (array[i] !== array[i] && values[j] !== values[j])
+        ) {
+          array.splice(i, 1);
+          i--;
         }
       }
     }
-    return array
+    return array;
   },
-
 
   pullAll: function (array, values) {
     for (let i = 0; i < array.length; i++) {
       for (let j = 0; j < values.length; j++) {
-        if (array[i] == values[j] || (array[i] !== array[i] && values[j] !== values[j])) {
-          array.splice(i, 1)
-          i--
+        if (
+          array[i] == values[j] ||
+          (array[i] !== array[i] && values[j] !== values[j])
+        ) {
+          array.splice(i, 1);
+          i--;
         }
       }
     }
-    return array
+    return array;
   },
 
+  pullAllBy: function () {},
 
-  pullAllBy: function () {
-
-  },
-
-
-  pullAllWith: function () {
-
-  },
-
+  pullAllWith: function () {},
 
   reverse: function (array) {
     //双指针
     for (let i = 0, j = array.length - 1; i < j; i++, j--) {
-      [array[i], array[j]] = [array[j], array[i]]
+      [array[i], array[j]] = [array[j], array[i]];
     }
-    return array
+    return array;
   },
-
 
   sortedIndex: function (array, value) {
     for (let i = 0; i < array.length; i++) {
       if (array[i] >= value) {
-        return i
+        return i;
       }
     }
-    return array.length
+    return array.length;
   },
 
-
-  sortedIndexBy: function () {
-
-  },
-
+  sortedIndexBy: function () {},
 
   sortedIndexOf: function (array, value) {
     for (let i = 0; i < array.length; i++) {
       if (array[i] == value || (array[i] !== array[i] && value !== value)) {
-        return i
+        return i;
       }
     }
   },
-
 
   sortedLastIndex: function (array, value) {
     for (let i = array.length - 1; i > 0; i--) {
       if (array[i] <= array) {
-        return i + 1
+        return i + 1;
       }
     }
-    return 0
+    return 0;
   },
 
-
-  sortedLastIndexBy: function () {
-
-  },
+  sortedLastIndexBy: function () {},
 
   //从右边开始，返回第一个遇到的索引
   sortedLastIndexOf: function (array, value) {
     for (let i = array.length - 1; i > 0; i--) {
       if (array[i] == value || (array[i] !== array[i] && value !== value)) {
-        return i
+        return i;
       }
     }
-    return -1
+    return -1;
   },
 
   //这个和uniq只是输入的数组的区别吗？？
   sortedUniq: function (array) {
     for (let i = 0; i < array.length; i++) {
       for (let j = i + 1; j < array.length; j++) {
-        if (array[i] === array[j] || (array[i] !== array[i] && array[j] !== array[j])) {
-          array.splice(j, 1)
+        if (
+          array[i] === array[j] ||
+          (array[i] !== array[i] && array[j] !== array[j])
+        ) {
+          array.splice(j, 1);
         }
       }
     }
-    return array
-
+    return array;
   },
 
-
-  sortedUniqBy: function () {
-
-  },
+  sortedUniqBy: function () {},
 
   tail: function (array) {
-    let res = []
+    let res = [];
     for (let i = 1; i < array.length; i++) {
-      res.push(array[i])
+      res.push(array[i]);
     }
-    return res
+    return res;
   },
-
 
   take: function (array, n = 1) {
     if (n >= array.length) {
-      return array
+      return array;
     }
-    let res = []
-    let i = 0
+    let res = [];
+    let i = 0;
     while (i < n) {
-      res.push(array[i])
-      i++
+      res.push(array[i]);
+      i++;
     }
-    return res
+    return res;
   },
-
 
   takeRight: function (array, n = 1) {
     if (n >= array.length) {
-      return array
+      return array;
     }
-    let res = []
-    let i = array.length - 1
-    let count = 0
+    let res = [];
+    let i = array.length - 1;
+    let count = 0;
     while (count < n) {
-      res.unshift(array[i])
-      i--
-      count++
+      res.unshift(array[i]);
+      i--;
+      count++;
     }
-    return res
+    return res;
   },
 
+  takeRightWhile: function () {},
 
-  takeRightWhile: function () {
-
-  },
-
-
-  takeWhile: function () {
-
-  },
-
+  takeWhile: function () {},
 
   union: function (...array) {
     for (let i = 1; i < array.length; i++) {
       for (let j = 0; j < array[i].length; j++) {
         if (!array[0].includes(array[i][j])) {
-          array[0].push(array[i][j])
+          array[0].push(array[i][j]);
         }
       }
     }
-    return array[0]
+    return array[0];
   },
 
+  unionBy: function () {},
 
-  unionBy: function () {
-
-  },
-
-
-  unionWith: function () {
-
-  },
+  unionWith: function () {},
 
   //去重
   uniq: function (array) {
     for (let i = 0; i < array.length; i++) {
       for (let j = i + 1; j < array.length; j++) {
-        if (array[i] === array[j] || (array[i] !== array[i] && array[j] !== array[j])) {
-          array.splice(j, 1)
+        if (
+          array[i] === array[j] ||
+          (array[i] !== array[i] && array[j] !== array[j])
+        ) {
+          array.splice(j, 1);
         }
       }
     }
-    return array
+    return array;
   },
 
+  uniqBy: function () {},
 
-  uniqBy: function () {
-
-  },
-
-
-  uniqWith: function () {
-
-  },
-
+  uniqWith: function () {},
 
   unzip: function (array) {
-    let res = []
+    let res = [];
     for (let i = 0; i < array[0].length; i++) {
-      res[i] = []
+      res[i] = [];
       for (let j = 0; j < array.length; j++) {
-        res[i][j] = array[j][i]
+        res[i][j] = array[j][i];
       }
     }
-    return res
+    return res;
   },
 
-
-  unzipWith: function () {
-
-  },
-
+  unzipWith: function () {},
 
   without: function (array, ...values) {
-    let res = []
+    let res = [];
     for (let ans of array) {
       if (!values.includes(ans)) {
-        res.push(ans)
+        res.push(ans);
       }
-
     }
-    return res
+    return res;
   },
 
   //求并集
   xor: function (...arrays) {
-    let ary = []
+    let ary = [];
     for (let ans of arrays) {
-      ary = ary.concat(ans)
+      ary = ary.concat(ans);
     }
     for (let i = 0; i < ary.length; i++) {
       for (let j = i + 1; j < ary.length; j++) {
         if (ary[i] == ary[j]) {
-          ary.splice(i, 1)
-          ary.splice(j - 1, 1)
-          i--
-          j--
+          ary.splice(i, 1);
+          ary.splice(j - 1, 1);
+          i--;
+          j--;
         }
       }
     }
-    return ary
+    return ary;
   },
 
+  xorBy: function () {},
 
-  xorBy: function () {
-
-  },
-
-
-  xorWith: function () {
-
-  },
-
+  xorWith: function () {},
 
   zip: function (...arrays) {
     //二维数组的声明
-    let res = []
+    let res = [];
     for (let i = 0; i < arrays[0].length; i++) {
-      res[i] = []
+      res[i] = [];
       for (let j = 0; j < arrays.length; j++) {
-        res[i][j] = arrays[j][i]
+        res[i][j] = arrays[j][i];
       }
-
     }
-    return res
+    return res;
   },
-
 
   zipObject: function (props = [], values = []) {
-    var res = {}
+    var res = {};
     for (let i = 0; i < props.length; i++) {
-      res[props[i]] = values[i]
+      res[props[i]] = values[i];
     }
-    return res
+    return res;
   },
 
-  zipObjectDeep: function () {
+  zipObjectDeep: function () {},
 
-  },
+  zipWith: function () {},
 
-  zipWith: function () {
+  countBy: function () {},
 
-  },
+  every: function () {},
 
-  countBy: function () {
-
-  },
-
-  every: function () {
-
-  },
-
-  filter: function () {
-
-  },
+  filter: function () {},
 
   //返回符合条件的第一个元素。
-  find: function () {
+  find: function () {},
 
-  },
+  findLast: function () {},
 
-  findLast: function () {
+  flatMap: function () {},
 
-  },
+  flatMapDeep: function () {},
 
-  flatMap: function () {
+  flatMapDepth: function () {},
 
-  },
+  forEach: function () {},
 
-  flatMapDeep: function () {
+  forEachRight: function () {},
 
-  },
-
-  flatMapDepth: function () {
-
-  },
-
-
-  forEach: function () {
-
-  },
-
-
-  forEachRight: function () {
-
-  },
-
-
-  groupBy: function () {
-
-  },
-
+  groupBy: function () {},
 
   includes: function (collection, value, fromIndex = 0) {
-    fromIndex = fromIndex >= 0 ? fromIndex : collection.length + fromIndex
-    if (typeof (collection) == 'object') {
+    fromIndex = fromIndex >= 0 ? fromIndex : collection.length + fromIndex;
+    if (typeof collection == "object") {
       //变成只有属性值的数组
-      collection = Object.values(collection)
+      collection = Object.values(collection);
     }
     for (let i = fromIndex; i < collection.length; i++) {
-      if ((value == collection[i]) || (value == collection.slice(i, i + value.length))) {
-        return true
+      if (
+        value == collection[i] ||
+        value == collection.slice(i, i + value.length)
+      ) {
+        return true;
       }
     }
-    return false
+    return false;
   },
 
+  invokeMap: function () {},
 
-  invokeMap: function () {
+  keyBy: function () {},
 
-  },
+  map: function () {},
 
+  orderBy: function () {},
 
-  keyBy: function () {
+  partition: function () {},
 
-  },
+  reduce: function () {},
 
+  reduceRight: function () {},
 
-  map: function () {
-
-  },
-
-
-  orderBy: function () {
-
-  },
-
-
-  partition: function () {
-
-  },
-
-
-  reduce: function () {
-
-  },
-
-
-  reduceRight: function () {
-
-  },
-
-
-  reject: function () {
-
-  },
-
+  reject: function () {},
 
   sample: function () {
     //random
   },
 
+  sampleSize: function () {},
 
-  sampleSize: function () {
-
-  },
-
-
-  shuffle: function () {
-
-  },
-
+  shuffle: function () {},
 
   size: function (collection) {
-    if (typeof (collection) == "object") {
-      return Object.keys(collection).length
+    if (typeof collection == "object") {
+      return Object.keys(collection).length;
     } else {
-      return collection.length
+      return collection.length;
     }
   },
 
+  some: function () {},
 
-  some: function () {
+  sortBy: function () {},
 
-  },
+  defer: function () {},
 
-
-  sortBy: function () {
-
-  },
-
-
-  defer: function () {
-
-  },
-
-
-  delay: function () {
-
-  },
-
+  delay: function () {},
 
   castArray: function (value) {
     //如何判断没有输入参数还是参数是undefined
     //用aruments.length
     if (!arguments.length) {
-      return []
+      return [];
     }
     if (typeof value == "array") {
-      return value
+      return value;
     }
 
-    return [value]
+    return [value];
   },
 
-
-  conformsTo: function () {
-
-  },
-
+  conformsTo: function () {},
 
   eq: function (value, other) {
     if (value !== value && other !== other) {
-      return true
+      return true;
     }
-    return value === other
+    return value === other;
   },
-
 
   gt: function (value, other) {
-    return value > other
+    return value > other;
   },
-
 
   gte: function (value, other) {
-    return value >= other
+    return value >= other;
   },
 
+  isArguments: function () {},
 
-  isArguments: function () {
+  isArray: function () {},
 
-  },
+  isArrayBuffer: function () {},
 
+  isArrayLike: function () {},
 
-  isArray: function () {
+  isArrayLikeObject: function () {},
 
-  },
+  isBoolean: function () {},
 
+  isDate: function () {},
 
-  isArrayBuffer: function () {
+  isElement: function () {},
 
-  },
-
-
-  isArrayLike: function () {
-
-  },
-
-
-  isArrayLikeObject: function () {
-
-  },
-
-
-  isBoolean: function () {
-
-  },
-
-
-  isDate: function () {
-
-  },
-
-
-  isElement: function () {
-
-  },
-
-
-  isEmpty: function () {
-
-  },
-
+  isEmpty: function () {},
 
   isEqual: function () {
     //深对比
   },
 
+  isEqualWith: function () {},
 
-  isEqualWith: function () {
+  isError: function () {},
 
-  },
+  isFinite: function () {},
 
+  isFunction: function () {},
 
-  isError: function () {
+  isInteger: function () {},
 
-  },
+  isLength: function () {},
 
+  isMap: function () {},
 
-  isFinite: function () {
+  isMatch: function () {},
 
-  },
+  isMatchWith: function () {},
 
-
-  isFunction: function () {
-
-  },
-
-
-  isInteger: function () {
-
-  },
-
-
-  isLength: function () {
-
-  },
-
-
-  isMap: function () {
-
-  },
-
-
-  isMatch: function () {
-
-  },
-
-
-  isMatchWith: function () {
-
-  },
-
-
-  isNative: function () {
-
-  },
-
+  isNative: function () {},
 
   isNil: function (value) {
     if (value === null || value === undefined) {
-      return true
+      return true;
     }
-    return false
+    return false;
   },
 
+  isNumber: function () {},
 
-  isNumber: function () {
+  isObject: function () {},
 
-  },
+  isObjectLike: function () {},
 
+  isPlainObject: function () {},
 
-  isObject: function () {
+  isRegExp: function () {},
 
-  },
+  isSafeInteger: function () {},
 
+  isSet: function () {},
 
-  isObjectLike: function () {
+  isString: function () {},
 
-  },
+  isSymbol: function () {},
 
-
-  isPlainObject: function () {
-
-  },
-
-
-  isRegExp: function () {
-
-  },
-
-
-  isSafeInteger: function () {
-
-  },
-
-
-  isSet: function () {
-
-  },
-
-
-  isString: function () {
-
-  },
-
-
-  isSymbol: function () {
-
-  },
-
-
-  isTypedArray: function () {
-
-  },
-
+  isTypedArray: function () {},
 
   isUndefined: function (value) {
-    return value === undefined
+    return value === undefined;
   },
 
+  isWeakMap: function () {},
 
-  isWeakMap: function () {
-
-  },
-
-
-  isWeakSet: function () {
-
-  },
+  isWeakSet: function () {},
 
   /**判断是不是null。
    * @param {*} value
@@ -1002,9 +763,9 @@ var brightzoe = {
    */
   isNull: function (val) {
     if (val === null) {
-      return true
+      return true;
     } else {
-      return false
+      return false;
     }
   },
 
@@ -1013,469 +774,312 @@ var brightzoe = {
    * @return {boolean}
    */
   isNaN: function (val) {
-    if (typeof val == 'object') {
+    if (typeof val == "object") {
       //对象转换为原始类型:valueOf()和toString()
-      if (val.toString() === 'NaN') {
-        return true
+      if (val.toString() === "NaN") {
+        return true;
       }
-      return false
+      return false;
     }
     if (val !== val) {
-      return true
+      return true;
     } else {
-      return false
+      return false;
     }
   },
-
 
   lt: function (value, other) {
-    return value < other
+    return value < other;
   },
-
 
   lte: function (value, other) {
-    return value <= other
+    return value <= other;
   },
-
 
   toArray: function (value) {
-    if (value == undefined) { //null&&undefined
-      return []
+    if (value == undefined) {
+      //null&&undefined
+      return [];
     }
-    if (typeof (value) == "object") {
-      return Object.values(value)
-    } else if (typeof (value) == "array") {
-      return value
-    } else if (typeof (value) == "string") {
-      let res = []
+    if (typeof value == "object") {
+      return Object.values(value);
+    } else if (typeof value == "array") {
+      return value;
+    } else if (typeof value == "string") {
+      let res = [];
       for (let str of value) {
-        res.push(str)
+        res.push(str);
       }
-      return res
+      return res;
     } else {
-      return []
+      return [];
     }
   },
 
+  toFinite: function () {},
 
-  toFinite: function () {
+  toInteger: function () {},
 
-  },
+  toLength: function () {},
 
+  toNumber: function () {},
 
-  toInteger: function () {
+  assign: function () {},
 
-  },
-
-
-  toLength: function () {
-
-  },
-
-
-  toNumber: function () {
-
-  },
-
-
-  assign: function () {
-
-  },
-
-
-  toSafeInteger: function () {
-
-  },
-
+  toSafeInteger: function () {},
 
   add: function (augend, addend) {
-    return augend + addend
+    return augend + addend;
   },
-
 
   ceil: function (number, precision = 0) {
     // p = -1 number = number - number % 10 + 10
     // p = 0 number = number - number % 1 + 1
     // p = 1 number = number - number % 0.1 + 0.1
-    let exp = 10 ** (-precision)
-    return number - number % exp + exp
+    let exp = 10 ** -precision;
+    return number - (number % exp) + exp;
   },
-
 
   divide: function (dividend, divisor) {
-    return dividend / divisor
+    return dividend / divisor;
   },
-
 
   floor: function (number, precision = 0) {
-    let exp = 10 ** (-precision)
-    return number - number % exp
+    let exp = 10 ** -precision;
+    return number - (number % exp);
   },
-
 
   max: function (array) {
-    let max = array[0]
+    let max = array[0];
     for (let i = 0; i < array.length; i++) {
-      max = max > array[i] ? max : array[i]
+      max = max > array[i] ? max : array[i];
     }
-    return max
+    return max;
   },
 
-
-  maxBy: function () {
-
-  },
-
+  maxBy: function () {},
 
   mean: function (array) {
-    let sum = 0
+    let sum = 0;
     for (let i = 0; i < array.length; i++) {
-      sum += array[i]
+      sum += array[i];
     }
-    return sum / array.length
+    return sum / array.length;
   },
 
-
-  meanBy: function () {
-
-  },
-
+  meanBy: function () {},
 
   min: function (array) {
-    let min = array[0]
+    let min = array[0];
     for (let i = 0; i < array.length; i++) {
-      mean = mean < array[i] ? mean : array[i]
+      mean = mean < array[i] ? mean : array[i];
     }
-    return min
+    return min;
   },
 
-  minBy: function () {
-
-  },
-
+  minBy: function () {},
 
   multiply: function (multiplier, multiplicand) {
-    return multiplicand * multiplier
+    return multiplicand * multiplier;
   },
-
 
   round: function (number, precision = 0) {
-    let exp = 10 ** (-precision)
+    let exp = 10 ** -precision;
     if (number - this.floor(number, precision) < 0.5 * exp) {
-
-      return this.floor(number, precision)
+      return this.floor(number, precision);
     }
-    return this.ceil(number, precision)
+    return this.ceil(number, precision);
   },
-
 
   subtract: function (minuend, subtrahend) {
-    return minuend - subtrahend
+    return minuend - subtrahend;
   },
-
 
   sum: function (array) {
-    let sum = 0
+    let sum = 0;
     for (let ary of array) {
-      sum += ary
+      sum += ary;
     }
-    return sum
+    return sum;
   },
 
+  sumBy: function () {},
 
-  sumBy: function () {
-
-  },
-
-
-  clamp: function () {
-
-  },
-
+  clamp: function () {},
 
   inRange: function (number, start = 0, end) {
     if (end == undefined) {
-      end = start
-      start = 0
+      end = start;
+      start = 0;
     }
     if (start > end) {
-      let temp = start
-      start = end
-      end = temp
+      let temp = start;
+      start = end;
+      end = temp;
     }
-    return number >= start && number < end
+    return number >= start && number < end;
   },
 
+  random: function () {},
 
-  random: function () {
-
-  },
-
-
-  assignIn: function () {
-
-  },
+  assignIn: function () {},
 
   at: function (object, paths) {
-    let res = []
+    let res = [];
     for (let i = 0; i < paths.length; i++) {
       // res.push(object[path[i]])
     }
-    return res
+    return res;
   },
-
 
   defaults: function (object, ...sources) {
-    let source = {}
+    let source = {};
     for (let i in sources) {
       //对象合并
-      Object.assign(source, sources[i])
+      Object.assign(source, sources[i]);
     }
-    let array = Object.keys(source)
+    let array = Object.keys(source);
     for (let ary of array) {
       if (ary in object == false) {
-        object[ary] = source[ary]
+        object[ary] = source[ary];
       }
     }
-    return object
+    return object;
   },
 
-  defaultsDeep: function () {
+  defaultsDeep: function () {},
 
-  },
+  findKey: function () {},
 
-  findKey: function () {
+  findLastKey: function () {},
 
-  },
+  forIn: function () {},
 
-  findLastKey: function () {
+  forInRight: function () {},
 
-  },
+  forOwn: function () {},
 
+  forOwnRight: function () {},
 
-  forIn: function () {
+  functions: function () {},
 
-  },
+  functionsIn: function () {},
 
+  get: function () {},
 
-  forInRight: function () {
+  has: function () {},
 
-  },
-
-
-
-  forOwn: function () {
-
-  },
-
-
-  forOwnRight: function () {
-
-  },
-
-
-  functions: function () {
-
-  },
-
-
-  functionsIn: function () {
-
-  },
-
-
-  get: function () {
-
-  },
-
-
-  has: function () {
-
-  },
-
-
-  hasIn: function () {
-
-  },
-
+  hasIn: function () {},
 
   invert: function (object) {
-    let res = {}
-    let array = Object.values(object)
-    let array2 = Object.keys(object)
+    let res = {};
+    let array = Object.values(object);
+    let array2 = Object.keys(object);
     for (let i = 0; i < array.length; i++) {
-      res[array[i]] = array2[i]
+      res[array[i]] = array2[i];
     }
-    return res
+    return res;
   },
 
+  invertBy: function () {},
 
-  invertBy: function () {
+  invoke: function () {},
 
-  },
+  keys: function () {},
 
+  keysIn: function () {},
 
-  invoke: function () {
+  mapKeys: function () {},
 
-  },
+  mapValues: function () {},
 
+  merge: function () {},
 
-  keys: function () {
+  mergeWith: function () {},
 
-  },
+  omit: function () {},
 
-
-
-  keysIn: function () {
-
-  },
-
-
-  mapKeys: function () {
-
-  },
-
-
-  mapValues: function () {
-
-  },
-
-
-  merge: function () {
-
-  },
-
-
-  mergeWith: function () {
-
-  },
-
-
-  omit: function () {
-
-  },
-
-
-  omitBy: function () {
-
-  },
-
+  omitBy: function () {},
 
   pick: function (object, props) {
-    let res = {}
+    let res = {};
     for (let prop of props) {
-      res[prop] = object[prop]
+      res[prop] = object[prop];
     }
-    return res
+    return res;
   },
 
+  pickBy: function () {},
 
-  pickBy: function () {
+  result: function () {},
 
-  },
+  set: function () {},
 
+  setWith: function () {},
 
-  result: function () {
+  toPairs: function () {},
 
-  },
+  toPairsIn: function () {},
 
+  transform: function () {},
 
-  set: function () {
+  unset: function () {},
 
-  },
+  update: function () {},
 
-
-  setWith: function () {
-
-  },
-
-
-  toPairs: function () {
-
-  },
-
-
-  toPairsIn: function () {
-
-  },
-
-
-  transform: function () {
-
-  },
-
-
-  unset: function () {
-
-  },
-
-
-  update: function () {
-
-  },
-
-
-
-  updateWith: function () {
-
-  },
-
-
+  updateWith: function () {},
 
   values: function (object) {
     //要去掉不可枚举的
-    let obj = Object(object)
-    let ary = []
+    let obj = Object(object);
+    let ary = [];
     for (let keys in obj) {
       if (obj.hasOwnProperty(keys)) {
-        ary.push(obj[keys])
+        ary.push(obj[keys]);
       }
     }
 
-    return ary
+    return ary;
   },
-
 
   valuesIn: function (object) {
     let obj = Object(object);
-    let ary = []
+    let ary = [];
     for (let keys in obj) {
-      ary.push(obj[keys])
+      ary.push(obj[keys]);
     }
-    return ary
+    return ary;
   },
 
-
-  camelCase: function (string = '') {
-    string = string.replace(/[^a-zA-Z]/g, ' ') //非字母变成空格
-    let str = string.trim() //前后空格去掉
-    str = str.toLowerCase()
+  camelCase: function (string = "") {
+    string = string.replace(/[^a-zA-Z]/g, " "); //非字母变成空格
+    let str = string.trim(); //前后空格去掉
+    str = str.toLowerCase();
     for (let i = 0; i < str.length; i++) {
-      if (str[i] == ' ' && str[i + 1].charCodeAt(0) >= 97) {
-        str = str.slice(0, i) + str[i + 1].toUpperCase() + str.slice(i + 2, str.length)
+      if (str[i] == " " && str[i + 1].charCodeAt(0) >= 97) {
+        str =
+          str.slice(0, i) +
+          str[i + 1].toUpperCase() +
+          str.slice(i + 2, str.length);
       }
     }
-    str.replace('/ /g', '')
-    return str
+    str.replace("/ /g", "");
+    return str;
   },
 
-
-  capitalize: function (string = '') {
-    string = string.toUpperCase()
-    string = string.slice(0, 1) + string.slice(1, string.length).toLowerCase()
-    return string
+  capitalize: function (string = "") {
+    string = string.toUpperCase();
+    string = string.slice(0, 1) + string.slice(1, string.length).toLowerCase();
+    return string;
   },
 
-  deburr: function () {
+  deburr: function () {},
 
-  },
-
-
-  endsWith: function (string = '', target, position = string.length) {
+  endsWith: function (string = "", target, position = string.length) {
     if (string[position - 1] == target) {
-      return true
+      return true;
     }
-    return false
+    return false;
   },
 
   /**转义string中的 "&", "<", ">", '"', "'", 和 "`" 字符为HTML实体字符。
@@ -1483,168 +1087,126 @@ var brightzoe = {
    * @return {string}
    */
   escape: function (string) {
-    string.replace(/&/g, "&amp;")
-    string.replace(/</g, "&lt;")
-    string.replace(/>/g, "&gt;")
-    string.replace(/"/g, "&quot;")
-    string.replace(/'/g, "&apos;")
-    string.replace(/`/g, "&grave;")
+    string.replace(/&/g, "&amp;");
+    string.replace(/</g, "&lt;");
+    string.replace(/>/g, "&gt;");
+    string.replace(/"/g, "&quot;");
+    string.replace(/'/g, "&apos;");
+    string.replace(/`/g, "&grave;");
   },
 
+  escapeRegExp: function () {},
 
-  escapeRegExp: function () {
-
+  kebabCase: function (string = "") {
+    string = string.replace(/[^a-zA-Z]/g, " ");
+    string = string.trim().toLowerCase();
+    string = string.replace(/ +/g, "-");
+    return string;
   },
 
-
-  kebabCase: function (string = '') {
-    string = string.replace(/[^a-zA-Z]/g, ' ')
-    string = string.trim().toLowerCase()
-    string = string.replace(/ +/g, '-')
-    return string
-  },
-
-
-  lowerCase: function (string = '') {
+  lowerCase: function (string = "") {
     if (/[^a-zA-Z]/.exec(string) == null) {
       for (var i = 1; i < string.length; i++) {
         if (string[i].charCodeAt(0) <= 90 && string[i].charCodeAt(0) >= 65) {
-          var string = string.slice(0, i) + ' ' + string.slice(i, i + 1).toLowerCase() + string.slice(i + 1, string.length)
+          var string =
+            string.slice(0, i) +
+            " " +
+            string.slice(i, i + 1).toLowerCase() +
+            string.slice(i + 1, string.length);
         }
-
       }
     }
 
-    string = string.replace(/[^a-zA-Z]+/g, ' ')
-    string = string.trim().toLowerCase()
-    return string
+    string = string.replace(/[^a-zA-Z]+/g, " ");
+    string = string.trim().toLowerCase();
+    return string;
   },
 
-
-  lowerFirst: function (string = '') {
-    var str = string[0].toLowerCase() + string.slice(1, string.length)
-    return str
+  lowerFirst: function (string = "") {
+    var str = string[0].toLowerCase() + string.slice(1, string.length);
+    return str;
   },
 
-
-  pad: function (string = '', length = 0, chars = ' ') {
+  pad: function (string = "", length = 0, chars = " ") {
     while (true) {
       if (string.length < length) {
-        string += chars
+        string += chars;
       } else {
         break;
       }
       if (string.length < length) {
-        string = chars + string
+        string = chars + string;
       } else {
         break;
       }
     }
-    return string.slice(0, length)
+    return string.slice(0, length);
   },
 
-
-  padEnd: function (string = '', length = 0, chars = ' ') {
+  padEnd: function (string = "", length = 0, chars = " ") {
     while (string.length < length) {
-      string += chars
+      string += chars;
     }
-    return string.slice(0, length)
+    return string.slice(0, length);
   },
 
-
-  padStart: function (string = '', length = 0, chars = ' ') {
-    var char = ''
+  padStart: function (string = "", length = 0, chars = " ") {
+    var char = "";
     for (var i = chars.length - 1; i >= 0; i--) {
-      char += chars[i]
+      char += chars[i];
     }
     while (string.length < length) {
-      string = char + string
+      string = char + string;
     }
-    return string.slice(string.length - length, string.length)
+    return string.slice(string.length - length, string.length);
   },
-
 
   parseInt: function (string, radix = 10) {
-    var num = +string
-    return num.toString(radix)
+    var num = +string;
+    return num.toString(radix);
   },
 
-
-  repeat: function (string = '', n) {
-    var res = ''
+  repeat: function (string = "", n) {
+    var res = "";
     for (var i = 0; i < n; i++) {
-      res += str
+      res += str;
     }
-    return res
+    return res;
   },
 
+  replace: function (string = "", pattern, replacement) {},
 
-  replace: function (string = '', pattern, replacement) {
+  snakeCase: function () {},
 
-  },
+  split: function () {},
 
+  startCase: function () {},
 
-  snakeCase: function () {
+  startsWith: function () {},
 
-  },
+  toLower: function () {},
 
+  toUpper: function () {},
 
-  split: function () {
+  trim: function () {},
 
-  },
+  trimEnd: function () {},
 
+  trimStart: function () {},
 
-  startCase: function () {
-
-  },
-
-
-  startsWith: function () {
-
-  },
-
-
-  toLower: function () {
-
-  },
-
-
-  toUpper: function () {
-
-  },
-
-
-  trim: function () {
-
-  },
-
-
-  trimEnd: function () {
-
-  },
-
-
-  trimStart: function () {
-
-  },
-
-
-  truncate: function () {
-
-  },
+  truncate: function () {},
 
   /**转换string字符串中的 HTML 实体 &amp;, &lt;, &gt;, &quot;, &#39;, 和 &#96; 为对应的字符。
    * @param {string} string
    * @return {string}
    */
   unescape: function (string) {
-    string.replace(/&amp;/g, "&")
-    string.replace(/&lt;/g, "<")
-    string.replace(/&gt;/g, ">")
-    string.replace(/&quot;/g, '"')
-    string.replace(/&apos;/g, "'")
-    string.replace(/&grave;/g, "`")
-
+    string.replace(/&amp;/g, "&");
+    string.replace(/&lt;/g, "<");
+    string.replace(/&gt;/g, ">");
+    string.replace(/&quot;/g, '"');
+    string.replace(/&apos;/g, "'");
+    string.replace(/&grave;/g, "`");
   },
 
   /**转换字符串string为 空格 分隔的大写单词
@@ -1653,50 +1215,45 @@ var brightzoe = {
    */
   upperCase: function (string) {
     //先全变成大写，字符都用空格替换，然后减少空格为1个
-    var str = string.toUpperCase()
-    str = str.replace(/[^A-Z]+/g, " ")
-    str = str.trim() //去掉首尾空格
-    for (let i = 0; i < str.length; i++) { //间隔空格全部变为1个
-      if (str[i] == ' ' && str[i + 1] == ' ') {
-        str.substr(i + 1, 1)
-        i--
+    var str = string.toUpperCase();
+    str = str.replace(/[^A-Z]+/g, " ");
+    str = str.trim(); //去掉首尾空格
+    for (let i = 0; i < str.length; i++) {
+      //间隔空格全部变为1个
+      if (str[i] == " " && str[i + 1] == " ") {
+        str.substr(i + 1, 1);
+        i--;
       }
     }
-    return str
+    return str;
   },
 
   /**转换字符串string的首字母为大写。
    * @param {string} string
-   * @return {string} 
+   * @return {string}
    */
   upperFirst: function (string) {
     //只有一个字符串，只需要改变首字符
     if (string[0].charCodeAt() >= 97 && string[0].charCodeAt() <= 122) {
-      let first = String.fromCharCode(string[0].charCodeAt() - 32)
-      return first + string.slice(1)
+      let first = String.fromCharCode(string[0].charCodeAt() - 32);
+      return first + string.slice(1);
     }
-    return string
+    return string;
   },
 
   /**拆分字符串string中的词为数组.
    * @param {string} string
    * @param {RegExp / string} pattern
-   * @return {array} 
+   * @return {array}
    */
   words: function (string, pattern = /\w+/g) {
-    return string.match(pattern)
+    return string.match(pattern);
     //指定字符串匹配指定文本内容,返回数组
   },
 
+  bindAll: function () {},
 
-  bindAll: function () {
-
-  },
-
-
-  defaultTo: function () {
-
-  },
+  defaultTo: function () {},
 
   /**创建一个包含从 start 到 end，但不包含 end 本身范围数字的数组。 如果 start 是负数，而 end 或 step 没有指定:那么 step 为 -1 。 如果 end 没有指定，start 设置为 0。 如果 end 小于 start，会创建一个空数组，除非指定了 step。
    * @param {number} [start = 0]
@@ -1708,186 +1265,102 @@ var brightzoe = {
     //输入一位数想要什么结果，输入两位数要什么结果
     if (end == undefined && step == undefined) {
       //只输入一个数，区分正数和负数
-      end = start
-      start = 0
+      end = start;
+      start = 0;
       if (end > 0) {
-        step = 1
+        step = 1;
       } else {
-        step = -1
+        step = -1;
       }
     }
     if (step == undefined) {
       //只输入两位数
       if (start < end) {
-        step = 1
+        step = 1;
       } else {
-        step = -1
+        step = -1;
       }
     }
 
     //已经将上面情况全部处理为正常三个数
     if (start == end) {
-      return []
+      return [];
     }
 
-    let result = [start]
-    let i = 0
+    let result = [start];
+    let i = 0;
     //是增序还是降序
     if (step > 0) {
       while (result[i] + step < end) {
-        result.push(result[i] + step)
-        i++
+        result.push(result[i] + step);
+        i++;
       }
     } else if (step < 0) {
       while (result[i] + step > end) {
-        result.push(result[i] + step)
-        i++
+        result.push(result[i] + step);
+        i++;
       }
     } else {
-      result.length = Math.abs(end - start)
-      result.fill(start)
+      result.length = Math.abs(end - start);
+      result.fill(start);
     }
 
-    return result
+    return result;
   },
 
+  rangeRight: function () {},
 
-  rangeRight: function () {
+  mixin: function () {},
 
-  },
+  times: function () {},
 
+  toPath: function () {},
 
-  mixin: function () {
+  uniqueId: function () {},
 
-  },
+  cloneDeep: function () {},
 
+  identity: function () {},
 
-  times: function () {
+  concat: function () {},
 
-  },
+  pullAt: function () {},
 
+  matches: function () {},
 
-  toPath: function () {
+  property: function () {},
 
-  },
+  ary: function () {},
 
+  unary: function () {},
 
-  uniqueId: function () {
+  negate: function () {},
 
-  },
+  once: function () {},
 
+  spread: function () {},
 
-  cloneDeep: function () {
+  curry: function () {},
 
-  },
+  memoize: function () {},
 
+  flip: function () {},
 
-  identity: function () {
+  conforms: function () {},
 
-  },
+  constant: function () {},
 
+  flow: function () {},
 
-  concat: function () {
+  method: function () {},
 
-  },
+  methodOf: function () {},
 
+  nthArg: function () {},
 
-  pullAt: function () {
+  propertyOf: function () {},
 
-  },
+  parseJson: function () {},
 
-
-  matches: function () {
-
-  },
-
-
-  property: function () {
-
-  },
-
-
-  ary: function () {
-
-  },
-
-
-  unary: function () {
-
-  },
-
-
-  negate: function () {
-
-  },
-
-
-  once: function () {
-
-  },
-
-
-  spread: function () {
-
-  },
-
-
-  curry: function () {
-
-  },
-
-
-  memoize: function () {
-
-  },
-
-
-  flip: function () {
-
-  },
-
-
-  conforms: function () {
-
-  },
-
-
-  constant: function () {
-
-  },
-
-
-  flow: function () {
-
-  },
-
-
-  method: function () {
-
-  },
-
-
-  methodOf: function () {
-
-  },
-
-
-  nthArg: function () {
-
-  },
-
-
-  propertyOf: function () {
-
-  },
-
-
-  parseJson: function () {
-
-  },
-
-
-  stringifyJson: function () {
-
-  }
-}
+  stringifyJson: function () {},
+};
