@@ -625,12 +625,43 @@ var brightzoe = {
   filter: function () {},
 
   //返回符合条件的第一个元素。
-  find: function (collection, predicate, fromIndex) {
+  find: function (collection, predicate, fromIndex = 0) {
     //未写findIndex
-    
+    if (isArray(collection)) {
+      for (let i = 0; i < collection.length; i++) {
+        if (predicate(collection[i], i, collection)) {
+          return collection[i]
+        }
+      }
+    } else {
+      for (let col of collection) {
+        if (predicate(collection[col], col, collection)) {
+          return col
+        }
+      }
+    }
   },
 
-  findLast: function () {},
+  findLast: function (
+    collection,
+    predicate,
+    fromIndex = collection.length - 1
+  ) {
+    //未写findIndex,obj没有从右向左
+    if (isArray(collection)) {
+      for (let i = collection.length - 1; i >= 0; i--) {
+        if (predicate(collection[i], i, collection)) {
+          return collection[i]
+        }
+      }
+    } else {
+      for (let col of collection) {
+        if (predicate(collection[col], col, collection)) {
+          return col
+        }
+      }
+    }
+  },
 
   flatMap: function () {},
 
@@ -638,7 +669,7 @@ var brightzoe = {
 
   flatMapDepth: function () {},
 
-  forEach: function (collection, iteratee = this.identity) {
+  forEach: function (collection, iteratee) {
     if (Array.isArray(collection)) {
       for (let i = 0; i < collection.length; i++) {
         iteratee(collection[i])
@@ -652,7 +683,7 @@ var brightzoe = {
 
   forEachRight: function () {},
 
-  groupBy: function (collection, iteratee = this.identity) {
+  groupBy: function (collection, iteratee) {
     var result = {}
   },
 
