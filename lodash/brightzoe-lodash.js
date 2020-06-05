@@ -61,7 +61,26 @@ var brightzoe = {
    * @param {function} [iteratee]
    * @return {array}
    */
-  differenceBy: function (array, values, iteratee) {},
+  differenceBy: function (array, values, iteratee) {
+    var result = []
+
+    if (typeof iteratee == 'function') {
+      var value = values.map((item) => iteratee(item))
+      for (let ary of array) {
+        if (!value.includes(iteratee(ary))) {
+          result.push(ary)
+        }
+      }
+    } else if (typeof iteratee == 'string') {
+      var value = values.map((item) => item[iteratee])
+      array.forEach((ary) => {
+        if (!value.includes(ary[iteratee])) {
+          result.push(ary)
+        }
+      })
+    }
+    return result
+  },
 
   /**
    * @param {array} array
@@ -69,7 +88,19 @@ var brightzoe = {
    * @param {function} [comparator]
    * @return {array}
    */
-  differenceWith: function (array, [values], [comparator]) {},
+  differenceWith: function (array, values, comparator) {
+    //array里面object，深对比是否一致
+    var result = []
+    for (let ary of array) {
+      for (let val of values) {
+        if (comparator(ary, val)) {
+          continue
+        }
+      }
+      result.push(ary)
+    }
+    return result
+  },
 
   /**把array的前size个元素删去，创建一个数组片段。
    * @param {array} array
@@ -101,14 +132,31 @@ var brightzoe = {
    * @param {function} [predicate=_.identity]
    * @return {array}
    */
-  dropRightWhile: function () {},
+  dropRightWhile: function (array, predicate) {
+    for (let i = array.length - 1; i >= 0; i--) {
+      if (predicate(array[i], i, array)) {
+        array.pop()
+      } else {
+        return array
+      }
+    }
+  },
 
   /**创建一个切片数组，去除array中从起点开始到 predicate 返回假值结束部分。predicate 会传入3个参数： (value, index, array)。
    * @param {array} array
    * @param {function} [predicate=_.identity]
    * @return {array}
    */
-  dropWhile: function () {},
+  dropWhile: function (array, predicate) {
+    for (let i = 0; i < array.length; i++) {
+      if (predicate(array[i], i, array)) {
+        array.shift()
+        i--
+      } else {
+        return array
+      }
+    }
+  },
 
   /**将数组index为start到end的元素全部替换为value。包含start，不包含end。
    * @param {array} array
@@ -126,10 +174,10 @@ var brightzoe = {
 
   /**该方法返回第一个通过 predicate 判断为真值的元素的索引值（index），而不是元素本身。
    * @param {array} array
-   * @param { Array | Function | Object | string} [predicate = _.identity]
+   * @param {Function} [predicate = _.identity]
    * @return {number}
    */
-  findIndex: function () {},
+  findIndex: function (array, predicate) {},
 
   /**这个方式类似 _.findIndex， 区别是它是从右到左的迭代集合array中的元素。
    * @param {array} array
@@ -577,7 +625,10 @@ var brightzoe = {
   filter: function () {},
 
   //返回符合条件的第一个元素。
-  find: function () {},
+  find: function (collection, predicate, fromIndex) {
+    //未写findIndex
+    
+  },
 
   findLast: function () {},
 
@@ -587,11 +638,23 @@ var brightzoe = {
 
   flatMapDepth: function () {},
 
-  forEach: function () {},
+  forEach: function (collection, iteratee = this.identity) {
+    if (Array.isArray(collection)) {
+      for (let i = 0; i < collection.length; i++) {
+        iteratee(collection[i])
+      }
+    } else {
+      for (item in collection) {
+        iteratee(item)
+      }
+    }
+  },
 
   forEachRight: function () {},
 
-  groupBy: function () {},
+  groupBy: function (collection, iteratee = this.identity) {
+    var result = {}
+  },
 
   includes: function (collection, value, fromIndex = 0) {
     fromIndex = fromIndex >= 0 ? fromIndex : collection.length + fromIndex
