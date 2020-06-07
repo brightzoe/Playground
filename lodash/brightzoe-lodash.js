@@ -177,14 +177,28 @@ var brightzoe = {
    * @param {Function} [predicate = _.identity]
    * @return {number}
    */
-  findIndex: function (array, predicate) {},
+  findIndex: function (array, predicate) {
+    for (let i = 0; i < collection.length; i++) {
+      if (predicate(collection[i], i, collection)) {
+        return i
+      }
+    }
+    return -1
+  },
 
   /**这个方式类似 _.findIndex， 区别是它是从右到左的迭代集合array中的元素。
    * @param {array} array
-   * @param { Array | Function | Object | string} [predicate = _.identity]
+   * @param { function} [predicate = _.identity]
    * @return {number}
    */
-  findLastIndex: function () {},
+  findLastIndex: function (array, predicate) {
+    for (let i = array.length - 1; i >= 0; i++) {
+      if (predicate(collection[i], i, collection)) {
+        return i
+      }
+    }
+    return -1
+  },
 
   /**减少一级array嵌套深度。
    * 把array[i] 是数组的解放掉，空数组concat(array[i])
@@ -309,6 +323,7 @@ var brightzoe = {
    * @param {Array|Function|Object|string} [iteratee = _.identity]
    * @return {array}
    */
+  TODO:
   intersectionBy: function () {},
 
   /**这个方法类似 _.intersection，区别是它接受一个 comparator 调用比较arrays中的元素。结果值是从第一数组中选择。comparator 会传入两个参数：(arrVal, othVal)。
