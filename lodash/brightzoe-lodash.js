@@ -32,7 +32,7 @@ var brightzoe = {
    * @param {...array} [values]//支持多个数组
    * @return {array}
    */
-  difference: function (array, values) {
+  difference: function (array, ...values) {
     let value = []
     let result = []
     for (let i = 1; i < arguments.length; i++) {
@@ -63,7 +63,14 @@ var brightzoe = {
    */
   differenceBy: function (array, values, iteratee) {
     var result = []
-
+    var temp = []
+    if (arguments.length <= 2) {
+      return this.difference(array, values)
+    }
+    for (let i = 1; i < arguments.length - 1; i++) {
+      //小池子拼成大池子
+      values = temp.concat(arguments[i])
+    }
     if (typeof iteratee == 'function') {
       var value = values.map((item) => iteratee(item))
       for (let ary of array) {
@@ -323,7 +330,7 @@ var brightzoe = {
    * @param {Array|Function|Object|string} [iteratee = _.identity]
    * @return {array}
    */
-  TODO:
+  //TODO:
   intersectionBy: function () {},
 
   /**这个方法类似 _.intersection，区别是它接受一个 comparator 调用比较arrays中的元素。结果值是从第一数组中选择。comparator 会传入两个参数：(arrVal, othVal)。
@@ -1472,4 +1479,48 @@ var brightzoe = {
   parseJson: function () {},
 
   stringifyJson: function () {},
+
+  //调用func,次数不超过n次，之后再调用这个函数，返回最后一次调用func的结果。
+  //超过多少次不再调用func。
+  before: function (n, func) {
+    var i = 0
+    var result
+    return function (...args) {
+      if (i < n) {
+        i++
+        result = func(...args)
+      }
+      return result
+    }
+  },
+
+  //创建一个函数，调用n次及以上马上触发func
+  after: function (n, func) {
+    var i = 0
+    return function (...args) {
+      i++
+      if (i > n) {
+        return func(...args)
+      }
+    }
+  },
+
+  //调用func,func最多接受n个参数
+  ary: function (func, n = func.length) {
+    return function (...args) {
+      return func(...args.slice(0, n))
+    }
+  },
+
+  //调用func,func只接受1个参数
+  unary: function (func) {
+    return function (args) {
+      return func(args)
+    }
+  },
+  flip: function (func) {
+    return function (...args) {
+      return func(...args.reverse())
+    }
+  }
 }
