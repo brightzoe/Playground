@@ -61,31 +61,24 @@ var brightzoe = {
    * @param {function} [iteratee]
    * @return {array}
    */
-  differenceBy: function (array, values, iteratee) {
-    var result = []
-    var temp = []
+  differenceBy: function (array, ...values) {
     if (arguments.length <= 2) {
-      return this.difference(array, values)
+      return this.difference(array, ...values)
     }
+    var value = []
+    var iteratee = this.identity(values[values.length - 1])
     for (let i = 1; i < arguments.length - 1; i++) {
       //小池子拼成大池子
-      values = temp.concat(arguments[i])
+      value = value.concat(arguments[i])
     }
-    if (typeof iteratee == 'function') {
-      var value = values.map((item) => iteratee(item))
-      for (let ary of array) {
-        if (!value.includes(iteratee(ary))) {
-          result.push(ary)
-        }
+    value = value.map((item) => iteratee(item))
+    var result = []
+    for (let ary of array) {
+      if (!value.includes(iteratee(ary))) {
+        result.push(ary)
       }
-    } else if (typeof iteratee == 'string') {
-      var value = values.map((item) => item[iteratee])
-      array.forEach((ary) => {
-        if (!value.includes(ary[iteratee])) {
-          result.push(ary)
-        }
-      })
     }
+
     return result
   },
 
@@ -97,6 +90,7 @@ var brightzoe = {
    */
   differenceWith: function (array, values, comparator) {
     //array里面object，深对比是否一致
+    //isequal
     var result = []
     for (let ary of array) {
       for (let val of values) {
@@ -644,7 +638,16 @@ var brightzoe = {
 
   every: function () {},
 
-  filter: function () {},
+  filter: function (array, prec) {
+    let test = iteratee(prec)
+    var result = []
+    for (let i = 0; i < array.length; i++) {
+      if (test(array[i], i, array)) {
+        result.push(array[i])
+      }
+    }
+    return result
+  },
 
   //返回符合条件的第一个元素。
   find: function (collection, predicate, fromIndex = 0) {
@@ -798,7 +801,9 @@ var brightzoe = {
 
   isArguments: function () {},
 
-  isArray: function () {},
+  isArray: function (value) {
+    return Array.isArray(value)
+  },
 
   isArrayBuffer: function () {},
 
@@ -806,7 +811,9 @@ var brightzoe = {
 
   isArrayLikeObject: function () {},
 
-  isBoolean: function () {},
+  isBoolean: function (value) {
+    return typeof value === 'boolean'
+  },
 
   isDate: function () {},
 
@@ -814,17 +821,63 @@ var brightzoe = {
 
   isEmpty: function () {},
 
-  isEqual: function () {
+  isEqual: function (value, other) {
     //深对比
-  },
+    if (value === other) {
+      //基本类型直接比较
+      return true
+    }
+    if (typeof value !== typeof other) {
+      //类型不等则肯定不等
+      return false
+    }
 
-  isEqualWith: function () {},
+    if (this.isNaN(value) && this.isNaN(other)) {
+      //NaN
+      return true
+    }
+    if (value.length !== other.length) {
+      return false
+    }
+    if (this.isArray(value)) {
+      //array
+      if (this.isArray(object)) {
+        for (let i = 0; i < value.length; i++) {
+          if (!this.isEqual(value[i], other[i])) {
+            return false
+          }
+        }
+        return true
+      }
+      return false
+    }
+    if (this.isObject(value) && this.isObject(other) && !this.isArray(other)) {
+      //object
+      for (let key in value) {
+        if (!this.isEqual(value[key], other[key])) {
+          return false
+        }
+      }
+      return true
+    }
+    return false
+  },
+  isEqualWith: function (value, other, customizer = undefined) {
+    customizer = typeof customizer == 'function' ? customizer : undefined
+    if (this.isUndefined(customizer)) {
+      return this.isEqual(value, other)
+    } else {
+      return customizer(value, other)
+    }
+  },
 
   isError: function () {},
 
   isFinite: function () {},
 
-  isFunction: function () {},
+  isFunction: function (value) {
+    return typeof value === 'function'
+  },
 
   isInteger: function () {},
 
@@ -832,9 +885,28 @@ var brightzoe = {
 
   isMap: function () {},
 
-  isMatch: function () {},
+  /**
+   * obj是否符合src的条件
+   * @param {*} obj
+   * @param {*} src
+   */
+  isMatch: function (obj, src) {
+    for (let key in src) {
+      if (obj[key] !== src[key]) {
+        return false
+      }
+    }
+    return true
+  },
 
-  isMatchWith: function () {},
+  isMatchWith: function (obj, src, customizer = undefined) {
+    customizer = typeof customizer == 'function' ? customizer : undefined
+    if (this.isUndefined(customizer)) {
+      return this.isMatch(obj, src)
+    } else {
+      return customizer(obj, src)
+    }
+  },
 
   isNative: function () {},
 
@@ -845,9 +917,16 @@ var brightzoe = {
     return false
   },
 
-  isNumber: function () {},
+  isNumber: function (value) {
+    return typeof value === 'number'
+  },
 
-  isObject: function () {},
+  isObject: function (value) {
+    if (value === null) {
+      return false
+    }
+    return typeof value === 'object'
+  },
 
   isObjectLike: function () {},
 
@@ -859,7 +938,9 @@ var brightzoe = {
 
   isSet: function () {},
 
-  isString: function () {},
+  isString: function (value) {
+    return typeof value === 'string'
+  },
 
   isSymbol: function () {},
 
@@ -1081,7 +1162,9 @@ var brightzoe = {
 
   functionsIn: function () {},
 
-  get: function () {},
+  get: function (obj, prop) {
+    return obj[prop]
+  },
 
   has: function () {},
 
@@ -1435,32 +1518,72 @@ var brightzoe = {
   uniqueId: function () {},
 
   cloneDeep: function () {},
-
-  identity: function () {},
+  /**
+   * 返回接收的首个参数。
+   * @param  {...any} args
+   */
+  identity: function (...args) {
+    return args[0]
+  },
 
   concat: function () {},
 
   pullAt: function () {},
 
-  matches: function () {},
-
-  property: function () {},
-
-  ary: function () {},
-
-  unary: function () {},
+  property: function (prop) {
+    return this.get.bind(null, _, prop)
+  },
+  /**
+   * 调用的函数最多传n个参数
+   * @param {*} func
+   * @param {*} n
+   */
+  ary: function (func, n = func.length) {
+    return function (...args) {
+      return func(...args.slice(0, n))
+    }
+  },
+  /**
+   * 调用的函数只接一个参数。
+   * @param {*} func
+   */
+  unary: function (func) {
+    return func(this.identity(...args))
+  },
 
   negate: function () {},
 
   once: function () {},
+  /**
+   * 返回可以接受数组的原函数
+   * @param {*} func
+   */
+  spread: function (func) {
+    return function (ary) {
+      return func(...ary)
+    }
+  },
 
-  spread: function () {},
-
-  curry: function () {},
+  /**
+   * 返回可以分开接受参数的原函数
+   * @param {*} func
+   * @param {*} arity
+   */
+  curry: function (func, arity = func.length) {
+    return function (...args) {
+      while (args.length < arity) {
+        return curry(func.bind(null, ...args), arity - args.length)
+      }
+      return func(...args)
+    }
+  },
 
   memoize: function () {},
 
-  flip: function () {},
+  /**返回参数反转接收的原函数 */
+  flip: function (func) {
+    return (...args) => func(...args.reverse())
+  },
 
   conforms: function () {},
 
@@ -1522,5 +1645,35 @@ var brightzoe = {
     return function (...args) {
       return func(...args.reverse())
     }
-  }
+  },
+  matches: function (src) {
+    return this.isMatch.bind(_, src)
+  },
+
+  matches: function (tar) {
+    return function (obj) {
+      for (var key in obj) {
+        if (obj[key] != tar[key]) {
+          return false
+        }
+      }
+      return true
+    }
+  },
+  matchesProperty: function (array) {
+    return this.matches(this.fromPairs(this.chunk(array, 2)))
+  },
+
+  iteratee: function (prec) {
+    //把string/array/object转为function
+    if (typeof prec === 'string') {
+      return this.property(prec)
+    } else if (Array.isArray(prec)) {
+      return this.matchesProperty(prec)
+    } else if (typeof prec === 'object') {
+      return this.matches(prec)
+    }
+  },
 }
+
+console.log(brightzoe.isEqual({ '0': 1, '1': 2, length: 2 }, [1, 2]))
