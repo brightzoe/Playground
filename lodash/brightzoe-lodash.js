@@ -6,11 +6,11 @@ var brightzoe = {
    * @return {array[][]}
    */
   chunk: function (array, size = 1) {
-    let result = []
+    let result = [];
     for (let i = 0, j = 0; i < array.length; i += size, j++) {
-      result[j] = array.slice(i, i + size)
+      result[j] = array.slice(i, i + size);
     }
-    return result
+    return result;
   },
 
   /**将数组中的假值去除，生成一个新数组。假值包括false，null，0，''，undefined和NaN。
@@ -18,13 +18,13 @@ var brightzoe = {
    * @return {array}
    */
   compact: function (array) {
-    let result = []
+    let result = [];
     for (let i = 0; i < array.length; i++) {
       if (array[i] != false && array[i] != null && array[i] === array[i]) {
-        result.push(array[i])
+        result.push(array[i]);
       }
     }
-    return result
+    return result;
   },
 
   /**创建一个新数组，其中的值为array里面，但在values里面没有出现的值，值的顺序与array一致。
@@ -33,26 +33,26 @@ var brightzoe = {
    * @return {array}
    */
   difference: function (array, ...values) {
-    let value = []
-    let result = []
+    let value = [];
+    let result = [];
     for (let i = 1; i < arguments.length; i++) {
       //小池子拼成大池子
-      value = value.concat(arguments[i])
+      value = value.concat(arguments[i]);
     }
 
     for (ans of array) {
-      let flag = 1
+      let flag = 1;
       for (let i = 0; i < value.length; i++) {
         if (ans == value[i]) {
-          flag = 0
-          continue
+          flag = 0;
+          continue;
         }
       }
       if (flag) {
-        result.push(ans)
+        result.push(ans);
       }
     }
-    return result
+    return result;
   },
 
   /**
@@ -63,23 +63,23 @@ var brightzoe = {
    */
   differenceBy: function (array, ...values) {
     if (arguments.length <= 2) {
-      return this.difference(array, ...values)
+      return this.difference(array, ...values);
     }
-    var value = []
-    var iteratee = this.identity(values[values.length - 1])
+    var value = [];
+    var iteratee = this.identity(values[values.length - 1]);
     for (let i = 1; i < arguments.length - 1; i++) {
       //小池子拼成大池子
-      value = value.concat(arguments[i])
+      value = value.concat(arguments[i]);
     }
-    value = value.map((item) => iteratee(item))
-    var result = []
+    value = value.map((item) => iteratee(item));
+    var result = [];
     for (let ary of array) {
       if (!value.includes(iteratee(ary))) {
-        result.push(ary)
+        result.push(ary);
       }
     }
 
-    return result
+    return result;
   },
 
   /**
@@ -91,16 +91,16 @@ var brightzoe = {
   differenceWith: function (array, values, comparator) {
     //array里面object，深对比是否一致
     //isequal
-    var result = []
+    var result = [];
     for (let ary of array) {
       for (let val of values) {
         if (comparator(ary, val)) {
-          continue
+          continue;
         }
       }
-      result.push(ary)
+      result.push(ary);
     }
-    return result
+    return result;
   },
 
   /**把array的前size个元素删去，创建一个数组片段。
@@ -109,11 +109,11 @@ var brightzoe = {
    * @return {array}
    */
   drop: function (array, n = 1) {
-    let result = []
+    let result = [];
     for (let i = n; i < array.length; i++) {
-      result.push(array[i])
+      result.push(array[i]);
     }
-    return result
+    return result;
   },
 
   /**创建一个切片数组，去除array尾部的n个元素。（n默认值为1。）
@@ -123,9 +123,9 @@ var brightzoe = {
    */
   dropRight: function (array, n = 1) {
     if (n == 0) {
-      return array
+      return array;
     }
-    return array.slice(0, -n) //从右边裁切
+    return array.slice(0, -n); //从右边裁切
   },
 
   /**创建一个切片数组，去除array中从 predicate 返回假值开始到尾部的部分。predicate 会传入3个参数： (value, index, array)。
@@ -136,9 +136,9 @@ var brightzoe = {
   dropRightWhile: function (array, predicate) {
     for (let i = array.length - 1; i >= 0; i--) {
       if (predicate(array[i], i, array)) {
-        array.pop()
+        array.pop();
       } else {
-        return array
+        return array;
       }
     }
   },
@@ -151,10 +151,10 @@ var brightzoe = {
   dropWhile: function (array, predicate) {
     for (let i = 0; i < array.length; i++) {
       if (predicate(array[i], i, array)) {
-        array.shift()
-        i--
+        array.shift();
+        i--;
       } else {
-        return array
+        return array;
       }
     }
   },
@@ -168,9 +168,9 @@ var brightzoe = {
    */
   fill: function (array, value, start = 0, end = array.length) {
     for (let i = start; i < end; i++) {
-      array[i] = value
+      array[i] = value;
     }
-    return array
+    return array;
   },
 
   /**该方法返回第一个通过 predicate 判断为真值的元素的索引值（index），而不是元素本身。
@@ -181,10 +181,10 @@ var brightzoe = {
   findIndex: function (array, predicate) {
     for (let i = 0; i < collection.length; i++) {
       if (predicate(collection[i], i, collection)) {
-        return i
+        return i;
       }
     }
-    return -1
+    return -1;
   },
 
   /**这个方式类似 _.findIndex， 区别是它是从右到左的迭代集合array中的元素。
@@ -195,10 +195,10 @@ var brightzoe = {
   findLastIndex: function (array, predicate) {
     for (let i = array.length - 1; i >= 0; i++) {
       if (predicate(collection[i], i, collection)) {
-        return i
+        return i;
       }
     }
-    return -1
+    return -1;
   },
 
   /**减少一级array嵌套深度。
@@ -207,11 +207,11 @@ var brightzoe = {
    * @return {array}
    */
   flatten: function (array) {
-    let res = []
+    let res = [];
     for (let ans of array) {
-      res = res.concat(ans)
+      res = res.concat(ans);
     }
-    return res
+    return res;
   },
 
   /**将array递归为一维数组。
@@ -219,17 +219,17 @@ var brightzoe = {
    * @return {array}
    */
   flattenDeep: function flattenDeep(array) {
-    let res = []
+    let res = [];
     for (let ans of array) {
-      res = res.concat(ans)
+      res = res.concat(ans);
     }
     for (let ans of res) {
       //递归，如果里面还有数组就继续减少一级深度。
       if (Array.isArray(ans)) {
-        return flattenDeep(res)
+        return flattenDeep(res);
       }
     }
-    return res
+    return res;
   },
 
   /**根据 depth 递归减少 array 的嵌套层级
@@ -240,13 +240,13 @@ var brightzoe = {
   flattenDepth: function (array, depth) {
     for (let i = 0; i < depth; i++) {
       //深度是几就减少几次
-      let res = []
+      let res = [];
       for (let ans of array) {
-        res = res.concat(ans)
+        res = res.concat(ans);
       }
-      array = res
+      array = res;
     }
-    return array
+    return array;
   },
 
   /**
@@ -254,13 +254,13 @@ var brightzoe = {
    * @return {object}
    */
   fromPairs: function (pairs) {
-    let res = {}
-    let key = ''
+    let res = {};
+    let key = "";
     for (let i = 0; i < pairs.length; i++) {
-      key = pairs[i][0]
-      res[key] = pairs[i][1]
+      key = pairs[i][0];
+      res[key] = pairs[i][1];
     }
-    return res
+    return res;
   },
 
   /**输出数组的第一个元素。
@@ -268,7 +268,7 @@ var brightzoe = {
    * @return {*}
    */
   head: function (array) {
-    return array[0]
+    return array[0];
   },
 
   /**使用 SameValueZero 等值比较，返回首次 value 在数组array中被找到的 索引值， 如果 fromIndex 为负值，将从数组array尾端索引进行匹配。
@@ -280,10 +280,10 @@ var brightzoe = {
   indexOf: function (array, value, fromIndex = 0) {
     for (let i = fromIndex; i < array.length; i++) {
       if (value == array[i] || (value !== value && array[i] !== array[i])) {
-        return i
+        return i;
       }
     }
-    return -1
+    return -1;
   },
 
   /**去除数组array中的最后一个元素
@@ -291,11 +291,11 @@ var brightzoe = {
    * @return {array}
    */
   initial: function (array) {
-    let res = []
+    let res = [];
     for (let i = 0; i < array.length - 1; i++) {
-      res.push(array[i])
+      res.push(array[i]);
     }
-    return res
+    return res;
   },
 
   /**创建一个给定数组的交集的数组。
@@ -303,20 +303,20 @@ var brightzoe = {
    * @return {array}
    */
   intersection: function (...array) {
-    let res = []
-    let flag = 1
+    let res = [];
+    let flag = 1;
     for (let i = 0; i < array[0].length; i++) {
       for (let j = 1; j < array.length; j++) {
         if (!array[j].includes(array[0][i])) {
-          flag = 0
-          break
+          flag = 0;
+          break;
         }
       }
       if (flag) {
-        res.push(array[0][i])
+        res.push(array[0][i]);
       }
     }
-    return res
+    return res;
   },
 
   /**
@@ -339,13 +339,13 @@ var brightzoe = {
    * @param {string} separator
    * @return {string}
    */
-  join: function (array, separator = ',') {
-    let res = ''
+  join: function (array, separator = ",") {
+    let res = "";
     for (let i = 0; i < array.length - 1; i++) {
-      res = res + array[i] + separator
+      res = res + array[i] + separator;
     }
-    res += array[array.length - 1]
-    return res
+    res += array[array.length - 1];
+    return res;
   },
 
   /**获取array中的最后一个元素。
@@ -356,7 +356,7 @@ var brightzoe = {
     // if (array.length == 0) {
     //   return undefined
     // }不需要
-    return array[array.length - 1]
+    return array[array.length - 1];
   },
 
   /**这个方法类似 _.indexOf ，区别是它是从右到左遍历array的元素。
@@ -368,10 +368,10 @@ var brightzoe = {
   lastIndexOf: function (array, value, fromIndex = array.length - 1) {
     for (let i = fromIndex; i >= 0; i--) {
       if (value == array[i] || (value !== value && array[i] !== array[i])) {
-        return i
+        return i;
       }
     }
-    return -1
+    return -1;
   },
 
   /**获取array数组的第n个元素。如果n为负数，则返回从数组结尾开始的第n个元素.
@@ -381,9 +381,9 @@ var brightzoe = {
    */
   nth: function (array, n = 0) {
     if (n < 0) {
-      return array[array.length + n]
+      return array[array.length + n];
     }
-    return array[n]
+    return array[n];
   },
 
   /**移除数组array中所有和给定值相等的元素，使用 SameValueZero 进行全等比较。
@@ -398,12 +398,12 @@ var brightzoe = {
           array[i] == values[j] ||
           (array[i] !== array[i] && values[j] !== values[j])
         ) {
-          array.splice(i, 1)
-          i--
+          array.splice(i, 1);
+          i--;
         }
       }
     }
-    return array
+    return array;
   },
 
   pullAll: function (array, values) {
@@ -413,12 +413,12 @@ var brightzoe = {
           array[i] == values[j] ||
           (array[i] !== array[i] && values[j] !== values[j])
         ) {
-          array.splice(i, 1)
-          i--
+          array.splice(i, 1);
+          i--;
         }
       }
     }
-    return array
+    return array;
   },
 
   pullAllBy: function () {},
@@ -428,18 +428,18 @@ var brightzoe = {
   reverse: function (array) {
     //双指针
     for (let i = 0, j = array.length - 1; i < j; i++, j--) {
-      ;[array[i], array[j]] = [array[j], array[i]]
+      [array[i], array[j]] = [array[j], array[i]];
     }
-    return array
+    return array;
   },
 
   sortedIndex: function (array, value) {
     for (let i = 0; i < array.length; i++) {
       if (array[i] >= value) {
-        return i
+        return i;
       }
     }
-    return array.length
+    return array.length;
   },
 
   sortedIndexBy: function () {},
@@ -447,7 +447,7 @@ var brightzoe = {
   sortedIndexOf: function (array, value) {
     for (let i = 0; i < array.length; i++) {
       if (array[i] == value || (array[i] !== array[i] && value !== value)) {
-        return i
+        return i;
       }
     }
   },
@@ -455,10 +455,10 @@ var brightzoe = {
   sortedLastIndex: function (array, value) {
     for (let i = array.length - 1; i > 0; i--) {
       if (array[i] <= array) {
-        return i + 1
+        return i + 1;
       }
     }
-    return 0
+    return 0;
   },
 
   sortedLastIndexBy: function () {},
@@ -467,10 +467,10 @@ var brightzoe = {
   sortedLastIndexOf: function (array, value) {
     for (let i = array.length - 1; i > 0; i--) {
       if (array[i] == value || (array[i] !== array[i] && value !== value)) {
-        return i
+        return i;
       }
     }
-    return -1
+    return -1;
   },
 
   //这个和uniq只是输入的数组的区别吗？？
@@ -481,49 +481,49 @@ var brightzoe = {
           array[i] === array[j] ||
           (array[i] !== array[i] && array[j] !== array[j])
         ) {
-          array.splice(j, 1)
+          array.splice(j, 1);
         }
       }
     }
-    return array
+    return array;
   },
 
   sortedUniqBy: function () {},
 
   tail: function (array) {
-    let res = []
+    let res = [];
     for (let i = 1; i < array.length; i++) {
-      res.push(array[i])
+      res.push(array[i]);
     }
-    return res
+    return res;
   },
 
   take: function (array, n = 1) {
     if (n >= array.length) {
-      return array
+      return array;
     }
-    let res = []
-    let i = 0
+    let res = [];
+    let i = 0;
     while (i < n) {
-      res.push(array[i])
-      i++
+      res.push(array[i]);
+      i++;
     }
-    return res
+    return res;
   },
 
   takeRight: function (array, n = 1) {
     if (n >= array.length) {
-      return array
+      return array;
     }
-    let res = []
-    let i = array.length - 1
-    let count = 0
+    let res = [];
+    let i = array.length - 1;
+    let count = 0;
     while (count < n) {
-      res.unshift(array[i])
-      i--
-      count++
+      res.unshift(array[i]);
+      i--;
+      count++;
     }
-    return res
+    return res;
   },
 
   takeRightWhile: function () {},
@@ -534,11 +534,11 @@ var brightzoe = {
     for (let i = 1; i < array.length; i++) {
       for (let j = 0; j < array[i].length; j++) {
         if (!array[0].includes(array[i][j])) {
-          array[0].push(array[i][j])
+          array[0].push(array[i][j]);
         }
       }
     }
-    return array[0]
+    return array[0];
   },
 
   unionBy: function () {},
@@ -553,11 +553,11 @@ var brightzoe = {
           array[i] === array[j] ||
           (array[i] !== array[i] && array[j] !== array[j])
         ) {
-          array.splice(j, 1)
+          array.splice(j, 1);
         }
       }
     }
-    return array
+    return array;
   },
 
   uniqBy: function () {},
@@ -565,45 +565,45 @@ var brightzoe = {
   uniqWith: function () {},
 
   unzip: function (array) {
-    let res = []
+    let res = [];
     for (let i = 0; i < array[0].length; i++) {
-      res[i] = []
+      res[i] = [];
       for (let j = 0; j < array.length; j++) {
-        res[i][j] = array[j][i]
+        res[i][j] = array[j][i];
       }
     }
-    return res
+    return res;
   },
 
   unzipWith: function () {},
 
   without: function (array, ...values) {
-    let res = []
+    let res = [];
     for (let ans of array) {
       if (!values.includes(ans)) {
-        res.push(ans)
+        res.push(ans);
       }
     }
-    return res
+    return res;
   },
 
   //求并集
   xor: function (...arrays) {
-    let ary = []
+    let ary = [];
     for (let ans of arrays) {
-      ary = ary.concat(ans)
+      ary = ary.concat(ans);
     }
     for (let i = 0; i < ary.length; i++) {
       for (let j = i + 1; j < ary.length; j++) {
         if (ary[i] == ary[j]) {
-          ary.splice(i, 1)
-          ary.splice(j - 1, 1)
-          i--
-          j--
+          ary.splice(i, 1);
+          ary.splice(j - 1, 1);
+          i--;
+          j--;
         }
       }
     }
-    return ary
+    return ary;
   },
 
   xorBy: function () {},
@@ -612,22 +612,22 @@ var brightzoe = {
 
   zip: function (...arrays) {
     //二维数组的声明
-    let res = []
+    let res = [];
     for (let i = 0; i < arrays[0].length; i++) {
-      res[i] = []
+      res[i] = [];
       for (let j = 0; j < arrays.length; j++) {
-        res[i][j] = arrays[j][i]
+        res[i][j] = arrays[j][i];
       }
     }
-    return res
+    return res;
   },
 
   zipObject: function (props = [], values = []) {
-    var res = {}
+    var res = {};
     for (let i = 0; i < props.length; i++) {
-      res[props[i]] = values[i]
+      res[props[i]] = values[i];
     }
-    return res
+    return res;
   },
 
   zipObjectDeep: function () {},
@@ -636,17 +636,30 @@ var brightzoe = {
 
   countBy: function () {},
 
-  every: function () {},
+  every: function (collection, predicate = this.identity) {
+    if (this.isArray(collection)) {
+      collection.reduce((pre, acc) => {
+        return pre && predicate(acc);//短路，都为true
+      }, true);
+    } else if (this.isObject(collection)) {
+      for (let key in collection) {
+        if (!predicate(collection[key], key, collection)) {
+          return false
+        }
+      }
+      return true
+    }
+  },
 
-  filter: function (array, prec) {
-    let test = iteratee(prec)
-    var result = []
+  filter: function (array, predicate = this.identity) {
+    let test = iteratee(predicate);
+    var result = [];
     for (let i = 0; i < array.length; i++) {
       if (test(array[i], i, array)) {
-        result.push(array[i])
+        result.push(array[i]);
       }
     }
-    return result
+    return result;
   },
 
   //返回符合条件的第一个元素。
@@ -655,13 +668,13 @@ var brightzoe = {
     if (isArray(collection)) {
       for (let i = 0; i < collection.length; i++) {
         if (predicate(collection[i], i, collection)) {
-          return collection[i]
+          return collection[i];
         }
       }
     } else {
       for (let col of collection) {
         if (predicate(collection[col], col, collection)) {
-          return col
+          return col;
         }
       }
     }
@@ -676,13 +689,13 @@ var brightzoe = {
     if (isArray(collection)) {
       for (let i = collection.length - 1; i >= 0; i--) {
         if (predicate(collection[i], i, collection)) {
-          return collection[i]
+          return collection[i];
         }
       }
     } else {
       for (let col of collection) {
         if (predicate(collection[col], col, collection)) {
-          return col
+          return col;
         }
       }
     }
@@ -697,11 +710,11 @@ var brightzoe = {
   forEach: function (collection, iteratee) {
     if (Array.isArray(collection)) {
       for (let i = 0; i < collection.length; i++) {
-        iteratee(collection[i])
+        iteratee(collection[i]);
       }
     } else {
       for (item in collection) {
-        iteratee(item)
+        iteratee(item);
       }
     }
   },
@@ -709,24 +722,24 @@ var brightzoe = {
   forEachRight: function () {},
 
   groupBy: function (collection, iteratee) {
-    var result = {}
+    var result = {};
   },
 
   includes: function (collection, value, fromIndex = 0) {
-    fromIndex = fromIndex >= 0 ? fromIndex : collection.length + fromIndex
-    if (typeof collection == 'object') {
+    fromIndex = fromIndex >= 0 ? fromIndex : collection.length + fromIndex;
+    if (typeof collection == "object") {
       //变成只有属性值的数组
-      collection = Object.values(collection)
+      collection = Object.values(collection);
     }
     for (let i = fromIndex; i < collection.length; i++) {
       if (
         value == collection[i] ||
         value == collection.slice(i, i + value.length)
       ) {
-        return true
+        return true;
       }
     }
-    return false
+    return false;
   },
 
   invokeMap: function () {},
@@ -754,10 +767,10 @@ var brightzoe = {
   shuffle: function () {},
 
   size: function (collection) {
-    if (typeof collection == 'object') {
-      return Object.keys(collection).length
+    if (typeof collection == "object") {
+      return Object.keys(collection).length;
     } else {
-      return collection.length
+      return collection.length;
     }
   },
 
@@ -771,38 +784,38 @@ var brightzoe = {
 
   castArray: function (value) {
     //如何判断没有输入参数还是参数是undefined
-    //用aruments.length
+    //用arguments.length
     if (!arguments.length) {
-      return []
+      return [];
     }
-    if (typeof value == 'array') {
-      return value
+    if (typeof value == "array") {
+      return value;
     }
 
-    return [value]
+    return [value];
   },
 
   conformsTo: function () {},
 
   eq: function (value, other) {
     if (value !== value && other !== other) {
-      return true
+      return true;
     }
-    return value === other
+    return value === other;
   },
 
   gt: function (value, other) {
-    return value > other
+    return value > other;
   },
 
   gte: function (value, other) {
-    return value >= other
+    return value >= other;
   },
 
   isArguments: function () {},
 
   isArray: function (value) {
-    return Array.isArray(value)
+    return Array.isArray(value);
   },
 
   isArrayBuffer: function () {},
@@ -812,7 +825,7 @@ var brightzoe = {
   isArrayLikeObject: function () {},
 
   isBoolean: function (value) {
-    return typeof value === 'boolean'
+    return typeof value === "boolean";
   },
 
   isDate: function () {},
@@ -825,49 +838,49 @@ var brightzoe = {
     //深对比
     if (value === other) {
       //基本类型直接比较
-      return true
+      return true;
     }
     if (typeof value !== typeof other) {
       //类型不等则肯定不等
-      return false
+      return false;
     }
 
     if (this.isNaN(value) && this.isNaN(other)) {
       //NaN
-      return true
+      return true;
     }
     if (value.length !== other.length) {
-      return false
+      return false;
     }
     if (this.isArray(value)) {
       //array
       if (this.isArray(object)) {
         for (let i = 0; i < value.length; i++) {
           if (!this.isEqual(value[i], other[i])) {
-            return false
+            return false;
           }
         }
-        return true
+        return true;
       }
-      return false
+      return false;
     }
     if (this.isObject(value) && this.isObject(other) && !this.isArray(other)) {
       //object
       for (let key in value) {
         if (!this.isEqual(value[key], other[key])) {
-          return false
+          return false;
         }
       }
-      return true
+      return true;
     }
-    return false
+    return false;
   },
   isEqualWith: function (value, other, customizer = undefined) {
-    customizer = typeof customizer == 'function' ? customizer : undefined
+    customizer = typeof customizer == "function" ? customizer : undefined;
     if (this.isUndefined(customizer)) {
-      return this.isEqual(value, other)
+      return this.isEqual(value, other);
     } else {
-      return customizer(value, other)
+      return customizer(value, other);
     }
   },
 
@@ -876,7 +889,7 @@ var brightzoe = {
   isFinite: function () {},
 
   isFunction: function (value) {
-    return typeof value === 'function'
+    return typeof value === "function";
   },
 
   isInteger: function () {},
@@ -893,18 +906,18 @@ var brightzoe = {
   isMatch: function (obj, src) {
     for (let key in src) {
       if (obj[key] !== src[key]) {
-        return false
+        return false;
       }
     }
-    return true
+    return true;
   },
 
   isMatchWith: function (obj, src, customizer = undefined) {
-    customizer = typeof customizer == 'function' ? customizer : undefined
+    customizer = typeof customizer == "function" ? customizer : undefined;
     if (this.isUndefined(customizer)) {
-      return this.isMatch(obj, src)
+      return this.isMatch(obj, src);
     } else {
-      return customizer(obj, src)
+      return customizer(obj, src);
     }
   },
 
@@ -912,20 +925,20 @@ var brightzoe = {
 
   isNil: function (value) {
     if (value === null || value === undefined) {
-      return true
+      return true;
     }
-    return false
+    return false;
   },
 
   isNumber: function (value) {
-    return typeof value === 'number'
+    return typeof value === "number";
   },
 
   isObject: function (value) {
     if (value === null) {
-      return false
+      return false;
     }
-    return typeof value === 'object'
+    return typeof value === "object";
   },
 
   isObjectLike: function () {},
@@ -939,7 +952,7 @@ var brightzoe = {
   isSet: function () {},
 
   isString: function (value) {
-    return typeof value === 'string'
+    return typeof value === "string";
   },
 
   isSymbol: function () {},
@@ -947,7 +960,7 @@ var brightzoe = {
   isTypedArray: function () {},
 
   isUndefined: function (value) {
-    return value === undefined
+    return value === undefined;
   },
 
   isWeakMap: function () {},
@@ -960,9 +973,9 @@ var brightzoe = {
    */
   isNull: function (val) {
     if (val === null) {
-      return true
+      return true;
     } else {
-      return false
+      return false;
     }
   },
 
@@ -971,45 +984,45 @@ var brightzoe = {
    * @return {boolean}
    */
   isNaN: function (val) {
-    if (typeof val == 'object') {
+    if (typeof val == "object") {
       //对象转换为原始类型:valueOf()和toString()
-      if (val.toString() === 'NaN') {
-        return true
+      if (val.toString() === "NaN") {
+        return true;
       }
-      return false
+      return false;
     }
     if (val !== val) {
-      return true
+      return true;
     } else {
-      return false
+      return false;
     }
   },
 
   lt: function (value, other) {
-    return value < other
+    return value < other;
   },
 
   lte: function (value, other) {
-    return value <= other
+    return value <= other;
   },
 
   toArray: function (value) {
     if (value == undefined) {
       //null&&undefined
-      return []
+      return [];
     }
-    if (typeof value == 'object') {
-      return Object.values(value)
-    } else if (typeof value == 'array') {
-      return value
-    } else if (typeof value == 'string') {
-      let res = []
+    if (typeof value == "object") {
+      return Object.values(value);
+    } else if (typeof value == "array") {
+      return value;
+    } else if (typeof value == "string") {
+      let res = [];
       for (let str of value) {
-        res.push(str)
+        res.push(str);
       }
-      return res
+      return res;
     } else {
-      return []
+      return [];
     }
   },
 
@@ -1026,78 +1039,78 @@ var brightzoe = {
   toSafeInteger: function () {},
 
   add: function (augend, addend) {
-    return augend + addend
+    return augend + addend;
   },
 
   ceil: function (number, precision = 0) {
     // p = -1 number = number - number % 10 + 10
     // p = 0 number = number - number % 1 + 1
     // p = 1 number = number - number % 0.1 + 0.1
-    let exp = 10 ** -precision
-    return number - (number % exp) + exp
+    let exp = 10 ** -precision;
+    return number - (number % exp) + exp;
   },
 
   divide: function (dividend, divisor) {
-    return dividend / divisor
+    return dividend / divisor;
   },
 
   floor: function (number, precision = 0) {
-    let exp = 10 ** -precision
-    return number - (number % exp)
+    let exp = 10 ** -precision;
+    return number - (number % exp);
   },
 
   max: function (array) {
-    let max = array[0]
+    let max = array[0];
     for (let i = 0; i < array.length; i++) {
-      max = max > array[i] ? max : array[i]
+      max = max > array[i] ? max : array[i];
     }
-    return max
+    return max;
   },
 
   maxBy: function () {},
 
   mean: function (array) {
-    let sum = 0
+    let sum = 0;
     for (let i = 0; i < array.length; i++) {
-      sum += array[i]
+      sum += array[i];
     }
-    return sum / array.length
+    return sum / array.length;
   },
 
   meanBy: function () {},
 
   min: function (array) {
-    let min = array[0]
+    let min = array[0];
     for (let i = 0; i < array.length; i++) {
-      mean = mean < array[i] ? mean : array[i]
+      mean = mean < array[i] ? mean : array[i];
     }
-    return min
+    return min;
   },
 
   minBy: function () {},
 
   multiply: function (multiplier, multiplicand) {
-    return multiplicand * multiplier
+    return multiplicand * multiplier;
   },
 
   round: function (number, precision = 0) {
-    let exp = 10 ** -precision
+    let exp = 10 ** -precision;
     if (number - this.floor(number, precision) < 0.5 * exp) {
-      return this.floor(number, precision)
+      return this.floor(number, precision);
     }
-    return this.ceil(number, precision)
+    return this.ceil(number, precision);
   },
 
   subtract: function (minuend, subtrahend) {
-    return minuend - subtrahend
+    return minuend - subtrahend;
   },
 
   sum: function (array) {
-    let sum = 0
+    let sum = 0;
     for (let ary of array) {
-      sum += ary
+      sum += ary;
     }
-    return sum
+    return sum;
   },
 
   sumBy: function () {},
@@ -1106,15 +1119,15 @@ var brightzoe = {
 
   inRange: function (number, start = 0, end) {
     if (end == undefined) {
-      end = start
-      start = 0
+      end = start;
+      start = 0;
     }
     if (start > end) {
-      let temp = start
-      start = end
-      end = temp
+      let temp = start;
+      start = end;
+      end = temp;
     }
-    return number >= start && number < end
+    return number >= start && number < end;
   },
 
   random: function () {},
@@ -1122,26 +1135,26 @@ var brightzoe = {
   assignIn: function () {},
 
   at: function (object, paths) {
-    let res = []
+    let res = [];
     for (let i = 0; i < paths.length; i++) {
       // res.push(object[path[i]])
     }
-    return res
+    return res;
   },
 
   defaults: function (object, ...sources) {
-    let source = {}
+    let source = {};
     for (let i in sources) {
       //对象合并
-      Object.assign(source, sources[i])
+      Object.assign(source, sources[i]);
     }
-    let array = Object.keys(source)
+    let array = Object.keys(source);
     for (let ary of array) {
       if (ary in object == false) {
-        object[ary] = source[ary]
+        object[ary] = source[ary];
       }
     }
-    return object
+    return object;
   },
 
   defaultsDeep: function () {},
@@ -1163,7 +1176,7 @@ var brightzoe = {
   functionsIn: function () {},
 
   get: function (obj, prop) {
-    return obj[prop]
+    return obj[prop];
   },
 
   has: function () {},
@@ -1171,13 +1184,13 @@ var brightzoe = {
   hasIn: function () {},
 
   invert: function (object) {
-    let res = {}
-    let array = Object.values(object)
-    let array2 = Object.keys(object)
+    let res = {};
+    let array = Object.values(object);
+    let array2 = Object.keys(object);
     for (let i = 0; i < array.length; i++) {
-      res[array[i]] = array2[i]
+      res[array[i]] = array2[i];
     }
-    return res
+    return res;
   },
 
   invertBy: function () {},
@@ -1201,11 +1214,11 @@ var brightzoe = {
   omitBy: function () {},
 
   pick: function (object, props) {
-    let res = {}
+    let res = {};
     for (let prop of props) {
-      res[prop] = object[prop]
+      res[prop] = object[prop];
     }
-    return res
+    return res;
   },
 
   pickBy: function () {},
@@ -1230,55 +1243,55 @@ var brightzoe = {
 
   values: function (object) {
     //要去掉不可枚举的
-    let obj = Object(object)
-    let ary = []
+    let obj = Object(object);
+    let ary = [];
     for (let keys in obj) {
       if (obj.hasOwnProperty(keys)) {
-        ary.push(obj[keys])
+        ary.push(obj[keys]);
       }
     }
 
-    return ary
+    return ary;
   },
 
   valuesIn: function (object) {
-    let obj = Object(object)
-    let ary = []
+    let obj = Object(object);
+    let ary = [];
     for (let keys in obj) {
-      ary.push(obj[keys])
+      ary.push(obj[keys]);
     }
-    return ary
+    return ary;
   },
 
-  camelCase: function (string = '') {
-    string = string.replace(/[^a-zA-Z]/g, ' ') //非字母变成空格
-    let str = string.trim() //前后空格去掉
-    str = str.toLowerCase()
+  camelCase: function (string = "") {
+    string = string.replace(/[^a-zA-Z]/g, " "); //非字母变成空格
+    let str = string.trim(); //前后空格去掉
+    str = str.toLowerCase();
     for (let i = 0; i < str.length; i++) {
-      if (str[i] == ' ' && str[i + 1].charCodeAt(0) >= 97) {
+      if (str[i] == " " && str[i + 1].charCodeAt(0) >= 97) {
         str =
           str.slice(0, i) +
           str[i + 1].toUpperCase() +
-          str.slice(i + 2, str.length)
+          str.slice(i + 2, str.length);
       }
     }
-    str.replace('/ /g', '')
-    return str
+    str.replace("/ /g", "");
+    return str;
   },
 
-  capitalize: function (string = '') {
-    string = string.toUpperCase()
-    string = string.slice(0, 1) + string.slice(1, string.length).toLowerCase()
-    return string
+  capitalize: function (string = "") {
+    string = string.toUpperCase();
+    string = string.slice(0, 1) + string.slice(1, string.length).toLowerCase();
+    return string;
   },
 
   deburr: function () {},
 
-  endsWith: function (string = '', target, position = string.length) {
+  endsWith: function (string = "", target, position = string.length) {
     if (string[position - 1] == target) {
-      return true
+      return true;
     }
-    return false
+    return false;
   },
 
   /**转义string中的 "&", "<", ">", '"', "'", 和 "`" 字符为HTML实体字符。
@@ -1286,94 +1299,94 @@ var brightzoe = {
    * @return {string}
    */
   escape: function (string) {
-    string.replace(/&/g, '&amp;')
-    string.replace(/</g, '&lt;')
-    string.replace(/>/g, '&gt;')
-    string.replace(/"/g, '&quot;')
-    string.replace(/'/g, '&apos;')
-    string.replace(/`/g, '&grave;')
+    string.replace(/&/g, "&amp;");
+    string.replace(/</g, "&lt;");
+    string.replace(/>/g, "&gt;");
+    string.replace(/"/g, "&quot;");
+    string.replace(/'/g, "&apos;");
+    string.replace(/`/g, "&grave;");
   },
 
   escapeRegExp: function () {},
 
-  kebabCase: function (string = '') {
-    string = string.replace(/[^a-zA-Z]/g, ' ')
-    string = string.trim().toLowerCase()
-    string = string.replace(/ +/g, '-')
-    return string
+  kebabCase: function (string = "") {
+    string = string.replace(/[^a-zA-Z]/g, " ");
+    string = string.trim().toLowerCase();
+    string = string.replace(/ +/g, "-");
+    return string;
   },
 
-  lowerCase: function (string = '') {
+  lowerCase: function (string = "") {
     if (/[^a-zA-Z]/.exec(string) == null) {
       for (var i = 1; i < string.length; i++) {
         if (string[i].charCodeAt(0) <= 90 && string[i].charCodeAt(0) >= 65) {
           var string =
             string.slice(0, i) +
-            ' ' +
+            " " +
             string.slice(i, i + 1).toLowerCase() +
-            string.slice(i + 1, string.length)
+            string.slice(i + 1, string.length);
         }
       }
     }
 
-    string = string.replace(/[^a-zA-Z]+/g, ' ')
-    string = string.trim().toLowerCase()
-    return string
+    string = string.replace(/[^a-zA-Z]+/g, " ");
+    string = string.trim().toLowerCase();
+    return string;
   },
 
-  lowerFirst: function (string = '') {
-    var str = string[0].toLowerCase() + string.slice(1, string.length)
-    return str
+  lowerFirst: function (string = "") {
+    var str = string[0].toLowerCase() + string.slice(1, string.length);
+    return str;
   },
 
-  pad: function (string = '', length = 0, chars = ' ') {
+  pad: function (string = "", length = 0, chars = " ") {
     while (true) {
       if (string.length < length) {
-        string += chars
+        string += chars;
       } else {
-        break
+        break;
       }
       if (string.length < length) {
-        string = chars + string
+        string = chars + string;
       } else {
-        break
+        break;
       }
     }
-    return string.slice(0, length)
+    return string.slice(0, length);
   },
 
-  padEnd: function (string = '', length = 0, chars = ' ') {
+  padEnd: function (string = "", length = 0, chars = " ") {
     while (string.length < length) {
-      string += chars
+      string += chars;
     }
-    return string.slice(0, length)
+    return string.slice(0, length);
   },
 
-  padStart: function (string = '', length = 0, chars = ' ') {
-    var char = ''
+  padStart: function (string = "", length = 0, chars = " ") {
+    var char = "";
     for (var i = chars.length - 1; i >= 0; i--) {
-      char += chars[i]
+      char += chars[i];
     }
     while (string.length < length) {
-      string = char + string
+      string = char + string;
     }
-    return string.slice(string.length - length, string.length)
+    return string.slice(string.length - length, string.length);
   },
 
   parseInt: function (string, radix = 10) {
-    var num = +string
-    return num.toString(radix)
+    var num = +string;
+    return num.toString(radix);
   },
 
-  repeat: function (string = '', n) {
-    var res = ''
+  repeat: function (string = "", n) {
+    var res = "";
     for (var i = 0; i < n; i++) {
-      res += str
+      res += str;
     }
-    return res
+    return res;
   },
 
-  replace: function (string = '', pattern, replacement) {},
+  replace: function (string = "", pattern, replacement) {},
 
   snakeCase: function () {},
 
@@ -1400,12 +1413,12 @@ var brightzoe = {
    * @return {string}
    */
   unescape: function (string) {
-    string.replace(/&amp;/g, '&')
-    string.replace(/&lt;/g, '<')
-    string.replace(/&gt;/g, '>')
-    string.replace(/&quot;/g, '"')
-    string.replace(/&apos;/g, "'")
-    string.replace(/&grave;/g, '`')
+    string.replace(/&amp;/g, "&");
+    string.replace(/&lt;/g, "<");
+    string.replace(/&gt;/g, ">");
+    string.replace(/&quot;/g, '"');
+    string.replace(/&apos;/g, "'");
+    string.replace(/&grave;/g, "`");
   },
 
   /**转换字符串string为 空格 分隔的大写单词
@@ -1414,17 +1427,17 @@ var brightzoe = {
    */
   upperCase: function (string) {
     //先全变成大写，字符都用空格替换，然后减少空格为1个
-    var str = string.toUpperCase()
-    str = str.replace(/[^A-Z]+/g, ' ')
-    str = str.trim() //去掉首尾空格
+    var str = string.toUpperCase();
+    str = str.replace(/[^A-Z]+/g, " ");
+    str = str.trim(); //去掉首尾空格
     for (let i = 0; i < str.length; i++) {
       //间隔空格全部变为1个
-      if (str[i] == ' ' && str[i + 1] == ' ') {
-        str.substr(i + 1, 1)
-        i--
+      if (str[i] == " " && str[i + 1] == " ") {
+        str.substr(i + 1, 1);
+        i--;
       }
     }
-    return str
+    return str;
   },
 
   /**转换字符串string的首字母为大写。
@@ -1434,10 +1447,10 @@ var brightzoe = {
   upperFirst: function (string) {
     //只有一个字符串，只需要改变首字符
     if (string[0].charCodeAt() >= 97 && string[0].charCodeAt() <= 122) {
-      let first = String.fromCharCode(string[0].charCodeAt() - 32)
-      return first + string.slice(1)
+      let first = String.fromCharCode(string[0].charCodeAt() - 32);
+      return first + string.slice(1);
     }
-    return string
+    return string;
   },
 
   /**拆分字符串string中的词为数组.
@@ -1446,7 +1459,7 @@ var brightzoe = {
    * @return {array}
    */
   words: function (string, pattern = /\w+/g) {
-    return string.match(pattern)
+    return string.match(pattern);
     //指定字符串匹配指定文本内容,返回数组
   },
 
@@ -1464,47 +1477,47 @@ var brightzoe = {
     //输入一位数想要什么结果，输入两位数要什么结果
     if (end == undefined && step == undefined) {
       //只输入一个数，区分正数和负数
-      end = start
-      start = 0
+      end = start;
+      start = 0;
       if (end > 0) {
-        step = 1
+        step = 1;
       } else {
-        step = -1
+        step = -1;
       }
     }
     if (step == undefined) {
       //只输入两位数
       if (start < end) {
-        step = 1
+        step = 1;
       } else {
-        step = -1
+        step = -1;
       }
     }
 
     //已经将上面情况全部处理为正常三个数
     if (start == end) {
-      return []
+      return [];
     }
 
-    let result = [start]
-    let i = 0
+    let result = [start];
+    let i = 0;
     //是增序还是降序
     if (step > 0) {
       while (result[i] + step < end) {
-        result.push(result[i] + step)
-        i++
+        result.push(result[i] + step);
+        i++;
       }
     } else if (step < 0) {
       while (result[i] + step > end) {
-        result.push(result[i] + step)
-        i++
+        result.push(result[i] + step);
+        i++;
       }
     } else {
-      result.length = Math.abs(end - start)
-      result.fill(start)
+      result.length = Math.abs(end - start);
+      result.fill(start);
     }
 
-    return result
+    return result;
   },
 
   rangeRight: function () {},
@@ -1523,7 +1536,7 @@ var brightzoe = {
    * @param  {...any} args
    */
   identity: function (...args) {
-    return args[0]
+    return args[0];
   },
 
   concat: function () {},
@@ -1531,7 +1544,7 @@ var brightzoe = {
   pullAt: function () {},
 
   property: function (prop) {
-    return this.get.bind(null, _, prop)
+    return this.get.bind(null, _, prop);
   },
   /**
    * 调用的函数最多传n个参数
@@ -1540,15 +1553,15 @@ var brightzoe = {
    */
   ary: function (func, n = func.length) {
     return function (...args) {
-      return func(...args.slice(0, n))
-    }
+      return func(...args.slice(0, n));
+    };
   },
   /**
    * 调用的函数只接一个参数。
    * @param {*} func
    */
   unary: function (func) {
-    return func(this.identity(...args))
+    return func(this.identity(...args));
   },
 
   negate: function () {},
@@ -1560,8 +1573,8 @@ var brightzoe = {
    */
   spread: function (func) {
     return function (ary) {
-      return func(...ary)
-    }
+      return func(...ary);
+    };
   },
 
   /**
@@ -1572,17 +1585,17 @@ var brightzoe = {
   curry: function (func, arity = func.length) {
     return function (...args) {
       while (args.length < arity) {
-        return curry(func.bind(null, ...args), arity - args.length)
+        return curry(func.bind(null, ...args), arity - args.length);
       }
-      return func(...args)
-    }
+      return func(...args);
+    };
   },
 
   memoize: function () {},
 
   /**返回参数反转接收的原函数 */
   flip: function (func) {
-    return (...args) => func(...args.reverse())
+    return (...args) => func(...args.reverse());
   },
 
   conforms: function () {},
@@ -1606,74 +1619,74 @@ var brightzoe = {
   //调用func,次数不超过n次，之后再调用这个函数，返回最后一次调用func的结果。
   //超过多少次不再调用func。
   before: function (n, func) {
-    var i = 0
-    var result
+    var i = 0;
+    var result;
     return function (...args) {
       if (i < n) {
-        i++
-        result = func(...args)
+        i++;
+        result = func(...args);
       }
-      return result
-    }
+      return result;
+    };
   },
 
   //创建一个函数，调用n次及以上马上触发func
   after: function (n, func) {
-    var i = 0
+    var i = 0;
     return function (...args) {
-      i++
+      i++;
       if (i > n) {
-        return func(...args)
+        return func(...args);
       }
-    }
+    };
   },
 
   //调用func,func最多接受n个参数
   ary: function (func, n = func.length) {
     return function (...args) {
-      return func(...args.slice(0, n))
-    }
+      return func(...args.slice(0, n));
+    };
   },
 
   //调用func,func只接受1个参数
   unary: function (func) {
     return function (args) {
-      return func(args)
-    }
+      return func(args);
+    };
   },
   flip: function (func) {
     return function (...args) {
-      return func(...args.reverse())
-    }
+      return func(...args.reverse());
+    };
   },
   matches: function (src) {
-    return this.isMatch.bind(_, src)
+    return this.isMatch.bind(_, src);
   },
 
   matches: function (tar) {
     return function (obj) {
       for (var key in obj) {
         if (obj[key] != tar[key]) {
-          return false
+          return false;
         }
       }
-      return true
-    }
+      return true;
+    };
   },
   matchesProperty: function (array) {
-    return this.matches(this.fromPairs(this.chunk(array, 2)))
+    return this.matches(this.fromPairs(this.chunk(array, 2)));
   },
 
-  iteratee: function (prec) {
+  iteratee: function (precision) {
     //把string/array/object转为function
-    if (typeof prec === 'string') {
-      return this.property(prec)
-    } else if (Array.isArray(prec)) {
-      return this.matchesProperty(prec)
-    } else if (typeof prec === 'object') {
-      return this.matches(prec)
+    if (typeof precision === "string") {
+      return this.property(precision);
+    } else if (Array.isArray(precision)) {
+      return this.matchesProperty(precision);
+    } else if (typeof precision === "object") {
+      return this.matches(precision);
     }
   },
-}
+};
 
-console.log(brightzoe.isEqual({ '0': 1, '1': 2, length: 2 }, [1, 2]))
+console.log(brightzoe.isEqual({ "0": 1, "1": 2, length: 2 }, [1, 2]));
