@@ -324,7 +324,6 @@ var brightzoe = {
    * @param {Array|Function|Object|string} [iteratee = _.identity]
    * @return {array}
    */
-  //TODO:
   intersectionBy: function () {},
 
   /**这个方法类似 _.intersection，区别是它接受一个 comparator 调用比较arrays中的元素。结果值是从第一数组中选择。comparator 会传入两个参数：(arrVal, othVal)。
@@ -639,15 +638,15 @@ var brightzoe = {
   every: function (collection, predicate = this.identity) {
     if (this.isArray(collection)) {
       collection.reduce((pre, acc) => {
-        return pre && predicate(acc);//短路，都为true
+        return pre && predicate(acc); //短路，都为true
       }, true);
     } else if (this.isObject(collection)) {
       for (let key in collection) {
         if (!predicate(collection[key], key, collection)) {
-          return false
+          return false;
         }
       }
-      return true
+      return true;
     }
   },
 
@@ -1591,7 +1590,23 @@ var brightzoe = {
     };
   },
 
-  memoize: function () {},
+  memoize: function (func,resolver = this.identity) {
+     //缓存函数是把计算的结果，存在函数中，当再次调用的时候就可以直接调用.通过牺牲算法的空间复杂度以换取更优的时间复杂度.比如闭包,hashTable,map.
+    //resolver 把参数映射为符合规则的key
+    var cache = new Map();
+    function memoized(...args) {
+      var key = resolver(...args)
+      if (caches.has(key)) {
+        return cache.get(key);
+      } else {
+        var result = func(...args)
+        cache.set(key, result);
+        return result;
+      }
+    };
+    memoized.cache = cache//给缓存函数添加一个cache属性
+    return memoized
+  },
 
   /**返回参数反转接收的原函数 */
   flip: function (func) {
