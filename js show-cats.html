@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Show Cats!</title>
+	</head>
+
+	<body>
+		<button>Show Cats!</button>
+		<script>
+
+			var btn = document.querySelector('button')
+			btn.onclick = (e) => {
+				var xhr = new XMLHttpRequest()
+				xhr.open("get", "https://xieranmaya.github.io/images/cats/cats.json")
+				xhr.send()
+				xhr.onload = (e) => {
+					var cats = JSON.parse(xhr.responseText);
+					for (var cat of cats) {
+						let img = document.createElement('img')
+						img.src = 'https://xieranmaya.github.io/images/cats/' + cat.url
+						img.onload = (e) => {//图片加载完成再展示到页面，防止半张半张地展示影响用户体验。
+							document.body.appendChild(img)
+						}
+					}
+				}
+
+			}
+
+
+		</script>
+	</body>
+
+</html>

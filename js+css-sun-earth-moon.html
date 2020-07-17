@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div style="position: relative;">
+      <img id="sun" src="./video/递归小鲤鱼.jpg" alt="" style="width: 20px; height: 30px;" />
+      <img id="earth" src="./video/1521006790194.jpg" id="me" style="position: relative; width: 20px;" alt="" />
+      <img id="moon src="" alt="">
+        </div>
+    <script>
+      var cat = document.querySelector(" img"); var me = document.querySelectorAll("img")[1]; var angle = 0, lastTime = null,
+        intr = 0; function animate(time) {
+          if (lastTime != null) { angle += (time - lastTime) * 0.002; intr += 0.01; }
+          lastTime = time; cat.style.top = Math.sin(angle) * 100 + 100 + "px"; cat.style.left = 500 + Math.cos(angle) * 100
+            + "px"; me.style.top = Math.sin(angle) * 100 + 180 + Math.sin(intr) * 80 + "px"; me.style.left = 560 +
+              Math.cos(angle) * 100 + Math.cos(intr) * 80 + "px"; requestAnimationFrame(animate);
+        } </script>
+  </body>
+
+</html>
