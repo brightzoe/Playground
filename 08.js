@@ -1,4 +1,4 @@
-//@ts-check
+//@ts-nocheck
 
 //TODO 快速排序
 function qSort(ary, start = 0, end = ary.length - 1) {
@@ -123,22 +123,3 @@ function showTip(anchor, html) {
   tip.style.top = top + "px";
   return tip;
 }
-
-//iterator  从低位到高位log出每一位
-function popDigit(number) {
-  while (number > 0) {
-    console.log(number % 10);
-    number = (number - (number % 10)) / 10;
-  }
-}
-
-function* generator(number) {
-  number = 10089;
-  while (number > 0) {
-    yield number % 10;
-    number = (number - (number % 10)) / 10;
-  }
-}
-
-var iterator = generator();
-iterator.next();
