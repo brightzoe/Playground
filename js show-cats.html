@@ -16,20 +16,67 @@
 				var xhr = new XMLHttpRequest()
 				xhr.open("get", "https://xieranmaya.github.io/images/cats/cats.json")
 				xhr.send()
-				xhr.onload = (e) => {
+				xhr.onload1by1 = (e) => {
 					var cats = JSON.parse(xhr.responseText);
 					for (var cat of cats) {
-						let img = document.createElement('img')
-						img.src = 'https://xieranmaya.github.io/images/cats/' + cat.url
-						img.onload = (e) => {//图片加载完成再展示到页面，防止半张半张地展示影响用户体验。
-							document.body.appendChild(img)
-						}
+						getImg(cat.fullUrl, document.body.appendChild)
 					}
 				}
+				xhr.onload2by2 = (e) => {//两张加载完再加载两张，两张完再两张
+					var cats = JSON.parse(xhr.responseText);
+					var i = 0
+					foo()
+					function foo() {
+						get2Img(cats[i++].fullUrl, cats[i++].fullUrl, (a, b) => {
+							document.body.appendChild(a)
+							document.body.appendChild(b)
+							if (i < cats.length) {
+								foo()//在callback里面调用，异步递归不是递归
+							}
+						})
 
+					}
+				}
+				xhr.onload = (e) => {//同时最多三张一起加载，类似迅雷同时最多三个任务下载
+					var cats = JSON.parse(xhr.responseText);
+					var i = 0
+					oneByOne()
+					oneByOne()
+					oneByOne()
+					function oneByOne() {
+						getImg(cats[i++].fullUrl, img => {
+							document.body.appendChild(img)
+							if (i < cats.length) {
+								oneByOne()//有一个结束了，就开启新的一个
+							}
+						})
+					}
+				}
 			}
 
-
+			function getImg(url, cb) {
+				var img = document.createElement('img')
+				img.src = url
+				img.onload = e => cb(img) // 图片加载完成再展示到页面，防止半张半张地展示影响用户体验。
+			}
+			function get2Img(url1, url2, cb) {
+				var img1, img2
+				var c = 0
+				getImg(url1, img => {
+					c++
+					img1 = img
+					if (c == 2) {
+						cb(img1, img2)
+					}
+				})
+				getImg(url2, img => {
+					c++
+					img2 = img
+					if (c == 2) {
+						cb(img1, img2)
+					}
+				})
+			}
 		</script>
 	</body>
 

@@ -1,2 +1,5 @@
-git push today.bat
+git-push-today.bat
+node_modules
+store-video-css
+.vscode
 

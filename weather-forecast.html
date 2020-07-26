@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>weather-forecast</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css" />
+		<style>
+			* {
+				border: 0.5px solid rgba(0, 0, 0, 0.1)
+			}
+
+			html {
+				font-size: 16px;
+			}
+
+
+
+			#form {
+				width: 500px;
+				height: 800px;
+				background-color: rgb(235, 221, 234);
+				padding: 30px;
+			}
+
+			select {
+				height: 30px;
+				margin: 10px;
+			}
+
+			#weather {
+				display: flex;
+				flex-direction: row;
+			}
+
+			span:first-child {
+				display: inline-block;
+				width: 100px;
+			}
+
+			span:last-child {
+				display: inline-block;
+			}
+
+			#forecast {
+				display: flex;
+				height: 500px;
+				flex-direction: row;
+			}
+
+
+			#yesterday,
+			#forecast>div {
+				width: 100px;
+			}
+
+			#forecast {
+				width: 300PX;
+			}
+
+			#weather ul {
+				width: 100px;
+				word-wrap: none;
+				padding: 0;
+				margin: 0;
+				list-style: none;
+			}
+
+		</style>
+	</head>
+
+	<body>
+		<form action="get" id="form">
+			<select name="select" id="select" class="chosen-select" data-placeholder="北京">
+			</select>
+			<div><span>昨日天气</span><span>未来五天天气</span></div>
+			<div id="weather">
+				<div id="yesterday">
+					<ul>
+						<li>日期</li>
+						<li>高温</li>
+						<li>低温</li>
+						<li>风向</li>
+						<li>多云</li>
+					</ul>
+				</div>
+				<div id="forecast">
+					<div id="1">
+						<ul>
+							<li>日期</li>
+							<li>高温</li>
+							<li>低温</li>
+							<li>风向</li>
+							<li>多云</li>
+						</ul>
+					</div>
+					<div id="2">
+						<ul>
+							<li>日期</li>
+							<li>高温</li>
+							<li>低温</li>
+							<li>风向</li>
+							<li>多云</li>
+						</ul>
+					</div>
+					<div id="3">
+						<ul>
+							<li>日期</li>
+							<li>高温</li>
+							<li>低温</li>
+							<li>风向</li>
+							<li>多云</li>
+						</ul>
+					</div>
+					<div id="4">
+						<ul>
+							<li>日期</li>
+							<li>高温</li>
+							<li>低温</li>
+							<li>风向</li>
+							<li>多云</li>
+						</ul>
+					</div>
+					<div id="5">
+						<ul>
+							<li>日期</li>
+							<li>高温</li>
+							<li>低温</li>
+							<li>风向</li>
+							<li>多云</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</form>
+		<script src="./china-city-area-zip.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.proto.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.proto.min.js"></script>
+		<script>
+			//$(".chosen-select").chosen({ disable_search_threshold: 10, no_results_text: "Oops, nothing found!", width: "60%" })
+			let select = document.getElementById("select")
+			for (let prov of china_city_area_zip) {
+				let optgroup = document.createElement('optgroup')
+				optgroup.label = prov.name
+				select.append(optgroup)
+				for (let city of prov.child) {
+					let option = document.createElement('option')
+					option.value = city.name
+					option.textContent = city.name
+					optgroup.append(option)
+				}
+			}
+			let weather = document.getElementById("weather")
+			let xhr = new XMLHttpRequest()
+			let url = 'http://wthrcdn.etouch.cn/weather_mini?city=' + select.value//城市更换
+			xhr.open('get', url)
+			xhr.onload = function () {
+				let data = JSON.parse(xhr.responseText).data//主要内容
+				let lis = weather.querySelectorAll('#yesterday li')
+				let dataOrder = ['date', 'high', 'low', 'fx', 'type']
+				for (let i = 0; i < lis.length; i++) {
+					let attr = dataOrder[i]
+					lis[i].textContent = data.yesterday[attr]
+				}
+				let divs = weather.querySelectorAll('#forecast>div')
+				for (let j = 0; j < divs.length; j++) {
+					lis = divs[j].querySelectorAll('li');
+					for (let i = 0; i < lis.length; i++) {
+						let attr = dataOrder[i]
+						lis[i].textContent = data.forecast[j][attr] || data.forecast[j]['fengxiang']
+					}
+				}
+			}
+			xhr.send()
+			select.onchange = () => {//换城市重新请求
+				let xhr = new XMLHttpRequest()
+				let url = 'http://wthrcdn.etouch.cn/weather_mini?city=' + select.value//城市更换
+				xhr.open('get', url)
+				xhr.onload = function () {
+					let data = JSON.parse(xhr.responseText).data//主要内容
+					console.log(data.ganmao)//感冒提醒
+					let lis = weather.querySelectorAll('#yesterday li')
+					let dataOrder = ['date', 'high', 'low', 'fx', 'type']
+					for (let i = 0; i < lis.length; i++) {
+						let attr = dataOrder[i]
+						lis[i].textContent = data.yesterday[attr]
+					}
+					let divs = weather.querySelectorAll('#forecast>div')
+					for (let j = 0; j < divs.length; j++) {
+						lis = divs[j].querySelectorAll('li');
+						for (let i = 0; i < lis.length; i++) {
+							let attr = dataOrder[i]
+							lis[i].textContent = data.forecast[j][attr]
+						}
+					}
+				}
+				xhr.send()
+
+			}
+		</script>
+	</body>
+
+</html>
