@@ -134,20 +134,6 @@ img.ready = function () {
     };
   });
 };
-//jQuery的promise实现
-var dfd = $dererred();
-dfd.promise;
-dfd.resolve;
-dfd.reject;
-
-function dererred() {
-  var dfd = {};
-  dfd.promise = new Promise((resolve, reject) => {
-    dfd.resolve = resolve;
-    dfd.reject = reject;
-  });
-  return dfd;
-}
 
 cat
   .reduce((seq, cat) => {
@@ -180,22 +166,51 @@ function getSelected(selectNode) {
 //作业: 实现表单元素的序列化; jQuery('form').serialize
 //'form?name=xx&age=18'
 function serialize(formNode) {
-  //有name
-  //radio，checkbox
-  //select multiple option->value
-  //textarea
-}
-
-// http://wthrcdn.etouch.cn/weather_mini?city=%E5%8C%97%E4%BA%AC
-
-// 实现一个极简的天气预报页面，输入城市名称，显示天气预报
-
-function getFileContent(file, done) {
-  var reader = new FileReader();
-  reader.addEventListener("load", function () {
-    done(reader.result);
-  });
-  reader.readAsText(file);
+  var res = "";
+  for (let i = 0; i < formNode.elements.length; i++) {
+    let element = formNode.elements[i];
+    if (element.name) {
+      let name = element.name;
+      let nodeName = element.nodeName;
+      if (nodeName == "INPUT") {
+        switch (element.type) {
+          case "radio":
+          case "checkbox":
+            if (element.checked) {
+              res += name + "=" + (element.value || "on");
+              if (i < formNode.elements.length - 1) {
+                res += "&";
+              }
+            }
+            break;
+          default:
+            res += name + "=" + (element.value || "on");
+            if (i < formNode.elements.length - 1) {
+              res += "&";
+            }
+        }
+      } else if (nodeName == "TEXTAREA") {
+        res += name + "=" + element.value;
+      } else if (nodeName == "SELECT") {
+        if (element.multiple) {
+          Array.from(element.options).forEach((option) => {
+            if (option.selected) {
+              res += name + "=" + element.value;
+              if (i < formNode.elements.length - 1) {
+                res += "&";
+              }
+            }
+          });
+        } else {
+          res += name + "=" + element.value;
+          if (i < form.elements.length - 1) {
+            res += "&";
+          }
+        }
+      }
+    }
+  }
+  return res;
 }
 
 function readFileAsText(file) {
@@ -211,62 +226,8 @@ function readFileAsText(file) {
   });
 }
 
-let text = {
-  data: {
-    yesterday: {
-      date: "24日星期五",
-      high: "高温 36℃",
-      fx: "西风",
-      low: "低温 22℃",
-      fl: "<![CDATA[2级]]>",
-      type: "多云",
-    },
-    city: "北京",
-    forecast: [
-      {
-        date: "25日星期六",
-        high: "高温 35℃",
-        fengli: "<![CDATA[2级]]>",
-        low: "低温 26℃",
-        fengxiang: "西南风",
-        type: "多云",
-      },
-      {
-        date: "26日星期天",
-        high: "高温 29℃",
-        fengli: "<![CDATA[2级]]>",
-        low: "低温 23℃",
-        fengxiang: "南风",
-        type: "雷阵雨",
-      },
-      {
-        date: "27日星期一",
-        high: "高温 30℃",
-        fengli: "<![CDATA[2级]]>",
-        low: "低温 23℃",
-        fengxiang: "南风",
-        type: "雷阵雨",
-      },
-      {
-        date: "28日星期二",
-        high: "高温 32℃",
-        fengli: "<![CDATA[2级]]>",
-        low: "低温 24℃",
-        fengxiang: "南风",
-        type: "多云",
-      },
-      {
-        date: "29日星期三",
-        high: "高温 35℃",
-        fengli: "<![CDATA[2级]]>",
-        low: "低温 26℃",
-        fengxiang: "南风",
-        type: "多云",
-      },
-    ],
-    ganmao: "感冒低发期，天气舒适，请注意多吃蔬菜水果，多喝水哦。",
-    wendu: "33",
-  },
-  status: 1000,
-  desc: "OK",
-};
+xhr = new XMLHttpRequest()
+xhr.open('get','/author')
+xhr.setRequestHeader('Accept', 'application/json')
+xhr.send()
+xhr.responseText 

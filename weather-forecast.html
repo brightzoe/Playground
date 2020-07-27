@@ -17,16 +17,16 @@
 			}
 
 
-
 			#form {
-				width: 500px;
-				height: 800px;
+				width: 600px;
+				height: 300px;
 				background-color: rgb(235, 221, 234);
-				padding: 30px;
+				padding: 20px;
 			}
 
 			select {
 				height: 30px;
+				width: 100px;
 				margin: 10px;
 			}
 
@@ -46,7 +46,7 @@
 
 			#forecast {
 				display: flex;
-				height: 500px;
+				height: 250px;
 				flex-direction: row;
 			}
 
@@ -66,6 +66,13 @@
 				padding: 0;
 				margin: 0;
 				list-style: none;
+			}
+
+			p {
+				font-size: 80px;
+				font-weight: bold;
+				letter-spacing: -20px;
+				text-shadow: 2px 0;
 			}
 
 		</style>
@@ -135,12 +142,14 @@
 				</div>
 			</div>
 		</form>
+		<select name="prov" id="" aria-placeholder="省份"></select>
+		<select name="city" id="" data-placeholder="城市"></select>
+		<button id="query">查询</button>
+		<div id="information">
+
+		</div>
 		<script src="./china-city-area-zip.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.proto.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.proto.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.19/lodash.min.js"></script>
 		<script>
 			//$(".chosen-select").chosen({ disable_search_threshold: 10, no_results_text: "Oops, nothing found!", width: "60%" })
 			let select = document.getElementById("select")
@@ -203,6 +212,67 @@
 
 			}
 		</script>
+		<script>
+			let prov = document.querySelector('[name=prov]')
+			let city = document.querySelector('[name=city]')
+			for (let province of china_city_area_zip) {
+				let option = document.createElement('option')
+				option.value = option.textContent = province.name
+				prov.append(option)
+			}
+			prov.addEventListener("change", e => {
+				let province = china_city_area_zip.find(it => it.name === prov.value)
+				city.innerHTML = ''
+				for (let ct of province.child) {
+					let option = document.createElement('option')
+					option.value = option.textContent = ct.name
+					city.append(option)
+				}
+				city.value = city.children[0].value
+			})
+			let query = document.querySelector("#query")
+			query.onclick = () => {//换城市重新请求
+				let url = 'http://wthrcdn.etouch.cn/weather_mini?city=' + city.value//城市更换
+				get(url).then(info => console.log(info))
+			}
+			function get(url) {
+				return new Promise((resolve, reject) => {
+					let xhr = new XMLHttpRequest()
+					xhr.open('get', url)
+					xhr.onload = () => resolve(xhr.responseText)
+					xhr.send()
+				}).then(JSON.parse)
+			}
+			let data = china_city_area_zip
+			var tpl = `
+			<header>
+				<div class="left">
+					<span><%=data.wendu%></span>
+					<span><%=data.forecast[0].type%></span>
+				</div>
+				<div class="right">
+					<span><%=data.ganmao%></span>
+				</div>
+				<div></div>
+				<ul>
+					<%data.forecast.forEach(it=>{%>
+					<li>
+					<span><%=it.date%></span>
+					<span><%=it.type%></span>
+					<span><%=it.high%></span>
+					<span><%=it.low%></span>
+					</li>
+					<%})%>
+				</ul>
+				<p>35</p>
+			</header>`
+			var tplFunc = _.template(tpl)
+		</script>
 	</body>
 
 </html>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.proto.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.proto.min.js"></script> -->

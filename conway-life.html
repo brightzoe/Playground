@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>conway life</title>
+		<style>
+			button {
+				margin: 10px;
+			}
+
+		</style>
+	</head>
+
+	<body>
+
+		<div>
+			<button id="random" title="随机生成150个存活细胞">随机播种</button>
+			<button id="load" title="从当前状态开始">开始运行</button>
+			<button id="pause" title="以现在状态暂停">暂停</button>
+			<button id="stop" title="停止运行，杀死所有细胞">停止</button>
+		</div>
+		<form id="conway"></form>
+
+		<script>
+			let conway = document.querySelector('#conway')
+			for (let i = 0; i < 1000; i++) {//创建好容器，一行用br换行
+				if (i % 50 == 0 && i !== 0) {
+					conway.append(document.createElement('br'))
+				}
+				let checkbox = document.createElement('input')
+				checkbox.type = 'checkbox'
+				conway.append(checkbox)
+			}
+			let checkboxes = conway.querySelectorAll('[type=checkbox]')//所有的checkbox
+
+			function countEnv(element) {//一个checkbox周围有几个checked,有几个活的
+				let count = 0
+				let i
+				for (i = 0; i < 1000; i++) {//找到现在这个目标是第几个，用i表示
+					if (checkboxes[i] === element) {
+						break;
+					}
+				}
+
+				if (i - 1 >= 0 && i - 1 <= 999 && checkboxes[i - 1].checked) {
+					count++
+				}
+				if (i + 1 >= 0 && i + 1 <= 999 && checkboxes[i + 1].checked) {
+					count++
+				}
+				if (i - 50 >= 0 && i - 50 <= 999 && checkboxes[i - 50].checked) {
+					count++
+				}
+				if (i + 50 >= 0 && i + 50 <= 999 && checkboxes[i + 50].checked) {
+					count++
+				}
+				if (i - 51 >= 0 && i - 51 <= 999 && checkboxes[i - 51].checked) {
+					count++
+				}
+				if (i - 49 >= 0 && i - 49 <= 999 && checkboxes[i - 49].checked) {
+					count++
+				}
+				if (i + 49 >= 0 && i + 49 <= 999 && checkboxes[i + 49].checked) {
+					count++
+				}
+				if (i + 51 >= 0 && i + 51 <= 999 && checkboxes[i + 51].checked) {
+					count++
+				}
+				return count
+			}
+			let random = document.querySelector('#random')
+			random.onclick = (e) => {//随机生成
+				for (let i = 0; i < 1000; i++) {//先全部清空
+					checkboxes[i].checked = false
+				}
+				let randomCell = randomNumber(150, 1000)
+				for (let i = 0; i < randomCell.length; i++) {
+					checkboxes[randomCell[i]].checked = true
+				}
+			}
+
+			function randomNumber(num1, num2) {//在0-num2范围内生成num1个不重复的整数
+				let res = []
+				while (res.length < num1) {
+					let temp = Math.floor(num2 * Math.random())
+					while (res.includes(temp)) {
+						temp = Math.floor(num2 * Math.random())
+					}
+					res.push(temp)
+				}
+				return res
+			}
+			let load = document.querySelector("#load")
+			let interval
+			load.addEventListener("click", e => {
+				//监控当前状态，500ms后同时改变状态
+				interval = setInterval(() => {
+					for (let i = 0; i < 1000; i++) {
+						if (checkboxes[i].checked && (countEnv(checkboxes[i]) < 2 || countEnv(checkboxes[i]) > 3)) {
+							checkboxes[i].checked = false
+						} else if (checkboxes[i].checked == false && countEnv(checkboxes[i]) >= 3) {
+							checkboxes[i].checked = true
+						}
+					}
+				}, 500);
+
+			})
+			let pause = document.querySelector('#pause')
+			pause.addEventListener("click", e => {
+				console.log(1)
+				clearInterval(interval)
+			})
+
+			let stop = document.querySelector('#stop')
+			stop.addEventListener('click', e => {
+				clearInterval(interval)
+				for (let i = 0; i < checkboxes.length; i++) {
+					checkboxes[i].checked = false
+				}
+			})
+		</script>
+	</body>
+
+</html>
