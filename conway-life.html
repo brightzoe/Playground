@@ -75,7 +75,7 @@
 				for (let i = 0; i < 1000; i++) {//先全部清空
 					checkboxes[i].checked = false
 				}
-				let randomCell = randomNumber(150, 1000)
+				let randomCell = randomNumber(100, 1000)
 				for (let i = 0; i < randomCell.length; i++) {
 					checkboxes[randomCell[i]].checked = true
 				}
@@ -100,7 +100,7 @@
 					for (let i = 0; i < 1000; i++) {
 						if (checkboxes[i].checked && (countEnv(checkboxes[i]) < 2 || countEnv(checkboxes[i]) > 3)) {
 							checkboxes[i].checked = false
-						} else if (checkboxes[i].checked == false && countEnv(checkboxes[i]) >= 3) {
+						} else if (checkboxes[i].checked == false && countEnv(checkboxes[i]) === 3) {
 							checkboxes[i].checked = true
 						}
 					}

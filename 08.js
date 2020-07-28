@@ -226,8 +226,86 @@ function readFileAsText(file) {
   });
 }
 
-xhr = new XMLHttpRequest()
-xhr.open('get','/author')
-xhr.setRequestHeader('Accept', 'application/json')
-xhr.send()
-xhr.responseText 
+xhr = new XMLHttpRequest();
+xhr.open("get", "/author");
+xhr.setRequestHeader("Accept", "application/json");
+xhr.send();
+xhr.responseText;
+
+//实现jquery
+class jQuery {
+  static parseHTML(code) {
+    var div = document.createElement("div");
+    div.innerHTML = code;
+    return Array.from(div.childNodes);
+  }
+  constructor(selector) {
+    var elements = document.querySelectorAll(selector);
+    for (let i = 0; i < elements.length; i++) {
+      this[i] = elements[i];
+    }
+    this.length = elements.length;
+  }
+  on(eventName, selector, handler) {
+    this.each((element) => {
+      this.addEventListener(eventName, function (e) {
+        if (e.target.matches(selector)) {
+          handler.call(e.target, e);
+        }
+      });
+    });
+  }
+  click(handler) {
+    if (handler) {
+      this.each((element) => {
+        element.addEventListener("click", handler);
+      });
+    } else {
+      this.each((element) => {
+        element.click();
+      });
+    }
+  }
+  each(func) {
+    for (let i = 0; i < this.length; i++) {
+      func.call(this[i], i, this[i]);
+    }
+    return this;
+  }
+  css(propName, propVal) {
+    for (let i = 0; i < this.length; i++) {
+      this[i].style[propName] = propVal;
+    }
+    return this;
+  }
+  html(val) {
+    if (val === undefined) {
+      return this[0].innerHTML;
+    } else {
+    }
+  }
+}
+
+new jQuery("div p");
+$("div");
+$("<div></div>");
+$(document.body);
+$([document.body, document.head]);
+
+
+// let codeBlob = new Blob(
+//   [
+//     `
+// var console = {
+// 	log:function(...args){
+// 		postMessage(args)
+// 	}
+// }
+// `,
+//     code.value,
+//   ],
+//   { type: "application/javascript" }
+// );
+// let codeUrl = URL.createObjectURL(codeBlob);
+// let codeWorker = new Worker(codeUrl); //创建新的线程，防止访问全局变量，操作dom，创建隔离环境
+// codeWorker.addEventListener("message", (e) => {});

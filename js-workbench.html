@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>JSWorkBench</title>
+		<style>
+			#result {
+				border: 2px solid red;
+				min-height: 3em;
+			}
+
+		</style>
+	</head>
+	<!-- 实现一个js控制台 -->
+	<!-- 放在沙箱里运行，完全隔离的环境 -->
+	<!-- 不能访问我全局的变量，不能修改我的dom -->
+	<!-- 实时代码高亮 -->
+
+	<body>
+		<textarea name="" id="code" cols="30"
+			rows="10">var a = 5;var b = 3;console.log(a+b);console.log(a+b);console.log(a+b);result =0</textarea>
+		<br>
+		<button id="run">Run</button>
+		<pre id="result"></pre>
+
+		<script>
+			(function () {
+				let run = document.getElementById('run')
+				let result = document.getElementById('result')
+				let code = document.getElementById('code')
+				let _console = console
+
+				run.onclick = e => {
+					result.textContent = ''
+					let logs = evalCode(code.value)
+					result.textContent = logs.map(it => it.map(String).join(' ')).join('\n')
+				}
+
+				function evalCode(code) {
+					var logs = []
+					window.console = {//如果有console.log
+						log: function (...args) {
+							_console.log(...args)
+							logs.push(args)
+						}
+					}
+					let globalEval = eval
+					logs.push([globalEval(code)])//需要阻止eval(code)访问外面的变量
+					return logs
+				}
+			})()
+
+		</script>
+	</body>
+
+</html>
