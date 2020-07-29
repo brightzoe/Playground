@@ -12,6 +12,8 @@
 
 		</style>
 	</head>
+	<!-- 像素游戏 -->
+	<!-- 细胞自动机，兰顿蚂蚁，贪吃蛇，俄罗斯方块，扫雷 -->
 
 	<body>
 
@@ -120,6 +122,74 @@
 					checkboxes[i].checked = false
 				}
 			})
+
+
+
+			class ConwayLife {
+				constructor(row, col) {
+					this.row = row
+					this.col = col
+					this.world = this.createNewWorld()
+					this.init(0.3)
+				}
+				createNewWorld() {
+					return new Array(this.row).fill(0).map(it => new Array(this.col).fill(0))
+				}
+				init(ratio = 0.2) {//初始随机播种的比例
+					for (let i = 0; i < this.row; i++) {
+						for (let j = 0; j < this.col; j++) {
+							this.world[i][j] = Math.random() < ratio ? 1 : 0//生成一定比例1的随机方式
+						}
+					}
+				}
+				nextGeneration() {
+					//输入二维数组,返回下一次状态
+					let world = this.createNewWorld()
+					for (let i = 0; i < this.row; i++) {
+						for (let j = 0; j < this.col; j++) {
+							let count = this.countSurroundings(i, j)
+							if (count < 2 || count > 3) {
+								world[i][j] = 0
+							} else if (count === 3) {
+								world[i][j] = 1
+							} else {
+								world[i][j] = this.world[i][j]
+							}
+						}
+					}
+					this.world = world
+					return this
+				}
+				countSurroundings(i, j) {
+					let count = 0//[i,j]周围有几个活的
+					for (let m = i - 1; m <= i + 1; m++) {
+						for (let n = j - 1; n <= j + 1; n++) {
+							let m1 = m//处理越界问题，上面越界从下面出来，左边越界从右边出来
+							if (m1 < 0) {
+								m1 = m1 + this.row
+							}
+							if (m1 > this.row - 1) {
+								m1 = m1 - this.row
+							}
+							let n1 = n
+							if (n1 < 0) {
+								n1 = n + this.col
+							}
+							if (n1 > this.col - 1) {
+								n1 = n - this.col
+							}
+							if (!(m1 === i && n1 === j)) {
+								count += this.world[m1][n1]
+							}
+						}
+					}
+				}
+				renderToHTML() {//试试只改变状态，而不是重新画出新的input
+					//可以优化为只用一个数组，而不是创建更多的数组，位运算可以，用不同的位来保存
+
+				}
+			}
+			game = new ConwayLife(10, 10)
 		</script>
 	</body>
 

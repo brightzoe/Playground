@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>auto completion</title>
+	</head>
+	<!-- 搜索联想，搜索建议，参考百度搜索 -->
+	<!-- typeahead -->
+
+	<body>
+		<input type="text" id="field">
+		<div id="suggestions" style="cursor: pointer"></div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script>
+
+			let input = document.querySelector('#field')
+			let suggestions = document.querySelector("#suggestions")
+			let sugCache = {}
+			let url = 'https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&sugsid=32288,1463,32357,31254,32351,32046,32398,32117,31709,26350&wd='
+			input.addEventListener('input', e => {
+				let time = Date.now()
+				let word = input.value//记录变量，防止缓存的word不一致
+				if (word in sugCache) {
+					suggestions.innerHTML = sugCache.g.map(it => it.q).join('<br>')
+
+				} else {
+
+					getJSON(url).then(data => {//拿到数据要做缓存，并且不能直接显示，防止显示顺序有问题
+						sugCache[word] = data
+						if (time > currShowTime) {
+
+							suggestions.innerHTML = data.g.map(it => it.q).join('<br>')
+							currShowTime = time
+						}
+					})
+				}
+
+			})
+			function delay(time) {
+				return new Promise(resolve => {
+					setTimeout(resolve, time);
+				})
+			}
+			function getJSON(url) {
+				return $.getJSON(url).then(data => {
+					return delay(300 + Math.random() * 200).then(() => data)
+				})
+			}
+
+		</script>
+	</body>
+
+</html>

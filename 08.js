@@ -1,4 +1,3 @@
-//@ts-nocheck
 
 //TODO 快速排序
 function qSort(ary, start = 0, end = ary.length - 1) {
@@ -148,89 +147,7 @@ cat
   .then(() => {
     console.log("All cats downloaded");
   });
-//将表单元素转换为query string
-function normalizeForm(form) {
-  return Array.from(form.elements)
-    .filter((it) => it.name)
-    .reduce((prev, curr) => prev + curr.name + "=" + curr.value + "&", "")
-    .slice(-1);
-}
 
-function getSelected(selectNode) {
-  Array.from(selectNode.options)
-    .filter((it) => it.selected)
-    .map((it) => Number(it.value))
-    .reduce((prev, curr) => prev + curr);
-}
-
-//作业: 实现表单元素的序列化; jQuery('form').serialize
-//'form?name=xx&age=18'
-function serialize(formNode) {
-  var res = "";
-  for (let i = 0; i < formNode.elements.length; i++) {
-    let element = formNode.elements[i];
-    if (element.name) {
-      let name = element.name;
-      let nodeName = element.nodeName;
-      if (nodeName == "INPUT") {
-        switch (element.type) {
-          case "radio":
-          case "checkbox":
-            if (element.checked) {
-              res += name + "=" + (element.value || "on");
-              if (i < formNode.elements.length - 1) {
-                res += "&";
-              }
-            }
-            break;
-          default:
-            res += name + "=" + (element.value || "on");
-            if (i < formNode.elements.length - 1) {
-              res += "&";
-            }
-        }
-      } else if (nodeName == "TEXTAREA") {
-        res += name + "=" + element.value;
-      } else if (nodeName == "SELECT") {
-        if (element.multiple) {
-          Array.from(element.options).forEach((option) => {
-            if (option.selected) {
-              res += name + "=" + element.value;
-              if (i < formNode.elements.length - 1) {
-                res += "&";
-              }
-            }
-          });
-        } else {
-          res += name + "=" + element.value;
-          if (i < form.elements.length - 1) {
-            res += "&";
-          }
-        }
-      }
-    }
-  }
-  return res;
-}
-
-function readFileAsText(file) {
-  return new Promise((resolve, reject) => {
-    var reader = new FileReader();
-    reader.onload = () => {
-      resolve(reader.result);
-    };
-    reader.onerror = (e) => {
-      reject(new Error(e));
-    };
-    reader.readAsText(file);
-  });
-}
-
-xhr = new XMLHttpRequest();
-xhr.open("get", "/author");
-xhr.setRequestHeader("Accept", "application/json");
-xhr.send();
-xhr.responseText;
 
 //实现jquery
 class jQuery {
@@ -292,20 +209,6 @@ $("<div></div>");
 $(document.body);
 $([document.body, document.head]);
 
-
-// let codeBlob = new Blob(
-//   [
-//     `
-// var console = {
-// 	log:function(...args){
-// 		postMessage(args)
-// 	}
-// }
-// `,
-//     code.value,
-//   ],
-//   { type: "application/javascript" }
-// );
-// let codeUrl = URL.createObjectURL(codeBlob);
-// let codeWorker = new Worker(codeUrl); //创建新的线程，防止访问全局变量，操作dom，创建隔离环境
-// codeWorker.addEventListener("message", (e) => {});
+function *f() {
+  
+}
