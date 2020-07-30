@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>test</title>
+		<style>
+			#field {
+				width: 200px;
+				height: 150px;
+				border: 10px solid black;
+				background-color: #00ff00;
+				overflow: hidden;
+				position: relative;
+			}
+
+			#gym {
+				height: 250px;
+				display: none
+			}
+
+			#ball {
+				position: absolute;
+				left: 0;
+				top: 0;
+				transition: 1s all;
+			}
+
+			.menu ul {
+				margin: 0;
+				list-style: none;
+				padding-left: 20px;
+				display: none;
+			}
+
+			.menu .title {
+				font-size: 18px;
+				cursor: pointer;
+			}
+
+			.menu .title::before {
+				content: "▶ ";
+				color: green;
+			}
+
+			.menu.open .title::before {
+				content: "▼ ";
+				color: green;
+			}
+
+			.menu.open ul {
+				display: block;
+			}
+
+			.tree span:hover {
+				font-weight: bold;
+			}
+
+			.tree span {
+				cursor: pointer;
+			}
+
+			.selected {
+				background: #b3c9ce;
+			}
+
+			li {
+				cursor: pointer;
+			}
+
+			body {
+				height: 2000px;
+				/* the tooltip should work after page scroll too */
+			}
+
+			.tooltip {
+				position: fixed;
+				z-index: 100;
+
+				padding: 10px 20px;
+
+				border: 1px solid #b3c9ce;
+				border-radius: 4px;
+				text-align: center;
+				font: italic 14px/1.3 sans-serif;
+				color: #333;
+				background: #fff;
+				box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+			}
+
+			#house {
+				margin-top: 50px;
+				width: 400px;
+				border: 1px solid brown;
+
+			}
+
+			#roof {
+				width: 0;
+				height: 0;
+				border-left: 200px solid transparent;
+				border-right: 200px solid transparent;
+				border-bottom: 20px solid brown;
+				margin-top: -20px;
+			}
+
+			p {
+				text-align: justify;
+				margin: 10px 3px;
+			}
+
+			.tooltip {
+				position: fixed;
+				z-index: 100;
+				padding: 10px 20px;
+				border: 1px solid #b3c9ce;
+				border-radius: 4px;
+				text-align: center;
+				font: italic 14px/1.3 sans-serif;
+				color: #333;
+				background: #fff;
+				box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+			}
+
+			#tree,
+			#gym,
+			#house,
+			.menu {
+				display: none
+			}
+
+		</style>
+	</head>
+
+	<body>
+		<div id="gym">
+			<p>Click on a field to move the ball there.<br>
+				The ball should never leave the field.</p>
+
+
+			<div id="field">
+				<img src="https://en.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+				.
+				. .
+				. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+				.
+				. .
+				. . . . . . .
+				. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+				.
+				. .
+				. . . . . . . . . . . . . . . . . . . . .
+			</div>
+		</div>
+
+		<div class="menu">
+			<span class="title">Sweeties (click me)!</span>
+			<ul>
+				<li>Cake</li>
+				<li>Donut</li>
+				<li>Honey</li>
+			</ul>
+		</div>
+		<ul class="tree" id="tree">
+			<li>Animals
+				<ul>
+					<li>Mammals
+						<ul>
+							<li>Cows</li>
+							<li>Donkeys</li>
+							<li>Dogs</li>
+							<li>Tigers</li>
+						</ul>
+					</li>
+					<li>Other
+						<ul>
+							<li>Snakes</li>
+							<li>Birds</li>
+							<li>Lizards</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li>Fishes
+				<ul>
+					<li>Aquarium
+						<ul>
+							<li>Guppy</li>
+							<li>Angelfish</li>
+						</ul>
+					</li>
+					<li>Sea
+						<ul>
+							<li>Sea trout</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		Click on a list item to select it.
+		<br>
+
+		<ul id="ul">
+			<li>Christopher Robin</li>
+			<li>Winnie-the-Pooh</li>
+			<li>Tiger</li>
+			<li>Panga</li>
+			<li>Rabbit. Just rabbit.</li>
+		</ul>
+		<div data-tooltip="Here is the house interior" id="house">
+			<div data-tooltip="Here is the roof" id="roof"></div>
+
+			<p>Once upon a time there was a mother pig who had three little pigs.</p>
+
+			<p>The three little pigs grew so big that their mother said to them, "You are too big to live here any longer. You
+				must go and build houses for yourselves. But take care that the wolf does not catch you."
+
+			<p>The three little pigs set off. "We will take care that the wolf does not catch us," they said.</p>
+
+			<p>Soon they met a man. <a href="https://en.wikipedia.org/wiki/The_Three_Little_Pigs"
+					data-tooltip="Read on…">Hover
+					over me</a></p>
+
+		</div>
+		<script>
+			let field = document.getElementById("field");
+			let ball = document.getElementById("ball"); //40*40px
+
+			field.addEventListener("click", (e) => {
+				if (e.clientX && e.clientY) {
+					//?????????border
+					let left = e.clientX - field.offsetLeft - 10 - ball.offsetWidth / 2;
+					//??x-??X-??border-ball???
+					let top = e.clientY - field.offsetTop - 10 - ball.offsetHeight / 2;
+					left = left < 0 ? 0 : left;
+					left =
+						left > field.clientWidth - ball.clientWidth
+							? field.clientWidth - 40
+							: left;
+					top = top < 0 ? 0 : top;
+					top =
+						top > field.clientHeight - ball.clientHeight
+							? field.clientHeight - 40
+							: top;
+					//??????????border
+					ball.style.left = left + "px";
+					ball.style.top = top + "px";
+				} else {
+					return;
+				}
+			});
+
+			let menu = document.querySelector(".menu");
+			let title = document.querySelector(".title");
+			title.onclick = function (e) {
+				menu.classList.toggle("open"); //??????????????????
+			};
+
+			let tree = document.getElementById("tree");
+			let li = tree.querySelectorAll("li");
+			for (let item of li) {
+				let span = document.createElement("span");
+				item.prepend(span); //?span??li????????
+				span.append(span.nextSibling); //????????????
+			}
+			tree.addEventListener("click", function (e) {
+				//li>span???li ul?hidden
+				if (e.target.tagName !== "SPAN") {
+					return;
+				}
+				let ul = e.target.parentNode.querySelector("ul");
+				ul.hidden = !ul.hidden;
+			});
+
+			//????
+			let ul2 = document.getElementById("ul");
+			ul2.onmousedown = () => false; //??????
+			ul2.addEventListener("click", function (e) {
+				if (e.target.tagName != "LI") {
+					return;
+				}
+				if (!e.ctrlKey && !e.metaKey) {
+					for (let item of ul2.querySelectorAll("li")) {
+						item.classList.remove("selected");
+						e.target.classList.add("selected");
+					}
+				} else {
+					e.target.classList.toggle("selected");
+				}
+			});
+
+			//mouseover / mouseout ???????????
+			let tooltip;
+			let house = document.getElementById("house");
+			house.addEventListener("mouseover", function (e) {
+				let anchor = e.target.closest("[data-tooltip]"); //?????????????????????????
+				if (!anchor) {
+					return;
+				}
+				tooltip = showTip(anchor, anchor.dataset.tooltip); //????????????
+			});
+			house.addEventListener("mouseout", function (e) {
+				if (tooltip) {
+					tooltip.remove(); //????????
+					//tooltip = false
+				}
+			});
+
+			function showTip(anchor, html) {
+				let tip = document.createElement("div");
+				anchor.prepend(tip);
+				tip.className = "tooltip";
+				tip.innerHTML = html;
+				//??tip??
+				let coords = anchor.getBoundingClientRect();
+				let left = coords.left + (anchor.offsetWidth - tip.offsetWidth) / 2;
+				if (left < 0) {
+					left = 0;
+				}
+				let top = coords.top + (anchor.offsetHeight - tip.offsetHeight) / 2;
+				if (top < 0) {
+					top = 0;
+				}
+				tip.style.left = left + "px";
+				tip.style.top = top + "px";
+				return tip;
+			}
+		</script>
+
+	</body>
+
+</html>

@@ -521,25 +521,6 @@ Bst.prototype.insert = function (val) {
     node.left ? node.left.insert(val) : (node.left = new Bst(val))
   }
   return this
-  // while (true) {
-  //   if (val < node.val) {
-  //     if (node.left) {
-  //       node = node.left
-  //     } else {
-  //       node.left = new Bst(val)
-  //       break
-  //     }
-  //   }
-
-  //   if (val > node.val) {
-  //     if (node.right) {
-  //       node = node.right
-  //     } else {
-  //       node.right = new Bst(val)
-  //       break
-  //     }
-  //   }
-  // }
 }
 
 Bst.prototype.remove = function (target) {
@@ -554,21 +535,6 @@ var b = new Bst()
 b.insert(2)
 b.remove(3) //
 
-function talksAbout(node, text) {
-  //node里面有没有出现text
-
-  for (let i = 0; i < node.childNodes.length; i++) {
-    let child = node.childNodes[i]
-    if (child.nodeType === document.TEXT_NODE) {
-      if (child.nodeValue.includes(text)) {
-        return true
-      }
-    } else if (child.nodeType === document.ELEMENT_NODE) {
-      return talksAbout(child, text)
-    }
-  }
-  return false
-}
 function getElementsById(id, node = document.documentElement) {
   if (node.id === 'id') {
     return node
@@ -584,12 +550,7 @@ function getElementsById(id, node = document.documentElement) {
   return null
 }
 
-Array.prototype.slice = function (start = 0, end = this.length) {
-  let res = []
-  for (let i = 0; i < end; i++) {
-    res.push(this[i])
-  }
-}
+
 
 function elt(tagName, attrs, ...children) {
   var node = document.createElement(tagName)
@@ -607,101 +568,6 @@ function elt(tagName, attrs, ...children) {
   return node
 }
 
-var str =
-  '[111,222,{"a":3},{"b":true,"c":"foobar","d":[1,false,[null,4,{"x":1,"y":2}]]}]'
-//实现parseJSON函数使其能够解析一个json字符串到一个js值。
-//实现以下几个函数：一个位置指针i，parseValue，parseString，parseNumber，parseArray，parseObject, 分别从i位置开始解析出对应的值并返回，同时移动指针i到解析完成后的位置。
-
-var ParseJSON = (function () {
-  var str
-  var i = 0
-  function parseValue() {
-    if (str[i] === '[') {
-      return parseArray()
-    }
-    if (str[i] === '{') {
-      return parseObject()
-    }
-    if (str[i] === '"') {
-      return parseString()
-    }
-    if (str[i] === 't') {
-      return parseTrue()
-    }
-    if (str[i] === 'f') {
-      return parseFalse()
-    }
-    if (str[i] === 'n') {
-      i += 4
-      return null
-    } else {
-      return parseNumber()
-    }
-  }
-
-  function parseArray() {
-    i++
-    var res = []
-    while (str[i] !== ']') {
-      var val = parseValue()
-      res.push(val)
-      if (str[i] === ',') {
-        i++
-      }
-    }
-    i++
-    return res
-  }
-
-  function parseString() {
-    i++
-    var j = i + 1
-    while (str[j] !== '"') {
-      j++
-    }
-    var res = str.slice(i, j)
-    i = j + 1
-    return res
-  }
-  function parseObject() {
-    i++
-    var res = {}
-    while (str[i] != '}') {
-      var key = parseString()
-      i++
-      var value = parseValue()
-      res[key] = value
-      if (str[i] === ',') {
-        i++
-      }
-    }
-    i++
-    return res
-  }
-  function parseTrue() {
-    i += 4
-    return true
-  }
-  function parseFalse() {
-    i += 5
-    return false
-  }
-
-  function parseNumber() {
-    //345
-    var numStr = ''
-    while (str[i].charCodeAt(0) >= 48 && str[i].charCodeAt(0) <= 57) {
-      numStr += str[i++]
-    }
-    return parseInt(numStr)
-  }
-  return function parseJSON(string) {
-    str = string
-    i = 0
-    //递归下降
-    return parseValue()
-  }
-})()
 
 function replaceImages() {
   var images = document.getElementsByTagName('img')
@@ -735,120 +601,3 @@ function normalize(node) {
   }
 }
 
-// var timer1 = setTimeout(() => {
-//   console.log('一秒后执行')
-// }, 10000)
-// //回调函数?
-// var timer2 = setTimeout(() => {
-//   clearTimeout(timer1)
-// }, 500) //中断time1的执行
-
-// var interval = setInterval(() => {
-//   let date = new Date()
-//   console.log(`${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`)
-// }, 100)
-
-// var clearInt = setTimeout(() => {
-//   clearInterval(interval)
-// }, 500)
-
-// //promise
-// //创建promise立即执行
-// var promise = new Promise((resolve) => {
-//   setTimeout(() => {
-//     resolve('success')
-//   }, 200)
-// })
-// //then接收
-// promise.then((val) => {
-//   console.log(val)
-// })
-
-// console.log('在promise之前执行')
-
-// var promise = new Promise((resolve, reject) => {
-//   setTimeout(() => {
-//     reject('promise failed')
-//   }, 200)
-// })
-// promise.catch((error) => {
-//   console.log(error)
-// })
-
-// //链式调用
-// new Promise((resolve, reject) => {
-//   setTimeout(() => {
-//     resolve(1)
-//   }, 1000)
-// })
-//   .then((value) => {
-//     console.log(value)
-//     throw 'then1 error'
-//     return value + 10
-//   })
-//   .then((value) => {
-//     console.log(value)
-//     return new Promise((resolve) => resolve(value + 20))
-//   })
-//   .then((value) => console.log(value))
-//   .catch((error) => console.log(error))
-
-// //多个promise同时执行
-// var p1 = new Promise((resolve) => {
-//   setTimeout(() => resolve(1), 1000)
-// })
-
-// var p2 = new Promise((resolve) => {
-//   setTimeout(() => resolve(2), 2000)
-// })
-
-// var p3 = new Promise((resolve) => {
-//   setTimeout(() => resolve(3), 500)
-// })
-
-// Promise.all([p1, p2, p3]).then((values) => console.log(values))
-
-//async & await
-// async function async1() {
-//   setTimeout(()=>console.log("async1 done"),1000)
-// }
-// async1()
-// console.log(async1());
-
-// async function async1() {
-//   let result2 = await async2()
-//   try {
-//     let result3 = await async3()
-//   } catch (error) {
-//     console.log(error)
-//   }
-//   console.log(result2)
-// }
-// async function async2() {
-//   return new Promise((resolve) => {
-//     setTimeout(() => resolve(10), 1000)
-//   })
-// }
-// async function async3() {
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => reject('error'), 500)
-//   })
-// }
-
-// async1()
-
-//模块化
-//导出 export func(){}
-//可以在js末尾统一导出 export{funcName,funcName...}
-
-//导入的script 的 type:module
-//import{functionName,funcName,var...} from "url"
-
-//默认导出
-//export default func;
-//export default func;
-//import name(随便起),以及非默认func from "xxx"
-
-//一个模块的所有导出,一次性导入
-//as可以取别名
-//import *  as xx from "url"
