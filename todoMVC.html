@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>todoMVC</title>
-</head>
-<body>
-	
-</body>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>todoMVC</title>
+		<link rel="stylesheet" href="./todoMVC.css">
+	</head>
+
+	<body>
+		<header>todos</header>
+		<div id="todo">
+			<button id="all"></button>
+			<label id="forall" for="all">﹀</label>
+			<input class="new" type="text" placeholder="What needs to be done?"></input>
+			<ul class="old"></ul>
+		</div>
+		<footer>
+			<p>Double-click to edit a todo</p>
+			<p>Created by petehunt</p>
+			<p>Part of TodoMVC</p>
+		</footer>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="./todoMVC.js"></script>
+	</body>
+
 </html>
