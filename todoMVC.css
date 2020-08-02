@@ -37,21 +37,23 @@ input.new {
   border: none;
   box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.03);
 }
-
+input.new:focus {
+  outline: none;
+}
 #all {
   display: none;
 }
 #forall {
   position: absolute;
-  left: 0;
-  top: 30px;
+  left: 10px;
+  top: 25px;
+  color: #bfbfbf;
 }
-.selected-all
-{
-  color: red;
+.selected-all {
+  color: black !important;
 }
 .selected-none {
-  color: yellow;
+  color: #bfbfbf;
 }
 footer {
   width: 550px;
@@ -75,6 +77,26 @@ ul > li {
   height: 58px;
   background: rgb(255, 255, 255);
   border-bottom: 1px solid #ededed;
+  position: relative;
+}
+.bechecked {
+  text-decoration: line-through;
+  color: #bfbfbf;
+}
+.del-label {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  color: rgb(212, 119, 119);
+}
+.not-hover {
+  display: none;
+}
+ul > div {
+  background: rgb(255, 255, 255);
+  height: 40px;
 }
 footer > p {
   /* margin合并 */
