@@ -1,3 +1,31 @@
+//重新打开页面，也要显示之前的,读取local storage
+$().ready(function () {
+  for (let i = 0; ; i++) {
+    if (!localStorage[i]) {
+      continue;
+    }
+    let newLi = `<li id ='${i}'><input type ="checkbox"></input>${
+      localStorage[i]
+    }<button id='${"btn" + i}' class="not-hover"></button>
+		<label for='${"btn" + i}' class="not-hover">×</label></li>`;
+    $("ul").prepend(newLi);
+    let li = $("ul")[0].firstElementChild;
+    li.addEventListener("mouseover", (e) => {
+      li.lastElementChild.classList.remove("not-hover");
+      li.lastElementChild.classList.add("del-label");
+    });
+    li.addEventListener("mouseout", (e) => {
+      li.lastElementChild.classList.remove("del-label");
+      li.lastElementChild.classList.add("not-hover");
+    });
+    if (
+      Array.from(document.getElementsByTagName("li")).length >=
+      localStorage.length
+    ) {
+      break;
+    }
+  }
+});
 window.onload = (e) => {
   let newTodo = $(".new")[0];
   newTodo.addEventListener("keydown", (e) => {
@@ -8,7 +36,9 @@ window.onload = (e) => {
   });
 
   function addToList(value) {
-    let i = $("ul")[0].children.length;
+    let i = $("ul")[0].children.length
+      ? +$("ul")[0].firstElementChild.id + 1
+      : 0;
     window.localStorage.setItem(i, value);
     let newLi = `<li id ='${i}'>
 		<input type ="checkbox"></input>
@@ -27,14 +57,6 @@ window.onload = (e) => {
       li.lastElementChild.classList.add("not-hover");
     });
     //添加了保存在local storage,key('0','1'...)
-  }
-  //重新打开页面，也要显示之前的,读取local storage
-  for (let i = 0; i < localStorage.length; i++) {
-    let li = `<li id ='${i}'><input type ="checkbox"></input>${
-      localStorage[i]
-    }<button id='${"btn" + i}' class="not-hover"></button>
-		<label for='${"btn" + i}' class="not-hover">×</label></li>`;
-    $("ul").prepend(li);
   }
 
   let all = $("#forall")[0];
@@ -61,25 +83,27 @@ window.onload = (e) => {
   }
   //如果全选中了，下一次点击是取消全选;否则点击时全选
   //TODO 可能有问题
-  all.onclick = (e) => {
-    if (isAllSelected()) {
-      console.log(lis.length);
-      for (let i = 0; i < lis.length; i++) {
-        lis[i].firstElementChild.checked = false;
-        all.classList.remove("selected-all");
-        all.classList.add("selected-none");
-        lis[i].classList.remove("bechecked");
+  window.onload(e) = (e) => {
+    console.log(lis.length);
+    all.onclick = (e) => {
+      if (isAllSelected()) {
+        console.log(lis.length);
+        for (let i = 0; i < lis.length; i++) {
+          lis[i].firstElementChild.checked = false;
+          all.classList.remove("selected-all");
+          all.classList.add("selected-none");
+          lis[i].classList.remove("bechecked");
+        }
+      } else {
+        for (let i = 0; i < lis.length; i++) {
+          lis[i].firstElementChild.checked = true;
+          all.classList.remove("selected-none");
+          all.classList.add("selected-all");
+          lis[i].classList.add("bechecked");
+        }
       }
-    } else {
-      for (let i = 0; i < lis.length; i++) {
-        lis[i].firstElementChild.checked = true;
-        all.classList.remove("selected-none");
-        all.classList.add("selected-all");
-        lis[i].classList.add("bechecked");
-      }
-    }
+    };
   };
-
   $("ul")[0].addEventListener("change", (e) => {
     console.log("ul change");
     if (isAllSelected()) {
@@ -108,4 +132,23 @@ window.onload = (e) => {
       e.target.parentNode.remove();
     }
   });
+};
+function howManyLeft() {
+  let count = 0;
+  for (let li of Array.from(document.getElementsByTagName("li"))) {
+    if (li.firstElementChild.checked == false) {
+      count++;
+    }
+  }
+  return count;
+}
+window.onload = (e) => {
+  //ul footer 还剩几个的span
+  let count = howManyLeft(); //TODO count要重新计算
+  let span = `<span>${count}item left</span>`;
+  $(".ul-footer").append(span);
+};
+$("ul")[0].onchange = (e) => {
+  let count = howManyLeft();
+  $(".ul-footer>span")[0].innerHTML = `<span>${count}item left</span>`;
 };
