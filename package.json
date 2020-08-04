@@ -1,0 +1,28 @@
+{
+  "name": "miao",
+  "version": "1.0.0",
+  "description": "",
+  "main": "08.js",
+  "dependencies": {
+    "chosen-js": "^1.8.7",
+    "figlet": "^1.5.0",
+    "lodash": "^4.17.19",
+    "webpack": "4.44.1"
+  },
+  "devDependencies": {
+    "webpack-cli": "3.3.12"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brightzoe/miao.git"
+  },
+  "author": "zoe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brightzoe/miao/issues"
+  },
+  "homepage": "https://github.com/brightzoe/miao#readme"
+}
