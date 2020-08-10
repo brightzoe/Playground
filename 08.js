@@ -1,9 +1,12 @@
-var grable = require("./grable");
 var util = require("util");
 var _ = require("lodash");
+var fs = require('fs')
 var fsp = require("fs").promises;
 var argument = process.argv[2];
-console.log(grable(argument));
+var figlet = require("figlet");
+figlet.text('hello', (error, result) => {
+  console.log(result);
+});
 function figletTextPromise(text) {
   return new Promise((resolve, reject) => {
     figlet.text(text, (error, data) => {
@@ -16,12 +19,20 @@ function figletTextPromise(text) {
   });
 }
 async function foo() {
-  await figletTextPromise(text);
+  var text = await figletTextPromise("hello promise");
+  console.log(text);
 }
 
+fs.readFile('08.js', 'utf8', (error, result) => {
+  if (error) {
+    console.log(error)
+  } else {
+    console.log(result)
+  }
+})
 function readFileP(...args) {
   return new Promise((resolve, reject) => {
-    fs.readFile(...arguments, (error, result) => {
+    fs.readFile(...args, (error, result) => {
       if (error) {
         reject(error);
       } else {
@@ -31,6 +42,13 @@ function readFileP(...args) {
   });
 }
 
+fs.writeFile('08.js', 'hello', error => {//一次性写入
+  if (error) {
+    console.log(error)
+  } else {
+    console.log('ok')
+  }
+})
 function writeFileP() {
   return new Promise((resolve, reject) => {
     fs.writeFile(...args, (error, result) => {
@@ -71,3 +89,6 @@ function callbackify(f) {
     );
   };
 }
+
+
+
