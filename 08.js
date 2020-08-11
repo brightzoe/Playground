@@ -1,12 +1,16 @@
 var util = require("util");
+debugger;
 var _ = require("lodash");
-var fs = require('fs')
+var fs = require("fs");
 var fsp = require("fs").promises;
 var argument = process.argv[2];
 var figlet = require("figlet");
-figlet.text('hello', (error, result) => {
+const { generateKeyPair } = require("crypto");
+
+figlet.text("hello", (error, result) => {
   console.log(result);
 });
+
 function figletTextPromise(text) {
   return new Promise((resolve, reject) => {
     figlet.text(text, (error, data) => {
@@ -89,6 +93,3 @@ function callbackify(f) {
     );
   };
 }
-
-
-
