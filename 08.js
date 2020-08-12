@@ -1,65 +1,12 @@
 let util = require("util");
 let path = require("path");
+let http = require("http");
 let _ = require("lodash");
 let fs = require("fs");
 let fsp = require("fs").promises;
 let argument = process.argv[2];
 let figlet = require("figlet");
 const { generateKeyPair } = require("crypto");
-
-// figlet.text("hello", (error, result) => {
-//   console.log(result);
-// });
-
-function figletTextPromise(text) {
-  return new Promise((resolve, reject) => {
-    figlet.text(text, (error, data) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(data);
-      }
-    });
-  });
-}
-
-// fs.readFile('08.js', 'utf8', (error, result) => {
-//   if (error) {
-//     console.log(error)
-//   } else {
-//     console.log(result)
-//   }
-// })
-function readFileP(...args) {
-  return new Promise((resolve, reject) => {
-    fs.readFile(...args, (error, result) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(result);
-      }
-    });
-  });
-}
-
-// fs.writeFile('08.js', 'hello', error => {//一次性写入
-//   if (error) {
-//     console.log(error)
-//   } else {
-//     console.log('ok')
-//   }
-// })
-function writeFileP() {
-  return new Promise((resolve, reject) => {
-    fs.writeFile(...args, (error, result) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(result);
-      }
-    });
-  });
-}
 
 //将基于callback的函数转换为返回promise的函数
 function transformFuncCallbackToPromise(f) {
@@ -111,14 +58,69 @@ function listFiles(dirPath) {
   let fullPath = path.resolve(dirPath);
   let fileNames = fs.readdirSync(fullPath);
   for (let fileName of fileNames) {
-    let statObj = fs.statSync(path.join(fullPath,fileName));
+    let file = path.join(fullPath, fileName);
+    let statObj = fs.statSync(file);
     if (statObj.isFile()) {
       res.push(fileName);
     } else if (statObj.isDirectory()) {
-      res.push(...listFiles(path.resolve(fileName)));
+      res.push(...listFiles(path.resolve(file)));
     }
   }
   return res;
 }
-listFiles("d://note");
+function listFilesCb(dirpath, cb) {
+  //回调回调加回调
+  let res = [];
+  var fullDirPath = path.resolve(dirpath);
+  fs.readdir(fullDirPath, (err, names) => {
+    var count = 0;
+    for (let name of names) {
+      let fullName = path.join(fullDirPath, name);
+      fs.stat(fullName, (err, stat) => {
+        if (stat.isFile()) {
+          res.push(fullName);
+          count++;
+          if (count == names.length) {
+            cb(null, res);
+          }
+        } else if (stat.isDirectory()) {
+          listFilesCb(fullName, (err, files) => {
+            res.push(...files);
+            count++;
+            if (count == names.length) {
+              cb(null, res);
+            }
+          });
+        }
+      });
+    }
+  });
+}
+// listFilesCb("笔记", (err, files) => {
+//   console.log(files);
+// });
+function listFilesPromise(dirpath, cb) {
+  let fullDirPath = path.resolve(dirpath);
+  var fullNames;
+  var res = [];
+  fsp
+    .readdir(fullDirPath)
+    .then((names) => {
+      fullNames = names.map((name) => path.join(fullDirPath, name));
+      return fullNames.map(fsp.stat);
+    })
+    .then((infos) => {
+      for (var i = 0; i < infos.length; i++) {
+        var info = infos[i];
+        var fullName = fullNames[i];
+        if (info.isFile()) {
+          res.push(fullName);
+        } else if (info.isDirectory()) {
+          listFilesPromise(fullName).then((files) => {
+            res.push(...files);
+          });
+        }
+      }
+    });
+}
 //tree，以缩进方式打开当前文件夹的目录树
