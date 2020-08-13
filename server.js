@@ -1,12 +1,13 @@
 let util = require("util");
+let url = require("url");
 let path = require("path");
 let http = require("http");
 let _ = require("lodash");
 let fs = require("fs");
 let fsp = require("fs").promises;
-let argument = process.argv[2];
-let figlet = require("figlet");
+
 const { generateKeyPair } = require("crypto");
+const { ESRCH } = require("constants");
 
 //将基于callback的函数转换为返回promise的函数
 function transformFuncCallbackToPromise(f) {
@@ -124,3 +125,18 @@ function listFilesPromise(dirpath, cb) {
     });
 }
 //tree，以缩进方式打开当前文件夹的目录树
+
+function start(route, handle) {
+  var server = http.createServer((req, res) => {
+    //console.log(new URL("localhost:3000" + req.url));//怎么获得全部地址
+    let pathname = url.parse(req.url).pathname; //获得请求的地址
+    console.log("request for " + pathname + " received");
+
+    res.writeHead(200, { "Content-Type": "text/plain" });
+    var content = route(handle, pathname);
+    res.write(content);
+    res.end();
+  });
+  server.listen(3000);
+}
+exports.start = start;
