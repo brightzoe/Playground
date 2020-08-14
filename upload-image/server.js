@@ -4,39 +4,6 @@ let path = require("path");
 let http = require("http");
 let _ = require("lodash");
 let fs = require("fs");
-let fsp = require("fs").promises;
-
-const { generateKeyPair } = require("crypto");
-const { ESRCH } = require("constants");
-
-//将基于callback的函数转换为返回promise的函数
-function transformFuncCallbackToPromise(f) {
-  return function (...args) {
-    return new Promise((resolve, reject) => {
-      f(...args, (error, result) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(result);
-        }
-      });
-    });
-  };
-}
-//将基于promise的函数转换为一个基于回调的函数
-function callbackify(f) {
-  return function (...args) {
-    let cb = args.pop(); //取出回调函数，是参数中的最后一个值
-    f(...args).then(
-      (result) => {
-        cb(null, result);
-      },
-      (reason) => {
-        cb(reason);
-      }
-    );
-  };
-}
 
 function getAllFile(path) {
   fs.readdir(path, (error, data) => {
@@ -51,7 +18,6 @@ function getAllFile(path) {
     }
   });
 }
-
 function listFiles(dirPath) {
   //递归返回dir文件夹中所有文件的完全路径
   //同步＋异步（promise，callback，async.await)
@@ -131,11 +97,7 @@ function start(route, handle) {
     //console.log(new URL("localhost:3000" + req.url));//怎么获得全部地址
     let pathname = url.parse(req.url).pathname; //获得请求的地址
     console.log("request for " + pathname + " received");
-
-    res.writeHead(200, { "Content-Type": "text/plain" });
-    var content = route(handle, pathname);
-    res.write(content);
-    res.end();
+    route(handle, pathname, res,req);
   });
   server.listen(3000);
 }
