@@ -1,4 +1,3 @@
-
 function bind(f, ...fixedArgs) {
   return function (...args) {
     return f(...fixedArgs, ...args);
@@ -101,144 +100,144 @@ function identity(...args) {
 
 //Chapter 666666
 var MOUNTAINS = [
-  { name: 'Kilimanjaro', height: 5895, country: 'Tanzania' },
-  { name: 'Everest', height: 8848, country: 'Nepal' },
-  { name: 'Mount Fuji', height: 3776, country: 'Japan' },
-  { name: 'Mont Blanc', height: 4808, country: 'Italy/France' },
-  { name: 'Vaalserberg', height: 323, country: 'Netherlands' },
-  { name: 'Denali', height: 6168, country: 'United States' },
-  { name: 'Popocatepetl', height: 5465, country: 'Mexico' },
-]
+  { name: "Kilimanjaro", height: 5895, country: "Tanzania" },
+  { name: "Everest", height: 8848, country: "Nepal" },
+  { name: "Mount Fuji", height: 3776, country: "Japan" },
+  { name: "Mont Blanc", height: 4808, country: "Italy/France" },
+  { name: "Vaalserberg", height: 323, country: "Netherlands" },
+  { name: "Denali", height: 6168, country: "United States" },
+  { name: "Popocatepetl", height: 5465, country: "Mexico" },
+];
 
-if (typeof module != 'undefined' && module.exports) module.exports = MOUNTAINS
+if (typeof module != "undefined" && module.exports) module.exports = MOUNTAINS;
 
 function rowHeights(rows) {
   //最小行高的最大值
   return rows.map(function (row) {
     return row.reduce(function (max, cell) {
-      return Math.max(max, cell.minHeight())
-    }, 0)
-  })
+      return Math.max(max, cell.minHeight());
+    }, 0);
+  });
 }
 
 function colWidths(rows) {
   //每列最小宽度的最大值
   return rows[0].map(function (_, i) {
     return rows.reduce(function (max, row) {
-      return Math.max(max, row[i].minWidth())
-    }, 0)
-  })
+      return Math.max(max, row[i].minWidth());
+    }, 0);
+  });
 }
 
 function drawTable(rows) {
-  var heights = rowHeights(rows)
-  var widths = colWidths(rows)
+  var heights = rowHeights(rows);
+  var widths = colWidths(rows);
   //这个宽和高刚刚包裹好所有内容
   function drawLine(blocks, lineNo) {
     //画出一行,中间用空格连接
     return blocks
       .map(function (block) {
-        return block[lineNo]
+        return block[lineNo];
       })
-      .join(' ')
+      .join(" ");
   }
 
   function drawRow(row, rowNum) {
     var blocks = row.map(function (cell, colNum) {
-      return cell.draw(widths[colNum], heights[rowNum])
-    })
+      return cell.draw(widths[colNum], heights[rowNum]);
+    });
     return blocks[0]
       .map(function (_, lineNo) {
-        return drawLine(blocks, lineNo)
+        return drawLine(blocks, lineNo);
       })
-      .join('\n')
+      .join("\n");
   }
 
-  return rows.map(drawRow).join('\n') //把所有行用换行符连到一起
+  return rows.map(drawRow).join("\n"); //把所有行用换行符连到一起
 }
 
 function repeat(string, times) {
-  var result = ''
-  for (var i = 0; i < times; i++) result += string
-  return result
+  var result = "";
+  for (var i = 0; i < times; i++) result += string;
+  return result;
 }
 
 function TextCell(text) {
-  this.text = text.split('\n') //文本分成每一行
+  this.text = text.split("\n"); //文本分成每一行
 }
 TextCell.prototype.minWidth = function () {
   return this.text.reduce(function (width, line) {
-    return Math.max(width, line.length)
-  }, 0) //字符串最大宽度
-}
+    return Math.max(width, line.length);
+  }, 0); //字符串最大宽度
+};
 TextCell.prototype.minHeight = function () {
-  return this.text.length
-}
+  return this.text.length;
+};
 TextCell.prototype.draw = function (width, height) {
   //向每行文本填充空格
-  var result = []
+  var result = [];
   for (var i = 0; i < height; i++) {
-    var line = this.text[i] || ''
-    result.push(line + repeat(' ', width - line.length))
+    var line = this.text[i] || "";
+    result.push(line + repeat(" ", width - line.length));
   }
-  return result
-}
+  return result;
+};
 
-var rows = []
+var rows = [];
 for (var i = 0; i < 5; i++) {
-  var row = []
+  var row = [];
   for (var j = 0; j < 5; j++) {
     if ((j + i) % 2) {
-      row.push(new TextCell('##'))
+      row.push(new TextCell("##"));
     } else {
-      row.push(new TextCell('  '))
+      row.push(new TextCell("  "));
     }
   }
-  rows.push(row)
+  rows.push(row);
 }
 
 function UnderlinedCell(inner) {
   //首行添加下划线单元格
-  this.inner = inner
+  this.inner = inner;
 }
 UnderlinedCell.prototype.minWidth = function () {
-  return this.inner.minWidth() //组合
-}
+  return this.inner.minWidth(); //组合
+};
 UnderlinedCell.prototype.minHeight = function () {
-  return this.inner.minHeight() + 1
-}
+  return this.inner.minHeight() + 1;
+};
 UnderlinedCell.prototype.draw = function (width, height) {
-  return this.inner.draw(width, height - 1).concat([repeat('-', width)])
-}
+  return this.inner.draw(width, height - 1).concat([repeat("-", width)]);
+};
 
 function RTextCell(text) {
   //纯数字单元格,右对齐
-  TextCell.call(this, text)
+  TextCell.call(this, text);
 }
-RTextCell.prototype = Object.create(TextCell.prototype)
+RTextCell.prototype = Object.create(TextCell.prototype);
 RTextCell.prototype.draw = function (width, height) {
-  var result = []
+  var result = [];
   for (var i = 0; i < height; i++) {
-    var line = this.text[i] || ''
-    result.push(repeat(' ', width - line.length) + line)
+    var line = this.text[i] || "";
+    result.push(repeat(" ", width - line.length) + line);
   }
-  return result
-}
+  return result;
+};
 
 function dataTable(data) {
-  var keys = Object.keys(data[0])
+  var keys = Object.keys(data[0]);
   var headers = keys.map(function (name) {
-    return new UnderlinedCell(new TextCell(name))
-  })
+    return new UnderlinedCell(new TextCell(name));
+  });
   var body = data.map(function (row) {
     return keys.map(function (name) {
-      var value = row[name]
+      var value = row[name];
       // This was changed:
-      if (typeof value == 'number') return new RTextCell(String(value))
-      else return new TextCell(String(value))
-    })
-  })
-  return [headers].concat(body)
+      if (typeof value == "number") return new RTextCell(String(value));
+      else return new TextCell(String(value));
+    });
+  });
+  return [headers].concat(body);
 }
 
 //console.log(drawTable(dataTable(MOUNTAINS)));
@@ -246,154 +245,154 @@ function dataTable(data) {
 
 function Instance(val, Cont) {
   if (val) {
-    if (typeof val != 'object') {
-      return false
+    if (typeof val != "object") {
+      return false;
     }
     if (val.__proto__ === Cont.prototype) {
-      return true
+      return true;
     }
-    Instance(val.__proto__, Cont)
+    Instance(val.__proto__, Cont);
   }
-  return false
+  return false;
 }
 
 function New(F, ...args) {
-  var obj = Object.create(F.prototype) //添加原型
-  var fReturn = F.call(obj, ...args) //绑定this
-  if (fReturn && typeof fReturn === 'object') {
+  var obj = Object.create(F.prototype); //添加原型
+  var fReturn = F.call(obj, ...args); //绑定this
+  if (fReturn && typeof fReturn === "object") {
     //如果F显式指定了返回值,返回这个
-    return fReturn
+    return fReturn;
   } else {
-    return obj //返回这个新创建的对象
+    return obj; //返回这个新创建的对象
   }
 }
 
 //二维向量
 function Vector(x, y) {
-  this.x = x
-  this.y = y
+  this.x = x;
+  this.y = y;
 }
 Vector.prototype.plus = function (other) {
-  var res = new Vector(this.x + other.x, this.y + other.y)
-  return res
-}
+  var res = new Vector(this.x + other.x, this.y + other.y);
+  return res;
+};
 Vector.prototype.minus = function (other) {
-  var res = new Vector(this.x - other.x, this.y - other.y)
-  return res
-}
-var v1 = new Vector(4, 0)
-var v2 = new Vector(2, 2)
+  var res = new Vector(this.x - other.x, this.y - other.y);
+  return res;
+};
+var v1 = new Vector(4, 0);
+var v2 = new Vector(2, 2);
 //console.log(v1.minus(v2))
-Object.defineProperty(Vector.prototype, 'length', {
+Object.defineProperty(Vector.prototype, "length", {
   get: function () {
-    return Math.sqrt(this.x * this.x + this.y * this.y)
+    return Math.sqrt(this.x * this.x + this.y * this.y);
   },
-})
+});
 
 //console.log(v1.length);
 
 //StretchCell,把单元格放大
 function StretchCell(inner, width, height) {
-  this.inner = inner
-  this.width = width
-  this.height = height
+  this.inner = inner;
+  this.width = width;
+  this.height = height;
 }
 StretchCell.prototype.minWidth = function () {
-  return Math.max(this.width, this.inner.minWidth())
-}
+  return Math.max(this.width, this.inner.minWidth());
+};
 StretchCell.prototype.minHeight = function () {
-  return Math.max(this.height, this.inner.minHeight())
-}
+  return Math.max(this.height, this.inner.minHeight());
+};
 
 StretchCell.prototype.draw = function (width, height) {
-  return this.inner.draw(width, height)
-}
+  return this.inner.draw(width, height);
+};
 
-var sc = new StretchCell(new TextCell('abc'), 1, 2)
+var sc = new StretchCell(new TextCell("abc"), 1, 2);
 //复数
 function Complex(real, img) {
-  this.real = real
-  this.img = img
+  this.real = real;
+  this.img = img;
 }
 
 Complex.prototype.plus = function (c) {
-  return new Complex(this.real + c.real, this.img + c.img)
-}
+  return new Complex(this.real + c.real, this.img + c.img);
+};
 Complex.prototype.minus = function (c) {
-  return new Complex(this.real - c.real, this.img - c.img)
-}
+  return new Complex(this.real - c.real, this.img - c.img);
+};
 Complex.prototype.multiple = function (c) {
   return new Complex(
     this.real * c.real - this.img * c.img,
     this.img * c.real + this.real * c.img
-  )
-}
+  );
+};
 Complex.prototype.division = function (c) {
-  var helper = new Complex(c.real, 0 - c.img)
-  var down = c.multiple(helper)
-  var up = this.multiple(helper)
-  return new Complex(up.real / down.real, up.img / down.real)
-}
-Complex.fromString = function (string) {}
-var c1 = new Complex(3, 7)
+  var helper = new Complex(c.real, 0 - c.img);
+  var down = c.multiple(helper);
+  var up = this.multiple(helper);
+  return new Complex(up.real / down.real, up.img / down.real);
+};
+Complex.fromString = function (string) {};
+var c1 = new Complex(3, 7);
 
-var c2 = new Complex(2, 5)
-c2.division(c1)
+var c2 = new Complex(2, 5);
+c2.division(c1);
 
 //集合 MySet
 function MySet(ary = []) {
-  this.elements = []
+  this.elements = [];
   for (let a of ary) {
-    this.add(a)
+    this.add(a);
   }
-  return this
+  return this;
 }
 
 MySet.prototype = {
   add(val) {
     if (!this.has(val)) {
-      this.elements.push(val)
+      this.elements.push(val);
     }
-    return this
+    return this;
   },
   delete(val) {
     if (this.has(val)) {
       for (var i = 0; i < this.elements, length; i++) {
         if (val === this.elements[i]) {
-          this.elements.splice(i, 1)
-          break
+          this.elements.splice(i, 1);
+          break;
         }
       }
     }
-    return this
+    return this;
   },
   get size() {
-    return this.ele.length
+    return this.ele.length;
   },
   has(val) {
-    var elements = this.elements
+    var elements = this.elements;
     if (val !== val) {
       for (var i = 0; i < elements.length; i++) {
         if (elements[i] !== elements[i]) {
-          return true
+          return true;
         }
       }
-      return false
+      return false;
     } else {
       for (var i = 0; i < elements.length; i++) {
         if (val === elements[i]) {
-          return true
+          return true;
         }
       }
-      return false
+      return false;
     }
   },
 
   clear() {
-    this.elements.length = 0
-    return this
+    this.elements.length = 0;
+    return this;
   },
-}
+};
 
 // set.add(3) //{3}
 // set.add(5) //{3,5}
@@ -405,16 +404,16 @@ MySet.prototype = {
 // set.clear()
 // new MySet([3, 56, 2]) //可以传递数组,注意去重
 //映射 Map
-function Mmp(init = '') {
+function Mmp(init = "") {
   // m = new Mmp([[2, 3], [[1, 2, 3], 'bar'], ['gdf'], {}])
-  this._keys = []
-  this._values = []
+  this._keys = [];
+  this._values = [];
   if (init.length == 2) {
-    this.set(init)
+    this.set(init);
   }
   if (Array.isArray(init)) {
     for (let i = 0; i < init.length; i++) {
-      this.set(init[i][0], init[i][1])
+      this.set(init[i][0], init[i][1]);
     }
   }
 }
@@ -424,50 +423,50 @@ Mmp.prototype = {
     if (k !== k) {
       for (let i = 0; i < this._keys.length; i++) {
         if (this._keys[i] !== this._keys[i]) {
-          return i
+          return i;
         }
       }
     } else {
       for (let i = 0; i < this._keys.length; i++) {
         if (k === this._keys[i]) {
-          return i
+          return i;
         }
       }
     }
-    return -1
+    return -1;
   },
   set(k, v) {
     if (!this.has(k)) {
-      this._keys.push(k)
-      this._values.push(v)
+      this._keys.push(k);
+      this._values.push(v);
     } else {
-      this._values[this._indexOfKey(k)] = v
+      this._values[this._indexOfKey(k)] = v;
     }
 
-    return this
+    return this;
   },
   get(k) {
-    return this._values[this._indexOfKey(k)]
+    return this._values[this._indexOfKey(k)];
   },
   delete(k) {
-    var idx = this._indexOfKey(k)
+    var idx = this._indexOfKey(k);
     if (idx >= 0) {
-      this._keys.splice(idx, 1)
-      this._values.splice(idx, 1)
+      this._keys.splice(idx, 1);
+      this._values.splice(idx, 1);
     }
-    return this
+    return this;
   },
   has(k) {
-    var idx = this._indexOfKey(k)
-    return idx >= 0 ? true : false
+    var idx = this._indexOfKey(k);
+    return idx >= 0 ? true : false;
   },
   clear() {
-    this._keys.length = this._values.length = 0
+    this._keys.length = this._values.length = 0;
   },
   get size() {
-    return this._keys.length
+    return this._keys.length;
   },
-}
+};
 
 // m = new Mmp()
 // m.set(2, 'bar') //{1 => "foo", 2 => "bar"}
@@ -482,126 +481,121 @@ function createTreeNode(val) {
     val: val,
     left: null,
     right: null,
-  }
+  };
 }
 
 function insertIntoBST(bst, val) {
   //向BST插入值val,并返回bst
   if (bst == null) {
-    return createTreeNode(val)
+    return createTreeNode(val);
   }
   if (val > bst.val) {
-    bst.right = insertIntoBST(bst.right, val)
+    bst.right = insertIntoBST(bst.right, val);
   } else {
-    bst.left = insertIntoBST(bst.left, val)
+    bst.left = insertIntoBST(bst.left, val);
   }
-  return bst
+  return bst;
 }
 
 function Bst(val = null) {
   if (val == null) {
-    this.root = null
-    return this.root
+    this.root = null;
+    return this.root;
   }
-  this.root = {}
-  this.root.val = val
-  this.root.left = null
-  this.root.right = null
+  this.root = {};
+  this.root.val = val;
+  this.root.left = null;
+  this.root.right = null;
 }
 
 Bst.prototype.insert = function (val) {
   if (this.root == null) {
-    return new Bst(val)
+    return new Bst(val);
   }
-  var node = this.root
+  var node = this.root;
 
   if (val > node.val) {
-    node.right ? node.right.insert(val) : (node.right = new Bst(val))
+    node.right ? node.right.insert(val) : (node.right = new Bst(val));
   } else {
-    node.left ? node.left.insert(val) : (node.left = new Bst(val))
+    node.left ? node.left.insert(val) : (node.left = new Bst(val));
   }
-  return this
-}
+  return this;
+};
 
 Bst.prototype.remove = function (target) {
   //先实现删除叶子节点
-  var node = this
-  node.left && node.left.remove(target)
-  node.right && node.right.remove(target)
-  return node.left === node.right && node.val === target ? null : node //是叶子节点把它变成null
-}
+  var node = this;
+  node.left && node.left.remove(target);
+  node.right && node.right.remove(target);
+  return node.left === node.right && node.val === target ? null : node; //是叶子节点把它变成null
+};
 
-var b = new Bst()
-b.insert(2)
-b.remove(3) //
+var b = new Bst();
+b.insert(2);
+b.remove(3); //
 
 function getElementsById(id, node = document.documentElement) {
-  if (node.id === 'id') {
-    return node
+  if (node.id === "id") {
+    return node;
   } else {
     for (let i = 0; i < node.childNodes.length; i++) {
-      var child = node.childNodes[i]
-      var res = getElementsById(id, child)
+      var child = node.childNodes[i];
+      var res = getElementsById(id, child);
       if (res) {
-        return res
+        return res;
       }
     }
   }
-  return null
+  return null;
 }
-
-
 
 function elt(tagName, attrs, ...children) {
-  var node = document.createElement(tagName)
+  var node = document.createElement(tagName);
   for (let key in attrs) {
-    let val = attrs[key]
-    node.setAttribute(key, val)
+    let val = attrs[key];
+    node.setAttribute(key, val);
   }
   for (let child of children) {
-    if (typeof child === 'string') {
-      node.appendChild(document.createTextNode(child))
+    if (typeof child === "string") {
+      node.appendChild(document.createTextNode(child));
     } else {
-      node.appendChild(child)
+      node.appendChild(child);
     }
   }
-  return node
+  return node;
 }
 
-
 function replaceImages() {
-  var images = document.getElementsByTagName('img')
+  var images = document.getElementsByTagName("img");
   for (let i = images.length - 1; i >= 0; i--) {
-    let image = images[i]
+    let image = images[i];
     if (image.alt) {
-      var text = document.createTextNode(image.alt)
-      image.parentNode.replaceChild(text, image)
+      var text = document.createTextNode(image.alt);
+      image.parentNode.replaceChild(text, image);
     }
   }
 }
 
 function normalize(node) {
   if (node.nodeType === document.ELEMENT_NODE) {
-    var children = Array.from(node.childNodes)
-    let text = ''
+    var children = Array.from(node.childNodes);
+    let text = "";
     for (let i = 0; i < children.length; i++) {
       if (children[i].nodeType === document.TEXT_NODE) {
-        text += children[i].nodeValue
-        node.removeChild(children[i])
+        text += children[i].nodeValue;
+        node.removeChild(children[i]);
       } else if (text) {
-        var textNode = document.createTextNode(text)
-        node.insertbefore(textNode, children[i])
-        text = ''
+        var textNode = document.createTextNode(text);
+        node.insertbefore(textNode, children[i]);
+        text = "";
       }
     }
     if (text) {
-      var textNode = document.createTextNode(text)
-      node.append(textNode)
+      var textNode = document.createTextNode(text);
+      node.append(textNode);
     }
   }
 }
-
-
 
 function getAllFile(path) {
   fs.readdir(path, (error, data) => {
@@ -689,3 +683,40 @@ function listFilesPromise(dirpath, cb) {
     });
 }
 //tree，以缩进方式打开当前文件夹的目录树
+
+//实现express
+
+function express() {
+  let middlewares = [];
+  function expressApp(req, res) {
+    step();
+    function step() {
+      let middleware = middlewares.shift();
+      if (middleware) {
+        middleware(req, res, () => {
+          step();
+        });
+      }
+    }
+  }
+  expressApp.use = function (middleware) {
+    middlewares.push(middleware);
+  };
+
+  return expressApp;
+}
+
+function compose(middlewares) {
+  return middlewares.reduceRight(
+    (next, mw) => {
+      return (
+        req,
+        res,
+        () => {
+          next(req, res);
+        }
+      );
+    },
+    () => {}
+  );
+}

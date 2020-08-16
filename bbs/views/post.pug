@@ -1,0 +1,20 @@
+doctype html
+
+html
+	head
+		title #{post.title} - 吧唧BBS
+		link(rel='stylesheet' href="/common.css")
+		link(rel='stylesheet' href="/post.css")
+	body
+		include header.pug
+
+		h2= post.title
+		p.post-item= post.content
+
+		ul
+			each comment in comments
+			
+
+
+
+		include footer.pug

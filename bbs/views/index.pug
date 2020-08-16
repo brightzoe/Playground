@@ -1,0 +1,24 @@
+doctype html
+
+html
+	head
+		title 吧唧
+
+		link(rel='stylesheet' href='/common.css')
+		link(rel='stylesheet' href='/home.css')
+	body
+		include header.pug
+		|
+		|
+		a.new-post(href='/post') 我要发贴！
+	
+		ul
+			each post in posts
+				li.post-item
+					a(href=`/user/${post.user.id}`)
+						img(src=post.user.avatar alt=post.user.name)
+					h2
+						a(href=`/post/${post.id}`)=post.title
+					span 回帖数量： #{post.commentCount}
+
+		include footer.pug

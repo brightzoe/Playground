@@ -1,0 +1,9 @@
+h1 {
+  text-align: center;
+}
+
+.post-item {
+  background-color: rgb(247, 232, 217);
+  margin: 20px;
+  list-style: none;
+}
