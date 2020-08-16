@@ -29,7 +29,10 @@ function upload(res, req) {
   console.log("about to parse");
   form.parse(req, (error, fields, files) => {
     console.log("parsing done");
-    fs.renameSync(files.upload.path, "../store-video-css/test.jpg");
+    fs.renameSync(
+      files.upload.path,
+      "C:\\Users\\zoeli\\AppData\\Local\\Temp\\test.jpg"
+    );
     res.writeHead(200, { "Content-Type": "text/html" });
     res.write("received image:<br/>");
     res.write("<img src='/show'/>");
@@ -38,17 +41,21 @@ function upload(res, req) {
 }
 function show(res) {
   console.log("request hander 'show' was called.");
-  fs.readFile("../store-video-css/递归小鲤鱼.jpg", "binary", (error, file) => {
-    if (error) {
-      res.writeHead(500, { "Content-Type": "text/plain" });
-      res.write(error + "\n");
-      res.end();
-    } else {
-      res.writeHead(200, { "Content-Type": "image/png" });
-      res.write(file, "binary");
-      res.end();
+  fs.readFile(
+    "C:\\Users\\zoeli\\AppData\\Local\\Temp\\test.jpg",
+    "binary",
+    (error, file) => {
+      if (error) {
+        res.writeHead(500, { "Content-Type": "text/plain" });
+        res.write(error + "\n");
+        res.end();
+      } else {
+        res.writeHead(200, { "Content-Type": "image/png" });
+        res.write(file, "binary");
+        res.end();
+      }
     }
-  });
+  );
 }
 exports.start = start;
 exports.upload = upload;

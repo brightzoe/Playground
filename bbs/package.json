@@ -1,0 +1,17 @@
+{
+  "name": "bbs",
+  "version": "1.0.0",
+  "description": "bbs",
+  "main": "express-server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "bbs"
+  ],
+  "author": "brightzoe <2577213154@qq.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "4.17.1"
+  }
+}
