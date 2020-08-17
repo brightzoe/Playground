@@ -1,5 +1,6 @@
 const express = require("express");
 const open = require("open");
+const cookieParser = require("cookie-parser");
 const app = express();
 const port = 3000;
 var users = [
@@ -67,6 +68,7 @@ app.use((req, res, next) => {
 app.use(express.static(__dirname + "/static")); //文件资源服务器
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser("qazwsxedcrfvtgbrightzoe")); //cookie签名
 //首页
 app.get("/", (req, res, next) => {
   let postInfo = posts.map((post) => {
@@ -158,46 +160,53 @@ app
     });
   });
 //username-conflict-check?name=xiao
-app.get(
-  "/username-conflict-check",
-  (req,  res,  next) => {
-    if (users.some(user => user.name === req.query.name)) {
+app.get("/username-conflict-check", (req, res, next) => {
+  if (users.some((user) => user.name === req.query.name)) {
+    res.json({
+      code: -1,
+      msg: "用户名已被占用",
+    });
+  } else {
+    res.json({
+      code: 0,
+      msg: "用户名可以使用",
+    });
+  }
+});
+
+app
+  .route("/login")
+  .get((req, res, next) => {
+    res.render("login.pug");
+  })
+  .post((req, res, next) => {
+    console.log("收到登录请求", req.body);
+    let loginInfo = req.body;
+    let user = users.find(
+      (user) =>
+        user.name === loginInfo.name && user.password === loginInfo.password
+    );
+    //Ajax
+    if (user) {
+      //登陆成功
+      res.cookie("user", user.name, {
+        maxAge: 86400000, //一天内有效
+        signed: true,
+      });
       res.json({
-        code: -1,
-        msg: "用户名已被占用",
+        code: 0,
+        msg: "登陆成功！",
       });
     } else {
-      res.json({
-        code: 0,
-        msg: "用户名可以使用",
-      });
-    }
-  }
-);
-
-app.route("/login")
-  .get((req, res, next) => {
-    res.render('login.pug')
-  }).post((req, res, next) => {
-    console.log('收到登录请求', req.body)
-    let loginInfo = req.body
-    let user = users.find(user => user.name === loginInfo.name && user.password === loginInfo.password)
-    //Ajax
-    if (user) {//登陆成功
-      res.json({
-        code: 0,
-        msg:'登陆成功！'
-
-      })
-    } else {//登陆失败
+      //登陆失败
       res.json({
         code: 1,
-        msg:'登陆失败！'
-      })
+        msg: "登陆失败！",
+      });
     }
-    res.end('ok')
-  })
-    
+    res.end("ok");
+  });
+
 app.listen(port, "127.0.0.1", () => {
   console.log("listening on port", port);
   // open("http://localhost:" + port);
