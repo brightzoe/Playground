@@ -18,6 +18,7 @@ var users = [
     avatar: "/upload/avatars/sfa.png",
   },
 ];
+var nextPostId = 3
 var posts = [
   {
     id: "1",
@@ -53,6 +54,7 @@ var comments = [
     createdAt: Date.now(),
   },
 ];
+
 app.locals.pretty = true;
 app.set("views", __dirname + "/views");
 
@@ -69,30 +71,58 @@ app.get("/", (req, res, next) => {
   let postInfo = posts.map((post) => {
     return {
       ...post,
-      user: users.find((user) => post.ownerId == user.id),
+      user: users.find((user) => post.ownerId === user.id),
     };
   });
-
+  postInfo.map((post) => {
+    post.commentCount = comments.filter((it) => it.replayTo === post.id).length;
+  });
   res.render("index.pug", {
     posts: postInfo,
   }); //渲染首页,后面是数据
 });
 
 app.get("/post/:id", (req, res, next) => {
-  let post = posts.find((it) => it.id == req.params.id); //找到符合条件的元素
-  let comments = comments.filter(it=>it.replayTo==post.id)//筛选出当前帖子的所有回复
+  let post = posts.find((it) => it.id === req.params.id); //找到符合条件的元素
   if (post) {
+    post.user = users.find((user) => post.ownerId === user.id);
     res.render("post.pug", {
       post: post,
-      comments:comments
+      comments: comments //筛选出这个帖子下的回复
+        .filter((it) => it.replayTo === post.id)
+        .map((it) => {
+          return {
+            ...it,
+            user: users.find((user) => user.id === it.ownerId),
+          };
+        }),
     });
   } else {
-    res.status(404)
+    res.status(404);
     res.render("404.pug");
   }
 });
+
+app
+  .route("/post")
+  .get((req, res, next) => {
+    res.render("add-post.pug");
+  })
+  .post((req, res, next) => {
+    console.log("收到发帖请求", req.body);
+    let post = req.body
+    post.createdAt = Date.now()
+    post.ownerId = '1'
+    post.id = (nextPostId++).toString()
+    post.commentCount = 0
+    posts.push(post)
+    res.redirect('/post/'+post.id)
+    
+  });
 
 app.listen(port, "127.0.0.1", () => {
   console.log("listening on port", port);
   // open("http://localhost:" + port);
 });
+
+

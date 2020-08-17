@@ -19,6 +19,7 @@ html
 						img(src=post.user.avatar alt=post.user.name)
 					h2
 						a(href=`/post/${post.id}`)=post.title
+					span 发帖时间：#{new Date(post.createdAt).toString().substr(0,24)}
 					span 回帖数量： #{post.commentCount}
 
 		include footer.pug

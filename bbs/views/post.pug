@@ -7,13 +7,28 @@ html
 		link(rel='stylesheet' href="/post.css")
 	body
 		include header.pug
-
-		h2= post.title
-		p.post-item= post.content
+		div.post
+			h2= post.title
+			p.post-item= post.content
+			p.post-info 发帖人：
+				a(href=`/user/${post.user.id}`)= post.user.name
+				span 发表于： #{new Date(post.createdAt).toString().substr(0,24)}
+			
 
 		ul
-			each comment in comments
-			
+			if(!comments.length)
+				p 暂时还没有回贴，快来消灭零回复吧！
+			else
+				each comment in comments
+					li.post-comment
+						a(href=`/user/${comment.user.id}`)
+							img(src=`${comment.user.avatar}`)
+						a(href=`/user/${comment.user.id}`)= comment.user.name
+						p= comment.content
+						span.comment-info 回复时间： #{new Date(comment.createdAt).toString().substr(0,24)}
+		form(action="")
+			textarea(name='',cols='30',rows='10')
+			button 回复
 
 
 
