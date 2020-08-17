@@ -1,0 +1,9 @@
+extends base.pug
+
+
+block content
+	p= result
+	if(code==0)
+		a(href="/login") 点击登录
+	else
+		button(onclick='history.back()') 返回
