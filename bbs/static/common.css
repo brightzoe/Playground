@@ -1,17 +1,17 @@
-html,
-body {
-  height: 100%;
-  width: 100%;
+html {
   margin: 0;
 }
 body {
+  box-sizing: border-box;
+  margin: 0;
   padding: 30px;
 }
 h1 {
   text-align: center;
 }
 
-.post-item,.post {
+.post-item,
+.post {
   background-color: rgb(247, 232, 217);
   margin: 20px 0;
   list-style: none;
@@ -25,5 +25,9 @@ ul {
 .post-comment {
   margin: 20px 0;
   border: 1px solid gray;
+  width: 100%;
+}
+
+footer {
   width: 100%;
 }

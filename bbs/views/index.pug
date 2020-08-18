@@ -10,6 +10,16 @@ html
 		include header.pug
 		|
 		|
+		if(user)
+			p 欢迎，#{user.name}
+				a(href='/logout') 退出账号
+		else
+			p 未登录
+				a(href="/login") 点击登录
+				br
+				|没有账号？
+				a(href="/register") 点击注册
+		
 		a.new-post(href='/post') 我要发贴！
 	
 		ul

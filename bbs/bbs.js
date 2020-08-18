@@ -21,6 +21,7 @@ var users = [
 ];
 var nextUserId = 3;
 var nextPostId = 3;
+let nextCommentId = 3;
 var posts = [
   {
     id: "1",
@@ -43,14 +44,14 @@ var posts = [
 var comments = [
   {
     id: "1",
-    replayTo: "1",
+    replyTo: "1",
     ownerId: "2",
     content: "test",
     createdAt: Date.now(),
   },
   {
     id: "2",
-    replayTo: "1",
+    replyTo: "1",
     ownerId: "1",
     content: "test 再试一下",
     createdAt: Date.now(),
@@ -69,7 +70,16 @@ app.use(express.static(__dirname + "/static")); //文件资源服务器
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser("qazwsxedcrfvtgbrightzoe")); //cookie签名
-//首页
+
+app.use((req, res, next) => {
+  if (req.signedCookies.user) {
+    //查询并存储签名cookie的用户信息，在请求首页时使用
+    req.user = users.find((user) => user.name === req.signedCookies.user);
+  }
+  next();
+});
+
+//打开首页
 app.get("/", (req, res, next) => {
   let postInfo = posts.map((post) => {
     return {
@@ -78,10 +88,11 @@ app.get("/", (req, res, next) => {
     };
   });
   postInfo.map((post) => {
-    post.commentCount = comments.filter((it) => it.replayTo === post.id).length;
+    post.commentCount = comments.filter((it) => it.replyTo === post.id).length;
   });
   res.render("index.pug", {
     posts: postInfo,
+    user: req.user, //cookie存在req里的登陆的用户信息
   }); //渲染首页,后面是数据
 });
 //帖子详情
@@ -92,7 +103,7 @@ app.get("/post/:id", (req, res, next) => {
     let postData = {
       post: post,
       comments: comments //筛选出这个帖子下的回复
-        .filter((it) => it.replayTo === post.id)
+        .filter((it) => it.replyTo === post.id)
         .map((it) => {
           return {
             ...it,
@@ -115,16 +126,38 @@ app
   })
   //提交新帖
   .post((req, res, next) => {
+    if (!req.user) {
+      res.end("未登录用户，无法发帖");
+      return;
+    }
+
     console.log("收到发帖请求", req.body);
     let post = req.body;
     post.createdAt = Date.now();
-    post.ownerId = "1";
+    post.ownerId = req.user.id; //登录用户的id
     post.id = (nextPostId++).toString();
     post.commentCount = 0;
     posts.push(post);
     res.redirect("/post/" + post.id);
   });
 
+app.post("/comment", (req, res, next) => {
+  console.log("收到评论请求", req.body, req.user);
+  if (req.user) {
+    let comment = {
+      id: (nextCommentId++).toString(),
+      replyTo: req.body.replyTo,
+      ownerId: req.user.id,
+      content: req.body.comment,
+      createdAt: Date.now(),
+    };
+    comments.push(comment);
+    res.redirect("/post/" + req.body.replyTo);
+  } else {
+    //FIXME 如何既有显示，又能重定向到login,不添加新页面能否做到
+     res.send("<p>未登录，<a href='/login'>点击去登录。</a></p>");
+  }
+});
 app
   .route("/register")
   .get((req, res, next) => {
@@ -134,6 +167,7 @@ app
     console.log("收到注册信息", req.body);
     //BUG 验证req.body三个字段的完整。
     //user.name,email不能重复
+    //实时验证，用下面conflict-check的接口
     //TODO实时验证是否被占用的细节，register里的tip
     let user = req.body;
     if (users.find((it) => it.name === user.name)) {
@@ -160,6 +194,7 @@ app
     });
   });
 //username-conflict-check?name=xiao
+//检测用户名冲突的接口
 app.get("/username-conflict-check", (req, res, next) => {
   if (users.some((user) => user.name === req.query.name)) {
     res.json({
@@ -177,9 +212,11 @@ app.get("/username-conflict-check", (req, res, next) => {
 app
   .route("/login")
   .get((req, res, next) => {
+    //打开登陆界面
     res.render("login.pug");
   })
   .post((req, res, next) => {
+    //输入信息，请求登录
     console.log("收到登录请求", req.body);
     let loginInfo = req.body;
     let user = users.find(
@@ -191,7 +228,7 @@ app
       //登陆成功
       res.cookie("user", user.name, {
         maxAge: 86400000, //一天内有效
-        signed: true,
+        signed: true, //签名
       });
       res.json({
         code: 0,
@@ -207,6 +244,11 @@ app
     res.end("ok");
   });
 
+app.get("/logout", (req, res, next) => {
+  //退出，清除cookie
+  res.clearCookie("user");
+  res.redirect("/");
+});
 app.listen(port, "127.0.0.1", () => {
   console.log("listening on port", port);
   // open("http://localhost:" + port);

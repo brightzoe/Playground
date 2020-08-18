@@ -26,9 +26,11 @@ html
 						a(href=`/user/${comment.user.id}`)= comment.user.name
 						p= comment.content
 						span.comment-info 回复时间： #{new Date(comment.createdAt).toString().substr(0,24)}
-		form(action="")
-			textarea(name='',cols='30',rows='10')
-			button 回复
+		form(action="/comment" method="post")
+			input(type='hidden' value=post.id name='replyTo')
+			//- 确认给哪个帖子的回复
+			textarea(name='comment',cols='30',rows='10')
+			button 提交回复
 
 
 
