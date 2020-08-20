@@ -1,62 +1,21 @@
 const express = require("express");
-const open = require("open");
+//const open = require("open");
 const cookieParser = require("cookie-parser");
+const sqlite = require("sqlite");
+const sqlite3 = require("sqlite3");
 const app = express();
 const port = 3000;
-var users = [
-  {
-    id: "1",
-    name: "xiaomiao",
-    password: "miao",
-    email: "gas@qq.com",
-    avatar: "/upload/avatars/52.png",
-  },
-  {
-    id: "2",
-    name: "danny",
-    password: "xiaomiao",
-    email: "fasdf@qq.com",
-    avatar: "/upload/avatars/sfa.png",
-  },
-];
-var nextUserId = 3;
-var nextPostId = 3;
-let nextCommentId = 3;
-var posts = [
-  {
-    id: "1",
-    title: "weather",
-    content: "今天好热呀",
-    createdAt: Date.now(),
-    ownerId: "1",
-    commentCount: 0,
-  },
 
-  {
-    id: "2",
-    title: "pretty boy",
-    content: "宋威龙绝世美颜",
-    createdAt: Date.now(),
-    ownerId: "2",
-    commentCount: 0,
-  },
-];
-var comments = [
-  {
-    id: "1",
-    replyTo: "1",
-    ownerId: "2",
-    content: "test",
-    createdAt: Date.now(),
-  },
-  {
-    id: "2",
-    replyTo: "1",
-    ownerId: "1",
-    content: "test 再试一下",
-    createdAt: Date.now(),
-  },
-];
+let db;
+
+sqlite
+  .open({
+    filename: __dirname + "/bbs.db",
+    driver: sqlite3.Database,
+  })
+  .then((value) => {
+    db = value;
+  });
 
 app.locals.pretty = true;
 app.set("views", __dirname + "/views");
@@ -71,46 +30,48 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser("qazwsxedcrfvtgbrightzoe")); //cookie签名
 
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
   if (req.signedCookies.user) {
-    //查询并存储签名cookie的用户信息，在请求首页时使用
-    req.user = users.find((user) => user.name === req.signedCookies.user);
+    //查询并存储签名cookie的用户信息，在请求有登录信息的页面时使用
+    req.user = await db.get(
+      "select rowid as id, * from users where name =?",
+      req.signedCookies.user
+    );
   }
   next();
 });
 
 //打开首页
-app.get("/", (req, res, next) => {
-  let postInfo = posts.map((post) => {
-    return {
-      ...post,
-      user: users.find((user) => post.ownerId === user.id),
-    };
-  });
-  postInfo.map((post) => {
-    post.commentCount = comments.filter((it) => it.replyTo === post.id).length;
-  });
+app.get("/", async (req, res, next) => {
+  let posts = await db.all(
+    "select posts.rowid as id,title,posts.content,posts.createdAt,posts.userId,categoryId,name ,avatar,count(*) as commentCount from posts join comments join users on posts.userId=users.rowid where posts.rowid=comments.postId GROUP BY postId"
+  ); //三表连接，鸭梨山大
+
   res.render("index.pug", {
-    posts: postInfo,
+    posts: posts,
     user: req.user, //cookie存在req里的登陆的用户信息
   }); //渲染首页,后面是数据
 });
 //帖子详情
-app.get("/post/:id", (req, res, next) => {
-  let post = posts.find((it) => it.id === req.params.id); //找到符合条件的元素
+app.get("/post/:id", async (req, res, next) => {
+  let postId = req.params.id;
+  let post = await db.get(
+    "select posts.rowid as id,title,content,createdAt,userId,name,avatar from posts join users on posts.userId= users.rowid where posts.rowid=?",
+    postId
+  );
+
+  //找到符合条件的元素
   if (post) {
-    post.user = users.find((user) => post.ownerId === user.id);
+    let comments = await db.all(
+      "select * from comments join users on comments.userId=users.rowid  where postId = ? order by createdAt desc",
+      postId
+    );
     let postData = {
       post: post,
-      comments: comments //筛选出这个帖子下的回复
-        .filter((it) => it.replyTo === post.id)
-        .map((it) => {
-          return {
-            ...it,
-            user: users.find((user) => user.id === it.ownerId),
-          };
-        }),
+      comments: comments,
+      user:req.user,
     };
+
     res.render("post.pug", postData);
   } else {
     res.status(404);
@@ -125,7 +86,7 @@ app
     res.render("add-post.pug");
   })
   //提交新帖
-  .post((req, res, next) => {
+  .post(async (req, res, next) => {
     if (!req.user) {
       res.end("未登录用户，无法发帖");
       return;
@@ -133,29 +94,34 @@ app
 
     console.log("收到发帖请求", req.body);
     let post = req.body;
-    post.createdAt = Date.now();
-    post.ownerId = req.user.id; //登录用户的id
-    post.id = (nextPostId++).toString();
-    post.commentCount = 0;
-    posts.push(post);
-    res.redirect("/post/" + post.id);
+    await db.run("insert into posts values(?,?,?,?,?)", [
+      post.title,
+      post.content,
+      new Date().toISOString(),
+      req.user.id,
+      1,
+    ]);
+    let postId = await db.get(
+      "select rowid as id,* from posts order by rowid desc limit 1"
+    );
+    res.redirect("/post/" + postId.id);
   });
 
-app.post("/comment", (req, res, next) => {
+app.post("/comment", async (req, res, next) => {
   console.log("收到评论请求", req.body, req.user);
+  let comment = req.body;
   if (req.user) {
-    let comment = {
-      id: (nextCommentId++).toString(),
-      replyTo: req.body.replyTo,
-      ownerId: req.user.id,
-      content: req.body.comment,
-      createdAt: Date.now(),
-    };
-    comments.push(comment);
-    res.redirect("/post/" + req.body.replyTo);
+    await db.run("insert into comments values (?,?,?,?)", [
+      comment.postId,
+      req.user.id,
+      comment.comment,
+      new Date().toISOString(),
+    ]);
+
+    res.redirect("/post/" + comment.postId);
   } else {
     //FIXME 如何既有显示，又能重定向到login,不添加新页面能否做到
-     res.send("<p>未登录，<a href='/login'>点击去登录。</a></p>");
+    res.send("<p>未登录，<a href='/login'>点击去登录。</a></p>");
   }
 });
 app
@@ -163,40 +129,35 @@ app
   .get((req, res, next) => {
     res.render("register.pug");
   })
-  .post((req, res, next) => {
+  .post(async (req, res, next) => {
     console.log("收到注册信息", req.body);
-    //BUG 验证req.body三个字段的完整。
-    //user.name,email不能重复
-    //实时验证，用下面conflict-check的接口
+    //实时验证是否可用，用下面conflict-check的接口
     //TODO实时验证是否被占用的细节，register里的tip
     let user = req.body;
-    if (users.find((it) => it.name === user.name)) {
+
+    try {
+      await db.run("INSERT INTO users VALUES(?,?,?,?)", [
+        user.name,
+        user.password,
+        user.email,
+        user.name + ".png",
+      ]);
       res.render("register-result.pug", {
-        result: "用户名已被占用！",
-        code: -1,
+        result: "账号注册成功！",
+        code: 0,
       });
-      return;
-    }
-    if (users.find((it) => it.email === user.email)) {
+    } catch (error) {
       res.render("register-result.pug", {
-        result: "邮箱已被占用！",
-        code: -1,
+        result: "账号注册失败！" + error.toString(),
+        code: 0,
       });
-      return;
     }
-    user.id = (nextUserId++).toString();
-    user.avatar = "/upload/avatars/462345.png";
-    users.push(user);
-    // res.redirect("/login");
-    res.render("register-result.pug", {
-      result: "账号注册成功！",
-      code: 0,
-    });
   });
 //username-conflict-check?name=xiao
 //检测用户名冲突的接口
-app.get("/username-conflict-check", (req, res, next) => {
-  if (users.some((user) => user.name === req.query.name)) {
+app.get("/username-conflict-check", async (req, res, next) => {
+  let user = await db.get("select * from users where name = ?", req.query.name);
+  if (user) {
     res.json({
       code: -1,
       msg: "用户名已被占用",
@@ -210,20 +171,23 @@ app.get("/username-conflict-check", (req, res, next) => {
 });
 
 app
-  .route("/login")
+  .route("/login")//存储referer,登陆后返回之前浏览的页面
   .get((req, res, next) => {
     //打开登陆界面
-    res.render("login.pug");
+    
+    res.render("login.pug", {
+      previousUrl:req.get('referer')
+    });
   })
-  .post((req, res, next) => {
+  .post(async (req, res, next) => {
     //输入信息，请求登录
     console.log("收到登录请求", req.body);
     let loginInfo = req.body;
-    let user = users.find(
-      (user) =>
-        user.name === loginInfo.name && user.password === loginInfo.password
+    let user = await db.get(
+      "select * from users where name =? and password =?",
+      [loginInfo.name, loginInfo.password]
     );
-    //Ajax
+
     if (user) {
       //登陆成功
       res.cookie("user", user.name, {
@@ -233,6 +197,7 @@ app
       res.json({
         code: 0,
         msg: "登陆成功！",
+     
       });
     } else {
       //登陆失败

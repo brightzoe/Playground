@@ -2,6 +2,8 @@ extends base.pug
 
 block content
 	form(action="/login", method="post")
+		input(type="hidden" name="previousUrl" value=previousUrl)
+		//- 记录之前浏览页面的地址
 		div 用户名:
 		input(type="text", name="name")
 		div 密码：
@@ -17,8 +19,11 @@ block content
 				password:loginForm.elements.password.value
 			}).then(result=>{
 				if(result.code===0){
-					alert('登陆成功，将跳转回首页')
-					location.href='/'
+					//- 返回之前浏览的页面，没有就首页
+					if(loginForm.elements.previousUrl.value)
+						location.href=loginForm.elements.previousUrl.value
+					else
+						location.href='/'
 				}else{
 					alert('登陆失败！')
 				}

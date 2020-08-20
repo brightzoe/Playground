@@ -3,34 +3,43 @@ doctype html
 html
 	head
 		title #{post.title} - 吧唧BBS
-		link(rel='stylesheet' href="/common.css")
-		link(rel='stylesheet' href="/post.css")
+		link( rel="stylesheet",href="/common.css")
+		link( rel="stylesheet",href="/post.css")
 	body
 		include header.pug
 		div.post
 			h2= post.title
 			p.post-item= post.content
-			p.post-info 发帖人：
-				a(href=`/user/${post.user.id}`)= post.user.name
-				span 发表于： #{new Date(post.createdAt).toString().substr(0,24)}
-			
+			p.post-info 
+				span 发帖人：
+					a(href=`/user/${post.userId}`)= post.name
+				span 发表于：#{new Date(post.createdAt).toLocaleString('zh', { hour12: true })}
 
-		ul
-			if(!comments.length)
-				p 暂时还没有回贴，快来消灭零回复吧！
-			else
+		if(!comments.length)
+			p 暂时还没有回贴，快来消灭零回复吧！
+		else
+			ul
 				each comment in comments
 					li.post-comment
-						a(href=`/user/${comment.user.id}`)
-							img(src=`${comment.user.avatar}`)
-						a(href=`/user/${comment.user.id}`)= comment.user.name
+						a(href=`/user/${comment.userId}`)
+							img(src=`${comment.avatar}`)
+						a(href=`/user/${comment.userId}`)= comment.name
 						p= comment.content
-						span.comment-info 回复时间： #{new Date(comment.createdAt).toString().substr(0,24)}
-		form(action="/comment" method="post")
-			input(type='hidden' value=post.id name='replyTo')
-			//- 确认给哪个帖子的回复
-			textarea(name='comment',cols='30',rows='10')
-			button 提交回复
+						span.comment-info 回复时间：#{new Date(comment.createdAt).toLocaleString('zh', { hour12: true })}
+
+		if(user)
+			form(action="/comment" method="post")
+				input(type='hidden' value=post.id name='postId')
+				//- 确认给哪个帖子的回复
+				textarea(name='comment',cols='30',rows='10')
+				button 提交回复
+		else
+			p 
+				a(href="/login") 登录
+				//- 登陆后返回当前页面 login?return post
+				|或
+				a(href="/register") 注册
+				
 
 
 
