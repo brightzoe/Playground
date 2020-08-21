@@ -40,21 +40,14 @@ input.new {
 input.new:focus {
   outline: none;
 }
+
 #all {
-  display: none;
-}
-#forall {
   position: absolute;
   left: 10px;
   top: 25px;
   color: #bfbfbf;
 }
-.selected-all {
-  color: black !important;
-}
-.selected-none {
-  color: #bfbfbf;
-}
+
 footer {
   width: 550px;
   height: 62px;
@@ -79,21 +72,7 @@ ul > li {
   border-bottom: 1px solid #ededed;
   position: relative;
 }
-.bechecked {
-  text-decoration: line-through;
-  color: #bfbfbf;
-}
-.del-label {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  font-size: 28px;
-  font-weight: bold;
-  color: rgb(212, 119, 119);
-}
-.not-hover {
-  display: none;
-}
+
 ul > div {
   background: rgb(255, 255, 255);
   height: 40px;
@@ -104,4 +83,49 @@ ul > div {
 footer > p {
   /* margin合并 */
   margin: 10px 0;
+}
+
+.todo-item input[type="text"] {
+  display: none;
+}
+.todo-item button {
+  display: none;
+}
+
+.todo-item:hover button {
+  display: inline-block;
+}
+.todo-item.completed span {
+  text-decoration: line-through;
+}
+.todo-item.editing span {
+  display: none;
+}
+.todo-item.editing input[type="text"] {
+  display: inline-block;
+}
+
+.state {
+  display: none;
+}
+/* body {
+  counter-reset: left-count;
+  
+}
+.todo-item {
+ 
+  counter-increment: left-count;
+}
+.todo-item.completed {
+  counter-increment: none;
+}
+.left-count::before {
+  content: counter(left-count);
+} */
+
+ul.completed li:not(.completed) {
+  display: none;
+}
+ul.active li.completed {
+  display: none;
 }

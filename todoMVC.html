@@ -11,18 +11,30 @@
 	<body>
 		<header>todos</header>
 		<div id="todo">
-			<button id="all"></button>
-			<label id="forall" for="all">﹀</label>
-			<input class="new" type="text" placeholder="What needs to be done?"></input>
-			<ul class="old"><div class="ul-footer"></div></ul>
+			<input type="checkbox" name="" id="all">
+
+			<input id='todoInput' class="new" type="text" placeholder="What needs to be done?"></input>
+			<ul id='todoList' class="old">
+				
+			</ul>
+			<div class="state">
+				<span class='left-count'> items left</span>
+				<span id="category-select">
+					<label><input type="radio" name="selected" value="all" id="" checked> All</label>
+					<label><input type="radio" name="selected" value="active" id=""> Active</label>
+					<label><input type="radio" name="selected" value="completed" id=""> Completed</label>
+				</span>
+				<button id="clear-completed">Clear completed</button>
+			</div>
 		</div>
 		<footer>
 			<p>Double-click to edit a todo</p>
 			<p>Created by petehunt</p>
 			<p>Part of TodoMVC</p>
 		</footer>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 		<script src="./todoMVC.js"></script>
+		
 	</body>
 
 </html>
