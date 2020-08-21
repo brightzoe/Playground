@@ -69,7 +69,7 @@ app.get("/post/:id", async (req, res, next) => {
     let postData = {
       post: post,
       comments: comments,
-      user:req.user,
+      user: req.user,
     };
 
     res.render("post.pug", postData);
@@ -83,7 +83,9 @@ app
   .route("/post")
   //发帖页面
   .get((req, res, next) => {
-    res.render("add-post.pug");
+    res.render("add-post.pug", {
+      user: req.user,
+    });
   })
   //提交新帖
   .post(async (req, res, next) => {
@@ -171,12 +173,12 @@ app.get("/username-conflict-check", async (req, res, next) => {
 });
 
 app
-  .route("/login")//存储referer,登陆后返回之前浏览的页面
+  .route("/login") //存储referer,登陆后返回之前浏览的页面
   .get((req, res, next) => {
     //打开登陆界面
-    
+
     res.render("login.pug", {
-      previousUrl:req.get('referer')
+      previousUrl: req.get("referer"),
     });
   })
   .post(async (req, res, next) => {
@@ -197,7 +199,6 @@ app
       res.json({
         code: 0,
         msg: "登陆成功！",
-     
       });
     } else {
       //登陆失败
@@ -213,6 +214,37 @@ app.get("/logout", (req, res, next) => {
   //退出，清除cookie
   res.clearCookie("user");
   res.redirect("/");
+});
+app.get("/user/:id", async (req, res, next) => {
+  //用户详情页
+  let userInfo = await db.get(
+    "select * from users where rowid=?",
+    req.params.id
+  );
+  if (userInfo) {
+    let userPostsPromise = db.all(
+      "select * from posts where userId = ? order by createdAt desc",
+      req.params.id
+    );
+    //用户发过的贴子和评论
+    let userCommentsPromise = db.all(
+      "select comments.postId,posts.title as postTitle,comments.content,comments.createdAt from comments join posts on comments.postId=posts.rowid where comments.userId = ? order by comments.createdAt desc",
+      req.params.id
+    );
+    let [userPosts, userComments] = await Promise.all([
+      userPostsPromise,
+      userCommentsPromise,
+    ]);
+
+    res.render("user-profile.pug", {
+      user: req.user, //登录的用户
+      userInfo, //查看的用户
+      userPosts,
+      userComments,
+    });
+  } else {
+    res.render("404.pug"); //查无此人
+  }
 });
 app.listen(port, "127.0.0.1", () => {
   console.log("listening on port", port);
