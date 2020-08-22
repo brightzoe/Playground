@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="./todoMVC.css">
+		<title>todoMVCdata</title>
+	</head>
+
+	<body>
+		<header>todos</header>
+		<div id="container"></div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js" integrity="sha512-90vH1Z83AJY9DmlWa8WkjkV79yfS2n2Oxhsi2dZbIv0nC4E6m5AbH8Nh156kkM7JePmqD6tcZsfad1ueoaovww==" crossorigin="anonymous"></script>
+		<script>
+			let container = document.querySelector('#container')
+			let showingCategory = 'all'
+			let editingIdx = -1
+
+			let todos = localStorage.todos ?
+				JSON.parse(localStorage.todos) :
+				[{
+					content: 'eat', completed: false
+				}, {
+					content: 'drink', completed: true
+				}, {
+					content: 'lala', completed: true
+				}, {
+					content: 'play', completed: false
+				}, {
+					content: 'sit', completed: false
+				},];
+			container.addEventListener('click', e => {
+				if (e.target.matches('.clear-completed')) {
+					todos = todos.filter(todo => !todo.completed)
+					render()
+				}
+				if (e.target.matches('.toggle-all-completed')) {
+					if (todos.every(todo => todo.completed)) {
+						todos.forEach(todo => todo.completed = false)
+					} else {
+						todos.forEach(todo => todo.completed = true)
+					}
+					render()
+				}
+				if (e.target.matches('.toggle-completed')) {
+					let li = e.target.parentNode
+					let ul = li.parentNode
+					let idx = Array.from(ul.children).indexOf(li)
+					todos[idx].completed = !todos[idx].completed
+					render()
+				}
+				if (e.target.matches('delete')) {
+					let li = e.target.parentNode
+					let ul = li.parentNode
+					let idx = Array.from(ul.children).indexOf(li)
+					todos.splice(idx, 1)//删掉一个
+					render();
+					//document.querySelector('.todo-input').focus//光标留在上边
+				}
+				if (e.target.matches(['input[type="radio"]'])) {
+					showingCategory = e.target.value
+					render()
+				}
+			})
+			container.addEventListener('keyup', e => {
+				if (e.key === 'Enter' && e.target.matches('.todo-input')) {
+					let todoText = e.target.value.trim()
+					e.target.value = ''
+					if (todoText) {
+						todos.push({
+							content: todoText,
+							completed: false
+						})
+						render()
+						document.querySelector('.todo-input').focus()
+					}
+				}
+				if (e.key === 'Enter' && e.target.matches('.edit-box')) {
+					let todoText = e.target.value.trim()
+					todos[editingIdx].content = todoText
+					editingIdx = -1
+					render()
+				}
+			})
+			container.addEventListener('dblclick', e => {
+				if (e.target.matches(['li>span'])) {
+					let li = e.target.parentNode
+					let ul = li.parentNode
+					let idx = Array.from(ul.children).indexOf(li)
+					editingIdx = idx
+					render()
+					let editBox = document.querySelector('.edit-box')
+					editBox.focus()
+					editBox.selectionStart = editBox.selectionEnd = 9999999//光标一直放最后
+				}
+			})
+			container.addEventListener('focusout', e => {
+				if (e.target.matches('.edit-box')) {
+					let todoText = e.target.value.trim()
+					if (editingIdx === -1) return
+					todos[editingIdx].content = todoText
+					editingIdx = -1
+					render()
+				}
+
+
+			})
+			function getContent() {
+				let html = `
+				<div>
+					<input class='toggle-all-completed' type='checkbox' ${todos.every(todo => todo.completed) && todos.length ? 'checked' : ''}>
+					<input class='todo-input' type='text'>
+				</div>
+				<ul class="todo-list ${showingCategory}">
+					${todos.map((todo, idx) => `
+						<li class='todo-item ${todo.completed ? 'completed' : 'active'}'>
+							<input  class="toggle-completed" type = "checkbox" ${todo.completed ? 'checked' : ''}>
+							${editingIdx === idx ?
+						`<input class="edit-box" type='text' value=${todo.content}>` :
+						`<span> ${todo.content}</span> `
+					}
+							<button class='delete'>&times;</button>
+						</li>
+						`).join('\n')}
+				</ul>
+				${
+					todos.length ?
+						`
+					<div>
+						<span>${todos.filter(todo => todo.completed === false).length} items left</span>
+						<div>
+							<label><input type='radio' ${showingCategory === 'all' ? 'checked' : ''} value="all">All</label>
+							<label><input type='radio' ${showingCategory === 'active' ? 'checked' : ''} value="active">Active</label>
+							<label><input type='radio' ${showingCategory === 'completed' ? 'checked' : ''} value="completed">Completed</label>
+						</div>
+					${todos.some(todo => todo.completed) ? `<button class='clear-completed'>Clear Completed</button>` : ''}
+					</div>`:
+						''
+					}
+			`
+				return html
+			}
+
+
+			function render() {
+				container.innerHTML = getContent()
+				localStorage.todos = JSON.stringify(todos)
+			}
+			render()
+			//////////////////////////////////////////////////////////
+			let getContent2 = _.template(``)
+			function render2() {
+				container.innerHTML = getContent2(todos)
+				localStorage.todos = JSON.stringify(todos)
+			}
+		</script>
+	</body>
+
+</html>

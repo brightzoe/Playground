@@ -58,7 +58,7 @@ footer {
   text-align: center;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
-ul.old {
+ul {
   list-style: none;
   text-align: left;
   line-height: 1.4em;
@@ -85,14 +85,14 @@ footer > p {
   margin: 10px 0;
 }
 
-.todo-item input[type="text"] {
+/* .todo-item input[type="text"] {
   display: none;
-}
-.todo-item button {
+} */
+li button {
   display: none;
 }
 
-.todo-item:hover button {
+li:hover button {
   display: inline-block;
 }
 .todo-item.completed span {
@@ -108,24 +108,18 @@ footer > p {
 .state {
   display: none;
 }
-/* body {
-  counter-reset: left-count;
-  
-}
-.todo-item {
- 
-  counter-increment: left-count;
-}
-.todo-item.completed {
-  counter-increment: none;
-}
-.left-count::before {
-  content: counter(left-count);
-} */
+
 
 ul.completed li:not(.completed) {
   display: none;
 }
 ul.active li.completed {
+  display: none;
+}
+
+ul.active li.completed{
+  display: none;
+}
+ul.completed li.active{
   display: none;
 }
