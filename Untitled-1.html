@@ -7,22 +7,63 @@
     <title>Document</title>
   </head>
 
-  <body id="div">
-    <p>{{rawHtml}}</p>
-    <p>Using v-html directive: <span v-html="rawHtml"></span></p>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.min.js" integrity="sha512-BKbSR+cfyxLdMAsE0naLReFSLg8/pjbgfxHh/k/kUC82Hy7r6HtR5hLhobaln2gcTvzkyyehrdREdjpsQwy2Jw==" crossorigin="anonymous"></script>
+  <body>
+    <div id="div">
+      <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+      <label for="jack">Jack</label>
+      <input type="checkbox" id="john" value="John" v-model="checkedNames">
+      <label for="john">John</label>
+      <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+      <label for="mike">Mike</label>
+      <span>Checked names: {{checkedNames}}</span>
+
+<div id="blog-posts-events-demo">
+  <div :style="{ fontSize: postFontSize + 'em' }">
+    <blog-post v-for="post in posts" v-bind:key="post.id" v-bind:post="post" v-on:enlarge-text="postFontSize += 0.1"></blog-post>
+  </div>
+</div>
+    </div>
+    <script src="./store/vue.js"></script>
     <script>
+
+      Vue.component('blog-post', {
+        props: ['post'],
+        template: `
+    <div class="blog-post">
+      <h3>{{ post.title }}</h3>
+       <button @click="$emit('enlarge-text')">
+        Enlarge text
+      </button>
+      <div v-html="post.content"></div>
+    </div>
+  `
+      })
+      Vue.component('count-from-numbers',{
+        template:`<p>当前数字是{{number}}</p>`,
+        props:{
+          initialNumber:{
+            type:Number,
+            required:true
+          }
+        },
+        data(){
+          return{number:this.initialNumber}
+        }
+      })
       var app = new Vue({
         el: "#div",
         data: {
-          rawHtml: '<span style="color:red">this should be red</span>',
-          newTodoText: '',
-          visitCount: 0,
-          hideCompletedTodos: false,
-          todos: [],
-          error: null
+          checkedNames: [],
+          postFontSize:1,
+          posts: [
+            { id: 1, title: 'My journey with Vue' },
+            { id: 2, title: 'Blogging with Vue' },
+            { id: 3, title: 'Why Vue is so fun' }
+          ]
+          
         }
       })
+
     </script>
   </body>
 
