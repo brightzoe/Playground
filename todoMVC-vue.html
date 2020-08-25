@@ -84,8 +84,8 @@
 				<!-- 如果需要传别的参数，并传入e,用 $event 传参 -->
 			</div>
 			<ul :class="showingCategory">
-				<li v-for="(todo,idx) in todos" :class="todo.completed ? 'completed' : 'active'" @dblclick="editTodo(idx,$event)">
-					<!-- 循环 -->
+				<li v-for="(todo,idx) in todos" :key="todo.content" :class="todo.completed ? 'completed' : 'active'" @dblclick="editTodo(idx,$event)">
+					<!-- 循环，key的唯一-->
 					<input type="checkbox" :checked="todo.completed" @click="todo.completed=!todo.completed" />
 					<span v-if="editingIdx!==idx">{{todo.content}}</span>
 					<input v-else type="text" class='edit-box' :value="todo.content" @keyup.enter="editDone(idx,$event)" @blur="editDone(idx,$event)" />
@@ -108,8 +108,7 @@
 				el: "#container", //挂载在这个元素上
 				data: {
 					todos: localStorage.todos && JSON.parse(localStorage.todos) || [
-						//在上面的元素内，直接可以访问这个变量
-						{ content: "eat", completed: false },
+												{ content: "eat", completed: false },
 						{ content: "drink", completed: false },
 						{ content: "lala", completed: true },
 						{ content: "play", completed: true },
@@ -121,22 +120,22 @@
 				methods: {
 					pushToTodos(e) {
 						let todo = e.target.value.trim();
-						this.todos.push({
-							//this是app._data
+						app.todos.push({
+							//app.$data,可以直接用app代理/this
 							content: todo,
 							completed: false,
 						});
 						e.target.value = ''
 					},
 					toggleAllCheckbox(e) {
-						if (this.todos.every((todo) => todo.completed)) {
-							this.todos.forEach((todo) => (todo.completed = false));
+						if (app.todos.every((todo) => todo.completed)) {
+							app.todos.forEach((todo) => (todo.completed = false));
 						} else {
-							this.todos.forEach((todo) => (todo.completed = true));
+							app.todos.forEach((todo) => (todo.completed = true));
 						}
 					},
 					editTodo(idx, e) {
-						this.editingIdx = idx;
+						app.editingIdx = idx;
 						setTimeout(() => {
 							editBox = document.querySelector('.edit-box')
 							editBox && editBox.focus();
@@ -145,8 +144,8 @@
 
 					},
 					editDone(idx, e) {
-						this.editingIdx = -1
-						this.todos[idx].content = e.target.value.trim()
+						app.editingIdx = -1
+						app.todos[idx].content = e.target.value.trim()
 					}
 				},
 				watch: {
