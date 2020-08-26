@@ -1,69 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
 
   <body>
-    <div id="div">
-      <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
-      <label for="jack">Jack</label>
-      <input type="checkbox" id="john" value="John" v-model="checkedNames">
-      <label for="john">John</label>
-      <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
-      <label for="mike">Mike</label>
-      <span>Checked names: {{checkedNames}}</span>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <div id="app">
+      <v-app>
+        <v-content>
+          <v-container>
 
-<div id="blog-posts-events-demo">
-  <div :style="{ fontSize: postFontSize + 'em' }">
-    <blog-post v-for="post in posts" v-bind:key="post.id" v-bind:post="post" v-on:enlarge-text="postFontSize += 0.1"></blog-post>
-  </div>
-</div>
+            <v-layout align-center justify-center>
+              <v-btn color="blue" dark large @click="loadNextImage">
+                Another &nbsp; <v-icon>refresh</v-icon>
+              </v-btn>
+            </v-layout>
+
+            <v-layout row wrap>
+              <v-flex xs12>
+                <v-card flat tile class="d-flex">
+                  <v-img :src="image.url" contain>
+                  </v-img>
+                </v-card>
+              </v-flex>
+            </v-layout>
+
+          </v-container>
+        </v-content>
+      </v-app>
     </div>
-    <script src="./store/vue.js"></script>
+
     <script>
-
-      Vue.component('blog-post', {
-        props: ['post'],
-        template: `
-    <div class="blog-post">
-      <h3>{{ post.title }}</h3>
-       <button @click="$emit('enlarge-text')">
-        Enlarge text
-      </button>
-      <div v-html="post.content"></div>
-    </div>
-  `
-      })
-      Vue.component('count-from-numbers',{
-        template:`<p>当前数字是{{number}}</p>`,
-        props:{
-          initialNumber:{
-            type:Number,
-            required:true
-          }
-        },
-        data(){
-          return{number:this.initialNumber}
-        }
-      })
-      var app = new Vue({
-        el: "#div",
+      new Vue({
+        el: '#app',
+        vuetify: new Vuetify(),
         data: {
-          checkedNames: [],
-          postFontSize:1,
-          posts: [
-            { id: 1, title: 'My journey with Vue' },
-            { id: 2, title: 'Blogging with Vue' },
-            { id: 3, title: 'Why Vue is so fun' }
-          ]
-          
+          image: { url: "" }
+        },
+        created() {
+          this.loadNextImage();
+        },
+        methods: {
+          async loadNextImage() {
+            try {
+              axios.defaults.headers.common['x-api-key'] = "9954448d-63b1-4ca7-a9bd-ba982507a429" // Replace this with your API Key
+
+              let response = await axios.get('https://api.thecatapi.com/v1/images/search', { params: { limit: 1, size: "full" } }) // Ask for 1 Image, at full resolution
+
+              this.image = response.data[0] // the response is an Array, so just use the first item as the Image
+
+              console.log("-- Image from TheCatAPI.com")
+              console.log("id:", this.image.id)
+              console.log("url:", this.image.url)
+
+            } catch (err) {
+              console.log(err)
+            }
+          }
         }
       })
-
     </script>
   </body>
 
