@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+	</head>
+
+	<body>
+		<div id="root">
+
+		</div>
+		<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+		<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+		<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+		<script type="text/babel">
+
+
+
+
+			class TodoApp extends React.Component {
+				constructor(props) {
+					super(props)
+					this.state = {
+						showingCategory: "all",
+						editingIdx: -1,
+						todos: [
+							{
+								content: 'eat', completed: false
+							}, {
+								content: 'drink', completed: true
+							}, {
+								content: 'lala', completed: true
+							}, {
+								content: 'play', completed: false
+							}, {
+								content: 'sit', completed: false
+							}
+						]
+					};
+				}
+				getShowingTodos(){
+					if(this.state.showingCategory==="all"){
+						return this.state.todos
+					}
+					if(this.state.showingCategory==="active"){
+						return this.state.todos.filter(todo=>!todo.completed)
+					}
+				}
+				render() {
+					console.log('render');
+					return (
+						<div>
+							<div>
+								<input type="checkbox" />
+								<input type="text" />
+							</div>
+							<ul>
+								{todos.map(todo=>(<li><input type="checkbox" />
+									<span></span>
+									<button></button>
+								</li>))}
+								
+								</ul>
+						</div>
+					)
+				}
+			}
+			ReactDOM.render(
+				<TodoApp />,
+				document.getElementById('root')
+			);
+
+
+		</script>
+	</body>
+
+</html>
