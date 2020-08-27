@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+
+	<body>
+		<template id="form">
+			<div>
+				<label for="name"> What's your name? </label>
+				<input type="text" id="name" :value="value" @input="$emit('input',$event.target.value)"  />
+			</div>
+		</template>
+		<template id="greetings">
+			<div>
+				<form-component :user.sync="user" v-model='user'></form-component>
+				<hello-component :user="user"></hello-component>
+			</div>
+		</template>
+		<!-- 模板声明 -->
+		<template id="hello">
+			<h1>{{msg}} {{user}}</h1>
+		</template>
+		<div id="app">
+			<greetings-component></greetings-component>
+		</div>
+		<script src="/store/vue.js"></script>
+		<script>
+			let HelloComponent = Vue.component('hello-component', {
+				template: '#hello',
+				data() {
+					return { msg: 'hello' };
+				},
+				props: ['user'], //作为html属性
+			});
+			let FormComponent = Vue.component('form-component', {
+				template: '#form',
+				props: ['value'],
+		
+			});
+			let GreetingsComponent = Vue.component('greetings-component', {
+				template: '#greetings',
+				data() {
+					return { user: 'hero' };
+				},
+			});
+			let app = new Vue({
+				el: '#app',
+				// data: { user: 'hero' },
+			});
+		</script>
+	</body>
+</html>
