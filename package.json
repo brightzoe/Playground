@@ -12,8 +12,7 @@
     "koa": "2.13.0",
     "lodash": "^4.17.19",
     "microtime": "3.0.0",
-    "vue": "2.6.12",
-    "webpack": "4.44.1"
+    "vue": "2.6.12"
   },
   "devDependencies": {
     "webpack-cli": "3.3.12"
