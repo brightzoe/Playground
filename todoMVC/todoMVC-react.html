@@ -13,7 +13,9 @@
 		</div>
 		<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
 		<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+		<script src="https://cdn.jsdelivr.net/npm/immer@7.0.8/dist/immer.umd.production.min.js"></script>
 		<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
 		<script type="text/babel">
 
 
@@ -40,29 +42,98 @@
 						]
 					};
 				}
-				getShowingTodos(){
-					if(this.state.showingCategory==="all"){
+				toggleAllCompleted=() =>{
+					if (this.isAllCompleted()) {
+						// this.setState(immer.produce(state.todos.forEach(todo => todo.completed = false)))
+						this.setState({
+							todos:this.state.todos.map(todo=>{
+								return {
+									...todo,
+									completed:false
+								}
+							})
+						})
+
+					} else {
+						this.setState({
+							todos: this.state.todos.map(todo => {
+								return {
+									...todo,
+									completed: true
+								}
+							})
+						})
+						this.state.todos.forEach(todo => todo.completed = true)
+					}
+				}
+				getShowingTodos() {
+					if (this.state.showingCategory === "all") {
 						return this.state.todos
 					}
-					if(this.state.showingCategory==="active"){
-						return this.state.todos.filter(todo=>!todo.completed)
+					if (this.state.showingCategory === "active") {
+						return this.state.todos.filter(todo => !todo.completed)
 					}
+					if (this.state.showingCategory === "completed") {
+						return this.state.todos.filter(todo => todo.completed)
+					}
+				}
+				isAllCompleted() {
+					return this.state.todos.every(todo => todo.completed)
+				}
+				toggleTodoState(todo) {
+					this.setState({
+						todos: this.state.todos.map(it => {
+							if (it === todo) {
+								return { ...todo, completed: !todo.completed }
+							} else {
+								return it
+							}
+						})
+					})
+				}
+				setShowingCategory(category){
+					this.setState({
+						showingCategory:category
+					})
+				}
+				deleteTodo(todo){
+					this.setState({
+						todos:this.state.todos.filter(it=>it!==todo)
+					})
+				}
+				hasCompleted(){
+					return this.state.todos.some(todo=>todo.completed)
+				}
+				leftCount() {
+					return this.state.todos.filter(todo => !todo.completed).length
 				}
 				render() {
 					console.log('render');
 					return (
 						<div>
 							<div>
-								<input type="checkbox" />
+								<input type="checkbox" checked={this.isAllCompleted()} onChange={this.toggleAllCompleted} />
 								<input type="text" />
 							</div>
 							<ul>
-								{todos.map(todo=>(<li><input type="checkbox" />
-									<span></span>
-									<button></button>
-								</li>))}
-								
-								</ul>
+								{this.getShowingTodos().map(todo => (
+									<li key={todo.content}>
+										<input type="checkbox" checked={todo.completed} onChange={() => this.toggleTodoState(todo)} />
+										<span>{todo.content}</span>
+										<button onClick={()=>this.deleteTodo(todo)}>&times;</button>
+									</li>
+								))}
+
+							</ul>
+							<div>
+								<span>{this.leftCount()} items left</span>
+								<div>
+									<label ><input type="radio"checked={this.state.showingCategory==='all'} onChange={()=>this.setShowingCategory('all')}/>All</label>
+									<label ><input type="radio" checked={this.state.showingCategory === 'active'} onChange={() => this.setShowingCategory('active')} />Active</label>
+									<label ><input type="radio" checked={this.state.showingCategory === 'completed'} onChange={() => this.setShowingCategory('completed')} />Completed</label>
+									{this.hasCompleted()&&<button>Clear Completed</button>}
+									</div>
+							</div>
 						</div>
 					)
 				}
