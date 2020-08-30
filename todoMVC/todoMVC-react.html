@@ -1,147 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
-
 	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
 	</head>
 
 	<body>
-		<div id="root">
-
-		</div>
-		<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-		<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+		<div id="root"></div>
+		<script
+			src="https://unpkg.com/react@16/umd/react.development.js"
+			crossorigin
+		></script>
+		<script
+			src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+			crossorigin
+		></script>
 		<script src="https://cdn.jsdelivr.net/npm/immer@7.0.8/dist/immer.umd.production.min.js"></script>
 		<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
 		<script type="text/babel">
-
 			class TodoApp extends React.Component {
 				constructor(props) {
-					super(props)
+					super(props);
 					this.state = {
-						showingCategory: "all",
+						showingCategory: 'all',
 						editingIdx: -1,
 						todos: [
 							{
-								content: 'eat', completed: false
-							}, {
-								content: 'drink', completed: true
-							}, {
-								content: 'lala', completed: true
-							}, {
-								content: 'play', completed: false
-							}, {
-								content: 'sit', completed: false
-							}
-						]
+								content: 'eat',
+								completed: false,
+							},
+							{
+								content: 'drink',
+								completed: true,
+							},
+							{
+								content: 'lala',
+								completed: true,
+							},
+							{
+								content: 'play',
+								completed: false,
+							},
+							{
+								content: 'sit',
+								completed: false,
+							},
+						],
 					};
 				}
-				toggleAllCompleted=() =>{
+				toggleAllCompleted = () => {
 					if (this.isAllCompleted()) {
 						// this.setState(immer.produce(state.todos.forEach(todo => todo.completed = false)))
 						this.setState({
-							todos:this.state.todos.map(todo=>{
+							todos: this.state.todos.map((todo) => {
 								return {
 									...todo,
-									completed:false
-								}
-							})
-						})
-
+									completed: false,
+								};
+							}),
+						});
 					} else {
 						this.setState({
-							todos: this.state.todos.map(todo => {
+							todos: this.state.todos.map((todo) => {
 								return {
 									...todo,
-									completed: true
-								}
-							})
-						})
-						this.state.todos.forEach(todo => todo.completed = true)
+									completed: true,
+								};
+							}),
+						});
+						this.state.todos.forEach((todo) => (todo.completed = true));
 					}
-				}
+				};
+				addTodo = (e) => {
+					if (e.key === 'Enter') {
+						let todoText = e.target.value.trim();
+						if (todoText) {
+							this.setState({
+								todos: [
+									...this.state.todos,
+									{
+										content: todoText,
+										completed: false,
+									},
+								],
+							});
+							e.target.value = '';
+						}
+					}
+				};
 				getShowingTodos() {
-					if (this.state.showingCategory === "all") {
-						return this.state.todos
+					if (this.state.showingCategory === 'all') {
+						return this.state.todos;
 					}
-					if (this.state.showingCategory === "active") {
-						return this.state.todos.filter(todo => !todo.completed)
+					if (this.state.showingCategory === 'active') {
+						return this.state.todos.filter((todo) => !todo.completed);
 					}
-					if (this.state.showingCategory === "completed") {
-						return this.state.todos.filter(todo => todo.completed)
+					if (this.state.showingCategory === 'completed') {
+						return this.state.todos.filter((todo) => todo.completed);
 					}
 				}
 				isAllCompleted() {
-					return this.state.todos.every(todo => todo.completed)
+					return this.state.todos.every((todo) => todo.completed);
 				}
 				toggleTodoState(todo) {
 					this.setState({
-						todos: this.state.todos.map(it => {
+						todos: this.state.todos.map((it) => {
 							if (it === todo) {
-								return { ...todo, completed: !todo.completed }
+								return { ...todo, completed: !todo.completed };
 							} else {
-								return it
+								return it;
 							}
-						})
-					})
+						}),
+					});
 				}
-				setShowingCategory(category){
+				setShowingCategory(category) {
 					this.setState({
-						showingCategory:category
-					})
+						showingCategory: category,
+					});
 				}
-				deleteTodo(todo){
+				deleteTodo(todo) {
 					this.setState({
-						todos:this.state.todos.filter(it=>it!==todo)
-					})
+						todos: this.state.todos.filter((it) => it !== todo),
+					});
 				}
-				hasCompleted(){
-					return this.state.todos.some(todo=>todo.completed)
+				hasCompleted() {
+					return this.state.todos.some((todo) => todo.completed);
 				}
 				leftCount() {
-					return this.state.todos.filter(todo => !todo.completed).length
+					return this.state.todos.filter((todo) => !todo.completed).length;
 				}
 				render() {
-					console.log('render');
+					console.log('render',this.state);
 					return (
 						<div>
 							<div>
-								<input type="checkbox" checked={this.isAllCompleted()} onChange={this.toggleAllCompleted} />
-								<input type="text" />
+								<input
+									type="checkbox"
+									checked={this.isAllCompleted()}
+									onChange={this.toggleAllCompleted}
+								/>
+								<input type="text" onKeyUp={this.addTodo} />
 							</div>
 							<ul>
-								{this.getShowingTodos().map(todo => (
+								{this.getShowingTodos().map((todo) => (
 									<li key={todo.content}>
-										<input type="checkbox" checked={todo.completed} onChange={() => this.toggleTodoState(todo)} />
+										<input
+											type="checkbox"
+											checked={todo.completed}
+											onChange={() => this.toggleTodoState(todo)}
+										/>
 										<span>{todo.content}</span>
-										<button onClick={()=>this.deleteTodo(todo)}>&times;</button>
+										<button onClick={() => this.deleteTodo(todo)}>
+											&times;
+										</button>
 									</li>
 								))}
-
 							</ul>
 							<div>
 								<span>{this.leftCount()} items left</span>
 								<div>
-									<label ><input type="radio"checked={this.state.showingCategory==='all'} onChange={()=>this.setShowingCategory('all')}/>All</label>
-									<label ><input type="radio" checked={this.state.showingCategory === 'active'} onChange={() => this.setShowingCategory('active')} />Active</label>
-									<label ><input type="radio" checked={this.state.showingCategory === 'completed'} onChange={() => this.setShowingCategory('completed')} />Completed</label>
-									{this.hasCompleted()&&<button>Clear Completed</button>}
-									</div>
+									<label>
+										<input
+											type="radio"
+											checked={this.state.showingCategory === 'all'}
+											onChange={() => this.setShowingCategory('all')}
+										/>
+										All
+									</label>
+									<label>
+										<input
+											type="radio"
+											checked={this.state.showingCategory === 'active'}
+											onChange={() => this.setShowingCategory('active')}
+										/>
+										Active
+									</label>
+									<label>
+										<input
+											type="radio"
+											checked={this.state.showingCategory === 'completed'}
+											onChange={() => this.setShowingCategory('completed')}
+										/>
+										Completed
+									</label>
+									{this.hasCompleted() && <button onClick={this.clear}>Clear Completed</button>}
+								</div>
 							</div>
 						</div>
-					)
+					);
 				}
 			}
-			ReactDOM.render(
-				<TodoApp />,
-				document.getElementById('root')
-			);
-
-
+			ReactDOM.render(<TodoApp />, document.getElementById('root'));
 		</script>
 	</body>
-
 </html>
