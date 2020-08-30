@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,14 +9,8 @@
 
 	<body>
 		<div id="root"></div>
-		<script
-			src="https://unpkg.com/react@16/umd/react.development.js"
-			crossorigin
-		></script>
-		<script
-			src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
-			crossorigin
-		></script>
+		<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+		<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 		<script src="https://cdn.jsdelivr.net/npm/immer@7.0.8/dist/immer.umd.production.min.js"></script>
 		<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
@@ -50,7 +45,7 @@
 						],
 					};
 				}
-				toggleAllCompleted = () => {
+				toggleAllCompleted() {
 					if (this.isAllCompleted()) {
 						// this.setState(immer.produce(state.todos.forEach(todo => todo.completed = false)))
 						this.setState({
@@ -131,15 +126,20 @@
 				leftCount() {
 					return this.state.todos.filter((todo) => !todo.completed).length;
 				}
+				clearCompleted() {
+					this.setState({
+						todos: this.state.todos.filter(todo => !todo.completed)
+					})
+				}
 				render() {
-					console.log('render',this.state);
+					console.log('render', this.state);
 					return (
 						<div>
 							<div>
 								<input
 									type="checkbox"
 									checked={this.isAllCompleted()}
-									onChange={this.toggleAllCompleted}
+									onChange={() => this.toggleAllCompleted()}
 								/>
 								<input type="text" onKeyUp={this.addTodo} />
 							</div>
@@ -185,7 +185,7 @@
 										/>
 										Completed
 									</label>
-									{this.hasCompleted() && <button onClick={this.clear}>Clear Completed</button>}
+									{this.hasCompleted() && <button onClick={() => this.clearCompleted()}>Clear Completed</button>}
 								</div>
 							</div>
 						</div>
@@ -195,4 +195,5 @@
 			ReactDOM.render(<TodoApp />, document.getElementById('root'));
 		</script>
 	</body>
+
 </html>
