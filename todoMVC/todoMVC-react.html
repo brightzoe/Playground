@@ -15,7 +15,16 @@
 		<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
 		<script type="text/babel">
+
+			const produce = immer.produce
 			class TodoApp extends React.Component {
+				setState(partialState, cb) {
+					//实现可以直接setstate
+					if (typeof partialState === 'function') {
+						return super.setState(produce(partialState, cb))
+					}
+					super.setState(partialState, cb)
+				}
 				constructor(props) {
 					super(props);
 					this.state = {
@@ -131,9 +140,26 @@
 						todos: this.state.todos.filter(todo => !todo.completed)
 					})
 				}
+				editTodoContent(e, todo) {
+					this.setState(produce(state => {
+						let idx = state.todos.indexOf(todo)
+						state.todos[idx].content = e.target.value.trim()
+
+					}))
+
+				}
+				setEditingIdx = (idx) => {
+					this.setState(produce(state => {
+						editingIdx = idx//fdf
+					}))
+					setTimeout(() => {
+						this.refs.editBox.focus()
+					});
+				}
 				render() {
 					console.log('render', this.state);
 					return (
+
 						<div>
 							<div>
 								<input
@@ -144,14 +170,16 @@
 								<input type="text" onKeyUp={this.addTodo} />
 							</div>
 							<ul>
-								{this.getShowingTodos().map((todo) => (
-									<li key={todo.content}>
+								{this.getShowingTodos().map((todo, idx) => (
+									<li key={idx}>
 										<input
 											type="checkbox"
 											checked={todo.completed}
 											onChange={() => this.toggleTodoState(todo)}
-										/>
-										<span>{todo.content}</span>
+										/>{this.state.editingIdx === idx ?
+											<input ref="editBox" type="text" onChange={e => this.editTodoContent(e, todo)} value={todo.content} /> :
+											<span onDoubleClick={() => this.setState({ editingIdx: idx })}>{todo.content}</span>}
+
 										<button onClick={() => this.deleteTodo(todo)}>
 											&times;
 										</button>
@@ -189,10 +217,13 @@
 								</div>
 							</div>
 						</div>
+
 					);
 				}
 			}
 			ReactDOM.render(<TodoApp />, document.getElementById('root'));
+
+
 		</script>
 	</body>
 

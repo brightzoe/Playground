@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://cdn.jsdelivr.net/npm/immer@7.0.8/dist/immer.umd.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+      class Welcome extends React.Component {
+        render() {
+          return <h1>hello,{this.props.name}</h1>
+        }
+      }
+      class App extends React.Component {
+
+        render() {
+          return (
+            <div>
+              <Welcome name="a" />
+              <Welcome name="b" />
+              <Welcome name="c" />
+            </div>
+          )
+        }
+      }
+
+      function FormattedDate(props) {
+        return <h2>it's {props.data.toLocaleTimeString()}</h2>
+      }
+
+      ReactDOM.render(<App />, document.getElementById('root'))
+    </script>
+  </body>
+
+</html>
