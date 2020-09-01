@@ -11,33 +11,39 @@
     <div id="root"></div>
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://cdn.jsdelivr.net/npm/immer@7.0.8/dist/immer.umd.production.min.js"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
     <script type="text/babel">
-      class Welcome extends React.Component {
-        render() {
-          return <h1>hello,{this.props.name}</h1>
-        }
-      }
-      class App extends React.Component {
 
+      class NameForm extends React.Component {
+        constructor(props) {
+          super(props)
+          this.state = { value: '' }
+        }
+        handleChange = (e) => {
+          this.setState({ value: e.target.value })
+        }
+        handleSubmit = (e) => {
+          alert('名字： ' + this.state.value)
+          e.preventDefault()
+        }
         render() {
           return (
-            <div>
-              <Welcome name="a" />
-              <Welcome name="b" />
-              <Welcome name="c" />
-            </div>
+            <form onSubmit={this.handleSubmit}>
+              <label>
+                名字:
+                <input type="text" name="name"
+                  value={this.state.value}
+                  onChange={this.handleChange} />
+              </label>
+              // 受控组件
+              <input type="submit" value="提交" />
+            </form>
           )
         }
       }
 
-      function FormattedDate(props) {
-        return <h2>it's {props.data.toLocaleTimeString()}</h2>
-      }
-
-      ReactDOM.render(<App />, document.getElementById('root'))
+     ReactDOM.render(<NameForm />, document.getElementById('root'))
     </script>
   </body>
 
