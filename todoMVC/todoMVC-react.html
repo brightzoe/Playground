@@ -11,20 +11,18 @@
 		<div id="root"></div>
 		<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
 		<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-		<script src="https://cdn.jsdelivr.net/npm/immer@7.0.8/dist/immer.umd.production.min.js"></script>
 		<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-
+		<script src="https://unpkg.com/immer"></script>
 		<script type="text/babel">
-
-			const produce = immer.produce
+			const { produce } = immer;
 			class TodoApp extends React.Component {
-				setState(partialState, cb) {
-					//实现可以直接setstate
-					if (typeof partialState === 'function') {
-						return super.setState(produce(partialState, cb))
-					}
-					super.setState(partialState, cb)
-				}
+				// setState(partialState, cb) {
+				// 	//实现可以直接setstate
+				// 	if (typeof partialState === 'function') {
+				// 		return super.setState(produce(partialState),cb)
+				// 	}
+				// 	super.setState(partialState, cb)
+				// }
 				constructor(props) {
 					super(props);
 					this.state = {
@@ -54,46 +52,7 @@
 						],
 					};
 				}
-				toggleAllCompleted() {
-					if (this.isAllCompleted()) {
-						// this.setState(immer.produce(state.todos.forEach(todo => todo.completed = false)))
-						this.setState({
-							todos: this.state.todos.map((todo) => {
-								return {
-									...todo,
-									completed: false,
-								};
-							}),
-						});
-					} else {
-						this.setState({
-							todos: this.state.todos.map((todo) => {
-								return {
-									...todo,
-									completed: true,
-								};
-							}),
-						});
-						this.state.todos.forEach((todo) => (todo.completed = true));
-					}
-				};
-				addTodo = (e) => {
-					if (e.key === 'Enter') {
-						let todoText = e.target.value.trim();
-						if (todoText) {
-							this.setState({
-								todos: [
-									...this.state.todos,
-									{
-										content: todoText,
-										completed: false,
-									},
-								],
-							});
-							e.target.value = '';
-						}
-					}
-				};
+
 				getShowingTodos() {
 					if (this.state.showingCategory === 'all') {
 						return this.state.todos;
@@ -141,17 +100,58 @@
 					})
 				}
 				editTodoContent(e, todo) {
+					for (let i = 0; i < this.state.todos.length; i++) {
+						if (this.state.todos[i].content === todo.content) {
+							var idx = i
+						}
+					}
 					this.setState(produce(state => {
-						let idx = state.todos.indexOf(todo)
-						state.todos[idx].content = e.target.value.trim()
-
+						state.todos[idx].content = this.refs.editBox.value.trim()
 					}))
 
 				}
+				toggleAllCompleted = () => {
+					if (this.isAllCompleted()) {
+						// this.setState(immer.produce(state.todos.forEach(todo => todo.completed = false)))
+						this.setState({
+							todos: this.state.todos.map((todo) => {
+								return {
+									...todo,
+									completed: false,
+								};
+							}),
+						});
+					} else {
+						this.setState({
+							todos: this.state.todos.map((todo) => {
+								return {
+									...todo,
+									completed: true,
+								};
+							}),
+						});
+						this.state.todos.forEach((todo) => (todo.completed = true));
+					}
+				};
+				addTodo = (e) => {
+					if (e.key === 'Enter') {
+						let todoText = e.target.value.trim();
+						if (todoText) {
+							this.setState({
+								todos: [
+									...this.state.todos,
+									{
+										content: todoText,
+										completed: false,
+									},
+								],
+							});
+							e.target.value = '';
+						}
+					}
+				};
 				setEditingIdx = (idx) => {
-					this.setState(produce(state => {
-						editingIdx = idx//fdf
-					}))
+					this.setState({ editingIdx: idx })
 					setTimeout(() => {
 						this.refs.editBox.focus()
 					});
@@ -165,7 +165,7 @@
 								<input
 									type="checkbox"
 									checked={this.isAllCompleted()}
-									onChange={() => this.toggleAllCompleted()}
+									onChange={this.toggleAllCompleted}
 								/>
 								<input type="text" onKeyUp={this.addTodo} />
 							</div>
@@ -177,8 +177,8 @@
 											checked={todo.completed}
 											onChange={() => this.toggleTodoState(todo)}
 										/>{this.state.editingIdx === idx ?
-											<input ref="editBox" type="text" onChange={e => this.editTodoContent(e, todo)} value={todo.content} /> :
-											<span onDoubleClick={() => this.setState({ editingIdx: idx })}>{todo.content}</span>}
+											<input ref="editBox" type="text" onChange={(e) => this.editTodoContent(e, todo)} value={todo.content} /> :
+											<span onDoubleClick={() => this.setEditingIdx(idx)}>{todo.content}</span>}
 
 										<button onClick={() => this.deleteTodo(todo)}>
 											&times;
