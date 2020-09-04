@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,42 +8,54 @@
 
 	<body>
 		<div id="root"></div>
-		<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-		<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+		<script
+			src="https://unpkg.com/react@16/umd/react.development.js"
+			crossorigin
+		></script>
+		<script
+			src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+			crossorigin
+		></script>
 		<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 		<script type="text/babel">
-
-
-
-			class Greeting extends React.Component {
+			class MouseTracker extends React.Component {
 				constructor(props) {
 					super(props);
-					this.state = { name: 'mary', firstName: 'Hello' };
+					this.state = {
+						pos: {
+							x: 0,
+							y: 0,
+						},
+					};
 				}
-				handleNameChange = (e) => {
+				updateMousePos = (e) => {
 					this.setState({
-						name: e.target.value,
+						pos: {
+							x: e.clientX,
+							y: e.clientY,
+						},
 					});
 				};
-				handlefirstNameChange = (e) => {
-					this.setState({
-						firstName: e.target.value
-					});
-				};
+				componentDidMount() {
+					window.addEventListener('mousemove', this.updateMousePos);
+				}
+				componentWillUnmount() {
+					window.removeEventListener('mousemove', this.updateMousePos);
+				}
 				render() {
-					return (
-						<section>
-							<input value={this.state.name} onChange={this.handleNameChange} />
-							<br />
-							<input value={this.state.firstName} onChange={this.handlefirstNameChange} />
-
-						</section>
-					);
+					return this.props.render(this.state.pos);
 				}
 			}
-
-			ReactDOM.render(<Greeting />, document.getElementById('root'));
+			ReactDOM.render(
+				<MouseTracker
+					render={(pos) => (
+						<div>
+							hello {pos.x},{pos.y}
+						</div>
+					)}
+				></MouseTracker>,
+				document.getElementById('root')
+			);
 		</script>
 	</body>
-
 </html>

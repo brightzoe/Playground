@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+      class MouseTracker extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            pos: {
+              x: 0,
+              y: 0,
+            },
+          };
+        }
+        updateMousePos = (e) => {
+          this.setState({
+            pos: {
+              x: e.clientX,
+              y: e.clientY,
+            },
+          });
+        };
+        componentDidMount() {
+          window.addEventListener('mousemove', this.updateMousePos);
+        }
+        componentWillUnmount() {
+          window.removeEventListener('mousemove', this.updateMousePos);
+        }
+        render() {
+          return this.props.render(this.state.pos);
+        }
+      }
+      ReactDOM.render(
+        <MouseTracker
+          render={(pos) => (
+            <div>
+              hello {pos.x},{pos.y}
+            </div>
+          )}
+        ></MouseTracker>,
+        document.getElementById('root')
+      );
+    </script>
+  </body>
+
+</html>
