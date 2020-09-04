@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,14 +9,8 @@
 
 	<body>
 		<div id="root"></div>
-		<script
-			src="https://unpkg.com/react@16/umd/react.development.js"
-			crossorigin
-		></script>
-		<script
-			src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
-			crossorigin
-		></script>
+		<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+		<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 		<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 		<script type="text/babel">
 			class MouseTracker extends React.Component {
@@ -46,16 +41,20 @@
 					return this.props.render(this.state.pos);
 				}
 			}
+			function Repeat(props) {
+				let items = []
+				for (let i = 0; i < props.time; i++) {
+					items.push(props.render(i))
+				}
+				return <div>{items}</div>
+			}
+
 			ReactDOM.render(
-				<MouseTracker
-					render={(pos) => (
-						<div>
-							hello {pos.x},{pos.y}
-						</div>
-					)}
-				></MouseTracker>,
+				<Repeat time={10} render={i => <div key={i}>this is {i}</div>} />
+				,
 				document.getElementById('root')
 			);
 		</script>
 	</body>
+
 </html>
