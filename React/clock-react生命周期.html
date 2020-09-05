@@ -1,66 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-  </head>
+	<body>
+		<div id="root"></div>
+		<script
+			src="https://unpkg.com/react@16/umd/react.development.js"
+			crossorigin
+		></script>
+		<script
+			src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+			crossorigin
+		></script>
 
-  <body>
-    <div id="root"></div>
-    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+		<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+		<script type="text/babel">
+			class Clock extends React.Component {
+				constructor(props) {
+					console.log('初始化props');
+					super(props);
+					console.log('初始化状态');
+					this.state = {
+						time: new Date(),
+					};
+				}
 
-    <script type='text/babel'>
-      class Clock extends React.Component {
-        constructor(props) {
-          super(props)
-          this.state = {
-            time: new Date()
-          }
-        }
+				componentDidMount() {
+					console.log('组件已经挂载');
+					// this.timerID = setInterval(() => {
+					//   this.tick()
+					// }, 1000);
+				}
+				shouldComponentUpdate() {
+					console.log('数据是否需要更新');
+					return true;
+				}
+				getSnapshotBeforeUpdate() {
+					console.log('数据将要更新');
+					return true;
+				}
+				componentDidUpdate() {
+					console.log('数据已经更新');
+				}
+				componentWillUnmount() {
+					clearInterval(this.timerID);
+				}
 
-        componentDidMount() {
-          this.timerID = setInterval(() => {
-            this.tick()
-          }, 1000);
-        }
-        
-        componentWillUnmount() {
-          clearInterval(this.timerID)
-        }
+				tick = () => {
+          
+					this.setState({
+						time: new Date(),
+					});
+				};
 
-        tick() {
-          this.setState({
-            time: new Date()
-          })
-        }
+				render() {
+					console.log('组件加载或数据更新');
+					return (
+						<div>
+							<h2>it is {this.state.time.toLocaleString()} </h2>
+							<button onClick={this.tick}>更新数据</button>
+						</div>
+					);
+				}
+			}
 
-        render() {
-          return (
-            <div>
-              <h2>it is {this.state.time.toLocaleString()}</h2>
-            </div>
-          )
-        }
-      };
-
-      class App extends React.Component {
-        render() {
-          return (
-            <div>
-              <Clock />
-              <Clock />
-              <Clock />
-            </div>
-          )
-        }
-      }
-      ReactDOM.render(<App />, document.getElementById("root"))
-    </script>
-  </body>
-
+			class App extends React.Component {
+				render() {
+					return (
+						<div>
+							<Clock />
+							<Clock />
+							<Clock />
+						</div>
+					);
+				}
+			}
+			ReactDOM.render(<Clock />, document.getElementById('root'));
+		</script>
+	</body>
 </html>

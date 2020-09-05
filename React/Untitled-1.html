@@ -19,14 +19,17 @@
 		<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 		<script type="text/babel">
 
-			function Hello(){
-					let time = new Date().toLocaleTimeString()
-				return (
-					<div>
-						<h1 className="red">hello, {props.name}{time}</h1>
-						<h2>年龄和</h2>
-					</div>)
+		class Hello extends React.Components{
+			constructor(props){
+				super(props)
 			}
+			componentDidMount(){
+				console.log('组件加载后')
+			}
+			render(){
+				return <div>hhhhh</div>
+			}
+		}
 			ReactDOM.render(<Hello  name="jack" />, document.getElementById('root'))
 		</script>
 	</body>
