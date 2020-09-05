@@ -5,6 +5,11 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
+		<style>
+			.red {
+				color: red;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -13,47 +18,16 @@
 		<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 		<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 		<script type="text/babel">
-			class MouseTracker extends React.Component {
-				constructor(props) {
-					super(props);
-					this.state = {
-						pos: {
-							x: 0,
-							y: 0,
-						},
-					};
-				}
-				updateMousePos = (e) => {
-					this.setState({
-						pos: {
-							x: e.clientX,
-							y: e.clientY,
-						},
-					});
-				};
-				componentDidMount() {
-					window.addEventListener('mousemove', this.updateMousePos);
-				}
-				componentWillUnmount() {
-					window.removeEventListener('mousemove', this.updateMousePos);
-				}
-				render() {
-					return this.props.render(this.state.pos);
-				}
-			}
-			function Repeat(props) {
-				let items = []
-				for (let i = 0; i < props.time; i++) {
-					items.push(props.render(i))
-				}
-				return <div>{items}</div>
-			}
 
-			ReactDOM.render(
-				<Repeat time={10} render={i => <div key={i}>this is {i}</div>} />
-				,
-				document.getElementById('root')
-			);
+			function Hello(){
+					let time = new Date().toLocaleTimeString()
+				return (
+					<div>
+						<h1 className="red">hello, {props.name}{time}</h1>
+						<h2>年龄和</h2>
+					</div>)
+			}
+			ReactDOM.render(<Hello  name="jack" />, document.getElementById('root'))
 		</script>
 	</body>
 
