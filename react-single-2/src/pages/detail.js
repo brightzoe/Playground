@@ -1,8 +1,33 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
-// import { Button } from 'antd';
+import { Link, useParams, useHistory } from 'react-router-dom';
+import { Button } from 'antd';
 import './app.scss';
 import 'antd/dist/antd.css';
 export default function Detail() {
-	return <div className="container">this is detail.</div>;
+	const history = useHistory();
+	const params = useParams();
+	return (
+		<div className="container">
+			<p>this is detail.</p>
+			<p>当前参数值为：{params.id}</p>
+			<Button
+				onClick={() => {
+					history.push('/');
+				}}
+			>
+				跳转首页
+			</Button>
+		</div>
+	);
 }
+// export default class Detail extends React.Component{
+// 	handleJump = ()=>{
+// 		this.props.history.push('/login')
+// 	}
+// 	render() {
+// 		return <div>
+// 			<h1>欢迎</h1>
+// 			<p>当前ID为：{this.props.match.params.id}</p>
+// 		</div>
+// 	}
+// }
