@@ -1,5 +1,9 @@
 import React from 'react';
+import { Input, Button, Select } from 'antd';
+import 'antd/dist/antd.css';
 import './App.scss';
+const Search = Input.Search;
+const Option = Select.Option;
 class App extends React.Component {
 	state = {
 		val: '',
@@ -16,20 +20,42 @@ class App extends React.Component {
 		let val = e.target.value;
 		this.setState({ val });
 	};
+	handleSearch = (val) => {
+		let { list } = this.state;
+		list.push(val);
+		this.setState({ list });
+	};
 	render() {
 		const { val, list } = this.state; //解析赋值
+		const options = [];
+		const LiItem = list.map((item, idx) => {
+			options.push(<Option key={idx} style={{height:50}}>{item}</Option>)
+			return <li key={idx}>{item}</li>
+		});
 		return (
 			<div>
 				<p>欢迎！</p>
 				<h1>hello</h1>
-				<input type="text" value={val} onChange={this.handleChange} />
-				<button onClick={this.handleAdd}>添加</button>
+				<Input
+					type="text"
+					value={val}
+					style={{ width: 300 }}
+					onChange={this.handleChange}
+				/>
+				<Button type="primary" onClick={this.handleAdd}>
+					添加
+				</Button>
 
-				<ul>
-					{list.map((item, idx) => {
-						return <li key={idx}>{item}</li>;
-					})}
-				</ul>
+				<ul>{LiItem}</ul>
+				<div>
+					<Search
+						style={{ width: 363 }}
+						onSearch={this.handleSearch}
+						enterButton="添加"
+					></Search>
+					<br/>
+					<Select style={{width:150}}>{options}</Select>
+				</div>
 			</div>
 		);
 	}
