@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,24 +13,59 @@
 
 	<body>
 		<div id="root"></div>
-		<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-		<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+		<script
+			src="https://unpkg.com/react@16/umd/react.development.js"
+			crossorigin
+		></script>
+		<script
+			src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+			crossorigin
+		></script>
 		<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 		<script type="text/babel">
-
-		class Hello extends React.Components{
-			constructor(props){
-				super(props)
+			function Login(props) {
+				return <button onClick={props.updateUser}>login</button>;
 			}
-			componentDidMount(){
-				console.log('组件加载后')
+			function Logout(props) {
+				return <button onClick={props.updateUser}>logout</button>;
 			}
-			render(){
-				return <div>hhhhh</div>
+			class TodoList extends React.Component {
+				state = {
+					val: '',
+					list: [],
+				};
+				handleAdd = () => {
+					const { val, list } = this.state;
+					list.push(val);
+					this.setState({ list });
+				};
+				handleInput = (e) => {
+					this.setState({
+						val: e.target.value,
+					});
+				};
+				render() {
+					const arr = this.state.list;
+					const listItem = [];
+					const val = this.state.val;
+					arr.map((item,idx) => {
+						let li = <li key={idx}>{item}</li>;
+						listItem.push(li);
+					});
+					return (
+						<div>
+							<div>
+								<input type="text" value={val} onChange={this.handleInput} />
+								<button onClick={this.handleAdd}>添加</button>
+							</div>
+							<div>
+								<ul>{listItem}</ul>
+							</div>
+						</div>
+					);
+				}
 			}
-		}
-			ReactDOM.render(<Hello  name="jack" />, document.getElementById('root'))
+			ReactDOM.render(<TodoList />, document.getElementById('root'));
 		</script>
 	</body>
-
 </html>
