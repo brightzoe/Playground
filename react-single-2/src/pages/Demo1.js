@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input, Button, Select } from 'antd';
 import 'antd/dist/antd.css';
-import './App.scss';
+import './Demo1.scss';
 const Search = Input.Search;
 const Option = Select.Option;
 class App extends React.Component {
