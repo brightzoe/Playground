@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useParams, useHistory } from 'react-router-dom';
+import {  useParams, useHistory } from 'react-router-dom';
 import { Button } from 'antd';
 import './app.scss';
 import 'antd/dist/antd.css';
