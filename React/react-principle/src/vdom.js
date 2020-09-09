@@ -44,17 +44,26 @@ function createElement(vnode) {
 		} else if (attr === 'style' && typeof rest.style === 'object') {
 			// style={{color:"red",fontSize: "16px"}}
 			//style="color:red;fontSize: 16px"
+			//TODO: key大写 fontSize 值：fontSize:16
 			const style = Object.keys(rest.style)
 				.map((k) => k + ':' + rest.style[k])
 				.join(';');
 			node.setAttribute('style', style);
+		} else if (attr.startsWith('on')) {
+			const e = attr.toLowerCase();
+			node[e] = rest[attr];
 		} else {
 			node.setAttribute(attr, rest[attr]);
 		}
 	});
 	//递归子元素在children里,塞到node里面
 	children.forEach((child) => {
-		node.appendChild(initVNode(child));
+		//有可能是数组,遍历
+		if (Array.isArray(child)) {
+			child.forEach((c) => node.appendChild(initVNode(c)));
+		} else {
+			node.appendChild(initVNode(child));
+		}
 	});
 	return node;
 }

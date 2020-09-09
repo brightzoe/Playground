@@ -6,4 +6,4 @@ function render(vnode, container) {
   container.appendChild(node)
   // container.innerHTML=`<pre>${JSON.stringify(vnode)}</pre>`
 }
-export default {render}
+export default { render }
