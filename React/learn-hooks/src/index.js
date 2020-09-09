@@ -1,24 +1,17 @@
-import React, { Component,useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
+import State from './01state';
+import Effect from './02effect';
+import Life from './03life-cycle'
+import Ref from "./04ref"
+import Context from './05context'
 import './index.css';
-
-function Greeting(props) {
-	const [name, setName] = useState('Mary');
-	const [surname, setSurname] = useState('hello');
-	function handleNameChange(e) {
-		setName(e.target.value);
-	}
-	function handleSurnameChange(e) {
-		setSurname(e.target.value);
-	}
+function App() {
 	return (
-		<section>
-      <input value={name} onChange={handleNameChange} />
-      <br/>
-			<input value={surname} onChange={handleSurnameChange} />
-		</section>
+		<div>
+			<Context />
+		</div>
 	);
 }
 
-ReactDOM.render(<Greeting />, document.getElementById('root'));
-
+ReactDOM.render(<App />, document.getElementById('root'));
