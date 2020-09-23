@@ -738,3 +738,6 @@ funcTwo();
 
 
 
+function parseQueryString(url) {
+	
+}
