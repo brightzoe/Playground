@@ -739,5 +739,5 @@ funcTwo();
 
 
 function parseQueryString(url) {
-	
+
 }
