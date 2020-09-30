@@ -736,8 +736,5 @@ async function funcTwo() {
 funcOne();
 funcTwo();
 
+function parseQueryString(url) {}
 
-
-function parseQueryString(url) {
-
-}
