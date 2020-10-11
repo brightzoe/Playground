@@ -739,21 +739,14 @@ funcTwo();
 function parseQueryString(url) {}
 
 
-//函数柯里化相关。
-//add(1)(2)(3)无限都可以得到结果
-function argsSum(args) {
-	return args.reduce((pre, cur) => {
-		return pre + cur;
-	});
+function sum(...args) {
+	let s = sum.bind(null, ...args)
+	s.valueOf = function () {
+		return args.reduce((a,b)=>a+b)
+	}
+	return s
 }
-function add(...args1) {
-	let sum1 = argsSum(args1);
-	let fn = function (...args2) {
-		let sum2 = argsSum(args2);
-		return add(sum1 + sum2);
-	};
-	fn.toString = function () {
-		return sum1;
-	};
-	return fn;
-}
+  sum(1,2,3).valueOf(); //6
+   sum(2,3)(2).valueOf(); //7
+   sum(1)(2)(3)(4).valueOf(); //10
+   sum(2)(4,1)(2).valueOf(); //9
