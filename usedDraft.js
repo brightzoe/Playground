@@ -751,3 +751,9 @@ function sum(...args) {
    sum(1)(2)(3)(4).valueOf(); //10
 sum(2)(4, 1)(2).valueOf(); //9
 
+//?1,2,3,4,4
+[1,2].forEach(async (ele) => {
+	await console.log(ele)
+console.log(4)
+})
+console.log(3)
