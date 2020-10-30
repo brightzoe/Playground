@@ -738,22 +738,36 @@ funcTwo();
 
 function parseQueryString(url) {}
 
-
 function sum(...args) {
-	let s = sum.bind(null, ...args)
+	let s = sum.bind(null, ...args);
 	s.valueOf = function () {
-		return args.reduce((a,b)=>a+b)
-	}
-	return s
+		return args.reduce((a, b) => a + b);
+	};
+	return s;
 }
-  sum(1,2,3).valueOf(); //6
-   sum(2,3)(2).valueOf(); //7
-   sum(1)(2)(3)(4).valueOf(); //10
+sum(1, 2, 3).valueOf(); //6
+sum(2, 3)(2).valueOf(); //7
+sum(1)(2)(3)(4).valueOf(); //10
 sum(2)(4, 1)(2).valueOf(); //9
 
 //?1,2,3,4,4
-[1,2].forEach(async (ele) => {
-	await console.log(ele)
-console.log(4)
-})
-console.log(3)
+[1, 2].forEach(async (ele) => {
+	await console.log(ele);
+	console.log(4);
+});
+console.log(3);
+
+Promise.prototype.finally = function (f) {
+	return this.then(
+		(val) => {
+			return Promise.resolve(f()).then(() => {
+				return val;
+			});
+		},
+		(reason) => {
+			return Promise.resolve(f()).then(() => {
+				throw reason;
+			});
+		}
+	);
+};
