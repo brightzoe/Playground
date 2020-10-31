@@ -1,3 +1,5 @@
+const { xor } = require("lodash");
+
 function bind(f, ...fixedArgs) {
 	return function (...args) {
 		return f(...fixedArgs, ...args);
@@ -577,6 +579,7 @@ function replaceImages() {
 }
 
 function normalize(node) {
+	//将连续的文本节点合并成一个
 	if (node.nodeType === document.ELEMENT_NODE) {
 		var children = Array.from(node.childNodes);
 		let text = '';
@@ -771,3 +774,10 @@ Promise.prototype.finally = function (f) {
 		}
 	);
 };
+
+let x = { a: 1, b: 2 }
+
+function func(obj) {
+	obj = 3
+}
+func(x)
