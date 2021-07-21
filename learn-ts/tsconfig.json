@@ -1,0 +1,9 @@
+{
+	"compileOnSave": false,
+	"buildOnSave": false,
+	"compilerOptions": {
+		"experimentalDecorators": true,
+		"sourceMap": true,
+		"allowJs": true
+	}
+}
