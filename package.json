@@ -9,7 +9,7 @@
 		"express": "4.17.1",
 		"figlet": "^1.5.0",
 		"formidable": "1.2.2",
-		"immer": "8.0.1",
+		"immer": "9.0.6",
 		"koa": "2.13.0",
 		"lodash": "^4.17.21",
 		"microtime": "3.0.0",
