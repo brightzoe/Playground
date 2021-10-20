@@ -1,11 +1,8 @@
-const { xor } = require("lodash");
-
 function bind(f, ...fixedArgs) {
 	return function (...args) {
 		return f(...fixedArgs, ...args);
 	};
 }
-
 function bind(f) {
 	var fixedArgs = Array.from(arguments).slice(1);
 	return function () {
@@ -17,6 +14,40 @@ function add(a, b, c) {
 	return a + b + c;
 }
 f2 = bind(add, 1);
+
+//bind
+//fn.bind(context,...args)
+//1 绑定this
+Function.prototype.bind1 = function (context = window) {
+	const _this = this;
+	return function () {
+		return _this.apply(context);
+	};
+};
+//2 固定部分参数
+Function.prototype.bind2 = function (context = window) {
+	const _this = this;
+	const args = [...arguments].slice(1); //bind 的参数
+	return function () {
+		return _this.apply(context, [...args, ...arguments]); //arguments=>bind返回的函数调用时传入的参数
+	};
+};
+//3 绑定的函数也可以是构造函数，还可以new
+Function.prototype.bind2 = function (context) {
+	var self = this;
+	var args = [...arguments].slice(1);
+
+	var fbound = function () {
+		var bindArgs = Array.prototype.slice.call(arguments);
+		// 当作为构造函数时，this 指向实例，self 指向绑定函数，因为下面一句 `fbound.prototype = this.prototype;`，已经修改了 fbound.prototype 为 绑定函数的 prototype，此时结果为 true，当结果为 true 的时候，this 指向实例。
+		// 当作为普通函数时，this 指向 window，self 指向绑定函数，此时结果为 false，当结果为 false 的时候，this 指向绑定的 context。
+		self.apply(this instanceof self ? this : context, args.concat(bindArgs));
+	};
+	// 修改返回函数的 prototype 为绑定函数的 prototype，实例就可以继承函数的原型中的值
+	fbound.prototype = this.prototype;
+	return fbound;
+};
+
 
 function map(ary, mapper) {
 	//reduce实现map
@@ -102,16 +133,16 @@ function identity(...args) {
 
 //Chapter 666666
 var MOUNTAINS = [
-	{ name: 'Kilimanjaro', height: 5895, country: 'Tanzania' },
-	{ name: 'Everest', height: 8848, country: 'Nepal' },
-	{ name: 'Mount Fuji', height: 3776, country: 'Japan' },
-	{ name: 'Mont Blanc', height: 4808, country: 'Italy/France' },
-	{ name: 'Vaalserberg', height: 323, country: 'Netherlands' },
-	{ name: 'Denali', height: 6168, country: 'United States' },
-	{ name: 'Popocatepetl', height: 5465, country: 'Mexico' },
+	{ name: "Kilimanjaro", height: 5895, country: "Tanzania" },
+	{ name: "Everest", height: 8848, country: "Nepal" },
+	{ name: "Mount Fuji", height: 3776, country: "Japan" },
+	{ name: "Mont Blanc", height: 4808, country: "Italy/France" },
+	{ name: "Vaalserberg", height: 323, country: "Netherlands" },
+	{ name: "Denali", height: 6168, country: "United States" },
+	{ name: "Popocatepetl", height: 5465, country: "Mexico" },
 ];
 
-if (typeof module != 'undefined' && module.exports) module.exports = MOUNTAINS;
+if (typeof module != "undefined" && module.exports) module.exports = MOUNTAINS;
 
 function rowHeights(rows) {
 	//最小行高的最大值
@@ -141,7 +172,7 @@ function drawTable(rows) {
 			.map(function (block) {
 				return block[lineNo];
 			})
-			.join(' ');
+			.join(" ");
 	}
 
 	function drawRow(row, rowNum) {
@@ -152,20 +183,20 @@ function drawTable(rows) {
 			.map(function (_, lineNo) {
 				return drawLine(blocks, lineNo);
 			})
-			.join('\n');
+			.join("\n");
 	}
 
-	return rows.map(drawRow).join('\n'); //把所有行用换行符连到一起
+	return rows.map(drawRow).join("\n"); //把所有行用换行符连到一起
 }
 
 function repeat(string, times) {
-	var result = '';
+	var result = "";
 	for (var i = 0; i < times; i++) result += string;
 	return result;
 }
 
 function TextCell(text) {
-	this.text = text.split('\n'); //文本分成每一行
+	this.text = text.split("\n"); //文本分成每一行
 }
 TextCell.prototype.minWidth = function () {
 	return this.text.reduce(function (width, line) {
@@ -179,8 +210,8 @@ TextCell.prototype.draw = function (width, height) {
 	//向每行文本填充空格
 	var result = [];
 	for (var i = 0; i < height; i++) {
-		var line = this.text[i] || '';
-		result.push(line + repeat(' ', width - line.length));
+		var line = this.text[i] || "";
+		result.push(line + repeat(" ", width - line.length));
 	}
 	return result;
 };
@@ -190,9 +221,9 @@ for (var i = 0; i < 5; i++) {
 	var row = [];
 	for (var j = 0; j < 5; j++) {
 		if ((j + i) % 2) {
-			row.push(new TextCell('##'));
+			row.push(new TextCell("##"));
 		} else {
-			row.push(new TextCell('  '));
+			row.push(new TextCell("  "));
 		}
 	}
 	rows.push(row);
@@ -209,7 +240,7 @@ UnderlinedCell.prototype.minHeight = function () {
 	return this.inner.minHeight() + 1;
 };
 UnderlinedCell.prototype.draw = function (width, height) {
-	return this.inner.draw(width, height - 1).concat([repeat('-', width)]);
+	return this.inner.draw(width, height - 1).concat([repeat("-", width)]);
 };
 
 function RTextCell(text) {
@@ -220,8 +251,8 @@ RTextCell.prototype = Object.create(TextCell.prototype);
 RTextCell.prototype.draw = function (width, height) {
 	var result = [];
 	for (var i = 0; i < height; i++) {
-		var line = this.text[i] || '';
-		result.push(repeat(' ', width - line.length) + line);
+		var line = this.text[i] || "";
+		result.push(repeat(" ", width - line.length) + line);
 	}
 	return result;
 };
@@ -235,7 +266,7 @@ function dataTable(data) {
 		return keys.map(function (name) {
 			var value = row[name];
 			// This was changed:
-			if (typeof value == 'number') return new RTextCell(String(value));
+			if (typeof value == "number") return new RTextCell(String(value));
 			else return new TextCell(String(value));
 		});
 	});
@@ -247,7 +278,7 @@ function dataTable(data) {
 
 function Instance(val, Cont) {
 	if (val) {
-		if (typeof val != 'object') {
+		if (typeof val != "object") {
 			return false;
 		}
 		if (val.__proto__ === Cont.prototype) {
@@ -261,7 +292,7 @@ function Instance(val, Cont) {
 function New(F, ...args) {
 	var obj = Object.create(F.prototype); //添加原型
 	var fReturn = F.call(obj, ...args); //绑定this
-	if (fReturn && typeof fReturn === 'object') {
+	if (fReturn && typeof fReturn === "object") {
 		//如果F显式指定了返回值,返回这个
 		return fReturn;
 	} else {
@@ -285,7 +316,7 @@ Vector.prototype.minus = function (other) {
 var v1 = new Vector(4, 0);
 var v2 = new Vector(2, 2);
 //console.log(v1.minus(v2))
-Object.defineProperty(Vector.prototype, 'length', {
+Object.defineProperty(Vector.prototype, "length", {
 	get: function () {
 		return Math.sqrt(this.x * this.x + this.y * this.y);
 	},
@@ -310,7 +341,7 @@ StretchCell.prototype.draw = function (width, height) {
 	return this.inner.draw(width, height);
 };
 
-var sc = new StretchCell(new TextCell('abc'), 1, 2);
+var sc = new StretchCell(new TextCell("abc"), 1, 2);
 //复数
 function Complex(real, img) {
 	this.real = real;
@@ -324,10 +355,7 @@ Complex.prototype.minus = function (c) {
 	return new Complex(this.real - c.real, this.img - c.img);
 };
 Complex.prototype.multiple = function (c) {
-	return new Complex(
-		this.real * c.real - this.img * c.img,
-		this.img * c.real + this.real * c.img
-	);
+	return new Complex(this.real * c.real - this.img * c.img, this.img * c.real + this.real * c.img);
 };
 Complex.prototype.division = function (c) {
 	var helper = new Complex(c.real, 0 - c.img);
@@ -406,7 +434,7 @@ MySet.prototype = {
 // set.clear()
 // new MySet([3, 56, 2]) //可以传递数组,注意去重
 //映射 Map
-function Mmp(init = '') {
+function Mmp(init = "") {
 	// m = new Mmp([[2, 3], [[1, 2, 3], 'bar'], ['gdf'], {}])
 	this._keys = [];
 	this._values = [];
@@ -537,7 +565,7 @@ b.insert(2);
 b.remove(3); //
 
 function getElementsById(id, node = document.documentElement) {
-	if (node.id === 'id') {
+	if (node.id === "id") {
 		return node;
 	} else {
 		for (let i = 0; i < node.childNodes.length; i++) {
@@ -558,7 +586,7 @@ function elt(tagName, attrs, ...children) {
 		node.setAttribute(key, val);
 	}
 	for (let child of children) {
-		if (typeof child === 'string') {
+		if (typeof child === "string") {
 			node.appendChild(document.createTextNode(child));
 		} else {
 			node.appendChild(child);
@@ -568,7 +596,7 @@ function elt(tagName, attrs, ...children) {
 }
 
 function replaceImages() {
-	var images = document.getElementsByTagName('img');
+	var images = document.getElementsByTagName("img");
 	for (let i = images.length - 1; i >= 0; i--) {
 		let image = images[i];
 		if (image.alt) {
@@ -582,7 +610,7 @@ function normalize(node) {
 	//将连续的文本节点合并成一个
 	if (node.nodeType === document.ELEMENT_NODE) {
 		var children = Array.from(node.childNodes);
-		let text = '';
+		let text = "";
 		for (let i = 0; i < children.length; i++) {
 			if (children[i].nodeType === document.TEXT_NODE) {
 				text += children[i].nodeValue;
@@ -590,7 +618,7 @@ function normalize(node) {
 			} else if (text) {
 				var textNode = document.createTextNode(text);
 				node.insertbefore(textNode, children[i]);
-				text = '';
+				text = "";
 			}
 		}
 		if (text) {
@@ -603,12 +631,12 @@ function normalize(node) {
 function getAllFile(path) {
 	fs.readdir(path, (error, data) => {
 		for (let subpath of data) {
-			let statObj = fs.statSync(path + '/' + subpath);
+			let statObj = fs.statSync(path + "/" + subpath);
 			if (statObj.isDirectory()) {
-				console.log('dir:' + subpath);
-				getAllFile(path + '/' + subpath);
+				console.log("dir:" + subpath);
+				getAllFile(path + "/" + subpath);
 			} else {
-				console.log('file:' + subpath);
+				console.log("file:" + subpath);
 			}
 		}
 	});
@@ -724,17 +752,17 @@ function compose(middlewares) {
 	);
 }
 
-const myPromise = Promise.resolve(Promise.resolve('Promise!'));
+const myPromise = Promise.resolve(Promise.resolve("Promise!"));
 function funcOne() {
 	myPromise.then((res) => res).then((res) => console.log(res));
-	setTimeout(() => console.log('Timeout!', 0));
-	console.log('Lastline!');
+	setTimeout(() => console.log("Timeout!", 0));
+	console.log("Lastline!");
 }
 async function funcTwo() {
 	const res = await myPromise;
 	console.log(await res);
-	setTimeout(() => console.log('Timeout!', 0));
-	console.log('Lastline!');
+	setTimeout(() => console.log("Timeout!", 0));
+	console.log("Lastline!");
 }
 funcOne();
 funcTwo();
@@ -775,9 +803,34 @@ Promise.prototype.finally = function (f) {
 	);
 };
 
-let x = { a: 1, b: 2 }
+let x = { a: 1, b: 2 };
 
 function func(obj) {
-	obj = 3
+	obj = 3;
 }
-func(x)
+func(x);
+
+//fn.call(context,xx,xx)=>context.fn(xx,xx)
+Function.prototype.myCall = function (context) {
+	//fn 挂在context 上
+	context.fn = this;
+	const args = [...arguments].slice(1);
+	const res = context.fn(...args);
+	delete context.fn;
+	return res;
+};
+
+//fn.apply(context,[args])=>context.fn(...args)
+Function.prototype.myApply = function (context) {
+	context.fn = this;
+	//第二个参数是数组
+	const args = arguments[1];
+	let res;
+	if (args) {
+		res = context.fn(...args);
+	} else {
+		res = context.fn();
+	}
+	delete context.fn;
+	return res;
+};
