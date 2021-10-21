@@ -48,7 +48,28 @@ Function.prototype.bind2 = function (context) {
 	return fbound;
 };
 
+// 实现instanceof
 
+function instanceOf(left, right) {
+	//基本数据类型肯定不是
+	const basicTypes = ["string", "number", "boolean", "undefined", "symbol"];
+	if (basicTypes.includes(typeof left)) {//typeof 判断不了array,null,其他都可以
+		return false;
+	}
+	//不是基本数据类型
+	let lp = left.__proto__;
+	let rp = right.prototype;
+	//循环向上找原型，直到找到或者到头找到null
+	while (true) {
+		if (lp === rp) {
+			return true;
+		}
+		if (lp === null) {
+			return false;
+		}
+		lp = lp.__proto__;
+	}
+}
 function map(ary, mapper) {
 	//reduce实现map
 	return ary.reduce((acc, cur) => {
@@ -764,10 +785,8 @@ async function funcTwo() {
 	setTimeout(() => console.log("Timeout!", 0));
 	console.log("Lastline!");
 }
-funcOne();
-funcTwo();
-
-function parseQueryString(url) {}
+// funcOne();
+// funcTwo();
 
 function sum(...args) {
 	let s = sum.bind(null, ...args);
