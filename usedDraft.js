@@ -53,7 +53,8 @@ Function.prototype.bind2 = function (context) {
 function instanceOf(left, right) {
 	//基本数据类型肯定不是
 	const basicTypes = ["string", "number", "boolean", "undefined", "symbol"];
-	if (basicTypes.includes(typeof left)) {//typeof 判断不了array,null,其他都可以
+	if (basicTypes.includes(typeof left)) {
+		//typeof 判断不了array,null,其他都可以
 		return false;
 	}
 	//不是基本数据类型
@@ -853,3 +854,4 @@ Function.prototype.myApply = function (context) {
 	delete context.fn;
 	return res;
 };
+
