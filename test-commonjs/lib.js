@@ -12,7 +12,8 @@
 // lib.js
 let obj = { a: 1 };
 function changeA() {
-	obj.a = 2;
+	// obj.a = 2;
+	obj = {a:2}
   console.log('lib',JSON.stringify(obj))
 }
 module.exports = {
