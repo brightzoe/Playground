@@ -145,3 +145,39 @@ request("GET", "./data.json")
   .then((val) => {
     console.log(val);
   });
+
+//-------------------------- 与promise.all 功能基本一致//fixme:
+async function awaitAll(promises) {
+  console.log(promises);
+  const res = [];
+  for (let promise of promises) {
+    res.push(await promise);
+  }
+  return await res;
+}
+
+awaitAll([Promise.resolve(1), Promise.resolve(1)])
+  .then((val) => {
+    console.log("val", val);
+  })
+  .catch((err) => {
+    console.log("err", err);
+  });
+
+//-------------------promise.all
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log("time");
+      resolve();
+    }, ms);
+  });
+}
+
+Promise.all([Promise.reject(1), sleep(1000)])
+  .then((val) => {
+    console.log("val", val);
+  })
+  .catch((err) => {
+    console.log("err", err);
+  });
