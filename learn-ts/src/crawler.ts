@@ -31,3 +31,4 @@ const crawler = new Crawler(url, analyzer);
 
 // const analyzer1 = new Covid19Analyzer();
 // const crawler1 = new Crawler(url, analyzer);
+console.log('hhh')

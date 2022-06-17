@@ -3,10 +3,12 @@
   "buildOnSave": false,
 
   "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
     "sourceMap": true,
     "strict": true /* Enable all strict type-checking options. */,
     // "allowJs": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "outDir": "./build" // 结合 tsc 命令 编译输出后的目录
   }
 }
