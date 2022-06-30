@@ -181,3 +181,28 @@ Promise.all([Promise.reject(1), sleep(1000)])
   .catch((err) => {
     console.log("err", err);
   });
+
+function myAll(promises) {
+  const reason = [];
+  let count = 0;
+  return new Promise((resolve, reject) => {
+    for (let i = 0; i < promises.length; i++) {
+      promises[i]
+        .then((res) => {
+          count++;
+          reason[i] = res;
+          if (count === promises.length) {
+            resolve(reason);
+          }
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    }
+  });
+}
+
+console.log(myAll([Promise.resolve(1), Promise.reject(3)]));
+console.log(Promise.all([Promise.resolve(1), Promise.reject(3)]));
+
+//----------------
