@@ -1,145 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        width: 40%;
+        margin: 20px auto 0px auto;
+      }
 
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Document</title>
-		<style>
-			.container {
-				width: 40%;
-				margin: 20px auto 0px auto;
-			}
+      .removed label {
+        text-decoration: line-through;
+      }
 
-			.removed label {
-				text-decoration: line-through;
-			}
+      ul li {
+        list-style-type: none;
+      }
 
-			ul li {
-				list-style-type: none;
-			}
+      ul li span {
+        margin-left: 5px;
+      }
 
-			ul li span {
-				margin-left: 5px;
-			}
+      .footer {
+        font-size: 0.7em;
+        margin-top: 20vh;
+      }
+    </style>
+  </head>
 
-			.footer {
-				font-size: 0.7em;
-				margin-top: 20vh;
-			}
+  <body>
+    <template id="add-item-template">
+      <div class="input-group">
+        <input type="text" v-model="newItem" placeholder="add shoping list item" class="form-control" />
+        <span class="input-group-btn">
+          <button class="btn btn-default">Add!</button>
+        </span>
+      </div>
+    </template>
+    <template id="item-template">
+      <li :class="{'removed':item.checked}">
+        <div class="checkbox">
+          <label for=""><input type="checkbox" v-model="item.checked" />{{item.text}}</label>
+        </div>
+      </li>
+    </template>
+    <template id="items-template">
+      <ul>
+        <item-component v-for="item in items" key="item" :item="item"></item-component>
+      </ul>
+    </template>
+    <template id="change-title-template">
+      <div>
+        <em>Change title here</em>
+        <input v-model="title" />
+      </div>
+    </template>
 
-		</style>
-	</head>
+    <div id="app" class="container">
+      <h2>{{title}}</h2>
+      <add-item-component :items="items"></add-item-component>
+      <items-component :items="items"></items-component>
+      <div class="footer">
+        <hr />
+        <change-title-component :title="title"></change-title-component>
+      </div>
+      <hr />
+      请输入一个数：<input v-model="number" />
+      <div v-square="number"></div>
+      <alert-box>
+        Something bad happened.
+        <!-- 插槽slot -->
+      </alert-box>
+    </div>
 
-	<body>
-		<template id="add-item-template">
-			<div class="input-group">
-				<input type="text" v-model="newItem" placeholder="add shoping list item" class="form-control">
-				<span class="input-group-btn">
-					<button  class="btn btn-default">Add!</button>
-				</span>
-			</div>
-		</template>
-		<template id="item-template">
-			<li :class="{'removed':item.checked}">
-				<div class="checkbox">
-					<label for=""><input type="checkbox" v-model="item.checked">{{item.text}}</label>
-				</div>
-			</li>
-		</template>
-		<template id="items-template">
-			<ul>
-				<item-component v-for="item in items" key="item" :item="item"></item-component>
-			</ul>
-		</template>
-		<template id="change-title-template">
-			<div>
-				<em>Change title here</em>
-				<input v-model="title">
-			</div>
-		</template>
+    <script src="../store/vue.js"></script>
 
-		<div id="app" class="container">
-			<h2>{{title}}</h2>
-			<add-item-component :items="items"></add-item-component>
-			<items-component :items="items"></items-component>
-			<div class="footer">
-				<hr>
-				<change-title-component :title="title"></change-title-component>
-			</div>
-			<hr>
-			请输入一个数：<input v-model="number">
-			<div v-square="number"></div>
-			<alert-box>
-				Something bad happened.
-				<!-- 插槽slot -->
-			</alert-box>
-		</div>
+    <script>
+      let data = {
+        items: [
+          { text: "Bananas", checked: true },
+          { text: "Apples", checked: false },
+        ],
+        title: "My Shopping List",
+        newItem: "",
+        number: 45,
+      };
+      Vue.component("add-item-component", {
+        template: "#add-item-template",
+        props: ["items", "newItem"],
+      });
+      Vue.component("item-component", {
+        template: "#item-template",
+        props: ["item"],
+      });
+      Vue.component("items-component", {
+        template: "#items-template",
+        props: ["items"],
+      });
+      Vue.component("change-title-component", {
+        template: "#change-title-template",
+        props: ["title"],
+        methods: {
+          onInput(event) {
+            this.$emit("input", event.target.value);
+          },
+        },
+      });
 
-		<script src="../store/vue.js"></script>
-
-		<script>
-			let data = {
-				items: [
-					{ text: "Bananas", checked: true },
-					{ text: "Apples", checked: false }],
-				title: "My Shopping List",
-				newItem: "",
-				number: 45
-			}
-			Vue.component('add-item-component', {
-				template: "#add-item-template",
-				props:['items','newItem']
-
-			});
-			Vue.component('item-component', {
-				template: '#item-template',
-				props: ['item']
-			})
-			Vue.component('items-component', {
-				template: '#items-template',
-				props: ['items']
-			})
-			Vue.component('change-title-component', {
-				template: '#change-title-template',
-				props: ['title'],
-				methods: {
-					onInput(event) {
-						this.$emit('input', event.target.value)
-					}
-				}
-
-			})
-
-			Vue.component('alert-box', {
-				template: `
+      Vue.component("alert-box", {
+        template: `
     <div class="demo-alert-box">
       <strong>Error!</strong>
       <slot></slot>
     </div>
-  `
-			})
-			Vue.directive('square', (el, binding) =>
-				el.innerHTML = Math.pow(binding.value, 2)//自定义指令
-
-			)
-			let app = new Vue({
-				el: '#app',
-				data: data,
-				methods: {
-					addItem() {
-						let text = this.newItem.trim()
-						if (text) {
-							this.items.push({
-								text: text,
-								checked: "false"
-							})
-							this.newItem = ''
-						}
-					}
-				}
-			})
-		</script>
-	</body>
-
+  `,
+      });
+      Vue.directive(
+        "square",
+        (el, binding) => (el.innerHTML = Math.pow(binding.value, 2)) //自定义指令
+      );
+      let app = new Vue({
+        el: "#app",
+        data: data,
+        methods: {
+          addItem() {
+            let text = this.newItem.trim();
+            if (text) {
+              this.items.push({
+                text: text,
+                checked: "false",
+              });
+              this.newItem = "";
+            }
+          },
+        },
+      });
+    </script>
+  </body>
 </html>

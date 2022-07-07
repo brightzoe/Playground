@@ -1,138 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+    <style>
+      button:disabled i {
+        color: gray;
+      }
+    </style>
+  </head>
 
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-		<title>Document</title>
-		<style>
-			button:disabled i {
-				color: gray;
-			}
+  <body>
+    <div id="app" class="container">
+      <h2>
+        <span>Pomodoro</span>
+        <button :disabled="state==='started'" title="start" @click="start()">
+          <i class="glyphicon glyphicon-play"></i>
+        </button>
+        <button :disabled="state!=='started'" title="pause" @click="pause()">
+          <i class="glyphicon glyphicon-pause"></i>
+        </button>
+        <button :disabled="state!=='started' && state !== 'paused'" title="stop" @click="stop()">
+          <i class="glyphicon glyphicon-stop"></i>
+        </button>
+      </h2>
+      <h3>{{title}}</h3>
+      <div class="well">
+        <div class="pomodoro-timer"><span>{{min}}</span>:<span>{{sec}}</span></div>
+      </div>
+      <img v-if="pomodoroState!=='work'" :src="img.url" alt="" />
+    </div>
 
-		</style>
-	</head>
+    <script src="./store/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+      crossorigin="anonymous"
+    ></script>
 
-	<body>
-		<div id="app" class="container">
-			<h2>
-				<span>Pomodoro</span>
-				<button :disabled="state==='started'" title="start" @click="start()">
-					<i class="glyphicon glyphicon-play"></i>
-				</button>
-				<button :disabled="state!=='started'" title="pause" @click="pause()">
-					<i class="glyphicon glyphicon-pause"></i>
-				</button>
-				<button :disabled="state!=='started' && state !== 'paused'" title="stop" @click="stop()">
-					<i class="glyphicon glyphicon-stop"></i>
-				</button>
-			</h2>
-			<h3>{{title}}</h3>
-			<div class="well">
-				<div class="pomodoro-timer">
-					<span>{{min}}</span>:<span>{{sec}}</span>
-				</div>
-			</div>
-			<img v-if="pomodoroState!=='work'" :src="img.url" alt="">
-		</div>
+    <script>
+      const POMODORO_STATES = {
+        WORK: "work",
+        REST: "rest",
+      };
+      const STATES = {
+        STARTED: "started",
+        STOPPED: "stopped",
+        PAUSED: "paused",
+      };
+      const WORKING_TIME_LENGTH_IN_MINUTES = 1;
+      const RESTING_TIME_LENGTH_IN_MINUTES = 5;
+      let app = new Vue({
+        el: "#app",
 
-		<script src="./store/vue.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
-		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-		<script>
-			const POMODORO_STATES = {
-				WORK: 'work',
-				REST: 'rest'
-			};
-			const STATES = {
-				STARTED: 'started',
-				STOPPED: 'stopped',
-				PAUSED: 'paused'
-			}
-			const WORKING_TIME_LENGTH_IN_MINUTES = 1;
-			const RESTING_TIME_LENGTH_IN_MINUTES = 5;
-			let app = new Vue({
-				el: "#app",
-
-				data: {
-					state: STATES.STOPPED,
-					minute: WORKING_TIME_LENGTH_IN_MINUTES,
-					second: 0,
-					pomodoroState: POMODORO_STATES.WORK,
-					timestamp: 0,
-					img: { url: '' }
-				},
-				created() {
-					this.loadNextImage()
-				},
-				computed: {
-					title: function () {
-						return this.pomodoroState === POMODORO_STATES.WORK ? 'Work!' :
-							'Rest!'
-					},
-					min: function () {
-						if (this.minute < 10) {
-							return '0' + this.minute
-						}
-						return this.minute
-					},
-					sec: function () {
-						if (this.second < 10) {
-							return '0' + this.second
-						}
-						return this.second
-					}
-				},
-				methods: {
-					start() {
-						this.state = STATES.STARTED
-						this._tick()
-						this.interval = setInterval(this._tick, 1000);
-					},
-					pause() {
-						this.state = STATES.PAUSED
-						clearInterval(this.interval)
-					},
-					stop() {
-						this.state = STATES.STOPPED
-						clearInterval(this.interval)
-						this.pomodoroState = POMODORO_STATES.WORK
-						this.minute = WORKING_TIME_LENGTH_IN_MINUTES
-						this.second = 0
-					},
-					_tick() {
-						if (this.second !== 0) {
-							this.second--;
-							return
-						}
-						if (this.minute !== 0) {
-							this.minute--;
-							this.second = 59;
-							return
-						}
-						this.pomodoroState = this.pomodoroState === POMODORO_STATES.WORK ? POMODORO_STATES.REST : POMODORO_STATES.WORK
-						//已经为0了，变更状态
-						if (this.pomodoroState === POMODORO_STATES.WORK) {
-							this.minute = WORKING_TIME_LENGTH_IN_MINUTES
-						} else {
-							this.minute = RESTING_TIME_LENGTH_IN_MINUTES
-						}
-					},
-					async loadNextImage() {
-						try {
-							await $.get('https://api.thecatapi.com/v1/images/search')
-								.then(result => this.img.url = result[0].url)
-						} catch (err) {
-							console.log(err)
-						}
-					}
-				}
-			})
-		</script>
-	</body>
-
+        data: {
+          state: STATES.STOPPED,
+          minute: WORKING_TIME_LENGTH_IN_MINUTES,
+          second: 0,
+          pomodoroState: POMODORO_STATES.WORK,
+          timestamp: 0,
+          img: { url: "" },
+        },
+        created() {
+          this.loadNextImage();
+        },
+        computed: {
+          title: function () {
+            return this.pomodoroState === POMODORO_STATES.WORK ? "Work!" : "Rest!";
+          },
+          min: function () {
+            if (this.minute < 10) {
+              return "0" + this.minute;
+            }
+            return this.minute;
+          },
+          sec: function () {
+            if (this.second < 10) {
+              return "0" + this.second;
+            }
+            return this.second;
+          },
+        },
+        methods: {
+          start() {
+            this.state = STATES.STARTED;
+            this._tick();
+            this.interval = setInterval(this._tick, 1000);
+          },
+          pause() {
+            this.state = STATES.PAUSED;
+            clearInterval(this.interval);
+          },
+          stop() {
+            this.state = STATES.STOPPED;
+            clearInterval(this.interval);
+            this.pomodoroState = POMODORO_STATES.WORK;
+            this.minute = WORKING_TIME_LENGTH_IN_MINUTES;
+            this.second = 0;
+          },
+          _tick() {
+            if (this.second !== 0) {
+              this.second--;
+              return;
+            }
+            if (this.minute !== 0) {
+              this.minute--;
+              this.second = 59;
+              return;
+            }
+            this.pomodoroState =
+              this.pomodoroState === POMODORO_STATES.WORK ? POMODORO_STATES.REST : POMODORO_STATES.WORK;
+            //已经为0了，变更状态
+            if (this.pomodoroState === POMODORO_STATES.WORK) {
+              this.minute = WORKING_TIME_LENGTH_IN_MINUTES;
+            } else {
+              this.minute = RESTING_TIME_LENGTH_IN_MINUTES;
+            }
+          },
+          async loadNextImage() {
+            try {
+              await $.get("https://api.thecatapi.com/v1/images/search").then(
+                (result) => (this.img.url = result[0].url)
+              );
+            } catch (err) {
+              console.log(err);
+            }
+          },
+        },
+      });
+    </script>
+  </body>
 </html>

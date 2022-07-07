@@ -12,8 +12,8 @@ export default {
     });
     Vue.directive("cos", (el, binding) => {
       el.innerHTML = Math.cos(binding.value);
-		});
-		Vue.directive("tan", (el, binding) => {
+    });
+    Vue.directive("tan", (el, binding) => {
       el.innerHTML = Math.tan(binding.value);
     });
   },
