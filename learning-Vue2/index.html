@@ -4,14 +4,117 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>vue 2</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <p>{{raw}}</p>
+      <p>reversed raw: {{reversedRaw}}</p>
+      <p>now: {{now}}</p>
+      <p>fullname: {{fullName}}</p>
+      <p v-if="awesome">awesome</p>
+      <h1 v-else>Oh no 😢</h1>
+      <ul>
+        <template v-for="item in items">
+          <li>{{ item.msg }}</li>
+          <li>hhhhhhh</li>
+        </template>
+      </ul>
+      <button @click="greet">greet</button>
+      <select title="select" v-model="selected">
+        <option value="" disabled>请选择</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+      </select>
+      <span>{{selected}}</span>
+      <p><a v-bind:href="info.url" target="_blank">{{info.name}}</a></p>
+      <input v-model="raw" type="text" value="hello" />
+      <button-counter v-for="item in items" v-bind:item="item"></button-counter>
+
+      <!-- 插槽 -->
+      <todo>
+        <todo-title slot="todo-title" v-bind:title="title"></todo-title>
+        <todo-content
+          slot="todo-content"
+          v-for="(item,index) in content"
+          v-bind:item="item"
+          v-bind:index="index"
+          v-on:remove="removeItem(index)"
+        ></todo-content>
+      </todo>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
+      //定义组件
+      Vue.component("button-counter", {
+        //组件名字
+        data: function () {
+          return {
+            count: 0,
+          };
+        },
+        props: ["item"],
+        template:
+          '<p><button v-on:click="count++">You clicked me {{ count }} times.</button><span>{{item.msg}}</span> </p>',
+      });
+      Vue.component("todo", {
+        template: "<div><slot name='todo-title'></slot><ul><slot name='todo-content'></slot></ul></div>",
+      });
+      Vue.component("todo-title", {
+        props: ["title"],
+        template: "<div>{{title}}</div>",
+      });
+      Vue.component("todo-content", {
+        props: ["item", "index"],
+        template: '<li >{{item}} --- {{index}} <button @click="remove">delete</button></li>',
+        methods: {
+          remove: function (index) {
+            this.$emit("remove", index);
+          },
+        },
+      });
+      let data = {
+        raw: "i m raw property",
+        firstName: "Foo",
+        lastName: "Bar",
+        awesome: false,
+        items: [{ msg: "123" }, { msg: "223" }],
+        selected: "",
+        info: "",
+        title: "title",
+        content: ["古力娜扎", "迪丽热巴", "哈利路亚", "玛丽哈拉"],
+      };
       var app = new Vue({
         el: "#app",
+        data,
+        computed: {
+          // 计算属性基于它的响应式依赖进行缓存。
+          reversedRaw: function () {
+            return this.raw.split("").reverse().join("");
+          },
+          now: function () {
+            return Date.now();
+          },
+          fullName: function () {
+            return this.firstName + " " + this.lastName;
+          },
+        },
+        methods: {
+          //每次都会重新执行
+          greet: function (event) {
+            console.log("greet", event.target, this);
+          },
+          removeItem: function (index) {
+            this.content.splice(index, 1);
+          },
+        },
+        mounted() {
+          axios.get("data.json").then((res) => {
+            this.info = res.data.info;
+          });
+        },
       });
     </script>
   </body>
